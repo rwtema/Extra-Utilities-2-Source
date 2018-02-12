@@ -1,0 +1,157 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+    }
+}
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.0.9'
+
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+ext.priv = parseConfig(file('../1.10.2/private.properties'))
+ext.version_config = parseConfig(file('../1.10.2/version.properties'))
+
+version = ext.version_config.version_no
+
+group= "com.rwtema.extrautils2" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "extrautils2-1.10.2"
+
+
+
+def parseConfig(File config) {
+    config.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        return (new ConfigSlurper().parse(prop))
+    }
+}
+
+
+minecraft {
+    version = "1.10.2-12.18.3.2316"
+    runDir = "run"
+    mappings = "snapshot_20170624"
+    makeObfSourceJar = false
+}
+
+repositories {
+  maven {
+    url "http://dvs1.progwml6.com/files/maven"
+  }
+}
+
+minecraft {
+  useDepAts = true
+}
+
+dependencies {
+    deobfCompile "mezz.jei:jei_1.10.2:3.13.3.380"
+
+    deobfCompile "slimeknights.mantle:Mantle:1.10.2-1.1.3.199"
+    deobfCompile "slimeknights:TConstruct:1.10.2-2.6.1.464"
+}
+
+
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+jar {
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+//        attributes "FMLCorePlugin": "com.rwtema.extrautils2.asm.CoreXU2"
+//	    attributes "FMLCorePluginContainsFMLMod": "true"
+    }
+}
+
+
+// Create deobf dev jars
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+//        attributes "FMLCorePlugin": "com.rwtema.extrautils2.asm.CoreXU2"
+//        attributes "FMLCorePluginContainsFMLMod": "true"
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+    }
+}
+
+artifacts {
+    archives deobfJar
+    archives sourcesJar
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+idea {
+
+}
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir 'src/compat/java'
+            srcDir 'src/compat111/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+            srcDir 'src/compat/resources'
+        }
+    }
+    api{
+        java {
+            srcDir 'src/api/java'
+        }
+    }
+}
+
+
+curseforge {
+    apiKey = priv.cfkey
+    project {
+        id = "225561"
+        changelog = file('../1.10.2/src/changelog.txt')
+        releaseType = "release"
+        addGameVersion "1.10.2"
+        mainArtifact (jar) {
+            displayName = "Extra Utilities 2 - 1.10.2 - ${version_config.version_no}"
+        }
+    }
+}

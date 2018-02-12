@@ -1,0 +1,741 @@
+# Extra Utilities uses a built-in model system. However if you create json models for the following, they will be used instead.
+
+## Blocks
+# Sound Muffler
+blockstates/soundmuffler.json
+variants={
+	normal
+}
+
+models/item/soundmuffler.json
+
+# Ender Lilly
+blockstates/enderlilly.json
+variants={
+	growth=2
+	growth=3
+	growth=4
+	growth=5
+	growth=0
+	growth=1
+	growth=6
+	growth=7
+}
+
+models/item/enderlilly.json
+
+# Trash Can
+blockstates/trashcan.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/trashcan.json
+
+# Trash Can (Fluid)
+blockstates/trashcanfluid.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/trashcanfluid.json
+
+# Trash Can (Energy)
+blockstates/trashcanenergy.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/trashcanenergy.json
+
+# Angel Block
+blockstates/angelblock.json
+variants={
+	normal
+}
+
+models/item/angelblock.json
+
+# Solar Panel
+blockstates/passivegenerator.json
+variants={
+	generatortype=player_wind_up
+	generatortype=creative
+	generatortype=wind
+	generatortype=dragon_egg
+	generatortype=solar
+	generatortype=water
+	generatortype=fire
+	generatortype=lava
+	generatortype=lunar
+}
+
+models/item/passivegenerator.json
+
+# Resturbed Mob Spawner
+blockstates/supermobspawner.json
+variants={
+	normal
+}
+
+models/item/supermobspawner.json
+
+# Redstone Clock
+blockstates/redstoneclock.json
+variants={
+	powerstate=enabled_powered
+	powerstate=disabled
+	powerstate=enabled_not_powered
+}
+
+models/item/redstoneclock.json
+
+# Compressed Cobblestone
+blockstates/compressedcobblestone.json
+variants={
+	compression_level_cobblestone=4
+	compression_level_cobblestone=3
+	compression_level_cobblestone=2
+	compression_level_cobblestone=1
+	compression_level_cobblestone=8
+	compression_level_cobblestone=7
+	compression_level_cobblestone=6
+	compression_level_cobblestone=5
+}
+
+models/item/compressedcobblestone.json
+
+# Compressed Dirt
+blockstates/compresseddirt.json
+variants={
+	compression_level_dirt=4
+	compression_level_dirt=2
+	compression_level_dirt=3
+	compression_level_dirt=1
+}
+
+models/item/compresseddirt.json
+
+# Compressed Sand
+blockstates/compressedsand.json
+variants={
+	compression_level_sand=1
+	compression_level_sand=2
+}
+
+models/item/compressedsand.json
+
+# Compressed Gravel
+blockstates/compressedgravel.json
+variants={
+	compression_level_gravel=2
+	compression_level_gravel=1
+}
+
+models/item/compressedgravel.json
+
+# Compressed Netherrack
+blockstates/compressednetherrack.json
+variants={
+	compression_level_netherrack=6
+	compression_level_netherrack=5
+	compression_level_netherrack=4
+	compression_level_netherrack=3
+	compression_level_netherrack=2
+	compression_level_netherrack=1
+}
+
+models/item/compressednetherrack.json
+
+# Red Orchid
+blockstates/redorchid.json
+variants={
+	growth=2
+	growth=3
+	growth=4
+	growth=5
+	growth=0
+	growth=1
+	growth=6
+}
+
+models/item/redorchid.json
+
+# Power Overload
+blockstates/poweroverload.json
+variants={
+	normal
+}
+
+models/item/poweroverload.json
+
+# Resonator
+blockstates/resonator.json
+variants={
+	normal
+}
+
+models/item/resonator.json
+
+# Screen
+blockstates/screen.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/screen.json
+
+# Player Chest
+blockstates/playerchest.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/playerchest.json
+
+# Chunk Loading Ward
+blockstates/chunkloader.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/chunkloader.json
+
+# Indexer
+blockstates/indexer.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/indexer.json
+
+# Mechanical Crafter
+blockstates/crafter.json
+variants={
+	normal
+}
+
+models/item/crafter.json
+
+# Scanner
+blockstates/scanner.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/scanner.json
+
+# Mechanical Miner
+blockstates/miner.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/miner.json
+
+# Mechanical User
+blockstates/user.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/user.json
+
+# Stone Drum
+blockstates/drum.json
+variants={
+	capacity=drum_creative
+	capacity=drum_16
+	capacity=drum_256
+	capacity=drum_4096
+	capacity=drum_65536
+}
+
+models/item/drum.json
+
+# Overworld Portal
+blockstates/teleporter.json
+variants={
+	type=deep_dark,unbreakable=false
+	type=deep_dark,unbreakable=true
+	type=special_dim,unbreakable=false
+	type=special_dim,unbreakable=true
+	type=overworld,unbreakable=true
+	type=overworld,unbreakable=false
+}
+
+models/item/teleporter.json
+
+# Wireless RF Transmitter
+blockstates/powertransmitter.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/powertransmitter.json
+
+# Wireless RF Battery
+blockstates/powerbattery.json
+variants={
+	normal
+}
+
+models/item/powerbattery.json
+
+# Quantum Quarry Actuator
+blockstates/quarryproxy.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/quarryproxy.json
+
+# Quantum Quarry
+blockstates/quarry.json
+variants={
+	normal
+}
+
+models/item/quarry.json
+
+# Wooden Spikes
+blockstates/spike_wood.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/spike_wood.json
+
+# Stone Spikes
+blockstates/spike_stone.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/spike_stone.json
+
+# Iron Spikes
+blockstates/spike_iron.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/spike_iron.json
+
+# Golden Spikes
+blockstates/spike_gold.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/spike_gold.json
+
+# Diamond Spikes
+blockstates/spike_diamond.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/spike_diamond.json
+
+# Creative Spikes
+blockstates/spike_creative.json
+variants={
+	facing=east
+	facing=south
+	facing=down
+	facing=north
+	facing=up
+	facing=west
+}
+
+models/item/spike_creative.json
+
+# Redstone Lantern
+blockstates/redstonelantern.json
+variants={
+	power=8
+	power=9
+	power=15
+	power=11
+	power=12
+	power=13
+	power=14
+	power=0
+	power=1
+	power=2
+	power=10
+	power=3
+	power=4
+	power=5
+	power=6
+	power=7
+}
+
+models/item/redstonelantern.json
+
+# Mini Chest
+blockstates/minichest.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/minichest.json
+
+# Rainbow Generator!
+blockstates/rainbowgenerator.json
+variants={
+	state=full
+	state=bottom_half
+	state=top_half
+}
+
+models/item/rainbowgenerator.json
+
+# Block of Enchanted Metal
+blockstates/simpledecorative.json
+variants={
+	type=block_demonic
+	type=block_enchanted
+}
+
+models/item/simpledecorative.json
+
+# Creative Chest
+blockstates/creativechest.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/creativechest.json
+
+# Creative Energy Source
+blockstates/creativeenergy.json
+variants={
+	normal
+}
+
+models/item/creativeenergy.json
+
+# Blank
+blockstates/synergy.json
+variants={
+	normal
+}
+
+models/item/synergy.json
+
+# Terraformer
+blockstates/terraformer.json
+variants={
+	type=cooler
+	type=antenna
+	type=dehostilifier
+	type=controller
+	type=magic_absorbtion
+	type=dehumidifier
+	type=magic_infuser
+	type=climograph_base
+	type=humidifier
+	type=heater
+}
+
+models/item/terraformer.json
+
+# Trash Chest
+blockstates/trashchest.json
+variants={
+	facing=east
+	facing=south
+	facing=north
+	facing=west
+}
+
+models/item/trashchest.json
+
+# Analog Crafter
+blockstates/analogcrafter.json
+variants={
+	normal
+}
+
+models/item/analogcrafter.json
+
+# Bedrock Bricks
+blockstates/decorativebedrock.json
+variants={
+	type=bedrock_cobblestone
+	type=bedrock_slabs
+	type=bedrock_bricks
+}
+
+models/item/decorativebedrock.json
+
+
+## Items
+# Watering Can
+models/item/wateringcan.json
+
+# Creative Destruction Wand
+models/item/itemcreativedestructionwand.json
+
+# Builders Wand
+models/item/itembuilderswand.json
+
+# Destruction Wand
+models/item/itemdestructionwand.json
+
+# Creative Builders Wand
+models/item/itemcreativebuilderswand.json
+
+# Stick
+models/item/fakecopy.json
+
+# Glass Cutter
+models/item/glasscutter.json
+
+# Ender Shard
+models/item/endershard.json
+
+# Wooden Sickle
+models/item/sickle_wood.json
+
+# Stone Sickle
+models/item/sickle_stone.json
+
+# Iron Sickle
+models/item/sickle_iron.json
+
+# Golden Sickle
+models/item/sickle_gold.json
+
+# Diamond Sickle
+models/item/sickle_diamond.json
+
+# Resonating Redstone Crystal
+models/item/ingredients_redstone_crystal.json
+
+# Redstone Gear
+models/item/ingredients_redstone_gear.json
+
+# Eye of Redstone
+models/item/ingredients_eye_redstone.json
+
+# Lunar Reactive Dust
+models/item/ingredients_dye_powder_lunar.json
+
+# Red Coal
+models/item/ingredients_red_coal.json
+
+# Moon Stone
+models/item/ingredients_moon_stone.json
+
+# Upgrade Speed
+models/item/ingredients_upgrade_speed.json
+
+# Upgrade Stack
+models/item/ingredients_upgrade_stack.json
+
+# Upgrade Mining
+models/item/ingredients_upgrade_mining.json
+
+# Upgrade Base
+models/item/ingredients_upgrade_base.json
+
+# Drop of Evil
+models/item/ingredients_evil_drop.json
+
+# Demon Ingot
+models/item/ingredients_demon_ingot.json
+
+# Enchanted Ingot
+models/item/ingredients_enchanted_ingot.json
+
+# Wireless RF Heating Coil
+models/item/ingredients_redstone_coil.json
+
+# Blue Dye
+models/item/ingredients_dye_powder_blue.json
+
+# Golden Lasso
+models/item/goldenlasso_0.json
+
+# Cursed Lasso
+models/item/goldenlasso_1.json
+
+# goldenlasso 2
+models/item/goldenlasso_2.json
+
+# Angel Ring
+models/item/angelring_angelring_base.json
+
+# Angel Ring
+models/item/angelring_angelring_feather.json
+
+# Angel Ring
+models/item/angelring_angelring_butterfly.json
+
+# Angel Ring
+models/item/angelring_angelring_demon.json
+
+# Angel Ring
+models/item/angelring_angelring_golden.json
+
+# Angel Ring
+models/item/angelring_angelring_bat.json
+
+# Power Manager
+models/item/powermanager.json
+
+# Bag Of Holding
+models/item/bagofholding.json
+
+# Wrench
+models/item/wrench.json
+
+# Magical Boomerang
+models/item/boomerang.json
+
+# Extra Utilities 2 Manual
+models/item/book.json
+
+# Contract
+models/item/contract.json
+
+# Filter
+models/item/filter.json
+
+# Filter Fluids
+models/item/filterfluids.json
+
+# Transfer Node (Items)
+models/item/grocket_0.json
+
+# Transfer Filter
+models/item/grocket_1.json
+
+# Transfer Node (Fluids)
+models/item/grocket_2.json
+
+# Retrieval Node (Items)
+models/item/grocket_3.json
+
+# Retrieval Node (Fluids)
+models/item/grocket_4.json
+
+# grocket 5
+models/item/grocket_5.json
+
+# Indexer Remote
+models/item/indexerremote.json
+
+# Magical Apple
+models/item/magicapple.json
+
+# Trowel
+models/item/trowel.json
+
+# Biome Marker
+models/item/biomemarker.json
+
+# Flat Transfer Node (Items)
+models/item/flattransfernode_transfernodes/flat_transfernode_items.json
+
+# Flat Transfer Node (Fluids)
+models/item/flattransfernode_transfernodes/flat_transfernode_fluids.json
+
+# Wooden Sickle
+models/item/sickle_wood.json
+
+# Stone Sickle
+models/item/sickle_stone.json
+
+# Iron Sickle
+models/item/sickle_iron.json
+
+# Golden Sickle
+models/item/sickle_gold.json
+
+# Diamond Sickle
+models/item/sickle_diamond.json
+
+# Magical Apple
+models/item/magicapple.json
+

@@ -1,0 +1,8 @@
+Dragon
+Fire
+Lava
+Lunar
+Manual
+Solar
+Water
+Wind

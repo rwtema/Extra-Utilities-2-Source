@@ -1,0 +1,16 @@
+[
+{
+  "modid": "extrautils2",
+  "name": "Extra Utilities 2",
+  "description": "A bunch of useful things.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["RWTema"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
