@@ -1,0 +1,189 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+}
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.0.9'
+
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+ext.priv = parseConfig(file('../1.10.2/private.properties'))
+ext.version_config = parseConfig(file('../1.10.2/version.properties'))
+
+version = ext.version_config.version_no
+group= "com.rwtema.extrautils2" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "extrautils2-1.12"
+
+
+
+
+def parseConfig(File config) {
+    config.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        return (new ConfigSlurper().parse(prop))
+    }
+}
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.0.2529"
+    runDir = "run"
+    
+    // the mappings can be changed at any time, and must be in the following format.
+    // snapshot_YYYYMMDD   snapshot are built nightly.
+    // stable_#            stables are built at the discretion of the MCP team.
+    // Use non-default mappings at your own risk. they may not always work.
+    // simply re-run your setup task after changing the mappings to update your workspace.
+    mappings = "snapshot_20170624"
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+}
+
+dependencies {
+    // you may put jars on which you depend on in ./libs
+    // or you may define them like so..
+    //compile "some.group:artifact:version:classifier"
+    //compile "some.group:artifact:version"
+      
+    // real examples
+    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+
+    // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
+    //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+
+    // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
+    // except that these dependencies get remapped to your current MCP mappings
+    //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+    //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+
+    // for more info...
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+}
+
+
+repositories {
+    maven {
+        name = "thiakil"
+        url = "http://maven.thiakil.com"
+    }
+    maven {
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+}
+
+
+dependencies {
+    deobfCompile "mezz.jei:jei_1.12.2:4.8.0.111"
+    deobfCompile "slimeknights.mantle:Mantle:1.12-1.3.1.22"
+    deobfCompile "slimeknights:TConstruct:1.12-2.7.2.508"
+    deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
+}
+
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else except the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+
+jar {
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+//        attributes "FMLCorePlugin": "com.rwtema.extrautils2.asm.CoreXU2"
+//	    attributes "FMLCorePluginContainsFMLMod": "true"
+    }
+}
+
+
+
+// Create deobf dev jars
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+//        attributes "FMLCorePlugin": "com.rwtema.extrautils2.asm.CoreXU2"
+//        attributes "FMLCorePluginContainsFMLMod": "true"
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+    }
+}
+
+artifacts {
+    archives deobfJar
+    archives sourcesJar
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir '../1.10.2/src/main/java'
+        }
+        resources {
+            srcDir '../1.10.2/src/main/resources'
+        }
+    }
+    api{
+        java {
+            srcDir '../1.10.2/src/api/java'
+        }
+    }
+
+}
+
+
+curseforge {
+    apiKey = priv.cfkey
+    project {
+        id = "225561"
+        changelog = file('../1.10.2/src/changelog.txt')
+        releaseType = "release"
+        addGameVersion "1.12"
+        addGameVersion "1.12.1"
+        addGameVersion "1.12.2"
+        mainArtifact (jar) {
+            displayName = "Extra Utilities 2 - 1.12 - ${version_config.version_no}"
+        }
+    }
+}

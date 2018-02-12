@@ -1,0 +1,166 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.0.9'
+
+}
+
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+
+
+ext.priv = parseConfig(file('../1.10.2/private.properties'))
+ext.version_config = parseConfig(file('../1.10.2/version.properties'))
+
+version = ext.version_config.version_no
+group= "com.rwtema.extrautils2" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "extrautils2-1.11.2"
+
+
+
+def parseConfig(File config) {
+    config.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        return (new ConfigSlurper().parse(prop))
+    }
+}
+
+
+sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
+minecraft {
+    version = "1.11.2-13.20.1.2388"
+    runDir = "run"
+    mappings = "snapshot_20170624"
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+}
+
+
+
+minecraft {
+  useDepAts = true
+}
+
+repositories {
+    maven {
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+}
+
+
+dependencies {
+    deobfCompile "mezz.jei:jei_1.11:4.1.1.208"
+}
+
+repositories {
+    maven { url "http://maven.amadornes.com/" }
+}
+dependencies {
+    deobfCompile "MCMultiPart2:MCMultiPart-exp:2.0.0_17"
+}
+
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else except the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+
+jar {
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+//        attributes "FMLCorePlugin": "com.rwtema.extrautils2.asm.CoreXU2"
+//	    attributes "FMLCorePluginContainsFMLMod": "true"
+    }
+}
+
+
+
+// Create deobf dev jars
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+//        attributes "FMLCorePlugin": "com.rwtema.extrautils2.asm.CoreXU2"
+//        attributes "FMLCorePluginContainsFMLMod": "true"
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+    manifest {
+        attributes "FMLAT": "extrautils2_at.cfg"
+    }
+}
+
+artifacts {
+    archives deobfJar
+    archives sourcesJar
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir '../1.10.2/src/main/java'
+            srcDir '../1.10.2/src/compat111/java'
+        }
+        resources {
+            srcDir '../1.10.2/src/main/resources'
+        }
+    }
+    api{
+        java {
+            srcDir '../1.10.2/src/api/java'
+        }
+    }
+}
+
+
+
+curseforge {
+    apiKey = priv.cfkey
+    project {
+        id = "225561"
+        changelog = file('../1.10.2/src/changelog.txt')
+        releaseType = "release"
+        addGameVersion "1.11.2"
+        mainArtifact (jar) {
+            displayName = "Extra Utilities 2 - 1.11.2 - ${version_config.version_no}"
+        }
+    }
+}
