@@ -9,6 +9,7 @@ import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.tile.TilePower;
 import com.rwtema.extrautils2.utils.CapGetter;
 import com.rwtema.extrautils2.utils.helpers.ItemStackHelper;
+import com.rwtema.extrautils2.utils.helpers.NullHelper;
 import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -227,13 +228,15 @@ public class TileTransferHolder extends TilePower implements ITickable, IPipe, I
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nonnull EnumFacing facing) {
+	public boolean hasCapability(@Nonnull Capability<?> capability, EnumFacing facing) {
+		if(facing == null) return false;
 		Grocket grocket = grockets[facing.ordinal()];
 		return grocket != null && grocket.getCapability(capability) != null;
 	}
 
 	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nonnull EnumFacing facing) {
+	public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing) {
+		if(facing == null) return null;
 		Grocket grocket = grockets[facing.ordinal()];
 		return grocket != null ? grocket.getCapability(capability) : null;
 	}

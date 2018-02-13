@@ -355,7 +355,7 @@ public abstract class XUTile extends TileEntity {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nonnull EnumFacing facing) {
+	public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing) {
 		if (CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability) {
 			IItemHandler handler = getItemHandler(facing);
 			if (handler != null) return (T) handler;
@@ -382,7 +382,7 @@ public abstract class XUTile extends TileEntity {
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nonnull EnumFacing facing) {
+	public boolean hasCapability(@Nonnull Capability<?> capability, EnumFacing facing) {
 		return getCapability(capability, facing) != null;
 	}
 
