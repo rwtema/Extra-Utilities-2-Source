@@ -56,14 +56,15 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	ResonatorRecipe currentRecipe = null;
 	int progress = 0;
 	ItemStack displayStack;
-	private ItemStackHandler INPUT = new ItemStackHandler() {
+	private ItemStackHandler INPUT = new XUTileItemStackHandler(1, this) {
 		@Override
 		protected void onContentsChanged(int slot) {
+			super.onContentsChanged(slot);
 			TileResonator.this.onInputChanged();
 		}
 
 		@Override
-		protected int getStackLimit(int slot, ItemStack stack) {
+		protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
 			if (StackHelper.isNull(stack) ||
 					(!ResonatorRecipe.WildCardItems.contains(stack.getItem()) &&
 							!ResonatorRecipe.SpecificItems.contains(stack)))
