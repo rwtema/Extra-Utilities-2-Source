@@ -1,0 +1,99 @@
+1.10.2/private.properties
+
+## 1.10.2
+# eclipse
+1.10.2/bin
+1.10.2/*.launch
+1.10.2/.settings
+1.10.2/.metadata
+1.10.2/.classpath
+1.10.2/.project
+
+# idea
+1.10.2/out
+1.10.2/*.ipr
+1.10.2/*.iws
+1.10.2/*.iml
+1.10.2/.idea
+
+# gradle
+1.10.2/build
+1.10.2/.gradle
+
+# other
+1.10.2/eclipse
+1.10.2/run
+
+1.10.2/src/test
+
+1.10.2/README.txt
+1.10.2/LICENSE-new.txt
+1.10.2/MinecraftForge-Credits.txt
+1.10.2/Paulscode IBXM Library License.txt
+1.10.2/Paulscode *.txt
+
+## 1.11
+# eclipse
+1.11/bin
+1.11/*.launch
+1.11/.settings
+1.11/.metadata
+1.11/.classpath
+1.11/.project
+
+# idea
+1.11/out
+1.11/*.ipr
+1.11/*.iws
+1.11/*.iml
+1.11/.idea
+
+# gradle
+1.11/build
+1.11/.gradle
+
+# other
+1.11/eclipse
+1.11/run
+
+1.11/src/test
+
+1.11/README.txt
+1.11/LICENSE-new.txt
+1.11/MinecraftForge-Credits.txt
+1.11/Paulscode IBXM Library License.txt
+1.11/Paulscode *.txt
+
+
+## 1.12
+# eclipse
+1.12/bin
+1.12/*.launch
+1.12/.settings
+1.12/.metadata
+1.12/.classpath
+1.12/.project
+
+# idea
+1.12/out
+1.12/*.ipr
+1.12/*.iws
+1.12/*.iml
+1.12/.idea
+
+# gradle
+1.12/build
+1.12/.gradle
+
+# other
+1.12/eclipse
+1.12/run
+
+1.12/src/test
+
+1.12/README.txt
+1.12/LICENSE-new.txt
+1.12/MinecraftForge-Credits.txt
+1.12/Paulscode IBXM Library License.txt
+1.12/Paulscode *.txt
+
