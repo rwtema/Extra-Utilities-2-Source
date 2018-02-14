@@ -1,0 +1,4 @@
+- Extra Utilities 2 is now visible source.
+- Fix NPE in transfer node capability handler.
+- Fix resonator dupe bug.
+- Fix missing localization.
