@@ -215,7 +215,7 @@ public class BlockTransferHolder extends XUBlock {
 
 	@Nonnull
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		ArrayList<ItemStack> list = new ArrayList<>();
 		TileEntity tileEntity = world.getTileEntity(pos);
 		if (tileEntity instanceof TileTransferHolder) {

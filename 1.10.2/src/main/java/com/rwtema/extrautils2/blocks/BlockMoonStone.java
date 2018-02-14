@@ -102,7 +102,7 @@ public class BlockMoonStone extends XUBlock {
 
 	@Nonnull
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		List<ItemStack> drops = Blocks.STONE.getDrops(world, pos, mimicState, fortune);
 		if (world instanceof World) {
 			World world1 = (World) world;

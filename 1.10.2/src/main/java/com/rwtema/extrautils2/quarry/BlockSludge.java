@@ -120,7 +120,7 @@ public class BlockSludge extends XUBlockStatic {
 
 	@Override
 	@Nonnull
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		return ImmutableList.of();
 	}
 

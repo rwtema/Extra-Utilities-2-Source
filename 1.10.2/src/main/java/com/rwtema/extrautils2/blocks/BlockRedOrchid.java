@@ -134,7 +134,7 @@ public class BlockRedOrchid extends XUBlockStatic implements IPlantable, IGrowab
 
 	@Nonnull
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		List<ItemStack> drops = super.getDrops(world, pos, state, fortune);
 		if (state == FULLY_GROWN_STATE)
 			addAdditionalDrops(fortune, drops, world instanceof World ? ((World) world).rand : RANDOM);

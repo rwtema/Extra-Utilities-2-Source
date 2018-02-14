@@ -355,7 +355,7 @@ public abstract class XUBlock extends BlockCompat implements IRegisterItemColors
 
 	@Nonnull
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		if (hasTile && hasTileEntity(state)) {
 			XUTile xuTile = droppingTileEntity.get();
 			if (xuTile == null) {

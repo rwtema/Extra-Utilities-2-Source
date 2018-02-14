@@ -248,7 +248,7 @@ public class BlockMachine extends XUBlock implements ICustomRecipeMatching {
 
 	@Nonnull
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		TileEntity tileEntity = droppingTileEntity.get();
 		if (tileEntity instanceof TileMachine) {
 			return ImmutableList.of(createStack(((TileMachine) tileEntity).machine));

@@ -8,6 +8,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -24,8 +25,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Random;
 
-public class BlockCompat extends Block {
+public abstract class BlockCompat extends Block {
 	public BlockCompat(Material blockMaterialIn, MapColor blockMapColorIn) {
 		super(blockMaterialIn, blockMapColorIn);
 	}
@@ -76,12 +78,12 @@ public class BlockCompat extends Block {
 
 	@Nullable
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
 		return super.getCollisionBoundingBox(blockState, worldIn, pos);
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
+	public void addCollisionBoxToList(IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB entityBox, @Nonnull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
 		addCollisionBoxToListBase(state, worldIn, pos, entityBox, collidingBoxes, entityIn);
 	}
 
@@ -89,6 +91,29 @@ public class BlockCompat extends Block {
 
 	}
 
+
+	@Nonnull
+	@Override
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune){
+		NonNullList<ItemStack> stacks = NonNullList.create();
+		Random rand = world instanceof World ? ((World)world).rand : RANDOM;
+
+		int count = quantityDropped(state, fortune, rand);
+		for (int i = 0; i < count; i++)
+		{
+			Item item = this.getItemDropped(state, rand, fortune);
+			if (item != Items.AIR)
+			{
+				stacks.add(new ItemStack(item, 1, this.damageDropped(state)));
+			}
+		}
+		return stacks;
+	}
+
+	@Override
+	public void getDrops(@Nonnull NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
+		drops.addAll(getDrops(world, pos, state, fortune));
+	}
 
 	public boolean causesDownwardCurrent(IBlockAccess worldIn, @Nonnull BlockPos pos, EnumFacing side) {
 		return false;

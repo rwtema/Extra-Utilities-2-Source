@@ -115,7 +115,7 @@ public class BlockDrum extends XUBlockStatic {
 
 	@Nonnull
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileDrum) {
 			return ImmutableList.of(((TileDrum) tile).createDropStack());
