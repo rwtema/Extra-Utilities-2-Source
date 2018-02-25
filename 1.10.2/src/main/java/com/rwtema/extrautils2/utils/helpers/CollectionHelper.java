@@ -280,10 +280,10 @@ public class CollectionHelper {
 			@Override
 			public Iterator<T> iterator() {
 				return new Iterator<T>() {
-					T curValue;
+					private T curValue;
 
 					@Nullable
-					T prevValue;
+					private T prevValue;
 
 					@Override
 					public boolean hasNext() {
@@ -301,9 +301,9 @@ public class CollectionHelper {
 							curValue = iterator.next();
 						} catch (ConcurrentModificationException err) {
 							if (prevValue == null) throw err;
-							throw new ConcurrentModificationException("Comodification error\n Last returned value:" + prevValue + (prevValue != null ? (" (" + prevValue.getClass() + ")") : ""), err);
+							throw new ConcurrentModificationException("Comodification error\n Last returned value:" + prevValue + " (" + prevValue.getClass() + ")", err);
 						}
-
+						prevValue = curValue;
 						return curValue;
 					}
 				};
