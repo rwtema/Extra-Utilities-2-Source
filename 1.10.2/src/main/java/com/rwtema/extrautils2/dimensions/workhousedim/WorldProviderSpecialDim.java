@@ -132,7 +132,7 @@ public class WorldProviderSpecialDim extends XUWorldProvider {
 		}
 
 		for (TileEntity tileEntity : CollectionHelper.wrapConcurrentErrorReport(chunk.getTileEntityMap().values())) {
-			tileEntity.invalidate();
+			world.markTileEntityForRemoval(tileEntity);
 		}
 
 		chunk.getTileEntityMap().clear();
