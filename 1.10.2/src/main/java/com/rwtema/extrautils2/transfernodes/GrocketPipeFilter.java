@@ -1,5 +1,7 @@
 package com.rwtema.extrautils2.transfernodes;
 
+import com.google.common.collect.Lists;
+import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.gui.backend.DynamicContainer;
 import com.rwtema.extrautils2.gui.backend.DynamicContainerTile;
 import com.rwtema.extrautils2.gui.backend.IDynamicHandler;
@@ -7,7 +9,10 @@ import com.rwtema.extrautils2.gui.backend.WidgetClickMCButtonChoices;
 import com.rwtema.extrautils2.itemhandler.SingleStackHandlerFilter;
 import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class GrocketPipeFilter extends Grocket implements IDynamicHandler {
 	public SingleStackHandlerFilter.EitherFilter filter = registerNBT("filter", new SingleStackHandlerFilter.EitherFilter());
@@ -15,6 +20,16 @@ public class GrocketPipeFilter extends Grocket implements IDynamicHandler {
 	@Override
 	public DynamicContainer getDynamicContainer(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		return new TransferPipeContainer(player);
+	}
+
+	@Override
+	public List<ItemStack> getDrops() {
+		if (StackHelper.isNonNull(filter.getStack())) {
+			List<ItemStack> drops = Lists.newArrayList(super.getDrops());
+			drops.add(filter.getStack());
+			return drops;
+		}
+		return super.getDrops();
 	}
 
 	@Override
