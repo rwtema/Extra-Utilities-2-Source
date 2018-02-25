@@ -124,7 +124,7 @@ public class Radar {
 
 		public PacketPing(@Nonnull ItemStack stack) {
 			this.stack = stack.copy();
-			stack.setTagCompound(null);
+			this.stack.setTagCompound(null);
 		}
 
 		@Override
