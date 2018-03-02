@@ -1,4 +1,3 @@
-- Extra Utilities 2 is now visible source.
-- Fix NPE in transfer node capability handler.
-- Fix resonator dupe bug.
-- Fix missing localization.
+- Fix filters not being dropped when transfer filters were broken
+- Fix radar key incorrectly deleting NBT data
+- Fix CME in QuantumQuarry
