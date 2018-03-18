@@ -349,7 +349,7 @@ public class ItemIngredients extends XUItemFlatMetadata implements IUpgradeProvi
 			@Override
 			public void addRecipes() {
 				CraftingHelper.addShaped("moon_stone", newStack(1), "sss", "sds", "sss", 'd',
-						"gemDiamond" ,
+						"gemDiamond",
 						's', DYE_POWDER_LUNAR);
 				if (XU2Entries.unstableIngots.isActive()) {
 					CraftingHelper.addShaped("moon_stone_adv", newStack(9), "sss", "sds", "sss", 'd', "ingotUnstable", 's', DYE_POWDER_LUNAR);
@@ -606,9 +606,10 @@ public class ItemIngredients extends XUItemFlatMetadata implements IUpgradeProvi
 
 			@Override
 			public ItemStack getContainerItem(ItemStack itemStack) {
+				if(itemStack == null) return null;
 				Side effectiveSide = FMLCommonHandler.instance().getEffectiveSide();
+				NBTTagCompound nbt = itemStack.getTagCompound();
 				if (effectiveSide == Side.SERVER) {
-					NBTTagCompound nbt = itemStack.getTagCompound();
 					if (nbt != null && nbt.hasKey("Freq", Constants.NBT.TAG_INT)) {
 						int freqNo = nbt.getInteger("Freq");
 						PowerManager.PowerFreq freq = PowerManager.instance.getPowerFreq(freqNo);
@@ -624,8 +625,10 @@ public class ItemIngredients extends XUItemFlatMetadata implements IUpgradeProvi
 						}
 					}
 				}
-				ItemStack copy = itemStack.copy();
-				StackHelper.setStackSize(copy, 1);
+				ItemStack copy = newStack();
+				if (nbt != null) {
+					copy.setTagCompound(nbt);
+				}
 				return copy;
 			}
 
