@@ -38,7 +38,7 @@ class DischantEnergyRecipe extends EnergyBaseRecipe {
 			int level = 1 + rawLevel;
 			int weight = enchantment.getRarity().getWeight();
 			double v = Math.sqrt(Math.min(level, enchantment.getMaxLevel()) / (double) enchantment.getMaxLevel()) * enchantment.getMaxLevel() * level * enchantment.getMaxLevel();
-			amount += v / Math.sqrt(weight) * enchantment.getMinEnchantability(rawLevel);
+			amount += v / Math.sqrt(weight) * Math.max(1, enchantment.getMinEnchantability(rawLevel));
 		}
 		return (int) Math.ceil(amount) * 400;
 	}
