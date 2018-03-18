@@ -35,7 +35,7 @@ import java.util.Optional;
 public class TileTransferHolder extends TilePower implements ITickable, IPipe, IDynamicHandler {
 	public BoxModel worldModel;
 	IBlockState centerPipe = null;
-	Grocket[] grockets = new Grocket[6];
+	final Grocket[] grockets = new Grocket[6];
 
 	@Nullable
 	public static IBlockState getCenterPipeState(byte b) {

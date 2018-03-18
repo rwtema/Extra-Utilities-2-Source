@@ -55,7 +55,7 @@ public class ChunkProviderDeepDark implements ChunkGeneratorCompat {
 	private final World world;
 	private final List<MapGenStructure> structureGenerators = Lists.newArrayList();
 	private final List<MapGenBase> generators = Lists.newArrayList();
-	final ThreadLocal<Integer> seedOffset = ThreadLocal.withInitial(() -> 0);
+	int seedOffset = 0;
 	Random random = new Random();
 	GenStates[] nextState;
 	Biome[] biomes = null;
@@ -213,7 +213,8 @@ public class ChunkProviderDeepDark implements ChunkGeneratorCompat {
 		ChunkPos chunkpos = new ChunkPos(x, z);
 
 		ForgeEventFactory.onChunkPopulate(true, this, this.world, this.random, x, z, false);
-
+		biome.decorate(this.world, this.random, new BlockPos(i, 0, j));
+//
 		for (MapGenStructure mapgenstructure : this.structureGenerators) {
 			boolean flag1 = mapgenstructure.generateStructure(this.world, this.random, chunkpos);
 
@@ -221,11 +222,11 @@ public class ChunkProviderDeepDark implements ChunkGeneratorCompat {
 				flag |= flag1;
 			}
 		}
-
+//
 		if (this.waterLakeGenerator != null && !flag && this.random.nextInt(4) == 0) {
 			this.waterLakeGenerator.generate(this.world, this.random, blockpos.add(this.random.nextInt(16) + 8, this.random.nextInt(256), this.random.nextInt(16) + 8));
 		}
-
+//
 		if (this.lavaLakeGenerator != null && !flag && this.random.nextInt(8) == 0) {
 			BlockPos blockpos1 = blockpos.add(this.random.nextInt(16) + 8, this.random.nextInt(this.random.nextInt(248) + 8), this.random.nextInt(16) + 8);
 
@@ -233,21 +234,23 @@ public class ChunkProviderDeepDark implements ChunkGeneratorCompat {
 				this.lavaLakeGenerator.generate(this.world, this.random, blockpos1);
 			}
 		}
-
+//
 		for (int i1 = 0; i1 < 8; ++i1) {
-			(new WorldGenDungeons()).generate(this.world, this.random, blockpos.add(this.random.nextInt(16) + 8, this.random.nextInt(256), this.random.nextInt(16) + 8));
+			(new WorldGenDungeons()).generate(this.world,
+					this.random,
+					blockpos.add(this.random.nextInt(16) + 8, this.random.nextInt(256), this.random.nextInt(16) + 8));
 		}
 
-		if(seedOffset.get() != 0){
+		if(seedOffset != 0){
 			return;
 		}
 
-		seedOffset.set(1);
+		seedOffset = 1;
 		biome.decorate(this.world, this.random, blockpos);
 		ForgeEventFactory.onChunkPopulate(false, this, this.world, this.random, x, z, flag);
 		BlockFalling.fallInstantly = false;
 		GameRegistry.generateWorld(x, z, this.world, this, this.world.getChunkProvider());
-		seedOffset.set(0);
+		seedOffset = 0;
 	}
 
 	@Override

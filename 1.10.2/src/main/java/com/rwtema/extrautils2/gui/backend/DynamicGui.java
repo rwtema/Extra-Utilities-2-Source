@@ -478,4 +478,10 @@ public class DynamicGui extends GuiContainerCompat {
 
 	}
 
+	public void setWidthHeight(int width, int height) {
+		this.xSize = width;
+		this.ySize = height;
+		this.guiLeft = (this.width - this.xSize) / 2;
+		this.guiTop = (this.height - this.ySize) / 2;
+	}
 }

@@ -128,20 +128,17 @@ public class BlockMachine extends XUBlock implements ICustomRecipeMatching {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addItemColors(ItemColors itemColors, BlockColors blockColors) {
-		itemColors.registerItemColorHandler(new IItemColor() {
-			@Override
-			public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
-				if (tintIndex == 1) {
-					String type = "blank";
-					if (StackHelper.isNonNull(stack) && stack.hasTagCompound()) {
-						type = Validate.notNull(stack.getTagCompound()).getString("Type");
-					}
-					Machine machine = MachineRegistry.getMachine(type);
-					if (machine != null)
-						return machine.color | 0xff000000;
+		itemColors.registerItemColorHandler((stack, tintIndex) -> {
+			if (tintIndex == 1) {
+				String type = "blank";
+				if (StackHelper.isNonNull(stack) && stack.hasTagCompound()) {
+					type = Validate.notNull(stack.getTagCompound()).getString("Type");
 				}
-				return -1;
+				Machine machine = MachineRegistry.getMachine(type);
+				if (machine != null)
+					return machine.color | 0xff000000;
 			}
+			return -1;
 		}, BlockMachine.this);
 
 

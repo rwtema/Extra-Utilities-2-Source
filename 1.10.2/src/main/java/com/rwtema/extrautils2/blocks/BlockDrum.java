@@ -72,12 +72,9 @@ public class BlockDrum extends XUBlockStatic {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addItemColors(ItemColors itemColors, BlockColors blockColors) {
-		itemColors.registerItemColorHandler(new IItemColor() {
-			@Override
-			public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
-				FluidStack fluidStack = getFluidFromItemStack(stack);
-				return FluidColors.getColor(fluidStack);
-			}
+		itemColors.registerItemColorHandler((stack, tintIndex) -> {
+			FluidStack fluidStack = getFluidFromItemStack(stack);
+			return FluidColors.getColor(fluidStack);
 		}, BlockDrum.this);
 
 		blockColors.registerBlockColorHandler(new IBlockColor() {

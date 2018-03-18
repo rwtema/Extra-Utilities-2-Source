@@ -514,10 +514,7 @@ public abstract class DynamicContainer extends Container {
 
 	@SideOnly(Side.CLIENT)
 	public void loadGuiDimensions(DynamicGui dynamicGui) {
-		dynamicGui.xSize = width;
-		dynamicGui.ySize = height;
-		dynamicGui.guiLeft = (dynamicGui.width - dynamicGui.xSize) / 2;
-		dynamicGui.guiTop = (dynamicGui.height - dynamicGui.ySize) / 2;
+		dynamicGui.setWidthHeight(width, height);
 	}
 
 	@SideOnly(Side.CLIENT)

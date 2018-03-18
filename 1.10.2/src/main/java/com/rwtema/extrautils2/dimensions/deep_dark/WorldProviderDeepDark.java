@@ -101,13 +101,14 @@ public class WorldProviderDeepDark extends XUWorldProvider {
 
 	@Override
 	public long getSeed() {
+		long seed = super.getSeed();
 		if (chunkProviderDeepDark != null) {
-			int i = chunkProviderDeepDark.seedOffset.get();
+			int i = chunkProviderDeepDark.seedOffset;
 			if (i != 0) {
-				return super.getSeed() * 31 + i;
+				return seed * 31 + i;
 			}
 		}
-		return super.getSeed();
+		return seed;
 	}
 
 	@Override
