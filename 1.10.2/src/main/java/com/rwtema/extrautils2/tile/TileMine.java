@@ -77,7 +77,8 @@ public class TileMine extends TileAdvInteractor {
 		return Iterables.concat(
 				InventoryHelper.getItemHandlerIterator(contents),
 				extraStacks,
-				InventoryHelper.getItemHandlerIterator(enchants));
+				InventoryHelper.getItemHandlerIterator(enchants),
+				InventoryHelper.getItemHandlerIterator(upgrades));
 	}
 
 	@Override
