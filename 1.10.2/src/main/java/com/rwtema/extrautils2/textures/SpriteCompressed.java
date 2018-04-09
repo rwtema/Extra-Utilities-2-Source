@@ -28,8 +28,7 @@ public class SpriteCompressed extends SpriteLoader {
 
 	@Override
 	public boolean load(IResourceManager manager, ResourceLocation location) {
-		try {
-			IResource iresource = manager.getResource(textureLocation);
+		try (IResource iresource = manager.getResource(textureLocation)) {
 			int mipmapLevels = Minecraft.getMinecraft().gameSettings.mipmapLevels;
 			BufferedImage[] abufferedimage = new BufferedImage[1 + mipmapLevels];
 

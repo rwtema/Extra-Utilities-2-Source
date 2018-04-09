@@ -43,8 +43,7 @@ public class SpriteSub extends SpriteLoader {
 		ResourceLocation resourcelocation = new ResourceLocation(ExtraUtils2.MODID + ":" +  super.getIconName());
 		ResourceLocation resourcelocation1 = Textures.completeTextureResourceLocation(resourcelocation);
 
-		try {
-			IResource iresource = par1ResourceManager.getResource(resourcelocation1);
+		try (IResource iresource = par1ResourceManager.getResource(resourcelocation1)) {
 			int mipmapLevels = Minecraft.getMinecraft().gameSettings.mipmapLevels;
 			BufferedImage[] abufferedimage = new BufferedImage[1 + mipmapLevels];
 			abufferedimage[0] = ImageIO.read(iresource.getInputStream());

@@ -41,14 +41,20 @@ public class BookHandler {
 
 				{
 					Language currentLanguage = Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage();
-					IResource resource;
+					IResource resource = null;
 					try {
-						resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/" + currentLanguage.getLanguageCode().toLowerCase() + ".json"));
-					}catch (IOException err){
-						resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/en_us.json"));
+						try {
+							resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/" + currentLanguage.getLanguageCode().toLowerCase() + ".json"));
+						} catch (IOException err) {
+							resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/en_us.json"));
+						}
+
+						InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+						b = DES.fromJson(reader, Book.class);
+					} finally {
+						if (resource != null)
+							resource.close();
 					}
-					InputStreamReader reader = new InputStreamReader(resource.getInputStream());
-					b = DES.fromJson(reader, Book.class);
 				} catch (
 						IOException e) {
 					e.printStackTrace();

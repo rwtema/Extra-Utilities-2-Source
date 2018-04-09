@@ -21,10 +21,9 @@ public abstract class SpriteLoaderProcessing extends SpriteLoader {
 
 	@Override
 	public boolean load(IResourceManager manager, ResourceLocation location) {
-		try {
-			ResourceLocation baseTexture = this.baseTexture;
-			baseTexture = new ResourceLocation(baseTexture.getResourceDomain(), String.format("%s/%s%s", "textures", baseTexture.getResourcePath(), ".png"));
-			IResource iresource = manager.getResource(baseTexture);
+		ResourceLocation baseTexture = this.baseTexture;
+		baseTexture = new ResourceLocation(baseTexture.getResourceDomain(), String.format("%s/%s%s", "textures", baseTexture.getResourcePath(), ".png"));
+		try (IResource iresource = manager.getResource(baseTexture)) {
 			int mipmapLevels = Minecraft.getMinecraft().gameSettings.mipmapLevels;
 			BufferedImage[] abufferedimage = new BufferedImage[1 + mipmapLevels];
 

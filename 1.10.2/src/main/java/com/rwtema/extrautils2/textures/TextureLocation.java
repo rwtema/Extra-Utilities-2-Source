@@ -3,9 +3,6 @@ package com.rwtema.extrautils2.textures;
 import com.google.common.base.Throwables;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.model.Textures;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResource;
@@ -16,16 +13,19 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 public abstract class TextureLocation implements ISolidWorldTexture {
 	protected final String[] textures;
 	protected final String[] baseTexture = new String[6];
 
 	public TextureLocation(String texture) {
 
-		try {
-			ResourceLocation resourcelocation = new ResourceLocation(ExtraUtils2.MODID + ":connected/" + texture);
-			ResourceLocation resourcelocation1 = Textures.completeTextureResourceLocation(resourcelocation);
-			IResource iresource = Minecraft.getMinecraft().getResourceManager().getResource(resourcelocation1);
+		ResourceLocation resourcelocation = new ResourceLocation(ExtraUtils2.MODID + ":connected/" + texture);
+		ResourceLocation resourcelocation1 = Textures.completeTextureResourceLocation(resourcelocation);
+		try (IResource iresource = Minecraft.getMinecraft().getResourceManager().getResource(resourcelocation1)) {
 			BufferedImage read = ImageIO.read(iresource.getInputStream());
 			int w = read.getWidth();
 			int h = read.getHeight();

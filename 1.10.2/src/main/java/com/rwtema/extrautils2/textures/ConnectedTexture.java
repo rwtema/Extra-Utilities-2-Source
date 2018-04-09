@@ -35,10 +35,9 @@ public class ConnectedTexture implements ISolidWorldTexture {
 		this.state = state;
 		this.base = base;
 
-		try {
-			ResourceLocation resourcelocation = new ResourceLocation(ExtraUtils2.MODID + ":connected/" + texture);
-			ResourceLocation resourcelocation1 = Textures.completeTextureResourceLocation(resourcelocation);
-			IResource iresource = Minecraft.getMinecraft().getResourceManager().getResource(resourcelocation1);
+		ResourceLocation resourcelocation = new ResourceLocation(ExtraUtils2.MODID + ":connected/" + texture);
+		ResourceLocation resourcelocation1 = Textures.completeTextureResourceLocation(resourcelocation);
+		try (IResource iresource = Minecraft.getMinecraft().getResourceManager().getResource(resourcelocation1)) {
 			BufferedImage read = ImageIO.read(iresource.getInputStream());
 			hasConnectedTextures = read.getHeight() == (read.getWidth() * 5);
 		} catch (IOException e) {
