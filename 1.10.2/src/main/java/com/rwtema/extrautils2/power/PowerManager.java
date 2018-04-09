@@ -335,6 +335,11 @@ public class PowerManager {
 	}
 
 	@SubscribeEvent
+	public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event){
+		playersDirty = true;
+	}
+
+	@SubscribeEvent
 	public void onPlayerJoin(PlayerEvent.PlayerRespawnEvent event) {
 		playersDirty = true;
 	}

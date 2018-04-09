@@ -154,6 +154,7 @@ public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCre
 			if (!getPlayer().isSpectator()) {
 				if (PowerManager.instance.isPowered(getPlayerMP()))
 					getPlayer().capabilities.allowFlying = true;
+				getPlayer().capabilities.isFlying = false;
 				getPlayer().sendPlayerAbilities();
 			}
 
