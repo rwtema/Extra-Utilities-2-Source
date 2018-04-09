@@ -134,7 +134,7 @@ public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCre
 			if (invalid) return;
 
 			EntityPlayerMP entityPlayerMP = getPlayerMP();
-			if (entityPlayerMP.isSpectator()) return;
+			if (entityPlayerMP.isDead || entityPlayerMP.isSpectator()) return;
 			if (entityPlayerMP.capabilities.isCreativeMode) powered = true;
 			if (entityPlayerMP.capabilities.allowFlying != powered) {
 				entityPlayerMP.capabilities.allowFlying = powered;
@@ -168,7 +168,10 @@ public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCre
 				if (!player.capabilities.isCreativeMode) {
 					player.capabilities.allowFlying = false;
 					player.capabilities.isFlying = false;
-					player.sendPlayerAbilities();
+					if (!player.isDead) {
+						player.sendPlayerAbilities();
+					}
+
 				}
 			}
 

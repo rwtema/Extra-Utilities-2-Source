@@ -438,11 +438,6 @@ public class ItemLawSword extends ItemSword implements IXUItem {
 				if (entity instanceof EntityPlayerMP) {
 					EntityPlayerMP entityPlayer = ((EntityPlayerMP) entity);
 					removePlayer(entityPlayer);
-					if (!entityPlayer.capabilities.isCreativeMode) {
-						entityPlayer.capabilities.allowFlying = false;
-						entityPlayer.capabilities.isFlying = false;
-						entityPlayer.sendPlayerAbilities();
-					}
 				}
 			} else {
 				tagCompound.setByte("XU|Sword", t);
