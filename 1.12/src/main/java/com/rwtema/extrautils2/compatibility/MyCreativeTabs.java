@@ -83,7 +83,7 @@ public class MyCreativeTabs extends CreativeTabs implements Comparator<ItemStack
 
 	@Override
 	public String getTranslatedTabLabel() {
-		return super.getTranslatedTabLabel();
+		return "itemgroup." + this.getTabLabel();
 	}
 
 	public boolean isBlock(ItemStack a) {

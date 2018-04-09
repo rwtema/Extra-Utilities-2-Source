@@ -48,7 +48,7 @@ public class Radar {
 
 	@SideOnly(Side.CLIENT)
 	public static void init() {
-		searchForItems = new KeyBinding("key.xu2.searchForItems", KeyConflictContext.GUI, KeyModifier.NONE, Keyboard.KEY_T, "Extra Utilities 2");
+		searchForItems = new KeyBinding("key.xu2.searchforitems", KeyConflictContext.GUI, KeyModifier.NONE, Keyboard.KEY_T, "Extra Utilities 2");
 
 		ClientRegistry.registerKeyBinding(searchForItems);
 

@@ -60,9 +60,9 @@ public class ItemLawSword extends ItemSword implements IXUItem {
 	public static final UUID soulDamageUUID = UUID.fromString("2CCDC290-A885-473A-973F-CDC5C918773B");
 	public static final UUID myModifier = UUID.fromString("3D0B4C2D-58EA-439E-83E0-26CFC61D1124");
 	public static final ToolMaterial material = EnumHelper.addToolMaterial("Ti-Tema-ian", 6, 2048, 10, 10, 22);
-	public static BaseAttribute godSlayingDamage = new RangedAttribute(null, "extrautils2.godSlayingAttackDamage", 0.0D, 0.0D, Double.MAX_VALUE);
-	public static BaseAttribute armorPiercingDamage = new RangedAttribute(null, "extrautils2.armorPiercingAttackDamage", 0.0D, 0.0D, Double.MAX_VALUE);
-	public static BaseAttribute soulDamage = new RangedAttribute(null, "extrautils2.soulDamage", 0.0D, 0.0D, Double.MAX_VALUE);
+	public static BaseAttribute godSlayingDamage = new RangedAttribute(null, "extrautils2.armorpiercingattackdamage", 0.0D, 0.0D, Double.MAX_VALUE);
+	public static BaseAttribute armorPiercingDamage = new RangedAttribute(null, "extrautils2.godslayingattackdamage", 0.0D, 0.0D, Double.MAX_VALUE);
+	public static BaseAttribute soulDamage = new RangedAttribute(null, "extrautils2.souldamage", 0.0D, 0.0D, Double.MAX_VALUE);
 	@SideOnly(Side.CLIENT)
 	public TextureAtlasSprite sprite;
 	private BoxModel sword;
