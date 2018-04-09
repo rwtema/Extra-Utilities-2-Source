@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 import com.rwtema.extrautils2.api.machine.*;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
+import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.compatibility.XUShapedRecipe;
 import com.rwtema.extrautils2.items.ItemIngredients;
 import com.rwtema.extrautils2.network.NetworkHandler;
@@ -416,6 +417,12 @@ public class MachineInit {
 					@Override
 					public ItemStack getResult(@Nonnull ItemStack stack) {
 						return FurnaceRecipes.instance().getSmeltingResult(stack);
+					}
+
+					@Nullable
+					@Override
+					public ItemStack getContainer(ItemStack stack) {
+						return StackHelper.empty();
 					}
 
 					@Override
