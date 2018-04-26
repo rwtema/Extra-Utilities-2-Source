@@ -1,6 +1,7 @@
 package com.rwtema.extrautils2.utils.datastructures;
 
 
+import com.google.common.collect.ImmutableList;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
@@ -550,6 +551,30 @@ public class NBTSerializable {
 		@Override
 		public void deserializeNBT(NBTTagIntArray nbt) {
 			array = nbt.getIntArray();
+		}
+	}
+
+	public static class NBTImmutableListSerializable<V extends INBTSerializable<V_NBT>, V_NBT extends NBTBase> implements INBTSerializable<NBTTagList> {
+		final ImmutableList<V> list;
+
+		public NBTImmutableListSerializable(ImmutableList<V> list) {
+			this.list = list;
+		}
+
+		@Override
+		public NBTTagList serializeNBT() {
+			NBTTagList nbtTagList = new NBTTagList();
+			for (V v : list) {
+				nbtTagList.appendTag(v.serializeNBT());
+			}
+			return null;
+		}
+
+		@Override
+		public void deserializeNBT(NBTTagList nbt) {
+			for (int i = 0; i < list.size(); i++) {
+				list.get(i).deserializeNBT((V_NBT) nbt.get(i));
+			}
 		}
 	}
 
