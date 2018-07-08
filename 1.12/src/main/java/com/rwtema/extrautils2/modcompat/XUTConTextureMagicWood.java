@@ -86,6 +86,9 @@ public class XUTConTextureMagicWood extends XUTConTextureBase {
 			}
 		}
 
+    if(div == 0)
+      div = 1;
+
 		mean = ((mean / div) * 2) / 4;
 
 
