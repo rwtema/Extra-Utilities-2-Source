@@ -29,7 +29,7 @@ public enum Upgrade {
 		Upgrade upgrade = item.getUpgrade(stack);
 		if (upgrade != null) {
 			int stackSize = StackHelper.getStacksize(stack);
-			int maxLevel = stacklimitoverride != -1 ? upgrade.maxLevel : stacklimitoverride;
+			int maxLevel = stacklimitoverride == -1 ? upgrade.maxLevel : stacklimitoverride;
 			tooltip.add(Lang.translateArgs("Max Upgrades: %s", maxLevel));
 			if (upgrade.power > 0) {
 				if (maxLevel == 1) {
