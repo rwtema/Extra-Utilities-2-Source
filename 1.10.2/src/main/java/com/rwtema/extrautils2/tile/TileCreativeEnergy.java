@@ -57,7 +57,13 @@ public class TileCreativeEnergy extends XUTile implements ITickable {
 				if (tileEntity != null) {
 					IEnergyStorage storage = CapGetter.energyReceiver.getInterface(tileEntity, facing.getOpposite());
 					if (storage != null && storage.canReceive()) {
-						storage.receiveEnergy(MAX_SEND, false);
+						for (int i = 0; i < 100; i++) {
+							int receiveEnergy = storage.receiveEnergy(MAX_SEND, false);
+							if(receiveEnergy == 0){
+								break;
+							}
+						}
+
 					}
 				}
 			}
