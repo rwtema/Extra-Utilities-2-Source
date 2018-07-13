@@ -128,6 +128,12 @@ public class BlockRedOrchid extends XUBlockStatic implements IPlantable, IGrowab
 		return validLocation(worldIn, pos) && super.canReplaceBase(worldIn, pos, side, stack);
 	}
 
+	@Override
+	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
+		return super.canPlaceBlockOnSide(worldIn, pos, side) && validLocation(worldIn, pos);
+	}
+
+
 	@Nonnull
 	@Override
 	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
