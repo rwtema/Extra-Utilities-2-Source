@@ -58,19 +58,13 @@ public class TeleporterBase extends Teleporter {
 		BlockPos blockpos;
 		BlockPos nextBlock;
 
-		boolean foundFree = world.provider.isSurfaceWorld();
-
 		for (blockpos = new BlockPos(x, y, z); blockpos.getY() >= 0; blockpos = nextBlock) {
 			nextBlock = blockpos.down();
 			IBlockState state = chunk.getBlockState(nextBlock);
 
-			if (state.getMaterial().blocksMovement() || state.getMaterial() == Material.WATER) {
-				if (foundFree) {
-					entityIn.setLocationAndAngles(x, blockpos.getY(), z, entityIn.rotationYaw, entityIn.rotationPitch);
-					return true;
-				}
-			} else {
-				foundFree = true;
+			if (state.getBlock() == XU2Entries.teleporter.value) {
+				entityIn.setLocationAndAngles(x, blockpos.getY(), z, entityIn.rotationYaw, entityIn.rotationPitch);
+				return true;
 			}
 		}
 
