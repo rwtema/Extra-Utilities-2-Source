@@ -2,10 +2,8 @@ package com.rwtema.extrautils2.items;
 
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.IXUItem;
-import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.backend.model.PassthruModelItem;
 import com.rwtema.extrautils2.backend.model.Textures;
-import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.PositionPool;
 import com.rwtema.extrautils2.utils.helpers.WorldHelper;
 import net.minecraft.block.material.Material;
@@ -28,10 +26,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ItemFireAxe extends ItemAxe implements IXUItem {
-	static final int MAX_DESTROY = 512;
+	static final int MAX_DESTROY = 2048;
 	static final Vec3i[] ORDERED_SIDES = new Vec3i[]{
 			// UP-DOWN
 			new Vec3i(0, 1, 0),
