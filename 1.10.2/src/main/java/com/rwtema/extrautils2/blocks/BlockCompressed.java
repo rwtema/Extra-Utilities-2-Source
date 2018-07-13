@@ -7,6 +7,7 @@ import com.rwtema.extrautils2.backend.model.Textures;
 import com.rwtema.extrautils2.textures.SpriteCompressed;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.blockaccess.BlockAccessDelegate;
+import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
@@ -98,7 +99,7 @@ public class BlockCompressed extends XUBlockFull {
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
 		IBlockState state = xuBlockState.getStateFromItemStack(stack);
 		int value = state.getValue(property_compression);
-		tooltip.add(Lang.translateArgs("%s Blocks", Math.pow(9, value)));
+		tooltip.add(Lang.translateArgs("%s Blocks", StringHelper.format(Math.pow(9, value))));
 	}
 
 	@Override
