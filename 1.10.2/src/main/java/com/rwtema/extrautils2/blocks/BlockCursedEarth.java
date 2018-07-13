@@ -52,6 +52,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -64,6 +66,7 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 	public static final PropertyInteger DECAY = PropertyInteger.create("decay", 0, MAX_DECAY);
 	public static final WeakLinkedSet<Entity> cursedClient = new WeakLinkedSet<>();
 	static final UUID uuid = UUID.fromString("E53E0344-EA5E-4F71-98F6-40791198D8FE");
+	public static Set<String> entity_blacklist = new HashSet<>();
 	ISolidWorldTexture tex;
 	ISolidWorldTexture side;
 	ISolidWorldTexture bottom;
@@ -219,7 +222,7 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 						IBlockState s = world.getBlockState(add.up());
 						if (s.getBlock().isReplaceable(worldIn, add.up())) {
 							world.setBlockState(add.up(), Blocks.FIRE.getDefaultState());
-						} else{
+						} else {
 							world.setBlockState(add, Blocks.DIRT.getDefaultState());
 						}
 					}
@@ -301,10 +304,16 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 		if (entry == null || !world.canCreatureTypeSpawnHere(type, entry, pos))
 			return;
 
+		EntityEntry entityEntry = EntityRegistry.getEntry(entry.entityClass);
+
+		if (entityEntry == null || entity_blacklist.contains(Objects.toString(entityEntry.getRegistryName()))) {
+			return;
+		}
+
 		EntityLiving mob;
 
 		try {
-			mob = entry.entityClass.getConstructor(World.class).newInstance(world);
+			mob = (EntityLiving) entityEntry.newInstance(world);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			return;
@@ -509,13 +518,13 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 				@Override
 				public void run() {
 					Entity entity = Minecraft.getMinecraft().world.getEntityByID(entityId);
-					if(entity != null) {
-						if(isEvil) {
+					if (entity != null) {
+						if (isEvil) {
 							cursedClient.add(entity);
-						}else{
+						} else {
 							cursedClient.remove(entity);
 						}
-					}else{
+					} else {
 						LogHelper.debug("No findy entity");
 					}
 				}

@@ -276,7 +276,12 @@ public class XU2Entries {
 		}
 	};
 	public static BlockClassEntry<BlockSuperMobSpawner> mobSpawner = new BlockClassEntry<>(BlockSuperMobSpawner.class, TileSuperMobSpawner.class);
-	public static BlockClassEntry<BlockCursedEarth> cursedEarth = new BlockClassEntry<>(BlockCursedEarth.class);
+	public static BlockClassEntry<BlockCursedEarth> cursedEarth = new BlockClassEntry<BlockCursedEarth>(BlockCursedEarth.class){
+		@Override
+		public void loadAdditionalConfig(Configuration config) {
+			Collections.addAll(BlockCursedEarth.entity_blacklist, config.getStringList("Cursed Earth Entity BlackList", ConfigHelper.GAMEPLAY_CATEGORY, new String[0], "Add an entity id (mod:name) to this list to prevent cursed earth from spawning it.") );
+		}
+	};
 	public static BlockClassEntry<BlockRedstoneClock> redstoneClock = new BlockClassEntry<BlockRedstoneClock>(BlockRedstoneClock.class) {
 		@Override
 		public void addRecipes() {
@@ -902,6 +907,12 @@ public class XU2Entries {
 					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionsHelper.getAwkwardPotionType()),
 					"obsidian",
 					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), antiFlying));
+
+			PotionType antiFlying2 = PotionsHelper.registerPotionType(new PotionEffect(value, 8 * 60 * 20));
+			BrewingRecipeRegistry.addRecipe(
+					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), antiFlying),
+					"dustRedstone",
+					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), antiFlying2));
 		}
 	};
 	public static PotionEntry<PotionSecondChance> potionAntiDeath = new PotionEntry<PotionSecondChance>("potion_second_chance", "Will save from death but only once.") {
