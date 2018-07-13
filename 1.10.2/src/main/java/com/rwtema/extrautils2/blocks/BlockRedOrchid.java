@@ -6,10 +6,6 @@ import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.model.*;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.ItemStackHelper;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -34,6 +30,11 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 
 public class BlockRedOrchid extends XUBlockStatic implements IPlantable, IGrowable {
 	public static final PropertyInteger GROWTH_STATE = PropertyInteger.create("growth", 0, 6);

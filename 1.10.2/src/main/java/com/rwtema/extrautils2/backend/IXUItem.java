@@ -36,7 +36,7 @@ public interface IXUItem extends IRegisterItemColors {
 	int getMaxMetadata();
 
 	@SideOnly(Side.CLIENT)
-	default String getModelSubName(int metadata){
+	default String getModelSubName(int metadata) {
 		return String.valueOf(metadata);
 	}
 }

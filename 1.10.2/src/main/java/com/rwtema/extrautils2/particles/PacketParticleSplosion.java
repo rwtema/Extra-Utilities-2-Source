@@ -38,9 +38,9 @@ public class PacketParticleSplosion extends XUPacketServerToClient {
 				WorldClient theWorld = Minecraft.getMinecraft().world;
 				if (theWorld != null) {
 					Entity entity = theWorld.getEntityByID(entityID);
-					if(entity != null && !entity.isDead){
+					if (entity != null && !entity.isDead) {
 						entity.setDead();
-						if(entity instanceof EntityLivingBase) {
+						if (entity instanceof EntityLivingBase) {
 							EntityLivingBase livingBase = (EntityLivingBase) entity;
 							for (int i = 0; i < 100; i++) {
 								Minecraft.getMinecraft().effectRenderer.addEffect(

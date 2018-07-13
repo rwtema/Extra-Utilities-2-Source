@@ -8,11 +8,6 @@ import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.network.XUPacketClientToServer;
 import com.rwtema.extrautils2.utils.helpers.SideHelper;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.regex.Pattern;
-import javax.annotation.Nonnull;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,13 +15,19 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.StringUtils;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.regex.Pattern;
 
 public class TileScreen extends TilePower implements IGuiHandler {
 	public static final Pattern illegalPatternControlCode = Pattern.compile("[^0-9A-Za-z]");
@@ -148,7 +149,7 @@ public class TileScreen extends TilePower implements IGuiHandler {
 		private BlockPos pos;
 		private EntityPlayer player;
 
-		public PacketEditScreen(){
+		public PacketEditScreen() {
 
 		}
 

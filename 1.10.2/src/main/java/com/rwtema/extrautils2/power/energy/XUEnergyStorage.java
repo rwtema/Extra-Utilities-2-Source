@@ -49,26 +49,26 @@ public class XUEnergyStorage extends EnergyStorage implements INBTSerializable<N
 		return this;
 	}
 
+	public int getMaxReceive() {
+
+		return maxReceive;
+	}
+
 	public XUEnergyStorage setMaxReceive(int maxReceive) {
 
 		this.maxReceive = maxReceive;
 		return this;
 	}
 
+	public int getMaxExtract() {
+
+		return maxExtract;
+	}
+
 	public XUEnergyStorage setMaxExtract(int maxExtract) {
 
 		this.maxExtract = maxExtract;
 		return this;
-	}
-
-	public int getMaxReceive() {
-
-		return maxReceive;
-	}
-
-	public int getMaxExtract() {
-
-		return maxExtract;
 	}
 
 	public void setEnergyStored(int energy) {

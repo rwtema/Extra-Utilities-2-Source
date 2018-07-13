@@ -113,7 +113,7 @@ public class GenericMachineRecipe implements IMachineRecipe {
 
 	public boolean matchesSlotItem(MachineSlotItem slot, ItemStack stack) {
 		List<ItemStack> stackList = inputItemStackMap.get(slot);
-		if(slot.optional && stackList == null) return true;
+		if (slot.optional && stackList == null) return true;
 		for (ItemStack itemStack : stackList) {
 			if (OreDictionary.itemMatches(stack, itemStack, false))
 				return true;
@@ -145,7 +145,7 @@ public class GenericMachineRecipe implements IMachineRecipe {
 		for (MachineSlotItem slotItem : machine.itemInputs) {
 			ItemStack stack = inputItems.get(slotItem);
 			if (StackHelper.isNull(stack)) {
-				if (!slotItem.optional || inputItemStackMap.get(slotItem) != null ) return false;
+				if (!slotItem.optional || inputItemStackMap.get(slotItem) != null) return false;
 			} else if (!matchesSlotItem(slotItem, stack) || inputAmountMap.get(slotItem) > StackHelper.getStacksize(stack))
 				return false;
 
@@ -154,7 +154,7 @@ public class GenericMachineRecipe implements IMachineRecipe {
 		for (MachineSlotFluid slotFluid : machine.fluidInputs) {
 			FluidStack stack = inputFluids.get(slotFluid);
 			if (stack == null) {
-				if (!slotFluid.optional  || inputFluidStackMap.get(slotFluid) != null ) return false;
+				if (!slotFluid.optional || inputFluidStackMap.get(slotFluid) != null) return false;
 			} else if (!matchesSlotFluid(slotFluid, stack) || inputAmountMap.get(slotFluid) > stack.amount)
 				return false;
 

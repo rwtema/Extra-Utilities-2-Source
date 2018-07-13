@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.crafting;
 
-import com.rwtema.extrautils2.compatibility.RecipeCompat;
 import com.rwtema.extrautils2.compatibility.XUShapedRecipe;
 import com.rwtema.extrautils2.compatibility.XUShapelessRecipe;
 import net.minecraft.block.Block;
@@ -25,7 +24,7 @@ public class AlwaysLast {
 		}
 	}
 
-	public static class XUShapedRecipeAlwaysLast extends XUShapedRecipe  {
+	public static class XUShapedRecipeAlwaysLast extends XUShapedRecipe {
 
 
 		public XUShapedRecipeAlwaysLast(ResourceLocation location, Block result, Object... recipe) {

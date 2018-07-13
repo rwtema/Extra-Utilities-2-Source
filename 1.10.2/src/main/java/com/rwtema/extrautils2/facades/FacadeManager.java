@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.facades;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.rwtema.extrautils2.entity.chunkdata.ChunkDataModuleManager;
 import com.rwtema.extrautils2.network.XUPacketBuffer;

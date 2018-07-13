@@ -4,8 +4,6 @@ import com.rwtema.extrautils2.utils.ItemStackNonNull;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nonnull;
-
 public interface IItemHandlerCompat extends IItemHandler {
 	@Override
 	int getSlots();

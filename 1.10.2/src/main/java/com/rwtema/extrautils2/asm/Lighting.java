@@ -2,12 +2,13 @@ package com.rwtema.extrautils2.asm;
 
 import com.rwtema.extrautils2.lighting.ILight;
 import com.rwtema.extrautils2.utils.datastructures.WeakLinkedSet;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.WeakHashMap;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+
+import java.util.HashMap;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 public class Lighting {
 	public static final WeakHashMap<World, HashMap<EnumSkyBlock, Set<ILight>>> plusLights = new WeakHashMap<>();

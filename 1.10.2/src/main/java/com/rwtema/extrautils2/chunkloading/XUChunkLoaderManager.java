@@ -1,10 +1,6 @@
 package com.rwtema.extrautils2.chunkloading;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSetMultimap;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import com.mojang.authlib.GameProfile;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.compatibility.CompatHelper;
@@ -12,11 +8,6 @@ import com.rwtema.extrautils2.tile.TileChunkLoader;
 import com.rwtema.extrautils2.utils.helpers.DescribeHelper;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
 import gnu.trove.list.array.TIntArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-import java.util.WeakHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -28,6 +19,8 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.util.*;
 
 public class XUChunkLoaderManager implements ForgeChunkManager.LoadingCallback, ForgeChunkManager.PlayerOrderedLoadingCallback {
 	public final static HashMultimap<World, TileChunkLoader> chunkLoaders = HashMultimap.create();

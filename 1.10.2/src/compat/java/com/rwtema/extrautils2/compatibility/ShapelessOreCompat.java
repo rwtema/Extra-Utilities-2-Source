@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.compatibility;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -21,7 +20,7 @@ public class ShapelessOreCompat extends ShapelessOreRecipe {
 	}
 
 	@Nonnull
-	public ItemStack[] getRemainingItemsBase(@Nonnull InventoryCrafting inv){
+	public ItemStack[] getRemainingItemsBase(@Nonnull InventoryCrafting inv) {
 		return ForgeHooks.defaultRecipeGetRemainingItems(inv);
 	}
 }

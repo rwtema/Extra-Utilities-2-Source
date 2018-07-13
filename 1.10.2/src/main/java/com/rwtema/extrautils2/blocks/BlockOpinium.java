@@ -198,7 +198,7 @@ public class BlockOpinium extends XUBlockTESR {
 
 			if (
 //					((i%2)==0) &&
-							subOrbitModel != null) {
+					subOrbitModel != null) {
 				for (int j = 0; j < NUMBER_SUBORBITS; j++) {
 					float ang2 = (float) (j * Math.PI * 2) / NUMBER_SUBORBITS + renderTimer / 4.6F + ang * 24.434F + i * i;
 

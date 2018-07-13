@@ -10,12 +10,6 @@ import com.rwtema.extrautils2.backend.model.PassthruModelBlock;
 import com.rwtema.extrautils2.backend.model.Textures;
 import com.rwtema.extrautils2.utils.CapGetter;
 import com.rwtema.extrautils2.utils.helpers.ItemStackHelper;
-
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -32,13 +26,16 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Map;
+
 public class BlockTransferPipe extends XUBlockStatic implements IPipe {
 	public static final Map<EnumFacing, IProperty<Boolean>> SIDE_BLOCKED = XUBlockStateCreator.createDirectionBooleanMap("blocked", (name, side) -> PropertyBool.create(name));
-
-	@Override
-	public boolean allowOverride() {
-		return false;
-	}
+	public static MultiBlockStateBuilder<BlockTransferPipe> stateBuilder = new MultiBlockStateBuilder<>(BlockTransferPipe.class)
+			.addWorldProperties(SIDE_BLOCKED.values());
 //	public static final Map<EnumFacing, IMetaProperty<Boolean>> SIDE_PIPE_CONNECTED = XUBlockStateCreator.createDirectionBooleanMap("connected", (name, side) -> {
 //		IProperty<Boolean> propertyBool = PropertyBool.create(name);
 //		return new IMetaProperty.Wrap<Boolean>(propertyBool) {
@@ -49,18 +46,12 @@ public class BlockTransferPipe extends XUBlockStatic implements IPipe {
 //			}
 //		};
 //	});
-
-	public static MultiBlockStateBuilder<BlockTransferPipe> stateBuilder = new MultiBlockStateBuilder<>(BlockTransferPipe.class)
-			.addWorldProperties(SIDE_BLOCKED.values());
 	EnumMap<EnumFacing, HashSet<IBlockState>> canOutputPipeStates;
 	IBlockState defaultSimple;
 	IBlockState allSides;
-
 	public BlockTransferPipe() {
 		super(Material.CLAY, MapColor.STONE);
 	}
-
-
 
 	public static boolean isUnblocked(@Nonnull IBlockState state, EnumFacing facing) {
 		return !state.getValue(SIDE_BLOCKED.get(facing));
@@ -86,6 +77,11 @@ public class BlockTransferPipe extends XUBlockStatic implements IPipe {
 					return true;
 			}
 		}
+		return false;
+	}
+
+	@Override
+	public boolean allowOverride() {
 		return false;
 	}
 

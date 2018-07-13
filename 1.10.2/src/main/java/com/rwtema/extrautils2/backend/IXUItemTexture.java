@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public interface IXUItemTexture extends IXUItem {
 	@Override
-	default void registerTextures(){
+	default void registerTextures() {
 		for (int i = 0; i < getMaxMetadata(); i++) {
 			Textures.register(getTexture(i));
 		}
@@ -17,32 +17,32 @@ public interface IXUItemTexture extends IXUItem {
 	String getTexture(int i);
 
 	@Override
-	default IBakedModel createModel(int metadata){
+	default IBakedModel createModel(int metadata) {
 		return new PassthruModelItem(this);
 	}
 
 	@Override
-	default TextureAtlasSprite getBaseTexture(){
+	default TextureAtlasSprite getBaseTexture() {
 		return Textures.getSprite(getTexture(0));
 	}
 
 	@Override
-	default void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack){
+	default void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
 		model.addSprite(Textures.getSprite(getTexture(stack.getMetadata())));
 	}
 
 	@Override
-	default void postTextureRegister(){
+	default void postTextureRegister() {
 
 	}
 
 	@Override
-	default void clearCaches(){
+	default void clearCaches() {
 
 	}
 
 	@Override
-	default boolean allowOverride(){
+	default boolean allowOverride() {
 		return true;
 	}
 

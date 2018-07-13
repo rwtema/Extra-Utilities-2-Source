@@ -1,20 +1,18 @@
 package com.rwtema.extrautils2.gui.backend;
 
-import java.util.List;
-
 import com.rwtema.extrautils2.itemhandler.IItemHandlerUpdate;
-import com.rwtema.extrautils2.itemhandler.SingleStackHandler;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 
+import java.util.List;
+
 public class WidgetSlotItemHandler extends SlotItemHandler implements IWidget {
-	private IItemHandler itemHandler;
 	protected final int index;
+	private IItemHandler itemHandler;
 	private int x;
 	private int y;
 	private DynamicContainer container;
@@ -57,7 +55,7 @@ public class WidgetSlotItemHandler extends SlotItemHandler implements IWidget {
 	public void onSlotChange(ItemStack p_75220_1_, ItemStack p_75220_2_) {
 		super.onSlotChange(p_75220_1_, p_75220_2_);
 		container.onSlotChanged(slotNumber);
-		if(itemHandler instanceof IItemHandlerUpdate){
+		if (itemHandler instanceof IItemHandlerUpdate) {
 			((IItemHandlerUpdate) itemHandler).onChange(index);
 		}
 	}
@@ -66,7 +64,7 @@ public class WidgetSlotItemHandler extends SlotItemHandler implements IWidget {
 	public void onSlotChanged() {
 		super.onSlotChanged();
 		container.onSlotChanged(slotNumber);
-		if(itemHandler instanceof IItemHandlerUpdate){
+		if (itemHandler instanceof IItemHandlerUpdate) {
 			((IItemHandlerUpdate) itemHandler).onChange(index);
 		}
 	}

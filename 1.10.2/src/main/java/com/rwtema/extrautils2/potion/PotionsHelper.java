@@ -73,7 +73,7 @@ public class PotionsHelper {
 		return registerPotionType(potionEffect, name);
 	}
 
-	public static PotionType registerDerivedPotionType(PotionEffect potionEffect, PotionType base, String suffix){
+	public static PotionType registerDerivedPotionType(PotionEffect potionEffect, PotionType base, String suffix) {
 		String resourcePathIn = base.getRegistryName().getResourcePath() + suffix;
 		addSimplePotionKeys(resourcePathIn, ((XUPotion) potionEffect.getPotion()).xuName);
 		return PotionsHelper.registerPotionType(potionEffect, resourcePathIn);
@@ -124,11 +124,11 @@ public class PotionsHelper {
 	}
 
 	public static class TooltipHandler {
+		public static HashMap<Potion, String> tooltips = new HashMap<>();
+
 		static {
 			MinecraftForge.EVENT_BUS.register(new TooltipHandler());
 		}
-
-		public static HashMap<Potion, String> tooltips = new HashMap<>();
 
 		@SubscribeEvent
 		@SideOnly(Side.CLIENT)

@@ -3,20 +3,21 @@ package com.rwtema.extrautils2.backend.model;
 import com.google.common.base.Throwables;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.ClientRunnable;
+import com.rwtema.extrautils2.utils.PositionPool;
 import com.rwtema.extrautils2.utils.blockaccess.BlockAccessEmpty;
 import com.rwtema.extrautils2.utils.blockaccess.BlockAccessMimic;
-import com.rwtema.extrautils2.utils.PositionPool;
-import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BoxMimic extends Box {
 	public static ThreadLocal<BlockAccessMimic> blockAccessMimicThreadLocal = new ThreadLocal<BlockAccessMimic>() {
@@ -64,7 +65,7 @@ public class BoxMimic extends Box {
 			blockAccessMimic.myPos = pos;
 			IBakedModel modelFromBlockState = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(mimicState);
 			IBlockState extendedState = mimicState.getBlock().getExtendedState(mimicState, blockAccessMimic, pos);
-			List<BakedQuad> array = modelFromBlockState.getQuads(extendedState, side, 0 );
+			List<BakedQuad> array = modelFromBlockState.getQuads(extendedState, side, 0);
 			blockAccessMimic.setBase(null);
 			return array;
 		} catch (Throwable throwable) {

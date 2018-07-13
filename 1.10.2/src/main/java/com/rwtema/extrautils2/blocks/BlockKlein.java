@@ -4,10 +4,7 @@ import com.rwtema.extrautils2.backend.XUBlockTESR;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.backend.model.BoxSingleQuad;
 import com.rwtema.extrautils2.backend.model.Textures;
-import com.rwtema.extrautils2.utils.helpers.QuadHelper;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
 

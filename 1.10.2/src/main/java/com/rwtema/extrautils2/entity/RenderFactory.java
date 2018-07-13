@@ -1,12 +1,13 @@
 package com.rwtema.extrautils2.entity;
 
 import com.google.common.base.Throwables;
-import java.lang.reflect.Constructor;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+
+import java.lang.reflect.Constructor;
 
 public class RenderFactory<T extends Entity> implements IRenderFactory<T> {
 	Class<Render<? super T>> clazz;

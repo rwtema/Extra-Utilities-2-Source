@@ -3,11 +3,12 @@ package com.rwtema.extrautils2.commands;
 import com.rwtema.extrautils2.gui.ContainerPlayerAlliances;
 import com.rwtema.extrautils2.gui.backend.GuiHandler;
 import com.rwtema.extrautils2.network.NetworkHandler;
-import javax.annotation.Nonnull;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
+
+import javax.annotation.Nonnull;
 
 public class CommandPowerSharing extends CommandBase {
 

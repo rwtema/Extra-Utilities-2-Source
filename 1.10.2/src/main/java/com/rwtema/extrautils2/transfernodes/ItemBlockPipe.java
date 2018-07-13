@@ -1,8 +1,6 @@
 package com.rwtema.extrautils2.transfernodes;
 
 import com.rwtema.extrautils2.backend.XUItemBlock;
-import javax.annotation.Nonnull;
-
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -17,6 +15,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class ItemBlockPipe extends XUItemBlock {
 	public ItemBlockPipe(Block block) {

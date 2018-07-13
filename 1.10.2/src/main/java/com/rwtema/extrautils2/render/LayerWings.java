@@ -4,7 +4,6 @@ import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.compatibility.CompatClientHelper;
 import com.rwtema.extrautils2.items.ItemAngelRing;
 import com.rwtema.extrautils2.utils.MCTimer;
-import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelRenderer;
@@ -16,6 +15,8 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+
+import javax.annotation.Nonnull;
 
 public class LayerWings implements LayerRenderer<AbstractClientPlayer> {
 	private static final ResourceLocation[] wing_textures = new ResourceLocation[]{

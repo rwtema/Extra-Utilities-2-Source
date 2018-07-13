@@ -17,7 +17,6 @@ import com.rwtema.extrautils2.utils.MCTimer;
 import com.rwtema.extrautils2.utils.datastructures.GetterSetter;
 import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
-import com.rwtema.extrautils2.utils.helpers.NullHelper;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -309,7 +308,7 @@ public class ItemUnstableIngots extends XUItemFlat implements IRegisterItemColor
 			if (world != null && stack.hasTagCompound()) {
 				NBTTagCompound tagCompound = Validate.notNull(stack.getTagCompound());
 				float time = (ItemUnstableIngots.TIME_OUT + tagCompound.getLong("time") - world.getTotalWorldTime()) / 20F;
-				if(time > 0) {
+				if (time > 0) {
 					tooltip.add(Lang.translateArgs("Explosion in %s", StringHelper.format(time)));
 				}
 			} else {
@@ -333,7 +332,7 @@ public class ItemUnstableIngots extends XUItemFlat implements IRegisterItemColor
 		@Nullable
 		@Override
 		public int[] getDimensions() {
-			return new int[]{1,3};
+			return new int[]{1, 3};
 		}
 
 		@Override

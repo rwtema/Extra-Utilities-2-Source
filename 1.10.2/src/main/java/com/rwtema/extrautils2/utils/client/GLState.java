@@ -1,7 +1,8 @@
 package com.rwtema.extrautils2.utils.client;
 
-import java.util.LinkedList;
 import net.minecraft.client.renderer.GlStateManager;
+
+import java.util.LinkedList;
 
 public abstract class GLState<T> {
 

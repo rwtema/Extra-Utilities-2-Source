@@ -27,7 +27,7 @@ public class WidgetEntity extends WidgetBase {
 		int h = (int) ((bb.maxY - bb.minY) * scale);
 
 		int posX = guiLeft + getX() + getW() / 2;
-		int posY = guiTop + getY() + getH() - (getH() - h)/4;
+		int posY = guiTop + getY() + getH() - (getH() - h) / 4;
 		states.restore();
 
 		int i = gui.mouseX;

@@ -1,25 +1,23 @@
 package com.rwtema.extrautils2.utils.blockaccess;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-
-
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
-
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.Map;
 
 public class ThreadSafeBlockAccess extends CompatBlockAccess implements IBlockAccess {
 
@@ -39,7 +37,7 @@ public class ThreadSafeBlockAccess extends CompatBlockAccess implements IBlockAc
 	@Override
 	public TileEntity getTileEntity(@Nonnull BlockPos pos) {
 		Chunk chunk = getChunk(pos);
-		if(chunk == null) return null;
+		if (chunk == null) return null;
 		Map<BlockPos, TileEntity> map = chunk.getTileEntityMap();
 		TileEntity tileEntity = map.get(pos);
 		if (tileEntity == null || tileEntity.isInvalid() || !pos.equals(tileEntity.getPos())) return null;

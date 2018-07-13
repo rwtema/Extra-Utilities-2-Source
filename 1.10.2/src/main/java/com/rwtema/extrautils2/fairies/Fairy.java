@@ -2,14 +2,15 @@ package com.rwtema.extrautils2.fairies;
 
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.OverridingMethodsMustInvokeSuper;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Fairy implements INBTSerializable<NBTTagCompound> {
 	public static int currentID;

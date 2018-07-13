@@ -5,6 +5,10 @@ import net.minecraftforge.energy.IEnergyStorage;
 public abstract class PublicEnergyWrapper implements IEnergyStorage {
 	final IEnergyStorage base;
 
+	public PublicEnergyWrapper(IEnergyStorage base) {
+		this.base = base;
+	}
+
 	@Override
 	public int getEnergyStored() {
 		return base.getEnergyStored();
@@ -13,10 +17,6 @@ public abstract class PublicEnergyWrapper implements IEnergyStorage {
 	@Override
 	public int getMaxEnergyStored() {
 		return base.getMaxEnergyStored();
-	}
-
-	public PublicEnergyWrapper(IEnergyStorage base) {
-		this.base = base;
 	}
 
 	public static class View extends PublicEnergyWrapper {

@@ -25,6 +25,22 @@ public abstract class BlockAdvInteractor extends XUBlockStatic {
 		this.texture = texture;
 	}
 
+	public static EnumFacing func_185647_a(BlockPos pos, EntityLivingBase entity) {
+		if (MathHelper.abs((float) entity.posX - (float) pos.getX()) < 2.0F && MathHelper.abs((float) entity.posZ - (float) pos.getZ()) < 2.0F) {
+			double d0 = entity.posY + (double) entity.getEyeHeight();
+
+			if (d0 - (double) pos.getY() > 2.0D) {
+				return EnumFacing.UP;
+			}
+
+			if ((double) pos.getY() - d0 > 0.0D) {
+				return EnumFacing.DOWN;
+			}
+		}
+
+		return entity.getHorizontalFacing().getOpposite();
+	}
+
 	@Override
 	public BoxModel getModel(IBlockState state) {
 		BoxModel model = getModel();
@@ -48,23 +64,6 @@ public abstract class BlockAdvInteractor extends XUBlockStatic {
 		return super.xuOnBlockPlacedBase(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(XUBlockStateCreator.ROTATION_ALL, value);
 	}
 
-	public static EnumFacing func_185647_a(BlockPos pos, EntityLivingBase entity) {
-		if (MathHelper.abs((float) entity.posX - (float) pos.getX()) < 2.0F && MathHelper.abs((float) entity.posZ - (float) pos.getZ()) < 2.0F) {
-			double d0 = entity.posY + (double) entity.getEyeHeight();
-
-			if (d0 - (double) pos.getY() > 2.0D) {
-				return EnumFacing.UP;
-			}
-
-			if ((double) pos.getY() - d0 > 0.0D) {
-				return EnumFacing.DOWN;
-			}
-		}
-
-		return entity.getHorizontalFacing().getOpposite();
-	}
-
-
 	protected BoxModel getModel() {
 		BoxModel model = BoxModel.newStandardBlock("interact_side");
 		model.setTextures(EnumFacing.UP, texture);
@@ -80,6 +79,11 @@ public abstract class BlockAdvInteractor extends XUBlockStatic {
 	@Nonnull
 	@Override
 	public abstract XUTile createTileEntity(@Nonnull World world, @Nonnull IBlockState state);
+
+	@Override
+	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
+		return true;
+	}
 
 	public static class Mine extends BlockAdvInteractor {
 		public Mine() {
@@ -109,7 +113,7 @@ public abstract class BlockAdvInteractor extends XUBlockStatic {
 		@Override
 		@Nullable
 		public RayTraceResult collisionRayTrace(IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Vec3d start, @Nonnull Vec3d end) {
-			if(rayTraceFlag.get()){
+			if (rayTraceFlag.get()) {
 				return null;
 			}
 			return super.collisionRayTrace(blockState, worldIn, pos, start, end);
@@ -150,10 +154,5 @@ public abstract class BlockAdvInteractor extends XUBlockStatic {
 					.addWorldPropertyWithDefault(XUBlockStateCreator.ROTATION_ALL, EnumFacing.UP)
 					.build();
 		}
-	}
-
-	@Override
-	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
-		return true;
 	}
 }

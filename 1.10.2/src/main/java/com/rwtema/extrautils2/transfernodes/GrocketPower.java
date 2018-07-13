@@ -4,12 +4,13 @@ import com.rwtema.extrautils2.power.Freq;
 import com.rwtema.extrautils2.power.IPower;
 import com.rwtema.extrautils2.power.IWorldPowerMultiplier;
 import com.rwtema.extrautils2.power.PowerManager;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public abstract class GrocketPower extends Grocket implements IPower {
 	public final static String NBT_FREQUENCY = "Frequency";

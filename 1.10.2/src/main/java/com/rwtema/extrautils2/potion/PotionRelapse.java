@@ -1,17 +1,12 @@
 package com.rwtema.extrautils2.potion;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.WeakHashMap;
-import javax.annotation.Nonnull;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.WorldServer;
+
+import javax.annotation.Nonnull;
+import java.util.*;
 
 public class PotionRelapse extends XUPotion {
 	WeakHashMap<EntityLivingBase, Map<Potion, PotionEffect>> effects = new WeakHashMap<>();

@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.dimensions;
 
 import com.rwtema.extrautils2.compatibility.WorldProviderCompat;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.WorldProvider;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;

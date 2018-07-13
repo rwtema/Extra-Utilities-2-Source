@@ -42,7 +42,7 @@ public class XUShapelessRecipeClearNBT extends AlwaysLast.XUShapelessRecipeAlway
 			if (StackHelper.isNonNull(stackInSlot)) {
 				ItemStack copy = stackInSlot.copy();
 
-				StackHelper.setStackSize(copy , 1);
+				StackHelper.setStackSize(copy, 1);
 				NBTTagCompound nbt = copy.getTagCompound();
 				if (nbt != null) {
 					for (String key : keys) {

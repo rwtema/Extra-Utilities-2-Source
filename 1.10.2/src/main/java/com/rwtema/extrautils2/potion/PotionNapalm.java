@@ -1,7 +1,8 @@
 package com.rwtema.extrautils2.potion;
 
-import javax.annotation.Nonnull;
 import net.minecraft.entity.EntityLivingBase;
+
+import javax.annotation.Nonnull;
 
 public class PotionNapalm extends XUPotion {
 	public PotionNapalm() {
@@ -10,7 +11,7 @@ public class PotionNapalm extends XUPotion {
 
 	@Override
 	public boolean isReady(int p_76397_1_, int p_76397_2_) {
-		return p_76397_1_ % 20 == 0 ;
+		return p_76397_1_ % 20 == 0;
 	}
 
 	@Override

@@ -1,11 +1,11 @@
 package com.rwtema.extrautils2.tile.tesr;
 
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.tile.XUTile;
 import com.rwtema.extrautils2.transfernodes.FacingHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -114,7 +114,7 @@ public interface ITESREnchantment<T extends XUTile> extends ITESRHookSimple<T> {
 	@SideOnly(Side.CLIENT)
 	default void renderTileEntityAt(T tile, double x, double y, double z, float partialTicks, int destroyStage) {
 		if (!shouldShowEnchantment()) return;
-		if(destroyStage != -1) return;
+		if (destroyStage != -1) return;
 		IBlockAccess world = MinecraftForgeClient.getRegionRenderCache(tile.getWorld(), tile.getPos());
 		BlockPos pos = tile.getPos();
 

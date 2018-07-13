@@ -1,7 +1,6 @@
 import com.google.common.base.Throwables;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.ClientRunnable;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.io.FileUtils;
@@ -20,7 +19,7 @@ public class UpdateLang {
 				File dest = new File("C:\\extrautils\\ExtraUtilities_Localization\\lang\\");
 
 				try {
-					FileUtils.copyDirectory(src,dest);
+					FileUtils.copyDirectory(src, dest);
 				} catch (IOException e) {
 					throw Throwables.propagate(e);
 				}

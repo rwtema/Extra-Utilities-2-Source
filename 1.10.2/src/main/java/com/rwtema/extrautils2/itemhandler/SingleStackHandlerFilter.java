@@ -11,7 +11,6 @@ import com.rwtema.extrautils2.gui.backend.WidgetSlotItemHandler;
 import com.rwtema.extrautils2.items.ItemIngredients;
 import com.rwtema.extrautils2.transfernodes.IBuffer;
 import com.rwtema.extrautils2.utils.Lang;
-import java.util.List;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public abstract class SingleStackHandlerFilter extends SingleStackHandler {
 	@Override

@@ -4,19 +4,20 @@ import com.google.common.collect.Lists;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.model.Textures;
 import com.rwtema.extrautils2.utils.LogHelper;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.annotation.Nonnull;
-import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.data.AnimationMetadataSection;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 public class SpriteConnectedTextures extends SpriteLoader {
-	public final int texID;
 	public static final String basePath = "textures";
+	public final int texID;
 
 	protected SpriteConnectedTextures(String spriteName, int texID) {
 		super(spriteName);

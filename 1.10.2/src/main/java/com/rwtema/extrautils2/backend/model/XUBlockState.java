@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.backend.model;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.rwtema.extrautils2.backend.IMetaProperty;

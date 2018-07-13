@@ -1,9 +1,10 @@
 package com.rwtema.extrautils2.backend.model;
 
-import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.EnumFacing;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BoxDoubleSided extends Box {
 	public BoxDoubleSided(int x0, int y0, int z0, int x1, int y1, int z1, boolean dummy) {

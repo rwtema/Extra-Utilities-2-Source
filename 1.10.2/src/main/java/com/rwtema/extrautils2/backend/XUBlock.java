@@ -112,7 +112,7 @@ public abstract class XUBlock extends BlockCompat implements IRegisterItemColors
 	}
 
 	@Nonnull
-		public abstract BoxModel getWorldModel(IBlockAccess world, BlockPos pos, @Nullable IBlockState state);
+	public abstract BoxModel getWorldModel(IBlockAccess world, BlockPos pos, @Nullable IBlockState state);
 
 	public BoxModel getGenericWorldModel(IBlockState state) {
 		BlockAccessSingle blockAccessSingle = BlockAccessSingle.cache.getUnchecked(state);
@@ -366,7 +366,7 @@ public abstract class XUBlock extends BlockCompat implements IRegisterItemColors
 			}
 			if (xuTile != null) {
 				NBTTagCompound saveInfo = xuTile.getSaveInfo();
-				if(saveInfo != null){
+				if (saveInfo != null) {
 					Item item = Item.getItemFromBlock(xuBlockState.mainBlock);
 					if (item != null) {
 						ItemStack stack = new ItemStack(item, 1, this.damageDropped(state));
@@ -500,11 +500,11 @@ public abstract class XUBlock extends BlockCompat implements IRegisterItemColors
 		return this.canPlaceBlockOnSide(p_176193_1_, p_176193_2_, p_176193_3_);
 	}
 
-	public String getSuffix(ItemStack stack){
+	public String getSuffix(ItemStack stack) {
 		return xuBlockState.getStateFromItemStack(stack).dropName;
 	}
 
-	public boolean allowOverride(){
+	public boolean allowOverride() {
 		return false;
 	}
 

@@ -41,7 +41,7 @@ public class CreativeEPHandler {
 
 		if (!worldIn.isRemote) {
 			worldIn.spawnEntity(new EntityEnderPearl(worldIn, player));
-		}else{
+		} else {
 			ExtraUtils2.proxy.run(XUProxy.sendRightClick);
 		}
 

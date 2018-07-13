@@ -1,17 +1,12 @@
 package com.rwtema.extrautils2.crafting.jei;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
-import static com.rwtema.extrautils2.crafting.jei.XUJEIPlugin.guiHelper;
 import com.rwtema.extrautils2.gui.backend.DynamicGui;
 import com.rwtema.extrautils2.tile.TileResonator;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -19,7 +14,9 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler.ResonatorWrapper> implements IRecipeHandler<TileResonator.ResonatorRecipe>, IRecipeCategory<JEIResonatorHandler.ResonatorWrapper> {
 
@@ -108,7 +105,6 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 		guiItemStacks.init(1, false, slotX1, 0);
 		guiItemStacks.set(1, recipeWrapper.resonatorRecipe.output);
 	}
-
 
 
 	public static class ResonatorWrapper extends BlankRecipeWrapper {

@@ -329,6 +329,46 @@ public class CollectionHelper {
 		}
 	}
 
+	public static <K, V> Map<K, V> createMap(Collection<K> collection, Function<K, V> function) {
+		ImmutableMap.Builder<K, V> builder = ImmutableMap.<K, V>builder();
+		for (K k : collection) {
+			V apply = function.apply(k);
+			if (apply != null) {
+				builder.put(k, apply);
+			}
+		}
+		return builder.build();
+	}
+
+	public static <K extends Enum<K>, V> EnumMap<K, V> createMap(Class<K> enumClazz, Function<K, V> function) {
+		EnumMap<K, V> map = new EnumMap<>(enumClazz);
+		for (K k : enumClazz.getEnumConstants()) {
+			V v = function.apply(k);
+			if (v != null) {
+				map.put(k, v);
+			}
+		}
+		return map;
+	}
+
+	@SafeVarargs
+	public static <T> ImmutableList<Pair<T, T>> splitInputListofPairs(T... inputs) {
+		ImmutableList.Builder<Pair<T, T>> builder = ImmutableList.builder();
+		for (int i = 0; i < inputs.length; i += 2) {
+			builder.add(Pair.of(inputs[i], inputs[i + 1]));
+		}
+		return builder.build();
+	}
+
+	public static <T> Pair<ImmutableList<T>, ImmutableList<T>> splitInputPairsofList(T[] inputs) {
+		ImmutableList.Builder<T> builder_a = ImmutableList.builder();
+		ImmutableList.Builder<T> builder_b = ImmutableList.builder();
+		for (int i = 0; i < inputs.length; i += 2) {
+			builder_a.add(inputs[i]);
+			builder_b.add(inputs[i + 1]);
+		}
+		return Pair.of(builder_a.build(), builder_b.build());
+	}
 
 
 	public interface ObjectFloatEntry<T> {
@@ -374,48 +414,5 @@ public class CollectionHelper {
 				}
 			};
 		}
-	}
-
-	public static <K,V> Map<K,V> createMap(Collection<K> collection, Function<K,V> function){
-		ImmutableMap.Builder<K, V> builder = ImmutableMap.<K, V>builder();
-		for (K k : collection) {
-			V apply = function.apply(k);
-			if(apply != null) {
-				builder.put(k, apply);
-			}
-		}
-		return builder.build();
-	}
-
-	public static <K extends Enum<K>, V> EnumMap<K,V> createMap(Class<K> enumClazz, Function<K,V> function){
-		EnumMap<K, V> map = new EnumMap<>(enumClazz);
-		for (K k : enumClazz.getEnumConstants()) {
-			V v = function.apply(k);
-			if(v != null){
-				map.put(k, v);
-			}
-		}
-		return map;
-	}
-
-
-	@SafeVarargs
-	public static <T> ImmutableList<Pair<T, T>> splitInputListofPairs(T... inputs){
-		ImmutableList.Builder<Pair<T, T>> builder = ImmutableList.builder();
-		for (int i = 0; i < inputs.length; i+=2) {
-			builder.add(Pair.of(inputs[i], inputs[i+1]));
-		}
-		return builder.build();
-	}
-
-
-	public static <T> Pair<ImmutableList<T>, ImmutableList<T>> splitInputPairsofList(T[] inputs){
-		ImmutableList.Builder<T> builder_a = ImmutableList.builder();
-		ImmutableList.Builder<T> builder_b = ImmutableList.builder();
-		for (int i = 0; i < inputs.length; i+=2) {
-			builder_a.add(inputs[i]);
-			builder_b.add(inputs[i+1]);
-		}
-		return Pair.of(builder_a.build(), builder_b.build());
 	}
 }

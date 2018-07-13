@@ -3,6 +3,7 @@ package com.rwtema.extrautils2.utils.datastructures;
 import com.google.common.cache.CacheLoader;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.ISidedFunction;
+
 import javax.annotation.Nonnull;
 
 public abstract class SidedCacheLoader<K, V> extends CacheLoader<K, V> implements ISidedFunction<K, V> {

@@ -19,7 +19,7 @@ public class BlockMiniChest extends XUBlockStaticRotation {
 	@Override
 	protected BoxModel createBaseModel(IBlockState baseState) {
 		BoxModel model = new BoxModel();
-		model.addBoxI(5,0,5,11,6,11, "minichest_side").setTextureSides(0, "minichest_bottom", 1, "minichest_top", 3, "minichest_front");
+		model.addBoxI(5, 0, 5, 11, 6, 11, "minichest_side").setTextureSides(0, "minichest_bottom", 1, "minichest_top", 3, "minichest_front");
 		return model;
 	}
 

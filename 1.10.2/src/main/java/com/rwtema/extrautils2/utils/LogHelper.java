@@ -1,13 +1,14 @@
 package com.rwtema.extrautils2.utils;
 
 import com.rwtema.extrautils2.ExtraUtils2;
+import net.minecraft.util.math.BlockPos;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import net.minecraft.util.math.BlockPos;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class LogHelper {
 	private static final ThreadLocal<HashSet<String>> one_time_strings_set = new ThreadLocal<HashSet<String>>() {
@@ -16,13 +17,7 @@ public class LogHelper {
 			return new HashSet<>();
 		}
 	};
-
-	public static ArrayList<String> getOneTimeStrings() {
-		return one_time_strings;
-	}
-
 	private static final ArrayList<String> one_time_strings = new ArrayList<>();
-
 	public static Logger logger = LogManager.getLogger(ExtraUtils2.MODID);
 	public static boolean isDeObf = false;
 
@@ -36,6 +31,10 @@ public class LogHelper {
 	}
 
 	SimpleDateFormat format = new SimpleDateFormat();
+
+	public static ArrayList<String> getOneTimeStrings() {
+		return one_time_strings;
+	}
 
 	public static void debug(Object info, Object... info2) {
 		if (isDeObf) {

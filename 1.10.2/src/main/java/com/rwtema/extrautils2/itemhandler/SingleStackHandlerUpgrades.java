@@ -9,13 +9,13 @@ import com.rwtema.extrautils2.items.ItemIngredients;
 import com.rwtema.extrautils2.transfernodes.IUpgradeProvider;
 import com.rwtema.extrautils2.transfernodes.Upgrade;
 import com.rwtema.extrautils2.utils.Lang;
-import java.util.EnumSet;
-import java.util.List;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import java.util.EnumSet;
+import java.util.List;
 
 public class SingleStackHandlerUpgrades extends SingleStackHandler {
 	EnumSet<Upgrade> allowedTypes;

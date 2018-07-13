@@ -19,7 +19,7 @@ public class BoxQuadList extends Box {
 
 	Map<EnumFacing, List<BakedQuad>> sidedQuads = new HashMap<>();
 
-	public BoxQuadList(Map<EnumFacing, List<BakedQuad>> sidedQuads){
+	public BoxQuadList(Map<EnumFacing, List<BakedQuad>> sidedQuads) {
 		super(getFullBounds(Iterables.concat(sidedQuads.values())));
 		this.sidedQuads = sidedQuads;
 		for (EnumFacing facing : FacingHelper.facingPlusNull) {

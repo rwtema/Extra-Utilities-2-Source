@@ -1,12 +1,10 @@
 package com.rwtema.extrautils2.crafting;
 
-import javax.annotation.Nonnull;
-
 import com.rwtema.extrautils2.compatibility.RecipeCompat;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.ForgeHooks;
+
+import javax.annotation.Nonnull;
 
 public abstract class RecipeBase implements RecipeCompat {
 	@Nonnull

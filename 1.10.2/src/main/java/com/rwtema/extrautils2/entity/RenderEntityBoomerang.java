@@ -1,17 +1,14 @@
 package com.rwtema.extrautils2.entity;
 
-import com.google.common.base.Optional;
 import com.rwtema.extrautils2.backend.model.CachedRenderers;
 import com.rwtema.extrautils2.backend.model.IClientClearCache;
 import com.rwtema.extrautils2.backend.model.Textures;
 import com.rwtema.extrautils2.compatibility.CompatClientHelper;
 import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.items.ItemBoomerang;
-import com.rwtema.extrautils2.utils.MCTimer;
-import java.util.List;
-import javax.annotation.Nonnull;
-import net.minecraft.client.renderer.GlStateManager;
 import com.rwtema.extrautils2.render.IVertexBuffer;
+import com.rwtema.extrautils2.utils.MCTimer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.Render;
@@ -23,6 +20,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ItemLayerModel;
 import net.minecraftforge.client.model.pipeline.LightUtil;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class RenderEntityBoomerang extends Render<EntityBoomerang> implements IClientClearCache {
 	TextureAtlasSprite sprite;
@@ -72,23 +72,22 @@ public class RenderEntityBoomerang extends Render<EntityBoomerang> implements IC
 
 		GlStateManager.translate((float) x, (float) y, (float) z);
 
-		GlStateManager.translate(0,0.25F/2,0);
+		GlStateManager.translate(0, 0.25F / 2, 0);
 		GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks + 90.0F, 0.0F, -1.0F, 0.0F);
 
 		GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks, 0.0F, 0.0F, -1.0F);
 //		GlStateManager.rotate(180F+45.0F , 0, 1, 0);
 
-		GlStateManager.rotate(-45F,0,0,1);
+		GlStateManager.rotate(-45F, 0, 0, 1);
 		GlStateManager.rotate(90.0F, 1, 1, 0);
 
-		GlStateManager.rotate(90.0F+ MCTimer.renderTimer * 16, 0, 0, 1);
+		GlStateManager.rotate(90.0F + MCTimer.renderTimer * 16, 0, 0, 1);
 
 
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 ////		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 
 		GlStateManager.translate(-0.5F, -0.5F, -0.5F);
-
 
 
 		renderModel(model);

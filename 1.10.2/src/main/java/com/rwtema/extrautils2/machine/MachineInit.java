@@ -117,7 +117,7 @@ public class MachineInit {
 				return 1;
 			}
 
-			public boolean isPassable(World world, BlockPos pos){
+			public boolean isPassable(World world, BlockPos pos) {
 				return !world.isBlockFullCube(pos);
 			}
 

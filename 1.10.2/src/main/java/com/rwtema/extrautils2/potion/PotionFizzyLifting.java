@@ -1,7 +1,8 @@
 package com.rwtema.extrautils2.potion;
 
-import javax.annotation.Nonnull;
 import net.minecraft.entity.EntityLivingBase;
+
+import javax.annotation.Nonnull;
 
 public class PotionFizzyLifting extends XUPotion {
 	public PotionFizzyLifting() {

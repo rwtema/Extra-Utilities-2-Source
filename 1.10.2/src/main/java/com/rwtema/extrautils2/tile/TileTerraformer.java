@@ -363,7 +363,7 @@ public class TileTerraformer extends TilePower implements ITickable, IDynamicHan
 					if (tile.range.value > level) {
 						BlockPos subtract = tile.targetPosition.subtract(tile.pos);
 
-						if (Math.abs(subtract.getX()) > level || Math.abs(subtract.getZ()) > level   ){
+						if (Math.abs(subtract.getX()) > level || Math.abs(subtract.getZ()) > level) {
 							tile.targetPosition.setPos(BlockPos.ORIGIN);
 						}
 

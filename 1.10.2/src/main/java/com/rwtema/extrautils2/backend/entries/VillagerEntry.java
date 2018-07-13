@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.backend.entries;
 
 import com.rwtema.extrautils2.compatibility.CompatHelper112;
-import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.villagers.XUVillagerCareer;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;

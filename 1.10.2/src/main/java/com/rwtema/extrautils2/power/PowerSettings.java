@@ -4,7 +4,6 @@ import com.mojang.authlib.GameProfile;
 import com.rwtema.extrautils2.backend.save.SaveModule;
 import com.rwtema.extrautils2.utils.LogHelper;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
-import gnu.trove.procedure.TIntObjectProcedure;
 import gnu.trove.set.hash.TIntHashSet;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -34,7 +33,7 @@ public class PowerSettings extends SaveModule {
 
 		try {
 			PowerManager.instance.unloadedChunkManager.deserializeNBT(nbt.getTagList("UnloadedChunkData", Constants.NBT.TAG_COMPOUND));
-		}catch (Throwable throwable){
+		} catch (Throwable throwable) {
 			throwable.printStackTrace();
 			PowerManager.instance.unloadedChunkManager.freqs.clear();
 		}
@@ -63,12 +62,12 @@ public class PowerSettings extends SaveModule {
 
 		try {
 			nbt.setTag("UnloadedChunkData", PowerManager.instance.unloadedChunkManager.serializeNBT());
-		}catch (Throwable throwable){
+		} catch (Throwable throwable) {
 			throwable.printStackTrace();
 			nbt.removeTag("UnloadedChunkData");
 		}
 
-		nbt.setIntArray("LockedFreqs",  PowerManager.instance.lockedFrequencies.toArray());
+		nbt.setIntArray("LockedFreqs", PowerManager.instance.lockedFrequencies.toArray());
 	}
 
 	@Override

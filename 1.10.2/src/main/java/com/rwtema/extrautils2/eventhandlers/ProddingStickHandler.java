@@ -67,8 +67,8 @@ public class ProddingStickHandler {
 			targetEntity.motionZ = d2;
 		}
 
-		if(targetEntity instanceof EntityAnimal){
-			((EntityAnimal)targetEntity).setRevengeTarget(null);
+		if (targetEntity instanceof EntityAnimal) {
+			((EntityAnimal) targetEntity).setRevengeTarget(null);
 		}
 
 		player.setLastAttackedEntity(targetEntity);

@@ -1,7 +1,5 @@
 package com.rwtema.extrautils2.gui.backend;
 
-import java.util.List;
-
 import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -9,6 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class WidgetTileBackground extends WidgetBase {
 

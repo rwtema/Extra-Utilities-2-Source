@@ -4,7 +4,6 @@ import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.utils.PositionPool;
 import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
 import com.rwtema.extrautils2.utils.helpers.WorldHelper;
-import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +20,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.List;
 
 public class ItemDestructionWand extends ItemSelectionWand {
 	Item[] harvestDelegates = new Item[]{Items.STONE_SHOVEL, Items.STONE_PICKAXE, Items.STONE_PICKAXE};
@@ -83,7 +84,7 @@ public class ItemDestructionWand extends ItemSelectionWand {
 		World world = player.world;
 		if (world.isAirBlock(pos)) return false;
 
-		if(world.isRemote) return false;
+		if (world.isRemote) return false;
 
 		RayTraceResult mop = PlayerHelper.rayTrace(player);
 
@@ -92,7 +93,7 @@ public class ItemDestructionWand extends ItemSelectionWand {
 
 		IBlockState blockState = world.getBlockState(pos);
 		Block block = blockState.getBlock();
-		ItemStack pickBlock = getStack(world,pos);
+		ItemStack pickBlock = getStack(world, pos);
 
 		List<BlockPos> potentialBlocks = getPotentialBlocks(player, world, pos, mop.sideHit, range, pickBlock, blockState, block);
 		if (potentialBlocks.isEmpty())
@@ -166,7 +167,7 @@ public class ItemDestructionWand extends ItemSelectionWand {
 
 		IBlockState blockState = world.getBlockState(pos);
 		Block block = blockState.getBlock();
-		ItemStack pickBlock = getStack(world,pos);
+		ItemStack pickBlock = getStack(world, pos);
 
 		List<BlockPos> potentialBlocks = getPotentialBlocks(player, world, pos, mop.sideHit, range, pickBlock, blockState, block);
 

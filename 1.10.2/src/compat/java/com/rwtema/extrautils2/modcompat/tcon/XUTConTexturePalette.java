@@ -17,6 +17,14 @@ class XUTConTexturePalette extends AbstractColoredTexture {
 		max = 0;
 	}
 
+	public static int getBrightness(int pixel) {
+		return ColorHelper.brightness(
+				TexturePlasma.directColorModel.getRed(pixel),
+				TexturePlasma.directColorModel.getGreen(pixel),
+				TexturePlasma.directColorModel.getBlue(pixel)
+		);
+	}
+
 	@Override
 	protected void processData(int[][] data) {
 		min = 255;
@@ -43,13 +51,5 @@ class XUTConTexturePalette extends AbstractColoredTexture {
 		float intensity = (brightness - min) / (float) (max - min);
 
 		return TexturePlasma.interpolate(intensity, colorPalette);
-	}
-
-	public static int getBrightness(int pixel) {
-		return ColorHelper.brightness(
-				TexturePlasma.directColorModel.getRed(pixel),
-				TexturePlasma.directColorModel.getGreen(pixel),
-				TexturePlasma.directColorModel.getBlue(pixel)
-		);
 	}
 }

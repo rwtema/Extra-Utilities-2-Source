@@ -3,11 +3,12 @@ package com.rwtema.extrautils2.fluids;
 import com.google.common.base.Throwables;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.utils.helpers.NBTCopyHelper;
-import java.io.IOException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.io.IOException;
 
 public abstract class FluidRef {
 

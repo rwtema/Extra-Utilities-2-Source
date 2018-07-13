@@ -1,28 +1,26 @@
 package com.rwtema.extrautils2.resources;
 
 import com.rwtema.extrautils2.ExtraUtils2;
+import net.minecraft.client.resources.IResourcePack;
+import net.minecraft.client.resources.data.IMetadataSection;
+import net.minecraft.client.resources.data.MetadataSerializer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.FMLClientHandler;
+
+import javax.annotation.Nonnull;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.annotation.Nonnull;
-
-import com.rwtema.extrautils2.resources.ResourcePackHelper;
-import net.minecraft.client.resources.IResourcePack;
-import net.minecraft.client.resources.data.IMetadataSection;
-
-import net.minecraft.client.resources.data.MetadataSerializer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class RedirectResourcePack implements IResourcePack {
 
-	protected final String name;
-	IResourcePack xuPack;
 	public final HashSet<String> domains;
+	protected final String name;
 	public String prefix;
+	IResourcePack xuPack;
 
 	public RedirectResourcePack(String name, HashSet<String> domains, String folderPrefix) {
 		this.name = name.toLowerCase();

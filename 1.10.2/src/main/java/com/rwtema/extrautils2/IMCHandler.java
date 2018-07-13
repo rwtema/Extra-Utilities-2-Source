@@ -18,7 +18,6 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class IMCHandler {

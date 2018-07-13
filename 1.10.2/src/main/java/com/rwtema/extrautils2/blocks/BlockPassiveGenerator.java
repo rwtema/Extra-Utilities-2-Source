@@ -11,10 +11,10 @@ import com.rwtema.extrautils2.backend.entries.IItemStackMaker;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.crafting.CraftingHelper;
-import com.rwtema.extrautils2.structure.PatternRecipe;
 import com.rwtema.extrautils2.items.ItemIngredients;
 import com.rwtema.extrautils2.power.IWorldPowerMultiplier;
 import com.rwtema.extrautils2.power.PowerMultipliers;
+import com.rwtema.extrautils2.structure.PatternRecipe;
 import com.rwtema.extrautils2.tile.TilePassiveGenerator;
 import com.rwtema.extrautils2.tile.TilePower;
 import com.rwtema.extrautils2.tile.TilePowerHandCrank;
@@ -264,8 +264,6 @@ public class BlockPassiveGenerator extends XUBlockStatic {
 			}
 		},
 		WATER(IWorldPowerMultiplier.CONSTANT, 64, LOSS_1, 128, LOSS_2, 512, LOSS_4) {
-
-
 			@Override
 			public float basePowerGen() {
 				return 4;

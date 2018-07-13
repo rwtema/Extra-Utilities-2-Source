@@ -48,7 +48,7 @@ public abstract class WidgetFluidIndicator extends WidgetBase implements IWidget
 				getW() - 2,
 				h,
 				sprite.getMinU(),
-				sprite.getInterpolatedV(16 - (h * 16.0F	) / h2),
+				sprite.getInterpolatedV(16 - (h * 16.0F) / h2),
 				sprite.getMaxU(),
 				sprite.getMaxV());
 	}

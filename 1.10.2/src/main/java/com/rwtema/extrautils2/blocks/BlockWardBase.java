@@ -4,12 +4,13 @@ import com.rwtema.extrautils2.backend.XUBlockStaticRotation;
 import com.rwtema.extrautils2.backend.model.Box;
 import com.rwtema.extrautils2.backend.model.BoxDoubleSided;
 import com.rwtema.extrautils2.backend.model.BoxModel;
-import javax.annotation.Nonnull;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public abstract class BlockWardBase extends XUBlockStaticRotation {
 

@@ -54,15 +54,13 @@ public class BlockSimpleDecorative extends XUBlockStatic {
 			public void addRecipes() {
 
 			}
-		}
-		,
+		},
 		BLOCK_EVIL("blockEvilMetal", "evil_infused_ingot_block") {
 			@Override
 			public void addRecipes() {
 
 			}
-		}
-		;
+		};
 
 		public final String oreName;
 		public final String texture;

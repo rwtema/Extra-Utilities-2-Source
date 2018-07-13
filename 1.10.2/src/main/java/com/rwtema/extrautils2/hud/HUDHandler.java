@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.hud;
 
-import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -8,6 +7,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
 
 public class HUDHandler {
 	static ArrayList<IHudHandler> handlers = new ArrayList<>();

@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 
 public class ObfuscatedKeyMap<V> {
-	private final  int seed, max_search;
+	private final int seed, max_search;
 	private final TIntObjectHashMap<SubEntry<V>> map;
 
 	public ObfuscatedKeyMap(int seed, int max_search, TIntObjectHashMap<SubEntry<V>> map) {

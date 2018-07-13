@@ -9,7 +9,7 @@ import java.util.List;
 public enum Upgrade {
 	STACK_SIZE(1, 5),
 	SPEED(64, 1),
-	MINING(1, 10){
+	MINING(1, 10) {
 		@Override
 		public float getPowerUse(int level) {
 			return 0;

@@ -1,10 +1,11 @@
 package com.rwtema.extrautils2.utils.helpers;
 
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeChunkManager;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeChunkManager;
 
 public class DescribeHelper {
 	public static void addDescription(List<String> list, String name, Object object) {

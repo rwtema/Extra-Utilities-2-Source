@@ -24,7 +24,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
 
 public class AchievementHelper {
 	private static HashMultimap<ItemRef, XUAchievement> dropMap = HashMultimap.create();
@@ -143,7 +142,7 @@ public class AchievementHelper {
 							InventoryPlayer inventory = event.player.inventory;
 							for (int i = 0; i < inventory.getSizeInventory(); i++) {
 								ItemStack stackInSlot = inventory.getStackInSlot(i);
-								if(StackHelper.isNonNull(stackInSlot)){
+								if (StackHelper.isNonNull(stackInSlot)) {
 									checkForPotentialAwards(event.player, stackInSlot);
 								}
 							}

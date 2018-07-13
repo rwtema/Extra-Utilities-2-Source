@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.utils.helpers;
 
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockRedSandstone;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.BlockTorch;

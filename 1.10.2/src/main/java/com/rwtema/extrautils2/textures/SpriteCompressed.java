@@ -1,18 +1,18 @@
 package com.rwtema.extrautils2.textures;
 
 import com.rwtema.extrautils2.ExtraUtils2;
-import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import com.rwtema.extrautils2.utils.LogHelper;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageTypeSpecifier;
+import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.data.AnimationMetadataSection;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageTypeSpecifier;
+import java.awt.image.BufferedImage;
 
 public class SpriteCompressed extends SpriteLoader {
 	private final int n;

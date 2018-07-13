@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
-import java.util.Iterator;
 
 public abstract class ItemHandlerRenumberer implements IItemHandlerCompat {
 	final IItemHandler base;
@@ -15,7 +14,8 @@ public abstract class ItemHandlerRenumberer implements IItemHandlerCompat {
 	}
 
 	public abstract int getRenumberedSlots(int slot, int num_slots);
-	public int getRenumberedSlot(int slot){
+
+	public int getRenumberedSlot(int slot) {
 		return getRenumberedSlots(slot, getSlots());
 	}
 

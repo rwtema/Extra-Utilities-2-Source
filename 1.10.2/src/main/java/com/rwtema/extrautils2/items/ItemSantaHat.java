@@ -19,14 +19,16 @@ import javax.annotation.Nullable;
 
 public class ItemSantaHat extends ItemArmor implements IXUItem {
 	public final static ArmorMaterial SANTA = EnumHelper.addArmorMaterial("Santaman", "extrautils2:santa", 200, new int[]{1, 1, 1, 1}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1);
+	@SideOnly(Side.CLIENT)
+	TextureAtlasSprite sprite;
+
+	public ItemSantaHat() {
+		super(SANTA, 0, EntityEquipmentSlot.HEAD);
+	}
 
 	@Override
 	public boolean hasOverlay(@Nonnull ItemStack stack) {
 		return true;
-	}
-
-	public ItemSantaHat() {
-		super(SANTA, 0, EntityEquipmentSlot.HEAD);
 	}
 
 	@Nullable
@@ -45,9 +47,6 @@ public class ItemSantaHat extends ItemArmor implements IXUItem {
 		return new PassthruModelItem(this);
 	}
 
-	@SideOnly(Side.CLIENT)
-	TextureAtlasSprite sprite;
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public TextureAtlasSprite getBaseTexture() {
@@ -56,7 +55,7 @@ public class ItemSantaHat extends ItemArmor implements IXUItem {
 
 	@Override
 	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
-model.addSprite(sprite);
+		model.addSprite(sprite);
 	}
 
 	@Override

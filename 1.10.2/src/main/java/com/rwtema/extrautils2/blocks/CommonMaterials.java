@@ -2,7 +2,7 @@ package com.rwtema.extrautils2.blocks;
 
 public class CommonMaterials {
 
-	enum Values{
+	enum Values {
 		GLASS,
 		STONE,
 

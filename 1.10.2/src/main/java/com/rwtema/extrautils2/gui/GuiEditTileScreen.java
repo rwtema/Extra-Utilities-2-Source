@@ -4,7 +4,6 @@ import com.rwtema.extrautils2.blocks.BlockScreen;
 import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.tile.TileScreen;
 import com.rwtema.extrautils2.utils.Lang;
-import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -12,6 +11,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.input.Keyboard;
+
+import java.io.IOException;
 
 public class GuiEditTileScreen extends GuiScreen {
 	private final TileScreen screen;

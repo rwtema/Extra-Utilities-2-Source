@@ -11,7 +11,7 @@ public abstract class SingleStackHandlerBase implements IItemHandlerModifiableCo
 	@ItemStackNonNull
 	public abstract ItemStack getStack();
 
-	public abstract void setStack( @ItemStackNonNull ItemStack stack);
+	public abstract void setStack(@ItemStackNonNull ItemStack stack);
 
 	@Override
 	public void setStackInSlot(int slot, @ItemStackNonNull ItemStack stack) {
@@ -132,7 +132,7 @@ public abstract class SingleStackHandlerBase implements IItemHandlerModifiableCo
 		return StackHelper.isNull(curStack) || StackHelper.isEmpty(curStack);
 	}
 
-	public int getStackLevel(){
+	public int getStackLevel() {
 		ItemStack curStack = getStack();
 		return StackHelper.isNull(curStack) ? 0 : StackHelper.getStacksize(curStack);
 	}

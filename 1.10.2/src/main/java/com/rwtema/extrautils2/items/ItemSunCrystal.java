@@ -12,12 +12,6 @@ import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.MCTimer;
 import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import com.rwtema.extrautils2.utils.helpers.QuadHelper;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Vector4f;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -26,8 +20,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumSkyBlock;
@@ -36,6 +30,13 @@ import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.Vector3f;
+
+import javax.annotation.Nonnull;
+import javax.vecmath.Matrix4f;
+import javax.vecmath.Vector4f;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ItemSunCrystal extends XUItem {
 	public static IPlayerPowerCreator creator = new IPlayerPowerCreator() {

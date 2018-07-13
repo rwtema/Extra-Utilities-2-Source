@@ -13,7 +13,7 @@ public abstract class LazySideMask {
 	byte calc;
 	byte result;
 
-	public boolean get(TileEntity parent, EnumFacing side){
+	public boolean get(TileEntity parent, EnumFacing side) {
 		return get(side.ordinal(), parent);
 	}
 
@@ -30,9 +30,9 @@ public abstract class LazySideMask {
 		int mask = 1 << bitIndex;
 		if ((calc & mask) == 0) {
 			calc |= mask;
-			if (test(bitIndex,parent)) {
+			if (test(bitIndex, parent)) {
 				result |= mask;
-			}else{
+			} else {
 				result &= ~mask;
 			}
 		}
@@ -50,11 +50,11 @@ public abstract class LazySideMask {
 
 	protected abstract boolean test(@Nullable TileEntity tileEntity, World world, BlockPos offset, EnumFacing opposite, TileEntity tile, int bitIndex);
 
-	public void invalidateAll(){
+	public void invalidateAll() {
 		calc = 0;
 	}
 
-	public void invalidate(int bitIndex){
+	public void invalidate(int bitIndex) {
 		calc &= (1 << bitIndex);
 	}
 
@@ -65,7 +65,7 @@ public abstract class LazySideMask {
 			return tileEntity != null && tileEntity.hasCapability(getCapability(), opposite);
 		}
 
-		protected abstract Capability<?> getCapability() ;
+		protected abstract Capability<?> getCapability();
 
 		public static class Energy extends HasCap {
 			@Override

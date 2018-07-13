@@ -3,8 +3,6 @@ package com.rwtema.extrautils2.power;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
 public class PowerMultipliers {
 	public final static IWorldPowerMultiplier SOLAR = new IWorldPowerMultiplier() {
 

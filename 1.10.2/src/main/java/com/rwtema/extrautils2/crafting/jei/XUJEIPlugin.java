@@ -68,7 +68,7 @@ public class XUJEIPlugin extends BlankModPlugin implements IModPlugin {
 			subtypeRegistry.registerSubtypeInterpreter(Validate.notNull(Item.getItemFromBlock(XU2Entries.machineEntry.value)), new MachineSubtypeInterpreter());
 		}
 
-		if(XU2Entries.unstableIngots.isActive()){
+		if (XU2Entries.unstableIngots.isActive()) {
 			subtypeRegistry.registerSubtypeInterpreter(XU2Entries.unstableIngots.value, new UnstableIIngotInterpreter());
 		}
 	}
@@ -156,7 +156,7 @@ public class XUJEIPlugin extends BlankModPlugin implements IModPlugin {
 
 		registry.addRecipeHandlers(new JEIVanillaCraftingRecipeHandler<>(EnchantRecipe.class));
 
-		if(XU2Entries.unstableIngots.isActive()) {
+		if (XU2Entries.unstableIngots.isActive()) {
 			registry.addRecipeHandlers(new JEIVanillaCraftingRecipeHandler<>(ItemUnstableIngots.UnstableIngotRecipe.class));
 		}
 

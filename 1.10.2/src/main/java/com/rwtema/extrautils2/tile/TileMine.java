@@ -7,19 +7,13 @@ import com.rwtema.extrautils2.backend.model.XUBlockState;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.eventhandlers.ItemCaptureHandler;
 import com.rwtema.extrautils2.fakeplayer.XUFakePlayer;
-import com.rwtema.extrautils2.gui.backend.*;
-import com.rwtema.extrautils2.itemhandler.InventoryHelper;
-import com.rwtema.extrautils2.itemhandler.PublicWrapper;
-import com.rwtema.extrautils2.itemhandler.SingleStackHandler;
-import com.rwtema.extrautils2.itemhandler.StackDump;
-import com.rwtema.extrautils2.itemhandler.XUTileItemStackHandler;
+import com.rwtema.extrautils2.gui.backend.DynamicContainer;
+import com.rwtema.extrautils2.gui.backend.DynamicContainerTile;
+import com.rwtema.extrautils2.gui.backend.DynamicGui;
+import com.rwtema.extrautils2.gui.backend.WidgetSlotItemHandler;
+import com.rwtema.extrautils2.itemhandler.*;
 import com.rwtema.extrautils2.items.ItemIngredients;
 import com.rwtema.extrautils2.utils.Lang;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.enchantment.Enchantment;
@@ -39,6 +33,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class TileMine extends TileAdvInteractor {
 	private final static ItemStack genericDigger = new ItemStack(Items.DIAMOND_PICKAXE, 1);

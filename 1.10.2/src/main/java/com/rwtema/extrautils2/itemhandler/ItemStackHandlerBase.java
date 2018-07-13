@@ -3,24 +3,23 @@ package com.rwtema.extrautils2.itemhandler;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.utils.ItemStackNonNull;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 public abstract class ItemStackHandlerBase implements IItemHandlerCompat, IItemHandlerModifiableCompat {
 
 	@ItemStackNonNull
 	public abstract ItemStack getStack(int slot);
+
 	public abstract void setStack(int slot, ItemStack stack);
-	
+
 	@Override
 	public void setStackInSlot(int slot, @ItemStackNonNull ItemStack stack) {
 		if (ItemStack.areItemStacksEqual(getStack(slot), stack))
 			return;
-		setStack(slot,stack);
+		setStack(slot, stack);
 		onContentsChanged(slot);
 	}
-	
+
 	@ItemStackNonNull
 	@Override
 	public ItemStack getStackInSlot(int slot) {

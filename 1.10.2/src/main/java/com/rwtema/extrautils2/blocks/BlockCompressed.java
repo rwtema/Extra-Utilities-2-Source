@@ -7,8 +7,6 @@ import com.rwtema.extrautils2.backend.model.Textures;
 import com.rwtema.extrautils2.textures.SpriteCompressed;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.blockaccess.BlockAccessDelegate;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
@@ -22,6 +20,9 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class BlockCompressed extends XUBlockFull {
 	public final PropertyInteger property_compression;
@@ -88,7 +89,7 @@ public class BlockCompressed extends XUBlockFull {
 	}
 
 	@Override
- 	public float getExplosionResistance(World world, BlockPos pos, @Nonnull Entity exploder, Explosion explosion) {
+	public float getExplosionResistance(World world, BlockPos pos, @Nonnull Entity exploder, Explosion explosion) {
 		int value = world.getBlockState(pos).getValue(property_compression);
 		return baseBlock.getExplosionResistance(exploder) * (int) Math.pow(1.5, value - 1);
 	}

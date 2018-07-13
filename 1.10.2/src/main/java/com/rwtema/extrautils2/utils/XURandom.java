@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.utils;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +34,7 @@ public class XURandom {
 		for (int i = n; i > 1; i--) {
 			j = rand.nextInt(i);
 			temp = arr[i - 1];
-			arr[i-1] = arr[j];
+			arr[i - 1] = arr[j];
 			arr[j] = temp;
 		}
 		return arr;

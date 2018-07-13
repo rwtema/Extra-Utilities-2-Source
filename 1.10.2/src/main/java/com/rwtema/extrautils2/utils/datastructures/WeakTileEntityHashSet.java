@@ -1,11 +1,11 @@
 package com.rwtema.extrautils2.utils.datastructures;
 
 import com.rwtema.extrautils2.tile.XUTile;
-import com.rwtema.extrautils2.utils.datastructures.WeakSet;
+import net.minecraft.tileentity.TileEntity;
+
+import javax.annotation.Nonnull;
 import java.util.Iterator;
 import java.util.WeakHashMap;
-import javax.annotation.Nonnull;
-import net.minecraft.tileentity.TileEntity;
 
 public class WeakTileEntityHashSet<T> extends WeakSet<T> {
 	public WeakTileEntityHashSet() {

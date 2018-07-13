@@ -3,13 +3,14 @@ package com.rwtema.extrautils2.power.energy;
 import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.utils.Lang;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class BlockPowerBattery extends XUBlockStatic {
 

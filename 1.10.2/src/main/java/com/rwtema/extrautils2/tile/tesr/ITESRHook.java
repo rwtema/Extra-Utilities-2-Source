@@ -1,7 +1,7 @@
 package com.rwtema.extrautils2.tile.tesr;
 
-import net.minecraft.client.renderer.BlockRendererDispatcher;
 import com.rwtema.extrautils2.render.IVertexBuffer;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.math.BlockPos;

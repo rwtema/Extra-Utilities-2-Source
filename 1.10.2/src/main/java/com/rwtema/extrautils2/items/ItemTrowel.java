@@ -1,9 +1,7 @@
 package com.rwtema.extrautils2.items;
 
 import com.google.common.collect.ImmutableSet;
-import com.rwtema.extrautils2.backend.XUItemFlat;
 import com.rwtema.extrautils2.backend.XUItemFlatMetadata;
-import com.rwtema.extrautils2.backend.model.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -19,10 +17,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Set;
 
 public class ItemTrowel extends XUItemFlatMetadata {
+	final Set<Material> validMaterials = ImmutableSet.of(Material.GRASS, Material.GROUND, Material.SAND, Material.SNOW, Material.CLAY);
+
 	public ItemTrowel() {
 		super("trowel");
 		setMaxStackSize(1);
@@ -37,7 +36,6 @@ public class ItemTrowel extends XUItemFlatMetadata {
 		return true;
 	}
 
-
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		NBTTagList tagList = stack.getEnchantmentTagList();
@@ -50,7 +48,6 @@ public class ItemTrowel extends XUItemFlatMetadata {
 			}
 		}
 	}
-
 
 	@Override
 	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player) {
@@ -76,8 +73,6 @@ public class ItemTrowel extends XUItemFlatMetadata {
 	public boolean canHarvestBlock(@Nonnull IBlockState state, ItemStack stack) {
 		return validMaterials.contains(state.getMaterial());
 	}
-
-	final Set<Material> validMaterials = ImmutableSet.of(Material.GRASS, Material.GROUND, Material.SAND, Material.SNOW, Material.CLAY);
 
 	@Override
 	public float getStrVsBlock(ItemStack stack, IBlockState state) {

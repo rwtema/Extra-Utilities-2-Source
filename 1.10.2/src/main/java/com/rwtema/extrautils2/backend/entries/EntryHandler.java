@@ -3,8 +3,8 @@ package com.rwtema.extrautils2.backend.entries;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.rwtema.extrautils2.achievements.AchievementHelper;
-import com.rwtema.extrautils2.modcompat.ModCompatibility;
 import com.rwtema.extrautils2.crafting.CraftingHelper;
+import com.rwtema.extrautils2.modcompat.ModCompatibility;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModAPIManager;
@@ -43,7 +43,7 @@ public class EntryHandler {
 
 			if (entry.enabled) {
 				activeEntries.add(entry);
-				if(entry instanceof IItemStackMaker){
+				if (entry instanceof IItemStackMaker) {
 					stackEntries.add(((IItemStackMaker) entry));
 				}
 			}

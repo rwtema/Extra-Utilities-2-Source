@@ -23,7 +23,7 @@ public class LightMathHelper {
 		float b2 = b * b;
 		float c2 = c * c;
 		float r = a2 + b2 + c2;
-		return new float[]{approxSqrt(a2, r) * Math.signum(a) , approxSqrt(b2, r) * Math.signum(b), approxSqrt(c2, r) * Math.signum(c)};
+		return new float[]{approxSqrt(a2, r) * Math.signum(a), approxSqrt(b2, r) * Math.signum(b), approxSqrt(c2, r) * Math.signum(c)};
 	}
 
 	public static float partialDist(float x, float y, float z, float r) {

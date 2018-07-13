@@ -1,10 +1,11 @@
 package com.rwtema.extrautils2.textures;
 
-import java.util.Random;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
+
+import java.util.Random;
 
 public class TextureRandom extends TextureLocation {
 

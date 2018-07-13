@@ -1,10 +1,11 @@
 package com.rwtema.extrautils2.gui.backend;
 
 import com.rwtema.extrautils2.network.XUPacketBuffer;
-import javax.annotation.Nonnull;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public abstract class WidgetButton extends WidgetBase implements IWidgetClientNetwork {
 	public String text;
@@ -41,7 +42,7 @@ public abstract class WidgetButton extends WidgetBase implements IWidgetClientNe
 		sendClickToServer();
 	}
 
-	public void onClickServer(XUPacketBuffer buffer){
+	public void onClickServer(XUPacketBuffer buffer) {
 
 	}
 
@@ -56,7 +57,7 @@ public abstract class WidgetButton extends WidgetBase implements IWidgetClientNe
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void sendClickToServer(){
+	public void sendClickToServer() {
 		sendClickToServer(null);
 	}
 

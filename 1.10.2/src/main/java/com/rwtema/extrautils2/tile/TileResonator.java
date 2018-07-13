@@ -44,18 +44,14 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 			PowerManager.instance.markDirty(TileResonator.this);
 		}
 	});
-
-	@Override
-	protected Iterable<ItemStack> getDropHandler() {
-		return Iterables.concat(
-				InventoryHelper.getItemHandlerIterator(handler),
-				InventoryHelper.getItemHandlerIterator(upgrades)
-		);
-	}
-
 	ResonatorRecipe currentRecipe = null;
 	int progress = 0;
 	ItemStack displayStack;
+	private SingleStackHandler OUTPUT = new SingleStackHandler() {
+		protected void onContentsChanged() {
+			TileResonator.this.onInputChanged();
+		}
+	};
 	private ItemStackHandler INPUT = new XUTileItemStackHandler(1, this) {
 		@Override
 		protected void onContentsChanged(int slot) {
@@ -72,11 +68,6 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 			return super.getStackLimit(slot, stack);
 		}
 	};
-	private SingleStackHandler OUTPUT = new SingleStackHandler() {
-		protected void onContentsChanged() {
-			TileResonator.this.onInputChanged();
-		}
-	};
 	private IItemHandler handler = ConcatItemHandler.concatNonNull(new PublicWrapper.Insert(INPUT), new PublicWrapper.Extract(OUTPUT));
 
 	public static void register(ItemStack input, ItemStack output, int energy) {
@@ -89,6 +80,14 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 			ResonatorRecipe.WildCardItems.add(input.getItem());
 		else
 			ResonatorRecipe.SpecificItems.add(new ItemStack(input.getItem(), 1, input.getItemDamage()));
+	}
+
+	@Override
+	protected Iterable<ItemStack> getDropHandler() {
+		return Iterables.concat(
+				InventoryHelper.getItemHandlerIterator(handler),
+				InventoryHelper.getItemHandlerIterator(upgrades)
+		);
 	}
 
 	@Override

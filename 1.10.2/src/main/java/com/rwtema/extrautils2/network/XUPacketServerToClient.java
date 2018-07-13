@@ -1,9 +1,6 @@
 package com.rwtema.extrautils2.network;
 
-import com.rwtema.extrautils2.asm.ModAdv;
 import net.minecraftforge.fml.relauncher.Side;
-
-import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 public abstract class XUPacketServerToClient extends XUPacketBase {
 	@SuppressWarnings("unused")

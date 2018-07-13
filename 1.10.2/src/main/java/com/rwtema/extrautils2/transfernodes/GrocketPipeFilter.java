@@ -16,6 +16,7 @@ import java.util.List;
 
 public class GrocketPipeFilter extends Grocket implements IDynamicHandler {
 	public SingleStackHandlerFilter.EitherFilter filter = registerNBT("filter", new SingleStackHandlerFilter.EitherFilter());
+	public NBTSerializable.NBTEnum<Priority> priority = registerNBT("priority", new NBTSerializable.NBTEnum<>(Priority.HIGH));
 
 	@Override
 	public DynamicContainer getDynamicContainer(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -67,8 +68,6 @@ public class GrocketPipeFilter extends Grocket implements IDynamicHandler {
 		NORMAL,
 		LOW
 	}
-
-	public NBTSerializable.NBTEnum<Priority> priority = registerNBT("priority", new NBTSerializable.NBTEnum<>(Priority.HIGH));
 
 	public class TransferPipeContainer extends DynamicContainerTile {
 		public TransferPipeContainer(EntityPlayer player) {

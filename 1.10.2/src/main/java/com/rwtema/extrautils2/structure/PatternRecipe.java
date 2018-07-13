@@ -1,17 +1,10 @@
 package com.rwtema.extrautils2.structure;
 
 import com.google.common.collect.Lists;
-import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.compatibility.StackHelper;
-import com.rwtema.extrautils2.utils.LogHelper;
 import com.rwtema.extrautils2.utils.blockaccess.CompatBlockAccess;
 import com.rwtema.extrautils2.utils.datastructures.ItemRef;
 import com.rwtema.extrautils2.utils.helpers.BlockStates;
-
-import java.util.*;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
@@ -25,6 +18,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import org.apache.commons.lang3.Validate;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class PatternRecipe {
 	public static ArrayList<PatternRecipe> recipeList = new ArrayList<>();

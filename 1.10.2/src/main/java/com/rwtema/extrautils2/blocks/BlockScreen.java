@@ -5,15 +5,16 @@ import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.tile.TilePower;
 import com.rwtema.extrautils2.tile.TileScreen;
-import javax.annotation.Nonnull;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockScreen extends XUBlockStatic {
 

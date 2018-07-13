@@ -10,12 +10,11 @@ public class WidgetScrollBar extends WidgetBase implements IWidgetMouseInput {
 	public int minValue;
 	public int maxValue;
 	public int scrollValue;
+	public boolean hideWhenInvalid;
 	@SideOnly(Side.CLIENT)
 	boolean allowGeneralMouseWheel;
 	private float drawValue;
 	private boolean isScrolling;
-
-	public boolean hideWhenInvalid;
 
 	public WidgetScrollBar(int x, int y, int h, int minValue, int maxValue) {
 		super(x, y, BAR_WIDTH, h);
@@ -94,7 +93,7 @@ public class WidgetScrollBar extends WidgetBase implements IWidgetMouseInput {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderBackground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
-		if(hideWhenInvalid && minValue == maxValue) return;
+		if (hideWhenInvalid && minValue == maxValue) return;
 		if (h == 112) {
 			gui.drawTexturedModalRect(guiLeft + getX(), guiTop + getY(), 220, 0, BAR_WIDTH, 112);
 		} else if (h < 112) {
@@ -113,7 +112,7 @@ public class WidgetScrollBar extends WidgetBase implements IWidgetMouseInput {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderForeground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
-		if(hideWhenInvalid && minValue == maxValue) return;
+		if (hideWhenInvalid && minValue == maxValue) return;
 		gui.drawTexturedModalRect(guiLeft + getX() + 1, guiTop + getY() + drawValue, 196, 0, 12, 15);
 	}
 

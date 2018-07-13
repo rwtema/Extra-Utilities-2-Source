@@ -1,13 +1,13 @@
 package com.rwtema.extrautils2.gui.backend;
 
 import com.rwtema.extrautils2.compatibility.CompatClientHelper;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ChatAllowedCharacters;
@@ -447,7 +447,7 @@ public class WidgetTextInput extends WidgetBase implements IWidgetKeyInput, IWid
 
 				String s = getFontRendererInstance().trimStringToWidth(text.substring(lineScrollOffset), getW());
 				setCursorPosition(getFontRendererInstance().trimStringToWidth(s, i).length() + lineScrollOffset);
-			}else if (mouseButton == 1){
+			} else if (mouseButton == 1) {
 				setText("");
 			}
 
@@ -490,7 +490,7 @@ public class WidgetTextInput extends WidgetBase implements IWidgetKeyInput, IWid
 		int w = getW();
 		int x1 = guiLeft + getX();
 		gui.drawTexturedModalRect(x1, guiTop + getY(), 0, 102, w / 2, 11);
-		gui.drawTexturedModalRect(x1 + w / 2, guiTop + getY(), 90 - w/2, 102, w / 2, 11);
+		gui.drawTexturedModalRect(x1 + w / 2, guiTop + getY(), 90 - w / 2, 102, w / 2, 11);
 
 	}
 

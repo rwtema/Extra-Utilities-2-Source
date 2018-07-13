@@ -20,11 +20,6 @@ public abstract class ItemCompat extends Item {
 		itemIn.getSubItems(itemIn, tab, subItems);
 	}
 
-	@Override
-	public void addInformation(ItemStack stack, @Nullable EntityPlayer player, List<String> tooltip, boolean flagIn) {
-		super.addInformation(stack, player, tooltip, flagIn);
-	}
-
 	public static EnumActionResult invokeOnItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		return stack.getItem().onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
 	}
@@ -35,6 +30,11 @@ public abstract class ItemCompat extends Item {
 
 	public static EnumActionResult invokeOnItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
 		return stack.getItem().onItemUseFirst(stack, player, world, pos, side, hitX, hitY, hitZ, hand);
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, @Nullable EntityPlayer player, List<String> tooltip, boolean flagIn) {
+		super.addInformation(stack, player, tooltip, flagIn);
 	}
 
 	public void getSubItemsBase(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {

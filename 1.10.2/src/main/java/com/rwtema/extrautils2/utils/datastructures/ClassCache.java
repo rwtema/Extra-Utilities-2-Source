@@ -20,7 +20,7 @@ public abstract class ClassCache<T> {
 		return t;
 	}
 
-	public void clear(){
+	public void clear() {
 		values.clear();
 	}
 

@@ -25,7 +25,7 @@ public class TileLaserBeam extends TilePower {
 			LinkedHashSet<TileLaserBeam> fenceList = new LinkedHashSet<>();
 
 
-			public void register(TileLaserBeam fence){
+			public void register(TileLaserBeam fence) {
 				if (fenceList.add(fence)) {
 
 				}

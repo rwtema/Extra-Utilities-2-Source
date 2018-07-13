@@ -1,18 +1,17 @@
 package com.rwtema.extrautils2.crafting.jei;
 
 import com.rwtema.extrautils2.compatibility.ParticleRedstoneCompat;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.utils.XURandom;
-import java.util.Random;
 import net.minecraft.client.multiplayer.WorldClient;
-
-import net.minecraft.client.particle.ParticleRedstone;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class ParticlePing extends ParticleRedstoneCompat {
 	public static final Random RANDOM = XURandom.rand;

@@ -3,7 +3,6 @@ package com.rwtema.extrautils2.banner;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.compatibility.CompatHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class Banner {

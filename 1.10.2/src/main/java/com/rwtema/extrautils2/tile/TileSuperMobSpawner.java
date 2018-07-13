@@ -5,18 +5,17 @@ import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.blocks.BlockCursedEarth;
 import com.rwtema.extrautils2.compatibility.StackHelper;
-import com.rwtema.extrautils2.gui.backend.*;
+import com.rwtema.extrautils2.gui.backend.DynamicContainer;
+import com.rwtema.extrautils2.gui.backend.DynamicContainerTile;
+import com.rwtema.extrautils2.gui.backend.IWidget;
+import com.rwtema.extrautils2.gui.backend.WidgetTextData;
 import com.rwtema.extrautils2.itemhandler.InventoryHelper;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.tile.tesr.ITESRHook;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -37,6 +36,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.ForgeEventFactory;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 public class TileSuperMobSpawner extends TileAdvInteractor implements ITESRHook {
 	MyMobSpawnerBaseLogic logic = registerNBT("spawner", new MyMobSpawnerBaseLogic() {

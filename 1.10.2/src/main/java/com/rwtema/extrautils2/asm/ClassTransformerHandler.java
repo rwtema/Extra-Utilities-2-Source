@@ -1,10 +1,11 @@
 package com.rwtema.extrautils2.asm;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 public class ClassTransformerHandler implements IClassTransformer {
 	final static ArrayList<IClassTransformer> transformers = Lists.newArrayList(

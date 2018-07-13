@@ -8,7 +8,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class SimpleWorldTexture implements ISolidWorldTexture{
+public class SimpleWorldTexture implements ISolidWorldTexture {
 	final String texture;
 
 	public SimpleWorldTexture(String texture) {

@@ -1,8 +1,9 @@
 package com.rwtema.extrautils2.itemhandler;
 
 import com.rwtema.extrautils2.tile.XUTile;
-import javax.annotation.OverridingMethodsMustInvokeSuper;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 public class XUTileItemStackHandler extends ItemStackHandler implements IItemHandlerUpdate {
 	final XUTile tile;

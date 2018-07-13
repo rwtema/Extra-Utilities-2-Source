@@ -80,7 +80,7 @@ public class Ping implements INBTSerializable<NBTTagIntArray> {
 						GrocketPipeFilter.Priority priority = pipe.getPriority(world, pos, facing);
 						if (found == null || priority.ordinal() < found.ordinal()) {
 							found = priority;
-						}else{
+						} else {
 							continue;
 						}
 					}
@@ -89,8 +89,8 @@ public class Ping implements INBTSerializable<NBTTagIntArray> {
 						pos = offset;
 						direction = facing;
 						return;
-					}else{
-						newPos= offset;
+					} else {
+						newPos = offset;
 						newDirection = facing;
 					}
 				}

@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.villagers;
 
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.compatibility.VillagerTradeCompat;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -4,11 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.gui.backend.IDynamicHandler;
 import com.rwtema.extrautils2.utils.CapGetter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -18,6 +13,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class Grocket implements ITickable {
 	public TileTransferHolder holder;
@@ -44,7 +45,7 @@ public abstract class Grocket implements ITickable {
 	public abstract GrocketType getType();
 
 	public boolean onActivated(EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if(this instanceof IDynamicHandler){
+		if (this instanceof IDynamicHandler) {
 			if (!holder.getWorld().isRemote)
 				holder.openGui(playerIn, this);
 			return true;
@@ -125,11 +126,11 @@ public abstract class Grocket implements ITickable {
 		return GrocketPipeFilter.Priority.NORMAL;
 	}
 
-	public boolean blockPipeConnection(){
+	public boolean blockPipeConnection() {
 		return true;
 	}
 
-	public boolean blockTileConnection(){
+	public boolean blockTileConnection() {
 		return false;
 	}
 

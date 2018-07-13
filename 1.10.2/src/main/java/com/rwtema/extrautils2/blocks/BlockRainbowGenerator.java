@@ -6,25 +6,20 @@ import com.rwtema.extrautils2.backend.XUBlockStateCreator;
 import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.model.Box;
 import com.rwtema.extrautils2.backend.model.BoxModel;
-import com.rwtema.extrautils2.backend.model.MutableModel;
 import com.rwtema.extrautils2.tile.TileRainbowGenerator;
-import com.rwtema.extrautils2.tile.XUTile;
 import com.rwtema.extrautils2.utils.Lang;
-import com.rwtema.extrautils2.utils.MCTimer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Random;
 
 public class BlockRainbowGenerator extends XUBlockStatic {
 	public final static PropertyEnumSimple<State> PROPERTY_STATE = new PropertyEnumSimple<State>(State.class);

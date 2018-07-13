@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.rwtema.extrautils2.api.machine.*;
 import com.rwtema.extrautils2.compatibility.CompatHelper;
-import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.utils.XURandom;
 import gnu.trove.map.TObjectIntMap;
@@ -16,7 +15,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
-
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;

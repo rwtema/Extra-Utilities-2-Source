@@ -6,7 +6,6 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.Random;
 import java.util.function.DoubleBinaryOperator;
-import java.util.function.DoubleConsumer;
 
 public class VecHelper {
 	public static Vec3d addSide(Vec3d vec, EnumFacing side, double mult) {
@@ -24,7 +23,7 @@ public class VecHelper {
 		return new Vec3d(cs * MathHelper.cos(t), cs * MathHelper.sin(t), MathHelper.sin(s));
 	}
 
-	public static Vec3d lambdaCombine(Vec3d left, Vec3d right, DoubleBinaryOperator lambda){
+	public static Vec3d lambdaCombine(Vec3d left, Vec3d right, DoubleBinaryOperator lambda) {
 		//noinspection SuspiciousNameCombination
 		return new Vec3d(
 				lambda.applyAsDouble(left.x, right.x),
@@ -33,7 +32,7 @@ public class VecHelper {
 		);
 	}
 
-	public static Vec3d lambdaCombine(Vec3d left, double scalar, DoubleBinaryOperator lambda){
+	public static Vec3d lambdaCombine(Vec3d left, double scalar, DoubleBinaryOperator lambda) {
 		//noinspection SuspiciousNameCombination
 		return new Vec3d(
 				lambda.applyAsDouble(left.x, scalar),

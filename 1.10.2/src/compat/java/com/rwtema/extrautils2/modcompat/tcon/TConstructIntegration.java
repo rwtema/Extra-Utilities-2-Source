@@ -26,7 +26,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.client.MaterialRenderInfo;
-import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.HarvestLevels;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;

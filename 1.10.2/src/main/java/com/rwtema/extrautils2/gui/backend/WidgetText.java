@@ -2,11 +2,12 @@ package com.rwtema.extrautils2.gui.backend;
 
 
 import com.rwtema.extrautils2.ExtraUtils2;
-import java.util.List;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class WidgetText extends WidgetBase implements IWidget {
 	public int align, color;

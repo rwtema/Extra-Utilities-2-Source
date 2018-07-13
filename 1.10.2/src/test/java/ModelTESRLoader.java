@@ -1,8 +1,6 @@
 import com.rwtema.extrautils2.utils.LogHelper;
 import com.rwtema.extrautils2.utils.helpers.CollectionHelper;
 import gnu.trove.set.hash.TFloatHashSet;
-import java.util.HashMap;
-import javax.vecmath.Matrix4f;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -13,9 +11,13 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 
+import javax.vecmath.Matrix4f;
+import java.util.HashMap;
+
 public class ModelTESRLoader {
 
 	static HashMap<Matrix4f, String> names = new HashMap<>();
+	static TFloatHashSet valueSet = new TFloatHashSet();
 
 	public static void init() {
 		StringBuilder builder = new StringBuilder();
@@ -36,8 +38,6 @@ public class ModelTESRLoader {
 		LogHelper.info("Fin");
 		LogHelper.info(valueSet.toString());
 	}
-
-	static TFloatHashSet valueSet = new TFloatHashSet();
 
 	private static String getName(Matrix4f m) {
 		Matrix4f mc = copy(m);

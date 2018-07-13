@@ -1,9 +1,10 @@
 package com.rwtema.extrautils2.utils;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.EnumDifficulty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BohemianHelper {
 	Sex sex;

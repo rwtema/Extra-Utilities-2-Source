@@ -276,10 +276,10 @@ public class XU2Entries {
 		}
 	};
 	public static BlockClassEntry<BlockSuperMobSpawner> mobSpawner = new BlockClassEntry<>(BlockSuperMobSpawner.class, TileSuperMobSpawner.class);
-	public static BlockClassEntry<BlockCursedEarth> cursedEarth = new BlockClassEntry<BlockCursedEarth>(BlockCursedEarth.class){
+	public static BlockClassEntry<BlockCursedEarth> cursedEarth = new BlockClassEntry<BlockCursedEarth>(BlockCursedEarth.class) {
 		@Override
 		public void loadAdditionalConfig(Configuration config) {
-			Collections.addAll(BlockCursedEarth.entity_blacklist, config.getStringList("Cursed Earth Entity BlackList", ConfigHelper.GAMEPLAY_CATEGORY, new String[0], "Add an entity id (mod:name) to this list to prevent cursed earth from spawning it.") );
+			Collections.addAll(BlockCursedEarth.entity_blacklist, config.getStringList("Cursed Earth Entity BlackList", ConfigHelper.GAMEPLAY_CATEGORY, new String[0], "Add an entity id (mod:name) to this list to prevent cursed earth from spawning it."));
 		}
 	};
 	public static BlockClassEntry<BlockRedstoneClock> redstoneClock = new BlockClassEntry<BlockRedstoneClock>(BlockRedstoneClock.class) {
@@ -1232,17 +1232,6 @@ public class XU2Entries {
 			return new TeleporterDeepDark(destWorld, dest, curDim);
 		}
 	};
-	public static BlockClassEntry<BlockPowerTransmitter> transmitter = new BlockClassEntry<BlockPowerTransmitter>(BlockPowerTransmitter.class, TilePowerTransmitter.class) {
-		@Override
-		public Set<Entry<?>> getDependencies() {
-			return ImmutableSet.of(battery);
-		}
-
-		@Override
-		public void addRecipes() {
-			addShaped("transmitter", newStack(4), "r", "S", 'S', stoneburnt, 'r', redstoneCrystal);
-		}
-	};
 	public static BlockClassEntry<BlockPowerBattery> battery = new BlockClassEntry<BlockPowerBattery>(BlockPowerBattery.class, TilePowerBattery.class) {
 		@Override
 		public Set<Entry<?>> getDependencies() {
@@ -1254,15 +1243,21 @@ public class XU2Entries {
 			addShaped("battery", newStack(), "SSS", "rRr", "SSS", 'S', stoneburnt, 'r', "blockRedstone", 'R', redstoneCrystal);
 		}
 	};
-	public static BlockClassEntry<BlockQuarryProxy> quarry_proxy = new BlockClassEntry<BlockQuarryProxy>(BlockQuarryProxy.class, TileQuarryProxy.class) {
+	public static BlockClassEntry<BlockPowerTransmitter> transmitter = new BlockClassEntry<BlockPowerTransmitter>(BlockPowerTransmitter.class, TilePowerTransmitter.class) {
 		@Override
 		public Set<Entry<?>> getDependencies() {
-			return ImmutableSet.of(quarry, specialdim);
+			return ImmutableSet.of(battery);
 		}
 
 		@Override
 		public void addRecipes() {
-			addShaped("quarry_proxy", newStack(), "eme", "ede", "rrr", 'e', Blocks.END_STONE, 'm', Blocks.END_ROD, 'd', Items.DIAMOND_PICKAXE, 'r', stoneburnt);
+			addShaped("transmitter", newStack(4), "r", "S", 'S', stoneburnt, 'r', redstoneCrystal);
+		}
+	};
+	public static DimensionEntry specialdim = new DimensionEntry("ExtraUtils2_Quarry_Dim", -9999, WorldProviderSpecialDim.class, true) {
+		@Override
+		public Set<Entry<?>> getDependencies() {
+			return ImmutableSet.of(quarry_proxy, quarry);
 		}
 	};
 	//	public static DimensionEntry dream_world = new DimensionEntry("dream_world", -22322, WorldProviderDreamWorld.class, false);
@@ -1303,10 +1298,15 @@ public class XU2Entries {
 			TileQuarry.ENERGY_PER_OPERATION = config.get(ConfigHelper.ENERGY_CATEGORY, "Quantum Quarry: Base Energy Per Operation", 20000).getInt();
 		}
 	};
-	public static DimensionEntry specialdim = new DimensionEntry("ExtraUtils2_Quarry_Dim", -9999, WorldProviderSpecialDim.class, true) {
+	public static BlockClassEntry<BlockQuarryProxy> quarry_proxy = new BlockClassEntry<BlockQuarryProxy>(BlockQuarryProxy.class, TileQuarryProxy.class) {
 		@Override
 		public Set<Entry<?>> getDependencies() {
-			return ImmutableSet.of(quarry_proxy, quarry);
+			return ImmutableSet.of(quarry, specialdim);
+		}
+
+		@Override
+		public void addRecipes() {
+			addShaped("quarry_proxy", newStack(), "eme", "ede", "rrr", 'e', Blocks.END_STONE, 'm', Blocks.END_ROD, 'd', Items.DIAMOND_PICKAXE, 'r', stoneburnt);
 		}
 	};
 	public static BlockEntry<BlockSpike> spike_wood = new BlockEntry<BlockSpike>("spike_wood") {

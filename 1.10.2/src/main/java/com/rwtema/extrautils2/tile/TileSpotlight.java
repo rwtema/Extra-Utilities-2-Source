@@ -8,11 +8,6 @@ import com.rwtema.extrautils2.lighting.ILight;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.utils.helpers.LightMathHelper;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.WeakHashMap;
-import javax.annotation.Nonnull;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,6 +22,12 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.Constants;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 public class TileSpotlight extends TilePower implements ILight {
 

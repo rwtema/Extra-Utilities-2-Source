@@ -12,15 +12,15 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class AnvilRecipe extends XUShapedRecipe {
-	public AnvilRecipe(ResourceLocation location ,Block result, Object... recipe) {
+	public AnvilRecipe(ResourceLocation location, Block result, Object... recipe) {
 		super(location, result, recipe);
 	}
 
-	public AnvilRecipe(ResourceLocation location ,Item result, Object... recipe) {
+	public AnvilRecipe(ResourceLocation location, Item result, Object... recipe) {
 		super(location, result, recipe);
 	}
 
-	public AnvilRecipe(ResourceLocation location ,ItemStack result, Object... recipe) {
+	public AnvilRecipe(ResourceLocation location, ItemStack result, Object... recipe) {
 		super(location, result, recipe);
 	}
 

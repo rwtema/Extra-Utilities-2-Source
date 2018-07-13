@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.textures;
 
 import com.rwtema.extrautils2.backend.model.Box;
-import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 
@@ -17,7 +16,7 @@ public class TextureComponent {
 		this.v1 = v1;
 	}
 
-	public Box makeQuad(EnumFacing side){
+	public Box makeQuad(EnumFacing side) {
 		return new Box(0, 0, 0, 1, 1, 1);
 	}
 }

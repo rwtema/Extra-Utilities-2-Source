@@ -38,7 +38,7 @@ public class XUCrafter extends InventoryCrafting {
 	public void loadStacks(ItemStack stacks[]) {
 		Validate.isTrue(stacks.length == array10List11.length());
 		for (int i = 0; i < array10List11.length(); i++) {
-			array10List11.set(i, stacks[i] == null ? StackHelper.empty() : stacks[i] );
+			array10List11.set(i, stacks[i] == null ? StackHelper.empty() : stacks[i]);
 		}
 	}
 

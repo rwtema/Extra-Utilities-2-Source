@@ -2,8 +2,6 @@ package com.rwtema.extrautils2.utils.helpers;
 
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.ISidedFunction;
-import java.util.Map;
-
 import com.rwtema.extrautils2.compatibility.CompatHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -11,6 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+
+import java.util.Map;
 
 public class WorldHelper {
 	private static final ISidedFunction<World, Float> getSunBrightness = new ISidedFunction<World, Float>() {
@@ -55,8 +55,8 @@ public class WorldHelper {
 		return tileEntity;
 	}
 
-	public static void markBlockForUpdate(World world, BlockPos pos){
+	public static void markBlockForUpdate(World world, BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
-		world.notifyBlockUpdate(pos, state, state, 0 );
+		world.notifyBlockUpdate(pos, state, state, 0);
 	}
 }

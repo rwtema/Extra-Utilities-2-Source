@@ -17,14 +17,14 @@ public abstract class WidgetClickBase extends WidgetBase implements IWidgetMouse
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public  void mouseClicked(int mouseX, int mouseY, int mouseButton, boolean mouseOver) {
+	public void mouseClicked(int mouseX, int mouseY, int mouseButton, boolean mouseOver) {
 		if (mouseOver)
 			this.mouseOver = true;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public  void mouseReleased(int mouseX, int mouseY, int mouseButton, boolean mouseOver) {
+	public void mouseReleased(int mouseX, int mouseY, int mouseButton, boolean mouseOver) {
 		if (this.mouseOver) {
 			if (mouseOver) {
 				sendClick(mouseButton);
@@ -36,7 +36,7 @@ public abstract class WidgetClickBase extends WidgetBase implements IWidgetMouse
 	@SideOnly(Side.CLIENT)
 	public void sendClick(int mouseButton) {
 		XUPacketBuffer pkt = getPacketToSend(mouseButton);
-		if(pkt == null) return;
+		if (pkt == null) return;
 		container.sendInputPacket(this, pkt);
 	}
 
@@ -51,7 +51,7 @@ public abstract class WidgetClickBase extends WidgetBase implements IWidgetMouse
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public  void mouseClickMove(int mouseX, int mouseY, int mouseButton, long timeSinceLastMove, boolean mouseOver) {
+	public void mouseClickMove(int mouseX, int mouseY, int mouseButton, long timeSinceLastMove, boolean mouseOver) {
 
 	}
 

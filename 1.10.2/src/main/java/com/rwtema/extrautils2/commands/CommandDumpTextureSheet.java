@@ -1,15 +1,6 @@
 package com.rwtema.extrautils2.commands;
 
 import com.rwtema.extrautils2.utils.LogHelper;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.IntBuffer;
-import javax.annotation.Nonnull;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageTypeSpecifier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.command.CommandBase;
@@ -19,6 +10,16 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import javax.annotation.Nonnull;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageTypeSpecifier;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
 
 public class CommandDumpTextureSheet extends CommandBase {
 

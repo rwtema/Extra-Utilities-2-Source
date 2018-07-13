@@ -3,6 +3,7 @@ package com.rwtema.extrautils2.backend.model;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.rwtema.extrautils2.compatibility.ICompatPerspectiveAwareModel;
 import com.rwtema.extrautils2.utils.client.GLState;
 import com.rwtema.extrautils2.utils.helpers.NullHelper;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import com.rwtema.extrautils2.compatibility.ICompatPerspectiveAwareModel;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;

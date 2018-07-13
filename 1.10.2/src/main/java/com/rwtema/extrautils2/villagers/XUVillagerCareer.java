@@ -2,11 +2,12 @@ package com.rwtema.extrautils2.villagers;
 
 import com.google.common.collect.ImmutableList;
 import gnu.trove.map.hash.TIntObjectHashMap;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 public class XUVillagerCareer extends VillagerRegistry.VillagerCareer {
 	private TIntObjectHashMap<List<EntityVillager.ITradeList>> randomLists = new TIntObjectHashMap<>();
@@ -40,10 +41,10 @@ public class XUVillagerCareer extends VillagerRegistry.VillagerCareer {
 		ImmutableList.Builder<EntityVillager.ITradeList> builder = ImmutableList.builder();
 		List<EntityVillager.ITradeList> list1 = randomLists.get(level);
 		List<EntityVillager.ITradeList> list2 = detLists.get(level);
-		if(list1 != null){
+		if (list1 != null) {
 			builder.add(new RandomTradeList(list1));
 		}
-		if(list2 != null){
+		if (list2 != null) {
 			builder.addAll(list2);
 		}
 		return builder.build();

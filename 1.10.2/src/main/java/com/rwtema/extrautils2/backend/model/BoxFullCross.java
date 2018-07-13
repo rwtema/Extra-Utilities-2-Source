@@ -1,11 +1,12 @@
 package com.rwtema.extrautils2.backend.model;
 
 import com.rwtema.extrautils2.utils.helpers.QuadHelper;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.EnumFacing;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoxFullCross extends Box {
 	private static final UV[][] stdUVs = new UV[][]{

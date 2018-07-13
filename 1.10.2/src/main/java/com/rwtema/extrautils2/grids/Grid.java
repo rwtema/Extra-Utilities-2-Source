@@ -1,7 +1,7 @@
 package com.rwtema.extrautils2.grids;
 
 import gnu.trove.set.hash.TLinkedHashSet;
-import java.util.Iterator;
+
 import java.util.Set;
 
 @SuppressWarnings("SuspiciousMethodCalls")
@@ -9,6 +9,7 @@ public class Grid {
 	public final Set<TileGridRef<XUTileGrid>> refList = new TLinkedHashSet<>();
 
 	public final GridType gridType;
+	boolean isValid = true;
 
 	public Grid(GridType gridType) {
 		this.gridType = gridType;
@@ -26,8 +27,6 @@ public class Grid {
 			destroy();
 		}
 	}
-
-	boolean isValid = true;
 
 	public void destroy() {
 		isValid = false;

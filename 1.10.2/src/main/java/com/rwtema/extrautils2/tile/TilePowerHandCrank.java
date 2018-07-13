@@ -5,18 +5,18 @@ import com.rwtema.extrautils2.backend.model.MutableModel;
 import com.rwtema.extrautils2.backend.model.Transforms;
 import com.rwtema.extrautils2.keyhandler.ConstantRightClickHandler;
 import com.rwtema.extrautils2.power.IWorldPowerMultiplier;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.tile.tesr.ITESRHook;
 import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
 import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,13 +30,13 @@ public class TilePowerHandCrank extends TilePassiveGenerator implements ITickabl
 	@Override
 	public void update() {
 		if (TIME.value > 0) {
-			if(world.isRemote){
+			if (world.isRemote) {
 				renderOffset += TIME.value * DELTA_OFFSET;
 			}
 
 			TIME.value -= 0.05;
 
-			if(TIME.value < 0) TIME.value = 0;
+			if (TIME.value < 0) TIME.value = 0;
 		}
 	}
 
@@ -61,7 +61,7 @@ public class TilePowerHandCrank extends TilePassiveGenerator implements ITickabl
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void render(IBlockAccess world, BlockPos pos, double x, double y, double z, float partialTicks, int destroyStage, IVertexBuffer renderer, BlockRendererDispatcher blockRenderer) {
-		double v = renderOffset  + partialTicks * Math.max(Math.min(TIME.value,0.5F)-0.05 * partialTicks,0)  * DELTA_OFFSET;
+		double v = renderOffset + partialTicks * Math.max(Math.min(TIME.value, 0.5F) - 0.05 * partialTicks, 0) * DELTA_OFFSET;
 		MutableModel model = new MutableModel(Transforms.blockTransforms);
 
 		BoxModel boxes = new BoxModel();
@@ -93,6 +93,6 @@ public class TilePowerHandCrank extends TilePassiveGenerator implements ITickabl
 
 	@Override
 	public float multiplier(World world) {
-		return Math.min(TIME.value,0.5F) * 30;
+		return Math.min(TIME.value, 0.5F) * 30;
 	}
 }

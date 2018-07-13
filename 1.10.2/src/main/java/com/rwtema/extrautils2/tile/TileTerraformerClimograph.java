@@ -44,6 +44,7 @@ public class TileTerraformerClimograph extends TilePower implements ITickable, I
 
 	public static final int INCREASE_MULTIPLIER = 40;
 	final static int POWER_PER_OPERATION = 1000;
+	public static Consumer<ItemStack> lookUpRecipes = null;
 
 	static {
 		register(BlockTerraformer.Type.COOLER, ItemRef.wrap(Blocks.ICE), 8);
@@ -221,7 +222,6 @@ public class TileTerraformerClimograph extends TilePower implements ITickable, I
 		return world.getBlockState(pos.up()) == XU2Entries.terraformer.value.getDefaultState().withProperty(BlockTerraformer.TYPE, BlockTerraformer.Type.ANTENNA);
 	}
 
-
 	@Override
 	public DynamicContainer getDynamicContainer(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		return new Container(this, player);
@@ -236,8 +236,6 @@ public class TileTerraformerClimograph extends TilePower implements ITickable, I
 	public void onPowerChanged() {
 
 	}
-
-	public static Consumer<ItemStack> lookUpRecipes = null;
 
 	public static class Container extends DynamicContainerTile {
 

@@ -8,8 +8,6 @@ import com.rwtema.extrautils2.backend.model.PassthruModelItem;
 import com.rwtema.extrautils2.compatibility.ItemCompat;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public abstract class XUItem extends ItemCompat implements IXUItem {
 	public static final List<IXUItem> items = Lists.newArrayList();

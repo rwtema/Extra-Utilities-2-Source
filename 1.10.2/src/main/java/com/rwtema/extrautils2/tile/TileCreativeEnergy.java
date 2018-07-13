@@ -59,7 +59,7 @@ public class TileCreativeEnergy extends XUTile implements ITickable {
 					if (storage != null && storage.canReceive()) {
 						for (int i = 0; i < 100; i++) {
 							int receiveEnergy = storage.receiveEnergy(MAX_SEND, false);
-							if(receiveEnergy == 0){
+							if (receiveEnergy == 0) {
 								break;
 							}
 						}

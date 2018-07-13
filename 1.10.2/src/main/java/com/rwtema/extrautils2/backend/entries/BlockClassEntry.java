@@ -14,10 +14,8 @@ public class BlockClassEntry<T extends XUBlock> extends BlockEntry<T> {
 	}
 
 
-
-
 	public BlockClassEntry(Class<T> clazz, Class<? extends TileEntity>... teClazzes) {
-		this(StringHelper.erasePrefix(clazz.getSimpleName(),"Block"), clazz, teClazzes);
+		this(StringHelper.erasePrefix(clazz.getSimpleName(), "Block"), clazz, teClazzes);
 	}
 
 	@Override

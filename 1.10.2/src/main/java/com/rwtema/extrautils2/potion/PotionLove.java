@@ -1,13 +1,14 @@
 package com.rwtema.extrautils2.potion;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class PotionLove extends XUPotion {
 	public PotionLove() {

@@ -1,12 +1,11 @@
 package com.rwtema.extrautils2.potion;
 
-import javax.annotation.Nonnull;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+
+import javax.annotation.Nonnull;
 
 public class PotionGravity extends XUPotion {
 

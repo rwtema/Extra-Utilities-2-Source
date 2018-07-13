@@ -3,13 +3,14 @@ package com.rwtema.extrautils2.backend.model;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.ClientRunnable;
 import com.rwtema.extrautils2.utils.datastructures.WeakSet;
-import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class CachedRenderers {
 	private final static WeakSet<IClientClearCache> cachedRenderers = new WeakSet<>();

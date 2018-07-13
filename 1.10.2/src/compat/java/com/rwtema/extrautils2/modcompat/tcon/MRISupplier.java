@@ -3,8 +3,6 @@ package com.rwtema.extrautils2.modcompat.tcon;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import slimeknights.tconstruct.library.client.MaterialRenderInfo;
 
-import java.util.function.BiFunction;
-
 public class MRISupplier extends MaterialRenderInfo.AbstractMaterialRenderInfo {
 
 	private XUTinkerMaterial owner;

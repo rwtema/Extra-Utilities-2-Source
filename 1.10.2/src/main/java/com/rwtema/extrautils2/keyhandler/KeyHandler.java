@@ -1,11 +1,12 @@
 package com.rwtema.extrautils2.keyhandler;
 
 import com.google.common.base.Throwables;
-import java.lang.reflect.Field;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.settings.KeyBindingMap;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class KeyHandler {

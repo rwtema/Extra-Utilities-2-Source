@@ -1,13 +1,6 @@
 package com.rwtema.extrautils2.items;
 
-import com.rwtema.extrautils2.backend.IXUItem;
 import com.rwtema.extrautils2.backend.IXUItemTexture;
-import com.rwtema.extrautils2.backend.XUItemFlat;
-import com.rwtema.extrautils2.backend.XUItemFlatMetadata;
-import com.rwtema.extrautils2.backend.model.PassthruModelItem;
-import com.rwtema.extrautils2.backend.model.Textures;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;

@@ -7,7 +7,6 @@ import com.rwtema.extrautils2.api.machine.MachineSlot;
 import com.rwtema.extrautils2.api.machine.MachineSlotFluid;
 import com.rwtema.extrautils2.api.machine.MachineSlotItem;
 import com.rwtema.extrautils2.compatibility.StackHelper;
-import com.rwtema.extrautils2.utils.datastructures.ItemRef;
 import gnu.trove.map.TObjectIntMap;
 import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.item.ItemStack;
@@ -31,7 +30,7 @@ public abstract class SingleInputStackMatchRecipeBase implements IMachineRecipe 
 
 	@Override
 	public List<Pair<Map<MachineSlotItem, List<ItemStack>>, Map<MachineSlotFluid, List<FluidStack>>>> getJEIInputItemExamples() {
-		List<Pair<Map<MachineSlotItem, List<ItemStack>>, Map<MachineSlotFluid, List<FluidStack>>>>  list = new ArrayList<>();
+		List<Pair<Map<MachineSlotItem, List<ItemStack>>, Map<MachineSlotFluid, List<FluidStack>>>> list = new ArrayList<>();
 		Collection<ItemStack> values = getInputValues();
 		values.stream().filter(StackHelper::isNonNull).forEach(stack -> {
 			list.add(Pair.of(ImmutableMap.of(inputSlot, ImmutableList.of(stack)), ImmutableMap.of()));

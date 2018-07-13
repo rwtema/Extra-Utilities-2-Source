@@ -199,7 +199,7 @@ public class ItemFireAxe extends ItemAxe implements IXUItem {
 						if (state.getBlock().isWood(world, offsetPos)) {
 							toDestroy.add(offsetPos);
 							toCheck.add(offsetPos);
-						} else if (state.getBlock().isLeaves(state, world, offsetPos)){
+						} else if (state.getBlock().isLeaves(state, world, offsetPos)) {
 							world.scheduleBlockUpdate(nextPos, blockState.getBlock(), world.rand.nextInt(40), 0);
 						}
 					}

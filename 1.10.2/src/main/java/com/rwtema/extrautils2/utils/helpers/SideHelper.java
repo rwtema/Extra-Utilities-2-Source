@@ -1,7 +1,7 @@
 package com.rwtema.extrautils2.utils.helpers;
 
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 
 public class SideHelper {
 	public static EnumFacing[][] edges = new EnumFacing[][]{

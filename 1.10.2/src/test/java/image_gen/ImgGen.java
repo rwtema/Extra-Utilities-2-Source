@@ -1,16 +1,17 @@
 package image_gen;
 
-import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import com.rwtema.extrautils2.utils.LogHelper;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageTypeSpecifier;
+import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.util.ResourceLocation;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageTypeSpecifier;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class ImgGen {
 	public static void createImage() {

@@ -2,8 +2,6 @@ package com.rwtema.extrautils2.backend.entries;
 
 import com.rwtema.extrautils2.items.ItemSickle;
 
-import java.util.Locale;
-
 public class ItemEntrySickle extends ItemEntry<ItemSickle> {
 	public static final Object[] MATERIALS = new Object[]{
 			"plankWood",

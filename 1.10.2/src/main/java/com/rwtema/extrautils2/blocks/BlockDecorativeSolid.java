@@ -11,20 +11,21 @@ import com.rwtema.extrautils2.textures.ISolidWorldTexture;
 import com.rwtema.extrautils2.textures.TextureLocation;
 import com.rwtema.extrautils2.textures.TextureRandom;
 import com.rwtema.extrautils2.tile.TileResonator;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 	public static final PropertyEnumSimple<DecorStates> decor = new PropertyEnumSimple<>(DecorStates.class);
@@ -60,7 +61,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 	@Override
 	public float getEnchantPowerBonus(World world, BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
-		if(state.getBlock() != this) return 0;
+		if (state.getBlock() != this) return 0;
 		return state.getValue(decor).enchantBonus;
 	}
 
@@ -76,7 +77,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 				CraftingHelper.addShapeless(name(), newStack(4), "stone", "bricksStone", "stone", "bricksStone");
 			}
 		},
-//		endstone {
+		//		endstone {
 //			@Override
 //			public void addRecipes() {
 //				CraftingHelper.addShaped(newStack(4), "SS", "SS", 'S', "endstone");
@@ -106,7 +107,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 		sandy_glass {
 			@Override
 			public void addRecipes() {
-				CraftingHelper.addShapeless(name(),newStack(4), "sand", "blockGlassColorless", "sand", "blockGlassColorless");
+				CraftingHelper.addShapeless(name(), newStack(4), "sand", "blockGlassColorless", "sand", "blockGlassColorless");
 			}
 		},
 		truchet {

@@ -10,6 +10,7 @@ import net.minecraftforge.common.IPlantable;
 
 public class ItemBlockPlantable extends XUItemBlock implements IPlantable {
 	IPlantable plantable;
+
 	public ItemBlockPlantable(Block block) {
 		super(block);
 		plantable = (IPlantable) block;
@@ -17,7 +18,7 @@ public class ItemBlockPlantable extends XUItemBlock implements IPlantable {
 
 	@Override
 	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-		return plantable.getPlantType(world,pos);
+		return plantable.getPlantType(world, pos);
 	}
 
 	@Override

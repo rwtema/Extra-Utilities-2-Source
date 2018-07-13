@@ -803,19 +803,8 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 	}
 
 	public static class ContainerMachine extends DynamicContainerTile {
-		@Override
-		public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-			return super.transferStackInSlot(par1EntityPlayer, par2);
-		}
-
 		protected final EntityPlayer player;
 		public TileMachine machine;
-
-		@Override
-		public void onSlotChanged(int index) {
-			super.onSlotChanged(index);
-		}
-
 		public ContainerMachine(final TileMachine machine, EntityPlayer player) {
 			super(machine);
 			this.player = player;
@@ -866,7 +855,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 			}
 
 			for (int i = 0; i < machine.itemHandlerInputs.getSlots(); i++) {
-				addWidget(new WidgetSlotItemHandler(machine.itemHandlerInputs, i, x, y){
+				addWidget(new WidgetSlotItemHandler(machine.itemHandlerInputs, i, x, y) {
 					@Override
 					public void onSlotChanged() {
 						super.onSlotChanged();
@@ -939,6 +928,16 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 			cropAndAddPlayerSlots(player.inventory);
 			validate();
 			this.machine = machine;
+		}
+
+		@Override
+		public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+			return super.transferStackInSlot(par1EntityPlayer, par2);
+		}
+
+		@Override
+		public void onSlotChanged(int index) {
+			super.onSlotChanged(index);
 		}
 	}
 

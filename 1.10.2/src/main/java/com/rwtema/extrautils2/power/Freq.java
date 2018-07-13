@@ -2,14 +2,15 @@ package com.rwtema.extrautils2.power;
 
 import com.mojang.authlib.GameProfile;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
-import java.util.Random;
-import java.util.UUID;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.Random;
+import java.util.UUID;
 
 
 public class Freq {

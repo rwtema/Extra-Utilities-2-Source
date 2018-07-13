@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.compatibility;
 
 
 import com.rwtema.extrautils2.gui.backend.WidgetCraftingMatrix;
-import com.rwtema.extrautils2.itemhandler.XUCrafter;
 import com.rwtema.extrautils2.tile.TileCrafter;
 import com.rwtema.extrautils2.utils.datastructures.ConcatList;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +12,6 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -30,7 +28,7 @@ public class CraftingHelper112 {
 	}
 
 
-	public static Object[] getShapedIngredientRecipes(Object... recipes){
+	public static Object[] getShapedIngredientRecipes(Object... recipes) {
 		return new Object[]{"S", 'S', Items.STICK};
 	}
 

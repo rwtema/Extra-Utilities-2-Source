@@ -3,9 +3,6 @@ package com.rwtema.extrautils2.dimensions;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.blocks.BlockTeleporter;
 import com.rwtema.extrautils2.tile.TileTeleporter;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -14,6 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Map;
 
 public class TeleporterBase extends Teleporter {
 	protected final WorldServer world;
@@ -90,7 +91,7 @@ public class TeleporterBase extends Teleporter {
 		double minDist = 0;
 		for (int x = (pos.getX() - 8) >> 4; x <= (pos.getX() + 8) >> 4; x++)
 			for (int z = (pos.getZ() - 8) >> 4; z <= (pos.getZ() + 8) >> 4; z++) {
-				Chunk chunk = world.getChunkFromChunkCoords(x,z);
+				Chunk chunk = world.getChunkFromChunkCoords(x, z);
 				for (Map.Entry<BlockPos, TileEntity> entry : chunk.getTileEntityMap().entrySet()) {
 					TileEntity tileEntity = entry.getValue();
 					if (tileEntity instanceof TileTeleporter) {

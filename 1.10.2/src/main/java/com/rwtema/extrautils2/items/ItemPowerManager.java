@@ -4,13 +4,14 @@ import com.rwtema.extrautils2.backend.XUItemFlatMetadata;
 import com.rwtema.extrautils2.gui.ContainerPowerReport;
 import com.rwtema.extrautils2.gui.backend.DynamicContainer;
 import com.rwtema.extrautils2.gui.backend.IDynamicHandler;
-import javax.annotation.Nonnull;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class ItemPowerManager extends XUItemFlatMetadata implements IDynamicHandler {
 	public ItemPowerManager() {
@@ -21,7 +22,7 @@ public class ItemPowerManager extends XUItemFlatMetadata implements IDynamicHand
 	@Nonnull
 	@Override
 	public ActionResult<ItemStack> onItemRightClickBase(@Nonnull ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		if(!worldIn.isRemote){
+		if (!worldIn.isRemote) {
 			openItemGui(playerIn);
 		}
 

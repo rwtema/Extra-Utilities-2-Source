@@ -3,7 +3,6 @@ package com.rwtema.extrautils2.eventhandlers;
 import com.rwtema.extrautils2.utils.XURandom;
 import gnu.trove.map.hash.TObjectDoubleHashMap;
 import gnu.trove.procedure.TObjectDoubleProcedure;
-import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraftforge.common.ForgeHooks;
@@ -12,6 +11,8 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.util.List;
 
 public class RareSeedHandler {
 

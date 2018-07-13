@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.worldgen;
 
 import com.rwtema.extrautils2.ExtraUtils2;
-import com.rwtema.extrautils2.compatibility.CompatHelper;
 import com.rwtema.extrautils2.utils.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

@@ -17,9 +17,9 @@ import java.util.List;
 
 public class EnchantRecipe extends PlayerSpecificCrafting {
 	private final int enchantLevel;
-	private List<List<ItemStack>> inputs;
 	@Nullable
 	private final int[] dimensions;
+	private List<List<ItemStack>> inputs;
 
 	public EnchantRecipe(ResourceLocation location, IRecipe recipe, int enchantLevel, List<List<ItemStack>> inputs, @Nullable int[] dimensions) {
 		super(location, recipe);

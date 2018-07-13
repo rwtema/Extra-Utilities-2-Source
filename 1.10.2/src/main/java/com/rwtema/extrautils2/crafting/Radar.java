@@ -39,12 +39,11 @@ import java.util.*;
 public class Radar {
 	@SideOnly(Side.CLIENT)
 	public static KeyBinding searchForItems;
+	static ItemStack lastRenderedStack = StackHelper.empty();
 
 	static {
 
 	}
-
-	static ItemStack lastRenderedStack = StackHelper.empty();
 
 	@SideOnly(Side.CLIENT)
 	public static void init() {

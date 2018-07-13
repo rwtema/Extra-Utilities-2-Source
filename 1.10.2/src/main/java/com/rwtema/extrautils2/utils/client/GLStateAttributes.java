@@ -2,20 +2,21 @@ package com.rwtema.extrautils2.utils.client;
 
 import com.google.common.collect.Lists;
 import gnu.trove.map.hash.TIntObjectHashMap;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import org.lwjgl.opengl.GL11;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import org.lwjgl.opengl.GL11;
 
 public class GLStateAttributes {
 	private static final TIntObjectHashMap<GlStateManager.FogMode> fogEnum;
 	private static final TIntObjectHashMap<GlStateManager.CullFace> cullFaceEnum;
 	private static final ArrayList<GlStateManager.BooleanState> booleanStates;
-	private static  TIntObjectHashMap<String> glAttrib;
+	private static TIntObjectHashMap<String> glAttrib;
 
 	static {
 		booleanStates = Lists.newArrayList(

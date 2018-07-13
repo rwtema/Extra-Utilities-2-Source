@@ -73,10 +73,10 @@ public class TileCreativeHarvest extends XUTile implements ITESREnchantment<Tile
 				}
 			}
 			return true;
-		} else if (playerIn.isSneaking()  ){
+		} else if (playerIn.isSneaking()) {
 			if (worldIn.isRemote) return true;
 
-			if(!(playerIn.capabilities.isCreativeMode || pickupable.value)){
+			if (!(playerIn.capabilities.isCreativeMode || pickupable.value)) {
 				return true;
 			}
 

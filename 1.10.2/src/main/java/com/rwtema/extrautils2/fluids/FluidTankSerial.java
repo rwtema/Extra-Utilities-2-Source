@@ -55,7 +55,7 @@ public class FluidTankSerial extends FluidTank implements INBTSerializable<NBTTa
 	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain) {
 		FluidStack drain = super.drain(maxDrain, doDrain);
-		if(doDrain && drain != null){
+		if (doDrain && drain != null) {
 			onChangeDrain();
 		}
 		return drain;
@@ -64,7 +64,7 @@ public class FluidTankSerial extends FluidTank implements INBTSerializable<NBTTa
 	@Override
 	public FluidStack drain(FluidStack resource, boolean doDrain) {
 		FluidStack drain = super.drain(resource, doDrain);
-		if(doDrain && drain != null){
+		if (doDrain && drain != null) {
 			onChangeDrain();
 		}
 		return drain;

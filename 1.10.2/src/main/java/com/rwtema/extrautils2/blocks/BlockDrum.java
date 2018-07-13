@@ -15,7 +15,6 @@ import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

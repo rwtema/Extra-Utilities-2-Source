@@ -43,7 +43,7 @@ public class CompatTypedReference<T, V extends CompatTypedReference<T, V>> {
 		return Optional.ofNullable(ref);
 	}
 
-	public static class Test extends CompatTypedReference<Item, Test>{
+	public static class Test extends CompatTypedReference<Item, Test> {
 
 	}
 }

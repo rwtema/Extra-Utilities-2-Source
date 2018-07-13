@@ -1,11 +1,11 @@
 package com.rwtema.extrautils2.backend.model;
 
-import java.util.EnumMap;
-import javax.vecmath.Matrix4f;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-
 import org.apache.commons.lang3.tuple.Pair;
+
+import javax.vecmath.Matrix4f;
+import java.util.EnumMap;
 
 @SuppressWarnings("deprecation")
 public class Transforms {
@@ -13,9 +13,8 @@ public class Transforms {
 	public static EnumMap<ItemCameraTransforms.TransformType, Matrix4f> itemToolsTransforms;
 	public static EnumMap<ItemCameraTransforms.TransformType, Matrix4f> blockTransforms;
 	public static EnumMap<ItemCameraTransforms.TransformType, Matrix4f> zeroTransforms;
-	static Matrix4f identity;
-
 	public static EnumMap<ItemCameraTransforms.TransformType, Matrix4f> itemBlockTransforms;
+	static Matrix4f identity;
 
 	static {
 		blockTransforms = new EnumMap<>(ItemCameraTransforms.TransformType.class);
@@ -141,7 +140,6 @@ public class Transforms {
 		identity = new Matrix4f();
 		identity.setIdentity();
 	}
-
 
 
 	public static EnumMap<ItemCameraTransforms.TransformType, Pair<? extends IBakedModel, Matrix4f>> createMap(IBakedModel model, EnumMap<ItemCameraTransforms.TransformType, Matrix4f> type) {

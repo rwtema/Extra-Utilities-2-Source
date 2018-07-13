@@ -1,18 +1,18 @@
 package com.rwtema.extrautils2.grids;
 
 import com.rwtema.extrautils2.tile.XUTile;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.EnumFacing;
 
 public abstract class XUTileGrid extends XUTile {
-	TileGridRef<XUTileGrid> myRef = new TileGridRef<>(this);
-
 	final HashMap<GridType, Grid> gridTypes = new HashMap<>();
+	TileGridRef<XUTileGrid> myRef = new TileGridRef<>(this);
 
 	protected XUTileGrid(GridType... gridTypes) {
 		for (GridType gridType : gridTypes) {

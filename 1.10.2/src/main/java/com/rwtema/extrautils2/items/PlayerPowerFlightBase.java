@@ -77,6 +77,7 @@ public abstract class PlayerPowerFlightBase extends PlayerPower {
 
 	protected ItemStack stack;
 	int tickFlight = 0;
+
 	public PlayerPowerFlightBase(EntityPlayer player, @Nonnull ItemStack stack) {
 		super(player);
 		this.stack = stack;

@@ -59,13 +59,11 @@ public class TeleporterDeepDark extends TeleporterBase {
 					if (dx == 0 && dy == -1 && dz == 0) {
 						this.world.setBlockState(pos, XU2Entries.teleporter.value.getDefaultState().withProperty(BlockTeleporter.property_type, BlockTeleporter.Type.DEEP_DARK).withProperty(BlockTeleporter.property_unbreakable, true), 2);
 						this.world.scheduleBlockUpdate(pos, XU2Entries.teleporter.value, 1, 0);
-					} else if (dx == -3 || dx == 3 || (dy + Math.max(Math.abs(dx) , Math.abs(dz)))  <= -1 || dy == 4 || dz == -3 || dz == 3) {
+					} else if (dx == -3 || dx == 3 || (dy + Math.max(Math.abs(dx), Math.abs(dz))) <= -1 || dy == 4 || dz == -3 || dz == 3) {
 						this.world.setBlockState(pos, BlockStates.COBBLESTONE);
-					}
-					else if ((dy + Math.max(Math.abs(dx) , Math.abs(dz))) == 0 && (dx == 2 || dx == -2 || dz == 2 || dz == -2)) {
+					} else if ((dy + Math.max(Math.abs(dx), Math.abs(dz))) == 0 && (dx == 2 || dx == -2 || dz == 2 || dz == -2)) {
 						this.world.setBlockState(pos, BlockStates.TORCH_UP);
-					}
-					else {
+					} else {
 						this.world.setBlockState(pos, BlockStates.AIR);
 					}
 				}

@@ -1,16 +1,11 @@
 package com.rwtema.extrautils2.utils.datastructures;
 
-import java.util.AbstractSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
 import javax.annotation.Nonnull;
+import java.util.*;
 
 public class WeakSet<E> extends AbstractSet<E> implements Set<E> {
-	private final transient Map<E, Object> map;
-
 	private static final Object PRESENT = new Object();
+	private final transient Map<E, Object> map;
 
 	public WeakSet() {
 		this(new WeakHashMap<>());

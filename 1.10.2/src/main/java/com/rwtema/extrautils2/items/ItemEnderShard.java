@@ -2,12 +2,12 @@ package com.rwtema.extrautils2.items;
 
 import com.rwtema.extrautils2.backend.XUItemFlat;
 import com.rwtema.extrautils2.backend.model.Textures;
-import javax.annotation.Nullable;
-
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class ItemEnderShard extends XUItemFlat {
 	@SideOnly(Side.CLIENT)

@@ -2,8 +2,8 @@ package com.rwtema.extrautils2.transfernodes;
 
 import com.rwtema.extrautils2.utils.CapGetter;
 import jline.internal.Nullable;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public interface IPipe {

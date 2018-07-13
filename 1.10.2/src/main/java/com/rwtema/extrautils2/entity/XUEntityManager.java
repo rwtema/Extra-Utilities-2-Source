@@ -76,7 +76,7 @@ public class XUEntityManager {
 
 	public static void init() {
 		registerEntity(EntityBoomerang.class, 64, 5, true);
-		registerEntity(EntityChunkData.class, 64, Integer.MAX_VALUE, false );
+		registerEntity(EntityChunkData.class, 64, Integer.MAX_VALUE, false);
 
 
 		ExtraUtils2.proxy.run(new ClientRunnable() {

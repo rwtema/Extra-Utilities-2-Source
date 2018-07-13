@@ -16,8 +16,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import java.awt.*;
-import java.util.*;
 import java.util.List;
 
 @Mod(modid = "Test")

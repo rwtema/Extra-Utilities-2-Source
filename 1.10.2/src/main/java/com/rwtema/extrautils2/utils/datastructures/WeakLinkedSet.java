@@ -14,9 +14,9 @@ import java.util.NoSuchElementException;
 
 public class WeakLinkedSet<E> extends AbstractSet<E> {
 
+	private final ReferenceQueue<E> queue = new ReferenceQueue<>();
 	private WeakLinkTHashSet set = new WeakLinkTHashSet();
 	private TLinkedList<WeakLink<E>> order = new TLinkedList<>();
-	private final ReferenceQueue<E> queue = new ReferenceQueue<>();
 
 	@Nonnull
 	@Override
@@ -84,37 +84,6 @@ public class WeakLinkedSet<E> extends AbstractSet<E> {
 		}
 	}
 
-	private class WeakLinkTHashSet extends THashSet<WeakLink<E>> {
-		public WeakLinkTHashSet() {
-		}
-
-		@SuppressWarnings("unchecked")
-		public WeakLink removeSpecial(Object obj) {
-			int index = index(obj);
-			if (index >= 0) {
-				Object o = _set[index];
-				removeAt(index);
-				return (WeakLink) o;
-			}
-			return null;
-		}
-
-
-		@Override
-		protected int hash(Object notnull) {
-			if(notnull instanceof WeakLink){
-				return notnull.hashCode();
-			}
-			return System.identityHashCode(notnull);
-		}
-
-		@Override
-		protected boolean equals(Object notnull, Object two) {
-			return !(two == null || two == REMOVED) && two.equals(notnull);
-
-		}
-	}
-
 	public static class WeakLink<E> extends WeakReference<E> implements TLinkable<WeakLink<E>> {
 		final int hash;
 		WeakLink<E> next;
@@ -167,6 +136,37 @@ public class WeakLinkedSet<E> extends AbstractSet<E> {
 			} else {
 				return false;
 			}
+		}
+	}
+
+	private class WeakLinkTHashSet extends THashSet<WeakLink<E>> {
+		public WeakLinkTHashSet() {
+		}
+
+		@SuppressWarnings("unchecked")
+		public WeakLink removeSpecial(Object obj) {
+			int index = index(obj);
+			if (index >= 0) {
+				Object o = _set[index];
+				removeAt(index);
+				return (WeakLink) o;
+			}
+			return null;
+		}
+
+
+		@Override
+		protected int hash(Object notnull) {
+			if (notnull instanceof WeakLink) {
+				return notnull.hashCode();
+			}
+			return System.identityHashCode(notnull);
+		}
+
+		@Override
+		protected boolean equals(Object notnull, Object two) {
+			return !(two == null || two == REMOVED) && two.equals(notnull);
+
 		}
 	}
 

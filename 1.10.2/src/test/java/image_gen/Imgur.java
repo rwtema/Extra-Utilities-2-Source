@@ -3,16 +3,17 @@ package image_gen;
 import com.google.common.base.Throwables;
 import com.rwtema.extrautils2.textures.ImgurTextureHolder;
 import com.rwtema.extrautils2.utils.LogHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IImageBuffer;
+import net.minecraft.client.renderer.ThreadDownloadImageData;
+import net.minecraft.client.renderer.texture.TextureUtil;
+
+import javax.annotation.Nonnull;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import javax.annotation.Nonnull;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IImageBuffer;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.TextureUtil;
 
 public class Imgur {
 
@@ -34,7 +35,7 @@ public class Imgur {
 				if (reader != null) {
 					try {
 						reader.close();
-					}catch(IOException ignored){
+					} catch (IOException ignored) {
 
 					}
 				}

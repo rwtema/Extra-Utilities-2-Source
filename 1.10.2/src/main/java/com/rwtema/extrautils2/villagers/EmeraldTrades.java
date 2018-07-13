@@ -1,13 +1,11 @@
 package com.rwtema.extrautils2.villagers;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
-
 import com.rwtema.extrautils2.compatibility.VillagerTradeCompat;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipeList;
+
+import java.util.Random;
 
 public class EmeraldTrades implements VillagerTradeCompat {
 	final ItemStack base;

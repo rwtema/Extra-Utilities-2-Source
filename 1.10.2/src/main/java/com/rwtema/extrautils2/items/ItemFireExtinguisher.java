@@ -63,9 +63,9 @@ public class ItemFireExtinguisher extends XUItemFlat {
 			Random r = worldIn.rand;
 			for (int i = 0; i < 10; i++) {
 				worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-						x0 ,
-						(playerIn.posY + 2 * y0) / 3 ,
-						z0 ,
+						x0,
+						(playerIn.posY + 2 * y0) / 3,
+						z0,
 						dx + r.nextGaussian() * 0.2,
 						dy + r.nextGaussian() * 0.2,
 						dz + r.nextGaussian() * 0.2);

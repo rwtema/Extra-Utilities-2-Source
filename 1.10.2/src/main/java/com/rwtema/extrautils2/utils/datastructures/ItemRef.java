@@ -273,7 +273,7 @@ public abstract class ItemRef implements IMatcher, IItemStackMaker, IMatcherMake
 
 		@Override
 		public ItemRef toCraftingVersion() {
-			if (!item.getHasSubtypes() || meta == OreDictionary.WILDCARD_VALUE ) return createSimpleItem(item);
+			if (!item.getHasSubtypes() || meta == OreDictionary.WILDCARD_VALUE) return createSimpleItem(item);
 			return this;
 		}
 
@@ -367,7 +367,7 @@ public abstract class ItemRef implements IMatcher, IItemStackMaker, IMatcherMake
 			int tagHash = buffer.readInt();
 			NBTTagCompound nbt = buffer.readNBT();
 			if (item == null) return NULL;
-			if(nbt == null) return ItemRef.wrap(item);
+			if (nbt == null) return ItemRef.wrap(item);
 			return new SimpleNBT(item, nbt, tagHash);
 		}
 
@@ -496,7 +496,7 @@ public abstract class ItemRef implements IMatcher, IItemStackMaker, IMatcherMake
 			int tagHash = buffer.readInt();
 			NBTTagCompound nbt = buffer.readNBT();
 			if (item == null) return NULL;
-			if(nbt == null) return new Meta(item, meta);
+			if (nbt == null) return new Meta(item, meta);
 			return new MetaNBT(item, meta, nbt, tagHash);
 		}
 

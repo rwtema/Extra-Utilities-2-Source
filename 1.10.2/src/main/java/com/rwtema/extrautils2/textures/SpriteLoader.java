@@ -1,19 +1,18 @@
 package com.rwtema.extrautils2.textures;
 
 import com.google.common.collect.Lists;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.List;
-
 import com.rwtema.extrautils2.compatibility.TextureAtlasSpriteCompat;
 import net.minecraft.client.renderer.texture.PngSizeInfo;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.data.AnimationFrame;
 import net.minecraft.client.resources.data.AnimationMetadataSection;
 import net.minecraft.util.ResourceLocation;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
 
 public abstract class SpriteLoader extends TextureAtlasSpriteCompat {
 	public SpriteLoader(String spriteName) {
@@ -35,15 +34,12 @@ public abstract class SpriteLoader extends TextureAtlasSpriteCompat {
 		this.height = j;
 		int[][] aint = new int[images.length][];
 
-		for (int k = 0; k < images.length; ++k)
-		{
+		for (int k = 0; k < images.length; ++k) {
 			BufferedImage bufferedimage = images[k];
 
-			if (bufferedimage != null)
-			{
-				if (k > 0 && (bufferedimage.getWidth() != i >> k || bufferedimage.getHeight() != j >> k))
-				{
-					throw new RuntimeException(String.format("Unable to load miplevel: %d, image is size: %dx%d, expected %dx%d", new Object[] {Integer.valueOf(k), Integer.valueOf(bufferedimage.getWidth()), Integer.valueOf(bufferedimage.getHeight()), Integer.valueOf(i >> k), Integer.valueOf(j >> k)}));
+			if (bufferedimage != null) {
+				if (k > 0 && (bufferedimage.getWidth() != i >> k || bufferedimage.getHeight() != j >> k)) {
+					throw new RuntimeException(String.format("Unable to load miplevel: %d, image is size: %dx%d, expected %dx%d", new Object[]{Integer.valueOf(k), Integer.valueOf(bufferedimage.getWidth()), Integer.valueOf(bufferedimage.getHeight()), Integer.valueOf(i >> k), Integer.valueOf(j >> k)}));
 				}
 
 				aint[k] = new int[bufferedimage.getWidth() * bufferedimage.getHeight()];
@@ -51,22 +47,17 @@ public abstract class SpriteLoader extends TextureAtlasSpriteCompat {
 			}
 		}
 
-		if (meta == null)
-		{
-			if (j != i)
-			{
+		if (meta == null) {
+			if (j != i) {
 				throw new RuntimeException("broken aspect ratio and not an animation");
 			}
 
 			this.framesTextureData.add(aint);
-		}
-		else
-		{
+		} else {
 			int j1 = j / i;
 			this.height = this.width;
 
-			if (meta.getFrameCount() > 0)
-			{
+			if (meta.getFrameCount() > 0) {
 
 				for (int i1 : meta.getFrameIndexSet()) {
 
@@ -80,13 +71,10 @@ public abstract class SpriteLoader extends TextureAtlasSpriteCompat {
 				}
 
 				this.animationMetadata = meta;
-			}
-			else
-			{
+			} else {
 				List<AnimationFrame> list = Lists.newArrayList();
 
-				for (int l1 = 0; l1 < j1; ++l1)
-				{
+				for (int l1 = 0; l1 < j1; ++l1) {
 					this.framesTextureData.add(getFrameTextureData(aint, i, i, l1));
 					list.add(new AnimationFrame(l1, -1));
 				}

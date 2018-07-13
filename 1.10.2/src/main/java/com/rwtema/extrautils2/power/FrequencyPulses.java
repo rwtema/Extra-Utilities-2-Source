@@ -7,10 +7,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 
 public class FrequencyPulses extends SaveModule {
+	public static final float COST_PER_TICK = .05F;
 	public static FrequencyPulses INSTANCE = new FrequencyPulses();
 	public static TIntLongHashMap pulsesMap = new TIntLongHashMap();
-
-	public static final float COST_PER_TICK = .05F;
 
 	public FrequencyPulses() {
 		super("FrequencyPulses");

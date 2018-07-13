@@ -1,6 +1,5 @@
 package json_gen;
 
-import com.google.gson.*;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.backend.XUBlockStatic;
@@ -31,10 +30,10 @@ public class JsonBoxModelConvertor {
 			if (block instanceof XUBlockStatic) {
 				for (IBlockState state : block.getBlockState().getValidStates()) {
 					BoxModel model = ((XUBlockStatic) block).cachedModels.get(state);
-					try{
+					try {
 						String s = GSON.toJson(model);
 						LogHelper.info(state + "_" + s);
-					}catch (Throwable err){
+					} catch (Throwable err) {
 						err.printStackTrace();
 					}
 				}
@@ -51,7 +50,7 @@ public class JsonBoxModelConvertor {
 			JsonArray elements = new JsonArray();
 
 			for (Box b : src) {
-				if(b.getClass() != Box.class) continue;
+				if (b.getClass() != Box.class) continue;
 				JsonObject element = new JsonObject();
 				element.add("from", toVector(b.minX, b.minY, b.minZ));
 				element.add("to", toVector(b.maxX, b.maxY, b.maxZ));
@@ -66,7 +65,7 @@ public class JsonBoxModelConvertor {
 						if (tex == null) tex = b.texture;
 						if (tex == null) continue;
 
-						String regTex = texturesMap.computeIfAbsent(tex, s -> s.substring(Math.max(0, Math.max(1+s.lastIndexOf('/'), 1+s.lastIndexOf(':')))).replace("_", ""));
+						String regTex = texturesMap.computeIfAbsent(tex, s -> s.substring(Math.max(0, Math.max(1 + s.lastIndexOf('/'), 1 + s.lastIndexOf(':')))).replace("_", ""));
 
 						face.addProperty("texture", "#" + regTex);
 

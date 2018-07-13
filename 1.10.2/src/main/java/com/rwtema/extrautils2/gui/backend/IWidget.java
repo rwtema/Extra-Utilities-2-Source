@@ -65,23 +65,23 @@ public interface IWidget {
 	int getH();
 
 	@SideOnly(Side.CLIENT)
-	default void renderForeground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop){
+	default void renderForeground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
 
 	}
 
 	@SideOnly(Side.CLIENT)
-	default void renderBackground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop){
+	default void renderBackground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
 
 	}
 
-	default void addToContainer(DynamicContainer container){
+	default void addToContainer(DynamicContainer container) {
 
 	}
 
 	List<String> getToolTip();
 
 	@SideOnly(Side.CLIENT)
-	default void addToGui(DynamicGui gui){
+	default void addToGui(DynamicGui gui) {
 
 	}
 

@@ -5,31 +5,21 @@ import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUItemFlat;
 import com.rwtema.extrautils2.backend.model.Textures;
 import com.rwtema.extrautils2.compatibility.StackHelper;
-import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.utils.PositionPool;
+import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
 import com.rwtema.extrautils2.utils.helpers.SideHelper;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
-
-import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -40,13 +30,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nullable;
+import java.util.*;
+
 public abstract class ItemSelectionWand extends XUItemFlat {
 	static double[][][] edgeLines;
-
-	@Override
-	public int getMaxMetadata() {
-		return 0;
-	}
 
 	static {
 		float offset = 0.50097656f;
@@ -78,8 +66,6 @@ public abstract class ItemSelectionWand extends XUItemFlat {
 	public final String name;
 	public final int range;
 	public final float[] col;
-
-
 	public ItemSelectionWand(String texture, String name, float[] col, int range) {
 		this.texture = texture;
 		this.name = name;
@@ -89,8 +75,13 @@ public abstract class ItemSelectionWand extends XUItemFlat {
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
+	@Override
+	public int getMaxMetadata() {
+		return 0;
+	}
+
 	public List<BlockPos> getPotentialBlocks(EntityPlayer player, World world, BlockPos pos, EnumFacing side, int maxBlocks, ItemStack pickBlock1, IBlockState blockState, Block block) {
-		if (pos.getY() >= 255 || pos.getY() < 0 || world.isAirBlock(pos) || (!world.isRemote  && !PlayerHelper.isPlayerReal(player)))
+		if (pos.getY() >= 255 || pos.getY() < 0 || world.isAirBlock(pos) || (!world.isRemote && !PlayerHelper.isPlayerReal(player)))
 			return ImmutableList.of();
 
 		if (StackHelper.isNull(pickBlock1))
@@ -196,8 +187,8 @@ public abstract class ItemSelectionWand extends XUItemFlat {
 					checkedBlocks.add(p2);
 
 					int d = Math.max(Math.max(
-									Math.abs(p2.getX() - pos.getX()),
-									Math.abs(p2.getY() - pos.getY())),
+							Math.abs(p2.getX() - pos.getX()),
+							Math.abs(p2.getY() - pos.getY())),
 							Math.abs(p2.getZ() - pos.getZ()));
 
 					ListIterator<BlockPos> listIterator = queue.listIterator();
@@ -205,8 +196,8 @@ public abstract class ItemSelectionWand extends XUItemFlat {
 						BlockPos next = listIterator.next();
 
 						int d2 = Math.max(Math.max(
-										Math.abs(next.getX() - pos.getX()),
-										Math.abs(next.getY() - pos.getY())),
+								Math.abs(next.getX() - pos.getX()),
+								Math.abs(next.getY() - pos.getY())),
 								Math.abs(next.getZ() - pos.getZ()));
 
 						if (d2 >= d) {
@@ -289,7 +280,7 @@ public abstract class ItemSelectionWand extends XUItemFlat {
 
 		List<BlockPos> potentialBlocks = getPotentialBlocks(player, player.world, blockPos, target.sideHit, range, pickBlock, blockState, block);
 
-			if (potentialBlocks.isEmpty()) return;
+		if (potentialBlocks.isEmpty()) return;
 
 		LinkedHashSet<BlockPos> posSet = new LinkedHashSet<>(potentialBlocks);
 

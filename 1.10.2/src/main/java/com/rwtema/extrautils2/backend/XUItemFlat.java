@@ -2,11 +2,12 @@ package com.rwtema.extrautils2.backend;
 
 import com.rwtema.extrautils2.backend.model.PassthruModelItem;
 import com.rwtema.extrautils2.backend.model.Textures;
-import javax.annotation.Nullable;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public abstract class XUItemFlat extends XUItem {
 	public XUItemFlat() {
@@ -48,7 +49,7 @@ public abstract class XUItemFlat extends XUItem {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getTint(ItemStack stack, int i){
+	public int getTint(ItemStack stack, int i) {
 		return -1;
 	}
 

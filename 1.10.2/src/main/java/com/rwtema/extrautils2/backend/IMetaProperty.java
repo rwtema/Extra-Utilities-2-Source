@@ -22,7 +22,9 @@ public interface IMetaProperty<T extends Comparable<T>> extends IProperty<T> {
 
 	T getDefaultValue();
 
-	default boolean addLocalization(){return false;}
+	default boolean addLocalization() {
+		return false;
+	}
 
 	abstract class Wrap<T extends Comparable<T>> implements IMetaProperty<T> {
 		final IProperty<T> base;

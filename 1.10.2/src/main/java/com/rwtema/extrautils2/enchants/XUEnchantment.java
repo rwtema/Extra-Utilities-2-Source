@@ -43,6 +43,11 @@ public abstract class XUEnchantment extends Enchantment {
 		}
 	}
 
+	public static ItemStack addEnchantment(ItemStack itemStack, Enchantment enchantment, int level) {
+		itemStack.addEnchantment(enchantment, level);
+		return itemStack;
+	}
+
 	public void register() {
 		setRegistryName(new ResourceLocation(ExtraUtils2.MODID, stripText));
 		CompatHelper112.register(this);
@@ -74,10 +79,5 @@ public abstract class XUEnchantment extends Enchantment {
 	@Override
 	public boolean canApplyTogether(Enchantment enchantment) {
 		return this != enchantment && !blackList.contains(enchantment);
-	}
-
-	public static ItemStack addEnchantment(ItemStack itemStack, Enchantment enchantment, int level){
-		itemStack.addEnchantment(enchantment, level);
-		return itemStack;
 	}
 }

@@ -12,7 +12,6 @@ import com.rwtema.extrautils2.tile.tesr.ITESRHookSimple;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -27,6 +26,7 @@ import java.util.Locale;
 public abstract class BlockEntry<T extends XUBlock> extends Entry<T> implements IItemStackMaker {
 	public static final HashMap<Class<? extends TileEntity>, XUBlock> tileToBlockMap = new HashMap<>();
 	public static final HashMultimap<Class<? extends TileEntity>, Block> tileToBlocksMap = HashMultimap.create();
+	public static HashMap<ResourceLocation, Block> blockMap = new HashMap<>();
 	public Class<? extends TileEntity>[] teClazzes;
 	public Class<? extends ItemBlock> itemClass = XUItemBlock.class;
 
@@ -46,8 +46,6 @@ public abstract class BlockEntry<T extends XUBlock> extends Entry<T> implements 
 
 		GameRegistry.registerTileEntity(teClazz, "XU2" + ":" + teClazz.getSimpleName());
 	}
-
-	public static HashMap<ResourceLocation, Block> blockMap = new HashMap<>();
 
 	public static <T extends XUBlock> Pair<T, ItemBlock> registerBlockItemCombo(T value, Class<? extends ItemBlock> itemClass, String name) {
 		ResourceLocation location = new ResourceLocation(ExtraUtils2.MODID + ":" + name.toLowerCase(Locale.ENGLISH));

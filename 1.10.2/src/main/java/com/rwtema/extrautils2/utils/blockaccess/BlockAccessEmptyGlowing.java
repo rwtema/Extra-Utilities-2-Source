@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 
 public class BlockAccessEmptyGlowing extends BlockAccessEmpty {
 	public static final BlockAccessEmptyGlowing INSTANCE = new BlockAccessEmptyGlowing();
+
 	@Override
 	public int getCombinedLight(@Nonnull BlockPos pos, int lightValue) {
 

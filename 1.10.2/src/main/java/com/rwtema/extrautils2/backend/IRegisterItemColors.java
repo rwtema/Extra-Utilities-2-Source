@@ -9,7 +9,7 @@ public interface IRegisterItemColors {
 
 
 	@SideOnly(Side.CLIENT)
-	default void addItemColors(ItemColors itemColors, BlockColors blockColors){
+	default void addItemColors(ItemColors itemColors, BlockColors blockColors) {
 
 	}
 }

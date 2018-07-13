@@ -45,7 +45,7 @@ public interface IMatcherMaker extends IMatcher {
 			if (StackHelper.isNull(t)) return false;
 			boolean b = false;
 			for (ItemStack input : stacks) {
-				if (OreDictionary.itemMatches( input, t, false)) {
+				if (OreDictionary.itemMatches(input, t, false)) {
 					b = true;
 					break;
 				}

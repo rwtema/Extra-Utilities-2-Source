@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.compatibility;
 
 import com.rwtema.extrautils2.dimensions.workhousedim.WorldProviderSpecialDim;
 import com.rwtema.extrautils2.utils.datastructures.FieldSetter;
-import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkGenerator;

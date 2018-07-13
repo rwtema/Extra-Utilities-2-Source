@@ -44,7 +44,7 @@ public class XUPotion extends Potion {
 		Gui screen = Minecraft.getMinecraft().ingameGUI;
 		if (screen != null) {
 			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-			screen.drawTexturedModalRect(x+4 , y +4, sprite, 16, 16);
+			screen.drawTexturedModalRect(x + 4, y + 4, sprite, 16, 16);
 		}
 	}
 }

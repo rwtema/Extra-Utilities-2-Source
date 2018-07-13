@@ -1,24 +1,17 @@
 package com.rwtema.extrautils2.asm;
 
 import com.google.common.collect.Sets;
-import java.util.ListIterator;
-import java.util.Set;
 import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
-import static org.objectweb.asm.Opcodes.ALOAD;
-import static org.objectweb.asm.Opcodes.GETFIELD;
-import static org.objectweb.asm.Opcodes.ILOAD;
-import static org.objectweb.asm.Opcodes.INVOKESTATIC;
-import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
-import static org.objectweb.asm.Opcodes.IRETURN;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldNode;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.*;
+
+import java.util.ListIterator;
+import java.util.Set;
+
+import static org.objectweb.asm.Opcodes.*;
 
 public class LightingTransformer implements IClassTransformer {
 	Set<String> getLightFor = Sets.newHashSet("getLightFor", "func_175642_b");

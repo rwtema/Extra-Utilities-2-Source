@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.utils.helpers;
 
 import com.google.common.collect.Lists;
-
 import com.rwtema.extrautils2.utils.LogHelper;
 
 import java.util.ArrayList;
@@ -11,9 +10,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TraceHelper {
+	final String name;
 	public HashMap<List<StackTraceElement>, Integer> elements = new HashMap<>();
 	int n = 0;
-	final String name;
 
 	public TraceHelper(String name) {
 		this.name = name;
@@ -31,8 +30,8 @@ public class TraceHelper {
 	public void log(StackTraceElement[] stackTrace) {
 		ArrayList<StackTraceElement> stackTraceElements = Lists.newArrayList(stackTrace);
 		elements.merge(stackTraceElements, 1, (integer, integer2) -> integer + integer2);
-		n=n+1;
-		if((n % 1024) == 0 ){
+		n = n + 1;
+		if ((n % 1024) == 0) {
 			report();
 		}
 	}

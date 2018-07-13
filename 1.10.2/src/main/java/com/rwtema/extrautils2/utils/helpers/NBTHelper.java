@@ -227,17 +227,17 @@ public class NBTHelper {
 	public static class NBTChainBuilder {
 		final NBTTagCompound tag;
 
-		public NBTTagCompound build(){
-			return tag;
-		}
-
-
 		public NBTChainBuilder() {
 			this(new NBTTagCompound());
 		}
 
+
 		public NBTChainBuilder(NBTTagCompound tag) {
 			this.tag = tag;
+		}
+
+		public NBTTagCompound build() {
+			return tag;
 		}
 
 		@Nonnull

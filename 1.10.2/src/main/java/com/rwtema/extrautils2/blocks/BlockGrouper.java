@@ -4,7 +4,6 @@ import com.rwtema.extrautils2.backend.XUBlockStaticRotation;
 import com.rwtema.extrautils2.backend.model.Box;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.machine.TileGrouper;
-import com.rwtema.extrautils2.machine.TileItemWrapper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;

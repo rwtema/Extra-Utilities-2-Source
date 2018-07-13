@@ -2,11 +2,12 @@ package com.rwtema.extrautils2.tile;
 
 import com.rwtema.extrautils2.power.IPower;
 import com.rwtema.extrautils2.power.IWorldPowerMultiplier;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TilePowerOverload extends XUTile implements ITickable, IPower {
 	@Override

@@ -7,6 +7,7 @@ import com.rwtema.extrautils2.backend.model.Transforms;
 import com.rwtema.extrautils2.backend.model.XUBlockState;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.tile.XUTile;
 import com.rwtema.extrautils2.tile.tesr.ITESRHook;
 import com.rwtema.extrautils2.utils.MCTimer;
@@ -15,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -62,7 +62,7 @@ public abstract class XUBlockTESR extends XUBlock {
 		}
 		if (world == null) return getWorldModel(null, state, 0);
 		TileEntity tileEntity = world.getTileEntity(pos);
-		if(!(tileEntity instanceof XUTESRTile)) return getWorldModel(null, state, 0);
+		if (!(tileEntity instanceof XUTESRTile)) return getWorldModel(null, state, 0);
 		XUTESRTile tile = (XUTESRTile) tileEntity;
 		return getWorldModel(tile.NBTStack.getRaw(), state, 0);
 	}

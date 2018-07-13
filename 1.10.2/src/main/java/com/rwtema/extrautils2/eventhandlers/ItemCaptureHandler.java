@@ -1,12 +1,13 @@
 package com.rwtema.extrautils2.eventhandlers;
 
-import java.util.LinkedList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.LinkedList;
 
 public class ItemCaptureHandler {
 	static ItemCaptureHandler INSTANCE = new ItemCaptureHandler();

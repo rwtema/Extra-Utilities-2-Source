@@ -6,9 +6,6 @@ import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.backend.model.Textures;
 import com.rwtema.extrautils2.textures.SpriteSub;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -20,6 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidBlock;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 public class BlockSludge extends XUBlockStatic {
 	final static PropertyInteger DECAY_LEVEL = PropertyInteger.create("decay", 0, 3);
@@ -80,9 +81,9 @@ public class BlockSludge extends XUBlockStatic {
 
 				if (!isFluid(worldIn, offset.up())) {
 					BlockPos down = offset.down();
-					if(blocksWater(worldIn, down)){
+					if (blocksWater(worldIn, down)) {
 						worldIn.setBlockState(offset, state);
-					}else {
+					} else {
 						EnumFacing opposite = facing.getOpposite();
 						for (EnumFacing facing2 : EnumFacing.HORIZONTALS) {
 							if (facing2 != opposite) {

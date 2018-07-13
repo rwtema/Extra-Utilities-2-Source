@@ -40,6 +40,7 @@ public class ItemBoomerang extends XUItemFlat {
 	static {
 		XUEnchantment.makeMutuallyExclusive(DIGGING, EXPLODE);
 	}
+
 	public ItemBoomerang() {
 		setMaxStackSize(1);
 		setMaxDamage(64);

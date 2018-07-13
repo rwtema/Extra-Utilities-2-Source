@@ -8,10 +8,6 @@ import com.rwtema.extrautils2.backend.model.Textures;
 import com.rwtema.extrautils2.items.ItemIngredients;
 import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import com.rwtema.extrautils2.utils.helpers.WorldHelper;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +22,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockMoonStone extends XUBlock {
 	public static IBlockState mimicState = Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE);

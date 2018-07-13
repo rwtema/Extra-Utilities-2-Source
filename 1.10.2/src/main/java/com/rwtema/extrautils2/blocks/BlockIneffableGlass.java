@@ -28,7 +28,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Random;
 
 public class BlockIneffableGlass extends XUBlockConnectedTextureBase {
 	public static final PropertyEnumSimple<DecorStates> decor = new PropertyEnumSimple<>(DecorStates.class);
@@ -36,7 +35,6 @@ public class BlockIneffableGlass extends XUBlockConnectedTextureBase {
 	public BlockIneffableGlass() {
 		super(Material.GLASS);
 	}
-
 
 
 	@Override

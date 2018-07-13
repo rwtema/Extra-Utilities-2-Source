@@ -22,6 +22,7 @@ import java.util.List;
 public class ModifyingBakedModel implements IBakedModel {
 	IBakedModel base;
 	IQuadReDesigner designer;
+	HashMap<EnumFacing, List<BakedQuad>> quads = new HashMap<>();
 
 	private ModifyingBakedModel(IBakedModel base, IQuadReDesigner designer) {
 		this.base = base;
@@ -34,8 +35,6 @@ public class ModifyingBakedModel implements IBakedModel {
 		} else
 			return new ModifyingBakedModel(base, designer);
 	}
-
-	HashMap<EnumFacing, List<BakedQuad>> quads = new HashMap<>();
 
 	@Nonnull
 	@Override

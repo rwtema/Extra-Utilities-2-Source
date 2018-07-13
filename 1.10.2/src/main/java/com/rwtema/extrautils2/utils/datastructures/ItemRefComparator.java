@@ -1,7 +1,8 @@
 package com.rwtema.extrautils2.utils.datastructures;
 
-import java.util.Comparator;
 import net.minecraft.item.Item;
+
+import java.util.Comparator;
 
 public abstract class ItemRefComparator implements Comparator<ItemRef> {
 	public static final ItemRefComparator id = new ItemRefComparator() {

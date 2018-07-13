@@ -1,15 +1,16 @@
 package com.rwtema.extrautils2.fairies;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.WeakHashMap;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.WeakHashMap;
 
 public class Fairies {
 	static final WeakHashMap<World, List<Fairy>> fairies = new WeakHashMap<>();

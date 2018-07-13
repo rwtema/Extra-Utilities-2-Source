@@ -24,41 +24,9 @@ public class WidgetProgressArrowBase extends WidgetBase {
 		this.curWidth = curWidth;
 	}
 
-	@Override
-	public void renderForeground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
-		if (curWidth > 0 && curWidth != -1) {
-			manager.bindTexture(gui.getWidgetTexture());
-			gui.drawTexturedModalRect(guiLeft + getX(), guiTop + getY(), 98, ARROW_HEIGHT - 1, curWidth, ARROW_HEIGHT - 1);
-		}
-	}
-
-	@Override
-	public void renderBackground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
-		if (curWidth == -1) {
-			manager.bindTexture(gui.getWidgetTexture());
-			gui.drawTexturedModalRect(guiLeft + getX(), guiTop + getY(), 98, (ARROW_HEIGHT - 1) * 2, ARROW_WIDTH, ARROW_HEIGHT - 1);
-		} else if (curWidth < ARROW_WIDTH) {
-			manager.bindTexture(gui.getWidgetTexture());
-			gui.drawTexturedModalRect(guiLeft + getX(), guiTop + getY(), 98, 0, ARROW_WIDTH, ARROW_HEIGHT - 1);
-		}
-	}
-
-	public List<String> getErrorMessage() {
-		return null;
-	}
-
-	public IWidget getJEIWidget(String uid) {
-		if (setCategory == null) return IWidget.NULL_INSTANCE;
-
-		Runnable runnable = () -> setCategory.accept(uid);
-
-		final WidgetProgressArrowBase base = this;
-		return getJEIWidget(runnable, base);
-	}
-
 	@Nonnull
 	public static IWidget getJEIWidget(final Runnable runnable, final WidgetProgressArrowBase base) {
-		if(runnable == null) return IWidget.NULL_INSTANCE;
+		if (runnable == null) return IWidget.NULL_INSTANCE;
 		return new IWidgetMouseInput() {
 			@Override
 			public void mouseClicked(int mouseX, int mouseY, int mouseButton, boolean mouseOver) {
@@ -137,5 +105,37 @@ public class WidgetProgressArrowBase extends WidgetBase {
 
 			}
 		};
+	}
+
+	@Override
+	public void renderForeground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
+		if (curWidth > 0 && curWidth != -1) {
+			manager.bindTexture(gui.getWidgetTexture());
+			gui.drawTexturedModalRect(guiLeft + getX(), guiTop + getY(), 98, ARROW_HEIGHT - 1, curWidth, ARROW_HEIGHT - 1);
+		}
+	}
+
+	@Override
+	public void renderBackground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
+		if (curWidth == -1) {
+			manager.bindTexture(gui.getWidgetTexture());
+			gui.drawTexturedModalRect(guiLeft + getX(), guiTop + getY(), 98, (ARROW_HEIGHT - 1) * 2, ARROW_WIDTH, ARROW_HEIGHT - 1);
+		} else if (curWidth < ARROW_WIDTH) {
+			manager.bindTexture(gui.getWidgetTexture());
+			gui.drawTexturedModalRect(guiLeft + getX(), guiTop + getY(), 98, 0, ARROW_WIDTH, ARROW_HEIGHT - 1);
+		}
+	}
+
+	public List<String> getErrorMessage() {
+		return null;
+	}
+
+	public IWidget getJEIWidget(String uid) {
+		if (setCategory == null) return IWidget.NULL_INSTANCE;
+
+		Runnable runnable = () -> setCategory.accept(uid);
+
+		final WidgetProgressArrowBase base = this;
+		return getJEIWidget(runnable, base);
 	}
 }

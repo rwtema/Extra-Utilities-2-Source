@@ -5,16 +5,17 @@ import com.rwtema.extrautils2.api.machine.MachineSlotFluid;
 import com.rwtema.extrautils2.api.machine.MachineSlotItem;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.utils.datastructures.ItemRef;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class SingleInputStackToStackRecipeCached extends SingleInputStackMatchRecipeCached {
 
-	HashMap<ItemRef, ItemStack> cache = new HashMap<>();
 	public final MachineSlotItem slotOutput;
+	HashMap<ItemRef, ItemStack> cache = new HashMap<>();
 
 	protected SingleInputStackToStackRecipeCached(MachineSlotItem inputSlot, MachineSlotItem slotOutput) {
 		super(inputSlot);

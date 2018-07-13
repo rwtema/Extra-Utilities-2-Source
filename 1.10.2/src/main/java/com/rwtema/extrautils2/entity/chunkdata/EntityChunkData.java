@@ -43,6 +43,7 @@ public class EntityChunkData extends Entity implements IEntityAdditionalSpawnDat
 	public Map<ChunkDataModuleManager, Object> objectHashMap = new HashMap<>();
 	ChunkPos pos;
 	private boolean dirty;
+
 	public EntityChunkData(World worldIn) {
 		super(worldIn);
 		noClip = true;

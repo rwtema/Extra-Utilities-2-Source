@@ -7,13 +7,14 @@ import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;
 import net.minecraftforge.fml.common.network.FMLIndexedMessageToMessageCodec;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 @ChannelHandler.Sharable
 public class PacketCodec extends FMLIndexedMessageToMessageCodec<XUPacketBase> {

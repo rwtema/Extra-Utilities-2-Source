@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.textures;
 
-import com.rwtema.extrautils2.utils.LogHelper;
 import com.rwtema.extrautils2.utils.datastructures.IntArrKey;
 import gnu.trove.map.hash.TIntIntHashMap;
 
@@ -129,7 +128,7 @@ public class ConnectedTexturesHelper {
 							{hu, 0, 0, 16, 8},
 							{hd, 0, 8, 16, 16}
 					};
-				}else
+				} else
 					throw new IllegalStateException();
 			}
 		}

@@ -3,18 +3,16 @@ package com.rwtema.extrautils2.gui.backend;
 
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.model.Textures;
-import com.rwtema.extrautils2.compatibility.ClientHelper112;
 import com.rwtema.extrautils2.compatibility.CompatClientHelper;
 import com.rwtema.extrautils2.compatibility.GuiContainerCompat;
 import com.rwtema.extrautils2.compatibility.StackHelper;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.utils.client.GLStateAttributes;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -224,7 +222,7 @@ public class DynamicGui extends GuiContainerCompat {
 			}
 
 			GlStateManager.pushMatrix();
-			GlStateManager.translate(- guiLeft, -guiTop, 0);
+			GlStateManager.translate(-guiLeft, -guiTop, 0);
 			drawHoveringText(strings, mouseX, mouseY, fontRenderer);
 			GlStateManager.popMatrix();
 			GlStateManager.enableLighting();

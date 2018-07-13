@@ -4,8 +4,9 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.rwtema.extrautils2.utils.datastructures.ItemRef;
-import javax.annotation.Nonnull;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class ItemStackMaker {
 	private final LoadingCache<ItemRef, IItemStackMaker> cache = CacheBuilder.newBuilder().build(new CacheLoader<ItemRef, IItemStackMaker>() {
@@ -14,7 +15,7 @@ public class ItemStackMaker {
 			return new IItemStackMaker() {
 				@Override
 				public ItemStack newStack() {
-					return  key.createItemStack(1);
+					return key.createItemStack(1);
 				}
 			};
 		}

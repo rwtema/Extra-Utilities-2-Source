@@ -134,8 +134,8 @@ public class CompatHelper {
 	}
 
 	public static IItemHandlerCompat wrapItemHandlerCompat(IItemHandler handler) {
-		if(handler instanceof IItemHandlerCompat)return (IItemHandlerCompat) handler;
-		return new IItemHandlerCompat(){
+		if (handler instanceof IItemHandlerCompat) return (IItemHandlerCompat) handler;
+		return new IItemHandlerCompat() {
 			public int getSlots() {
 				return handler.getSlots();
 			}

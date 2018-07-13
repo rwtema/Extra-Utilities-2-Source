@@ -24,7 +24,7 @@ public class BlockTrashChest extends XUBlockStaticRotation {
 		BoxModel boxes = new BoxModel();
 		boxes.addBoxI(1, 0, 1, 15, 14, 15, "trashchest_side").setTextureSides(0, "trashchest_bottom", 1, "trashchest_top", 3, "trashchest_front");
 		boxes.addBoxI(6, 6, 15, 10, 11, 16, "trashchest_side").setTextureSides(0, "trashchest_bottom", 1, "trashchest_top", 3, "trashchest_front");
-		boxes.addBoxI(5, 14, 7, 11, 15, 9,"trashchest_side").setTextureSides(0, "trashchest_bottom", 1, "trashchest_top");
+		boxes.addBoxI(5, 14, 7, 11, 15, 9, "trashchest_side").setTextureSides(0, "trashchest_bottom", 1, "trashchest_top");
 		return boxes;
 	}
 

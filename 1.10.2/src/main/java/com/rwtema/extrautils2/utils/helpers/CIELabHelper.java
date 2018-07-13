@@ -13,7 +13,7 @@ public class CIELabHelper {
 		float[] a = rgb2lab(inputColor, new float[3]);
 		float[] b = rgb2lab(targetColor, new float[3]);
 		float[] rgb = new float[3];
-		lab2rgb((a[0] + 3*b[0]) / 4, b[1], b[2], rgb);
+		lab2rgb((a[0] + 3 * b[0]) / 4, b[1], b[2], rgb);
 
 		return ColorHelper.colorClamp(rgb[0], rgb[1], rgb[2], ColorHelper.getAF(inputColor));
 	}

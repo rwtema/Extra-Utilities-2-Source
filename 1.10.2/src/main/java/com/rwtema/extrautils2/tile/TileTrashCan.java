@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
 public class TileTrashCan extends XUTile implements IDynamicHandler {
 	SingleStackHandlerFilter.ItemFilter FILTER = registerNBT("filter", new SingleStackHandlerFilter.ItemFilter());
@@ -49,7 +48,6 @@ public class TileTrashCan extends XUTile implements IDynamicHandler {
 			return StackHelper.empty();
 		}
 	};
-
 
 
 	@Override

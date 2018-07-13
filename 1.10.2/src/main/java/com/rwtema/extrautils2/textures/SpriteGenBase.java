@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.textures;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.resources.data.AnimationMetadataSection;
 import net.minecraft.util.ResourceLocation;
 
 import javax.imageio.ImageTypeSpecifier;

@@ -2,14 +2,10 @@ package com.rwtema.extrautils2.backend;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.block.properties.PropertyHelper;
+
+import javax.annotation.Nonnull;
+import java.util.*;
 
 public class PropertyEnumSimple<T extends Enum<T>> extends PropertyHelper<T> {
 	List<T> allowedValues = new ArrayList<>();

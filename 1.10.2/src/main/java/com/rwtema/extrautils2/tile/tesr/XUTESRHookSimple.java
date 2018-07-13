@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.tile.tesr;
 
 import com.rwtema.extrautils2.compatibility.TESRCompat;
 import com.rwtema.extrautils2.tile.XUTile;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 
 public class XUTESRHookSimple<T extends XUTile & ITESRHookSimple<T>> extends TESRCompat<T> {
 

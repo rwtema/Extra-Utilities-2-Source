@@ -60,10 +60,10 @@ public class WorldProviderSpecialDim extends XUWorldProvider {
 	public static boolean isEnd = false;
 	public static boolean isNether = false;
 	public static Long seedOverride = null;
+	public static boolean ALLOW_SPECIAL_DIMS;
 	static List<Biome> suitableBiomes = null;
 	static WorldProvider tempWorldHolder;
 	static IBlockState BORDER_STATE = Blocks.BEDROCK.getDefaultState();
-	public static boolean ALLOW_SPECIAL_DIMS;
 	private ChunkProviderSpecialDim chunkProviderSpecialDim;
 
 	public WorldProviderSpecialDim() {
@@ -95,7 +95,7 @@ public class WorldProviderSpecialDim extends XUWorldProvider {
 	}
 
 	@SubscribeEvent
-	public static void onJoin(EntityJoinWorldEvent event){
+	public static void onJoin(EntityJoinWorldEvent event) {
 		if (isSpecialDim(event.getWorld()) && event.getEntity() instanceof EntityLiving) {
 			event.setCanceled(true);
 		}
@@ -199,7 +199,7 @@ public class WorldProviderSpecialDim extends XUWorldProvider {
 			try {
 				isNether = isEnd = false;
 
-				if(ALLOW_SPECIAL_DIMS) {
+				if (ALLOW_SPECIAL_DIMS) {
 					if (targetBiome != null) {
 						if (CompatHelper.isBiomeOfType(targetBiome, BiomeDictionary.Type.END)) {
 							generator = SpecialDimCompat.getEndGenerator(targetBiome, world);

@@ -10,8 +10,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BoxQuadListDeferred extends Box {
-	private Supplier<TextureAtlasSprite> textureSupplier;
 	private final Function<EnumFacing, List<BakedQuad>> quadCreator;
+	private Supplier<TextureAtlasSprite> textureSupplier;
 
 	public BoxQuadListDeferred(float x0, float y0, float z0, float x1, float y1, float z1, Supplier<TextureAtlasSprite> textureSupplier, Function<EnumFacing, List<BakedQuad>> quadCreator) {
 		super(x0, y0, z0, x1, y1, z1);

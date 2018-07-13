@@ -33,6 +33,15 @@ public class DemonicIngotHandler {
 	WeakLinkedSet<EntityItem> goldIngotsServer = new WeakLinkedSet<>();
 	WeakLinkedSet<EntityItem> goldIngotsClient = new WeakLinkedSet<>();
 
+	public static ItemStack getRawStack(EntityItem entityItem) {
+		Object itemStackOptional = entityItem.getDataManager().get(ITEM);
+		if (itemStackOptional instanceof ItemStack) {
+			return ((ItemStack) itemStackOptional);
+		} else if (itemStackOptional instanceof Optional) {
+			return ((Optional<ItemStack>) itemStackOptional).or(Optional.fromNullable(StackHelper.empty())).orNull();
+		} else return StackHelper.empty();
+	}
+
 	@SubscribeEvent
 	public void onJoin(EntityJoinWorldEvent event) {
 
@@ -48,15 +57,6 @@ public class DemonicIngotHandler {
 				entityItems.add((EntityItem) entity);
 			}
 		}
-	}
-
-	public static ItemStack getRawStack(EntityItem entityItem) {
-		Object itemStackOptional = entityItem.getDataManager().get(ITEM);
-		if (itemStackOptional instanceof ItemStack) {
-			return ((ItemStack) itemStackOptional);
-		} else if (itemStackOptional instanceof Optional) {
-			return ((Optional<ItemStack>) itemStackOptional).or(Optional.fromNullable(StackHelper.empty())).orNull();
-		} else return StackHelper.empty();
 	}
 
 	@SubscribeEvent

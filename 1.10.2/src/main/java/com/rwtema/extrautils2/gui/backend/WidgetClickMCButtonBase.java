@@ -49,10 +49,10 @@ public abstract class WidgetClickMCButtonBase extends WidgetClickBase {
 			gui.drawTexturedModalRect(x, y, 0, v, w2, 10);
 			gui.drawTexturedModalRect(x + w2, y, u2, v, w2, 10);
 			int y2 = y + h - 10;
-			for (int k = y+10; k < y2; k += 10) {
+			for (int k = y + 10; k < y2; k += 10) {
 				int dk = Math.min(k + 10, y2) - k;
-				gui.drawTexturedModalRect(x, k, 0, v+5, w2, dk);
-				gui.drawTexturedModalRect(x + w2, k, u2, v+5, w2, dk);
+				gui.drawTexturedModalRect(x, k, 0, v + 5, w2, dk);
+				gui.drawTexturedModalRect(x + w2, k, u2, v + 5, w2, dk);
 			}
 
 			gui.drawTexturedModalRect(x, y2, 0, v + 10, w2, 10);

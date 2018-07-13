@@ -4,8 +4,8 @@ import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.backend.model.XUBlockState;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.fluids.FluidTankSerial;
-import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.network.SpecialChat;
+import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import net.minecraft.block.Block;
@@ -256,7 +256,7 @@ public abstract class TileDrum extends XUTile {
 
 		@Override
 		public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-			if(worldIn.isRemote) return true;
+			if (worldIn.isRemote) return true;
 
 			IFluidHandler container;
 			if (StackHelper.isNull(heldItem) || (container = FluidUtil.getFluidHandler(heldItem)) == null) {

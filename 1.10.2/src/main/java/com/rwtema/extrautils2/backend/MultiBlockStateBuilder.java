@@ -1,7 +1,5 @@
 package com.rwtema.extrautils2.backend;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -9,21 +7,15 @@ import com.google.common.collect.Maps;
 import com.rwtema.extrautils2.backend.model.XUBlockState;
 import com.rwtema.extrautils2.backend.multiblockstate.XUBlockStateMulti;
 import gnu.trove.map.hash.TObjectIntHashMap;
-import java.lang.reflect.Constructor;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Nonnull;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.MapPopulator;
 import net.minecraft.util.math.Cartesian;
-import net.minecraftforge.common.property.IUnlistedProperty;
+
+import javax.annotation.Nonnull;
+import java.lang.reflect.Constructor;
+import java.util.*;
 
 public class MultiBlockStateBuilder<T extends XUBlock> {
 	public final Class<T> clazz;

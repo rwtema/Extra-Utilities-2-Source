@@ -2,8 +2,9 @@ package com.rwtema.extrautils2.tile;
 
 import com.rwtema.extrautils2.utils.datastructures.InitMap;
 import com.rwtema.extrautils2.utils.datastructures.WeakSet;
-import java.util.WeakHashMap;
 import net.minecraft.world.World;
+
+import java.util.WeakHashMap;
 
 public class LocationRegistry {
 	public static LocationRegistry sunTorches = new LocationRegistry();

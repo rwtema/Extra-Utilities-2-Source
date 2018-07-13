@@ -15,6 +15,7 @@ import com.rwtema.extrautils2.gui.backend.*;
 import com.rwtema.extrautils2.itemhandler.InventoryHelper;
 import com.rwtema.extrautils2.itemhandler.PublicWrapper;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.tile.TilePower;
 import com.rwtema.extrautils2.utils.CapGetter;
 import com.rwtema.extrautils2.utils.Lang;
@@ -30,7 +31,6 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
@@ -834,7 +834,6 @@ public class TileIndexer extends TilePower implements ITickable, IDynamicHandler
 				if (StackHelper.isNull(itemStack)) return null;
 				return CompatHelper112.getTooltip(itemStack, player, Minecraft.getMinecraft().gameSettings.advancedItemTooltips);
 			}
-
 
 
 			@Override

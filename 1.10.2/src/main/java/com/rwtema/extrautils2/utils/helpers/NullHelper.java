@@ -19,11 +19,11 @@ public class NullHelper {
 		return obj != dummy;
 	}
 
-	public static <T> Optional<T> deobfOptional(Supplier<T> supplier){
+	public static <T> Optional<T> deobfOptional(Supplier<T> supplier) {
 		return ExtraUtils2.deobf_folder ? Optional.of(supplier.get()) : Optional.empty();
 	}
 
-	public static <T, P> Optional<T> deobfOptional(Function<P, T> func, P parameter ){
+	public static <T, P> Optional<T> deobfOptional(Function<P, T> func, P parameter) {
 		return ExtraUtils2.deobf_folder ? Optional.of(func.apply(parameter)) : Optional.empty();
 	}
 

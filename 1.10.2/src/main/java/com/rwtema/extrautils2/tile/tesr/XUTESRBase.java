@@ -2,11 +2,10 @@ package com.rwtema.extrautils2.tile.tesr;
 
 import com.rwtema.extrautils2.compatibility.CompatClientHelper;
 import com.rwtema.extrautils2.compatibility.TESRCompat;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.tile.XUTile;
-import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -14,6 +13,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.math.BlockPos;
 import org.lwjgl.opengl.GL11;
+
+import javax.annotation.Nonnull;
 
 public abstract class XUTESRBase<T extends XUTile> extends TESRCompat<T> {
 	@Override

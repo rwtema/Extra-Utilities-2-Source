@@ -1,7 +1,5 @@
 package com.rwtema.extrautils2.utils.datastructures;
 
-import com.google.common.base.Throwables;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import org.apache.logging.log4j.Level;
@@ -29,8 +27,8 @@ public class FieldSetter<C, V> {
 
 	}
 
-	private Field field;
 	private final Object fieldAccessor;
+	private Field field;
 
 	public FieldSetter(Class<C> clazz, String... fieldNames) {
 		field = ReflectionHelper.findField(clazz, fieldNames);

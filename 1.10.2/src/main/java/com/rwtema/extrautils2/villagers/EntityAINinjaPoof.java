@@ -3,9 +3,6 @@ package com.rwtema.extrautils2.villagers;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
-import java.util.List;
-import javax.annotation.Nullable;
-
 import com.rwtema.extrautils2.compatibility.CompatHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,8 +15,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,6 +23,9 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class EntityAINinjaPoof extends EntityAIAvoidEntity<EntityPlayer> {
 	private final EntityVillager villager;

@@ -3,9 +3,10 @@ package com.rwtema.extrautils2.transfernodes;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.backend.model.Box;
 import com.rwtema.extrautils2.backend.model.BoxModel;
-import javax.annotation.Nonnull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+
+import javax.annotation.Nonnull;
 
 public enum GrocketType {
 	TRANSFER_NODE_ITEMS {
@@ -86,7 +87,10 @@ public enum GrocketType {
 		public BoxModel createBaseModel() {
 			return createBasicBox("transfernodes/transfernode_front_yellow");
 		}
-	}
+	};
+
+	BoxModel[] cache = new BoxModel[6];
+
 
 	;
 
@@ -99,11 +103,6 @@ public enum GrocketType {
 		model.setTextures("transfernodes/transfernode_side", 0, "transfernodes/transfernode_back", 1, s3);
 		return model;
 	}
-
-
-	;
-
-	BoxModel[] cache = new BoxModel[6];
 
 	public abstract Grocket create();
 

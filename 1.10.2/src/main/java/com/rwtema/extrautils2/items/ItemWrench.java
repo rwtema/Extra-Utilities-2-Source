@@ -139,7 +139,6 @@ public class ItemWrench extends XUItemFlatMetadata implements IWrench, ITool, IT
 	}
 
 
-
 //	@Override
 //	public boolean isUsable(ItemStack item, EntityLivingBase user, BlockPos pos) {
 //		return true;

@@ -1,9 +1,10 @@
 package com.rwtema.extrautils2.gui.backend;
 
-import java.util.List;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public abstract class WidgetBase implements IWidget {
 	protected int x, y, w, h;

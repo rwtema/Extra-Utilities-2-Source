@@ -4,12 +4,13 @@ import com.rwtema.extrautils2.backend.XUBlockStateCreator;
 import com.rwtema.extrautils2.backend.XUBlockStaticRotation;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.tile.TilePower;
-import javax.annotation.Nonnull;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockIndexer extends XUBlockStaticRotation {
 	public BlockIndexer() {

@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.compatibility;
 
-import com.rwtema.extrautils2.fakeplayer.XUFakePlayer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;

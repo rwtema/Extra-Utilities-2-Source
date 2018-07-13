@@ -2,8 +2,11 @@ package com.rwtema.extrautils2.fluids;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.*;
-import net.minecraftforge.fluids.capability.*;
+import net.minecraftforge.fluids.FluidEvent;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 import javax.annotation.Nullable;
 

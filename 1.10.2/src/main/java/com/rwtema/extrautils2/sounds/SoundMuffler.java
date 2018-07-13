@@ -1,13 +1,14 @@
 package com.rwtema.extrautils2.sounds;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.Sound;
 import net.minecraft.client.audio.SoundEventAccessor;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class SoundMuffler implements ISound {
 	final ISound original;

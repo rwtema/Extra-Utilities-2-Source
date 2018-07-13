@@ -14,7 +14,6 @@ import com.rwtema.extrautils2.chunkloading.XUChunkLoaderManager;
 import com.rwtema.extrautils2.commands.CommandDebug;
 import com.rwtema.extrautils2.commands.CommandPowerSharing;
 import com.rwtema.extrautils2.compatibility.CompatFinalHelper;
-import com.rwtema.extrautils2.compatibility.CompatHelper;
 import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.compatibility.MyCreativeTabs;
 import com.rwtema.extrautils2.entity.XUEntityManager;
@@ -50,7 +49,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.net.URL;
 import java.util.Random;
-import java.util.function.Supplier;
 
 @Mod(modid = ExtraUtils2.MODID, version = ExtraUtils2.VERSION,
 		dependencies = CompatFinalHelper.DEPENDENCIES,
@@ -116,9 +114,9 @@ public class ExtraUtils2 {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		XU2Entries.init();
 		CompatHelper112.loadVersionSpecificEntries();
-		if(deobf_folder){
+		if (deobf_folder) {
 			//noinspection TrivialFunctionalExpressionUsage,RedundantCast
-			(((Runnable)XU2EntriesDev::init)).run();
+			(((Runnable) XU2EntriesDev::init)).run();
 		}
 		XUEntityManager.init();
 		EntryHandler.loadModEntries(event.getAsmData());
@@ -210,7 +208,7 @@ public class ExtraUtils2 {
 	}
 
 	@Mod.EventHandler
-	public void serverStarted(FMLServerStartedEvent event){
+	public void serverStarted(FMLServerStartedEvent event) {
 		SaveManager.init();
 	}
 

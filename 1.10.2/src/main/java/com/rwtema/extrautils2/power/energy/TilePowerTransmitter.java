@@ -9,13 +9,6 @@ import com.rwtema.extrautils2.power.IPowerSubType;
 import com.rwtema.extrautils2.tile.TilePower;
 import com.rwtema.extrautils2.utils.CapGetter;
 import com.rwtema.extrautils2.utils.Lang;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-
 import com.rwtema.extrautils2.utils.helpers.VecHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,6 +23,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import java.util.*;
 
 public class TilePowerTransmitter extends TilePower implements IPowerSubType {
 	public static final int VELOCITY = 4;

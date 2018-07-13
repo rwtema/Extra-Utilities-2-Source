@@ -4,8 +4,6 @@ import com.rwtema.extrautils2.backend.XUBlockStateCreator;
 import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.utils.Lang;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +12,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class BlockPowerTransmitter extends XUBlockStatic {
 	@Nonnull

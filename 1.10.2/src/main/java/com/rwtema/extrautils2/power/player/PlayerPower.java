@@ -3,8 +3,6 @@ package com.rwtema.extrautils2.power.player;
 import com.rwtema.extrautils2.power.Freq;
 import com.rwtema.extrautils2.power.IPower;
 import com.rwtema.extrautils2.power.IWorldPowerMultiplier;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -12,19 +10,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public abstract class PlayerPower implements IPower, IWorldPowerMultiplier {
-	@Override
-	public boolean isLoaded() {
-		return true;
-	}
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
+public abstract class PlayerPower implements IPower, IWorldPowerMultiplier {
 	public final int freq;
+	public final int dimension;
 	@Nonnull
 	private final EntityPlayer player;
 	public int cooldown = 20;
-	public final int dimension;
 	public boolean invalid;
-
 	public PlayerPower(@Nonnull EntityPlayer player) {
 		this.player = player;
 		if (player instanceof EntityPlayerMP) {
@@ -32,6 +27,11 @@ public abstract class PlayerPower implements IPower, IWorldPowerMultiplier {
 		} else
 			freq = 0;
 		dimension = player.world.provider.getDimension();
+	}
+
+	@Override
+	public boolean isLoaded() {
+		return true;
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public abstract class PlayerPower implements IPower, IWorldPowerMultiplier {
 
 	}
 
-	public boolean shouldOveride(EntityPlayer player, PlayerPower other){
+	public boolean shouldOveride(EntityPlayer player, PlayerPower other) {
 		return false;
 	}
 

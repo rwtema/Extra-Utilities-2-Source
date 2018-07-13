@@ -55,7 +55,6 @@ public class XUItemBlock extends ItemBlockCompat implements IRegisterItemColors 
 			return super.getItemStackDisplayName(stack);
 
 
-
 		String key = this.getUnlocalizedNameInefficiently(stack) + ".name";
 		String name;
 		if (!hasSubtypes)
@@ -63,7 +62,7 @@ public class XUItemBlock extends ItemBlockCompat implements IRegisterItemColors 
 		else
 			name = Lang.translate(key, StringHelper.sepWords(StringHelper.capFirst(this.block.xuBlockState.getStateFromItemStack(stack).dropName, false)));
 
-		name = block.getOverrideStackDisplayName(stack, name );
+		name = block.getOverrideStackDisplayName(stack, name);
 		return name;
 	}
 

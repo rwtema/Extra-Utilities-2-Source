@@ -19,9 +19,9 @@ public class GuiHandler implements IGuiHandler {
 	private static final TIntObjectHashMap<IDynamicHandler> customDynamicGuiMap = new TIntObjectHashMap<>();
 
 	public static int register(String name, IDynamicHandler handler) {
-		int id =  name.hashCode() | 0x80000000;
+		int id = name.hashCode() | 0x80000000;
 
-		if(customDynamicGuiMap.containsKey(id))
+		if (customDynamicGuiMap.containsKey(id))
 			throw new RuntimeException("Duplicate id: " + id + " - " + customDynamicGuiMap.get(id) + " - (adding " + handler + ")");
 		customDynamicGuiMap.put(id, handler);
 		return id;

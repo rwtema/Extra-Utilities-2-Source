@@ -106,7 +106,7 @@ public class ItemBuildersWand extends ItemSelectionWand {
 
 			ItemStack stackInSlot = null;
 			for (; slot < player.inventory.getSizeInventory(); slot++) {
-				if(slot == origSlot) continue;
+				if (slot == origSlot) continue;
 				stackInSlot = player.inventory.getStackInSlot(slot);
 				if (StackHelper.isNull(stackInSlot)) continue;
 

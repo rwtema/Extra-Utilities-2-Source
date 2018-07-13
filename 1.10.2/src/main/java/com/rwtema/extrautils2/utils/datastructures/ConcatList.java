@@ -1,10 +1,9 @@
 package com.rwtema.extrautils2.utils.datastructures;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 
-import java.util.*;
 import javax.annotation.Nonnull;
+import java.util.*;
 
 public class ConcatList<T> extends AbstractList<T> {
 	public final List<List<T>> subLists;

@@ -31,12 +31,6 @@ import java.util.List;
 
 
 public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCreator {
-	@Nullable
-	@Override
-	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-		return ItemStackHelper.getBaubleProvider("RING");
-	}
-
 	public final static String[] textures = new String[]{
 			"angelring_base",
 			"angelring_feather",
@@ -48,7 +42,6 @@ public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCre
 	public final static int POWER = 32;
 	public static TObjectIntHashMap<String> serverFlyingPlayers = new TObjectIntHashMap<>(5, 0.5F, -1);
 	public static TObjectIntHashMap<String> clientFlyingPlayers = new TObjectIntHashMap<>(5, 0.5F, -1);
-
 	public ItemAngelRing() {
 		super(textures);
 		setMaxStackSize(1);
@@ -67,6 +60,12 @@ public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCre
 				NetworkHandler.sendToAllPlayers(new PacketAngelRingNotifier(name, type));
 			}
 		}
+	}
+
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return ItemStackHelper.getBaubleProvider("RING");
 	}
 
 	@Override

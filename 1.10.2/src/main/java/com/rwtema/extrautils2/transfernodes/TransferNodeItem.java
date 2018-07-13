@@ -108,36 +108,36 @@ public class TransferNodeItem extends TransferNodeBase<IItemHandler> implements 
 					if (water && lava) {
 						stack.insertItem(0, b, false);
 					}
-				}else if (state ==BlockStates.SNOW_LEVEL_0){
+				} else if (state == BlockStates.SNOW_LEVEL_0) {
 					ItemStack b = new ItemStack(Items.SNOWBALL, upgradeLevel * 8);
 					if (!stack.isEmpty() && !ItemHandlerHelper.canItemStacksStack(stack.getStack(), b)) {
 						return;
 					}
 
-					if(world.getBiome(offset).getFloatTemperature(offset) >= 0.8F){
+					if (world.getBiome(offset).getFloatTemperature(offset) >= 0.8F) {
 						return;
 					}
 
 					List<EntitySnowman> entities = world.getEntitiesWithinAABB(EntitySnowman.class, new AxisAlignedBB(
-0,0,0,1,1,1
+							0, 0, 0, 1, 1, 1
 					).offset(offset));
 
 					for (EntitySnowman entity : entities) {
-						if(!entity.isDead){
+						if (!entity.isDead) {
 							stack.insertItem(0, b, false);
 							return;
 						}
 					}
-				} else if (state.getBlock().isAir(state, world, offset)){
+				} else if (state.getBlock().isAir(state, world, offset)) {
 					AxisAlignedBB aabb = new AxisAlignedBB(offset);
-					aabb=aabb.union(new AxisAlignedBB(offset.offset(side, 4)));
+					aabb = aabb.union(new AxisAlignedBB(offset.offset(side, 4)));
 					for (EnumFacing facing : FacingHelper.orthogonal.get(side)) {
-						aabb=aabb.union(new AxisAlignedBB(offset.offset(facing, 4)));
+						aabb = aabb.union(new AxisAlignedBB(offset.offset(facing, 4)));
 					}
 					for (EntityItem item : world.getEntitiesWithinAABB(EntityItem.class, aabb)) {
 						ItemStack insertItem = item.getItem();
 						ItemStack result = stack.insertItem(0, insertItem, false);
-						if(insertItem != result){
+						if (insertItem != result) {
 							item.setItem(result);
 						}
 					}

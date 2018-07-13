@@ -11,15 +11,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class SquidSpawnRestrictions {
 	@SubscribeEvent(priority = EventPriority.HIGH)
-	public static void denySquidSpawn(LivingSpawnEvent.CheckSpawn event){
-		if(event.getResult() != Event.Result.DEFAULT) return;
+	public static void denySquidSpawn(LivingSpawnEvent.CheckSpawn event) {
+		if (event.getResult() != Event.Result.DEFAULT) return;
 
 		if (event.getEntity() instanceof EntitySquid) {
 			World world = event.getWorld();
 			BlockPos pos = new BlockPos(event.getX(), event.getY(), event.getZ());
 			for (BlockPos.MutableBlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
 				TileEntity entity = world.getTileEntity(blockPos);
-				if(entity != null){
+				if (entity != null) {
 					event.setResult(Event.Result.DENY);
 				}
 			}

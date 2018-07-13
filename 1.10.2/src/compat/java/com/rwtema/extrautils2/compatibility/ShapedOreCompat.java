@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.compatibility;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -10,7 +9,7 @@ import javax.annotation.Nonnull;
 
 public class ShapedOreCompat extends ShapedOreRecipe {
 
-	public ShapedOreCompat( ItemStack result, Object... recipe) {
+	public ShapedOreCompat(ItemStack result, Object... recipe) {
 		super(result, recipe);
 	}
 

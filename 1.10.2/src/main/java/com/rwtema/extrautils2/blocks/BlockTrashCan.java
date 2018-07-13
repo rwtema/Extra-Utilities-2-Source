@@ -53,7 +53,7 @@ public class BlockTrashCan extends XUBlockStaticRotation {
 
 
 	public static class Fluid extends BlockTrashCan {
-		public Fluid(){
+		public Fluid() {
 			super("_fluid");
 		}
 
@@ -65,7 +65,7 @@ public class BlockTrashCan extends XUBlockStaticRotation {
 	}
 
 	public static class Energy extends BlockTrashCan {
-		public Energy(){
+		public Energy() {
 			super("_energy");
 		}
 

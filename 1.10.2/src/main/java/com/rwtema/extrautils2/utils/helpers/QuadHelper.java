@@ -143,14 +143,14 @@ public class QuadHelper {
 		return rotate(angle, axis.x, axis.y, axis.z, src, dest);
 	}
 
-	public static Matrix4f translate(Matrix4f m, float x, float y, float z){
+	public static Matrix4f translate(Matrix4f m, float x, float y, float z) {
 		m.m03 += x;
 		m.m13 += y;
 		m.m23 += z;
 		return m;
 	}
 
-	public static Matrix4f scale(Matrix4f m, float scale){
+	public static Matrix4f scale(Matrix4f m, float scale) {
 		m.m00 *= scale;
 		m.m01 *= scale;
 		m.m02 *= scale;
@@ -304,7 +304,7 @@ public class QuadHelper {
 
 
 	public static void rotate(float ang, javax.vecmath.Vector3f orbit_axis, Matrix4f mat) {
-		rotate(ang,orbit_axis.x,orbit_axis.y,orbit_axis.z, mat,mat);
+		rotate(ang, orbit_axis.x, orbit_axis.y, orbit_axis.z, mat, mat);
 	}
 
 	public static Collection<? extends BakedQuad> trySplitQuad(BakedQuad quad, TextureAtlasSprite newsprite) {
@@ -334,9 +334,9 @@ public class QuadHelper {
 			return ImmutableList.of(new BakedQuadRetextured(quad, newsprite));
 		}
 
-		offset_position = format.getOffset(offset_position)/ 4;
-		offset_color = format.getOffset(offset_color)/ 4;
-		offset_tex = format.getOffset(offset_tex)/ 4;
+		offset_position = format.getOffset(offset_position) / 4;
+		offset_color = format.getOffset(offset_color) / 4;
+		offset_tex = format.getOffset(offset_tex) / 4;
 
 		int[] vertexData = quad.getVertexData();
 
@@ -398,11 +398,11 @@ public class QuadHelper {
 
 				UV center_uv = UV.interpolateQuad(uvs, 0.5F, 0.5F);
 
-				int center_u = MathHelper.clamp(MathHelper.clamp(Math.round(center_uv.u * 16 -0.05F), u_lower, u_upper), 0, uMax - 1);
-				int center_v = MathHelper.clamp(MathHelper.clamp(Math.round(center_uv.v * 16 -0.05F), v_lower, v_upper), 0, vMax - 1);
+				int center_u = MathHelper.clamp(MathHelper.clamp(Math.round(center_uv.u * 16 - 0.05F), u_lower, u_upper), 0, uMax - 1);
+				int center_v = MathHelper.clamp(MathHelper.clamp(Math.round(center_uv.v * 16 - 0.05F), v_lower, v_upper), 0, vMax - 1);
 
 				int i1 = center_u + (center_v) * uMax;
-				if(i1 < 0 || i1 >= pixels.length){
+				if (i1 < 0 || i1 >= pixels.length) {
 					pixels = pixels;
 					continue;
 				}
@@ -411,7 +411,7 @@ public class QuadHelper {
 				int alpha = color >> 24 & 0xFF;
 				if (alpha <= 4) continue;
 
-				int b = (ColorHelper.brightness(color) * 120) / 256 + (256-120);
+				int b = (ColorHelper.brightness(color) * 120) / 256 + (256 - 120);
 				int new_color = ColorHelper.color(b, b, b, alpha);
 //				new_color = 0xffffffff;
 

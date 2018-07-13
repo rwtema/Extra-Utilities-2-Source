@@ -606,7 +606,7 @@ public class ItemIngredients extends XUItemFlatMetadata implements IUpgradeProvi
 
 			@Override
 			public ItemStack getContainerItem(ItemStack itemStack) {
-				if(itemStack == null) return null;
+				if (itemStack == null) return null;
 				Side effectiveSide = FMLCommonHandler.instance().getEffectiveSide();
 				NBTTagCompound nbt = itemStack.getTagCompound();
 				if (effectiveSide == Side.SERVER) {

@@ -9,8 +9,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class WidgetBackground extends WidgetBase {
 	private ResourceLocation texture;
 
-	public WidgetBackground(IWidget other, ResourceLocation location, int expand){
-		this(other.getX() - expand,other.getY() - expand,other.getW() + 2 * expand,other.getH() + 2 * expand, location);
+	public WidgetBackground(IWidget other, ResourceLocation location, int expand) {
+		this(other.getX() - expand, other.getY() - expand, other.getW() + 2 * expand, other.getH() + 2 * expand, location);
 	}
 
 	public WidgetBackground(int x, int y, int w, int h, ResourceLocation texture) {

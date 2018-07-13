@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -419,23 +418,19 @@ public class XUPacketBuffer {
 	}
 
 
-	public int readVarInt()
-	{
+	public int readVarInt() {
 		int i = 0;
 		int j = 0;
 
-		while (true)
-		{
+		while (true) {
 			byte b0 = this.readByte();
 			i |= (b0 & 127) << j++ * 7;
 
-			if (j > 5)
-			{
+			if (j > 5) {
 				throw new RuntimeException("VarInt too big");
 			}
 
-			if ((b0 & 128) != 128)
-			{
+			if ((b0 & 128) != 128) {
 				break;
 			}
 		}
@@ -443,10 +438,8 @@ public class XUPacketBuffer {
 		return i;
 	}
 
-	public void writeVarInt(int input)
-	{
-		while ((input & -128) != 0)
-		{
+	public void writeVarInt(int input) {
+		while ((input & -128) != 0) {
 			this.writeByte(input & 127 | 128);
 			input >>>= 7;
 		}

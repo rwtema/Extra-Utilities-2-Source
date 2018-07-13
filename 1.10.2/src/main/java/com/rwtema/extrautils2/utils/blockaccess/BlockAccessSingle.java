@@ -3,10 +3,11 @@ package com.rwtema.extrautils2.utils.blockaccess;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class BlockAccessSingle extends BlockAccessEmpty {
 	public static final BlockPos CENTER = new BlockPos(0, 128, 0);

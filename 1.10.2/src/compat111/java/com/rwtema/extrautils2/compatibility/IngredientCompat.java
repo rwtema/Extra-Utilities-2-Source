@@ -18,13 +18,14 @@ public abstract class IngredientCompat implements Predicate<ItemStack>, com.goog
 		this.stacks = Lists.newArrayList(stacks);
 	}
 
-	public Object toCompat(){
+	public Object toCompat() {
 		return getStandby();
 	}
 
-	public Object getStandby(){
+	public Object getStandby() {
 		return stacks;
 	}
+
 	@Override
 	public boolean apply(@Nullable ItemStack p_apply_1_) {
 		return test(p_apply_1_);

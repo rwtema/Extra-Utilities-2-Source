@@ -1,40 +1,15 @@
 package com.rwtema.extrautils2.fakeplayer;
 
-import java.util.Set;
-import javax.annotation.Nonnull;
 import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.client.CPacketAnimation;
-import net.minecraft.network.play.client.CPacketChatMessage;
-import net.minecraft.network.play.client.CPacketClickWindow;
-import net.minecraft.network.play.client.CPacketClientSettings;
-import net.minecraft.network.play.client.CPacketClientStatus;
-import net.minecraft.network.play.client.CPacketCloseWindow;
-import net.minecraft.network.play.client.CPacketConfirmTeleport;
-import net.minecraft.network.play.client.CPacketConfirmTransaction;
-import net.minecraft.network.play.client.CPacketCreativeInventoryAction;
-import net.minecraft.network.play.client.CPacketCustomPayload;
-import net.minecraft.network.play.client.CPacketEnchantItem;
-import net.minecraft.network.play.client.CPacketEntityAction;
-import net.minecraft.network.play.client.CPacketHeldItemChange;
-import net.minecraft.network.play.client.CPacketInput;
-import net.minecraft.network.play.client.CPacketKeepAlive;
-import net.minecraft.network.play.client.CPacketPlayer;
-import net.minecraft.network.play.client.CPacketPlayerAbilities;
-import net.minecraft.network.play.client.CPacketPlayerDigging;
-import net.minecraft.network.play.client.CPacketPlayerTryUseItem;
-import net.minecraft.network.play.client.CPacketPlayerTryUseItemOnBlock;
-import net.minecraft.network.play.client.CPacketResourcePackStatus;
-import net.minecraft.network.play.client.CPacketSpectate;
-import net.minecraft.network.play.client.CPacketSteerBoat;
-import net.minecraft.network.play.client.CPacketTabComplete;
-import net.minecraft.network.play.client.CPacketUpdateSign;
-import net.minecraft.network.play.client.CPacketUseEntity;
-import net.minecraft.network.play.client.CPacketVehicleMove;
+import net.minecraft.network.play.client.*;
 import net.minecraft.network.play.server.SPacketPlayerPosLook;
 import net.minecraft.util.text.ITextComponent;
+
+import javax.annotation.Nonnull;
+import java.util.Set;
 
 public class FakeServerHandler extends NetHandlerPlayServer {
 

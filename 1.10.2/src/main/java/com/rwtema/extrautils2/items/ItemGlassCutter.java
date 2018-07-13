@@ -3,8 +3,6 @@ package com.rwtema.extrautils2.items;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.api.recipes.ICustomRecipeMatching;
 import com.rwtema.extrautils2.backend.XUItemFlatMetadata;
-import javax.annotation.Nonnull;
-
 import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -19,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class ItemGlassCutter extends XUItemFlatMetadata implements ICustomRecipeMatching {
 	public ItemGlassCutter() {

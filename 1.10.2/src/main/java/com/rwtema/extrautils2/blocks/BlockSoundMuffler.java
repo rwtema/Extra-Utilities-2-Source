@@ -4,8 +4,6 @@ import com.rwtema.extrautils2.backend.XUBlockFull;
 import com.rwtema.extrautils2.sounds.SoundMuffler;
 import com.rwtema.extrautils2.tile.TileSoundMuffler;
 import com.rwtema.extrautils2.tile.XUTile;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -13,14 +11,17 @@ import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.ITickableSound;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 // 🔇 Sound Muffler 🔇
 public class BlockSoundMuffler extends XUBlockFull {
@@ -56,7 +57,7 @@ public class BlockSoundMuffler extends XUBlockFull {
 		AxisAlignedBB expand = new AxisAlignedBB(sound.getXPosF(), sound.getYPosF(), sound.getZPosF(), sound.getXPosF(), sound.getYPosF(), sound.getZPosF()).grow(8, 8, 8);
 
 		List<TileSoundMuffler> tileSoundMufflers = XUTile.searchAABBForTiles(theWorld, expand, TileSoundMuffler.class, true, null);
-		if(tileSoundMufflers.isEmpty()) return;
+		if (tileSoundMufflers.isEmpty()) return;
 
 		float volume = 0.05F;
 

@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.tile;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.IMetaProperty;
@@ -13,6 +12,7 @@ import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.gui.backend.IDynamicHandler;
 import com.rwtema.extrautils2.itemhandler.InventoryHelper;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.utils.helpers.NullHelper;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -20,7 +20,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -441,7 +440,7 @@ public abstract class XUTile extends TileEntity {
 
 	public Optional<ItemStack> getPickBlock(EntityPlayer player, @Nullable RayTraceResult target) {
 		NBTTagCompound saveInfo = getSaveInfo();
-		if(saveInfo != null){
+		if (saveInfo != null) {
 			Item item = Item.getItemFromBlock(getXUBlock().xuBlockState.mainBlock);
 			if (item != null) {
 				ItemStack stack = new ItemStack(item, 1, getXUBlock().damageDropped(state));

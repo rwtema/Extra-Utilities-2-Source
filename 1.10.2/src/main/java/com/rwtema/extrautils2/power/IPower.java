@@ -1,8 +1,9 @@
 package com.rwtema.extrautils2.power;
 
-import javax.annotation.Nullable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public interface IPower {
 	float getPower();

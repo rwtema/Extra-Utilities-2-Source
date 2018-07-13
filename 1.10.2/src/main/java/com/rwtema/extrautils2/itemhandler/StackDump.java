@@ -1,10 +1,5 @@
 package com.rwtema.extrautils2.itemhandler;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import javax.annotation.Nonnull;
-
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +7,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+
+import javax.annotation.Nonnull;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class StackDump implements Iterable<ItemStack>, INBTSerializable<NBTTagList> {
 	public final LinkedList<ItemStack> stacks = new LinkedList<>();

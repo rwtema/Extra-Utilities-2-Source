@@ -1,14 +1,10 @@
 package com.rwtema.extrautils2.eventhandlers;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import java.util.LinkedList;
 
 public class XPCaptureHandler {
 	static XPCaptureHandler INSTANCE = new XPCaptureHandler();

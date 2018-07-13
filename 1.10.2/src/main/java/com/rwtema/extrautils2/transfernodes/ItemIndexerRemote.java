@@ -6,7 +6,6 @@ import com.rwtema.extrautils2.gui.backend.DynamicContainer;
 import com.rwtema.extrautils2.gui.backend.IDynamicHandler;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
-import javax.annotation.Nonnull;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +18,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+
+import javax.annotation.Nonnull;
 
 public class ItemIndexerRemote extends XUItemFlatMetadata implements IDynamicHandler {
 	public ItemIndexerRemote() {

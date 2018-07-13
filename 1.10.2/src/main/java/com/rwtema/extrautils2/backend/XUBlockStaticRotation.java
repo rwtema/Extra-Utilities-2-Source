@@ -1,13 +1,14 @@
 package com.rwtema.extrautils2.backend;
 
 import com.rwtema.extrautils2.backend.model.BoxModel;
-import javax.annotation.Nonnull;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public abstract class XUBlockStaticRotation extends XUBlockStatic {
 	public XUBlockStaticRotation(Material materialIn) {

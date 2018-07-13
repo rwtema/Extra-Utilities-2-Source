@@ -1,7 +1,5 @@
 package com.rwtema.extrautils2.backend;
 
-import com.rwtema.extrautils2.ExtraUtils2;
-import java.util.concurrent.Callable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

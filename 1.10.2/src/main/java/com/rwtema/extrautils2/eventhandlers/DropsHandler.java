@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.eventhandlers;
 
 import com.google.common.collect.HashMultimap;
 import com.rwtema.extrautils2.utils.XURandom;
-import java.util.Set;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -13,8 +12,11 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Set;
+
 public class DropsHandler {
 	public static HashMultimap<IBlockState, Pair<ItemStack, Double>> drops2add = HashMultimap.create();
+	public static HashMultimap<ResourceLocation, LootPool> lootDrops = HashMultimap.create();
 
 	static {
 		MinecraftForge.EVENT_BUS.register(new DropsHandler());
@@ -38,12 +40,10 @@ public class DropsHandler {
 		}
 	}
 
-	public static HashMultimap<ResourceLocation,LootPool> lootDrops = HashMultimap.create();
-
 	@SubscribeEvent
-	public void registerLoot(LootTableLoadEvent event){
+	public void registerLoot(LootTableLoadEvent event) {
 		Set<LootPool> stacks = lootDrops.get(event.getName());
-		if(stacks.isEmpty()) return;
+		if (stacks.isEmpty()) return;
 		for (LootPool pool : stacks) {
 			event.getTable().addPool(pool);
 		}

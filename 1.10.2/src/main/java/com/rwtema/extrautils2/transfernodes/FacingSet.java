@@ -1,13 +1,10 @@
 package com.rwtema.extrautils2.transfernodes;
 
 import com.google.common.collect.ImmutableList;
-import java.util.AbstractSet;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
-import javax.annotation.Nonnull;
 import net.minecraft.util.EnumFacing;
+
+import javax.annotation.Nonnull;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class FacingSet extends AbstractSet<EnumFacing> implements Set<EnumFacing> {

@@ -13,9 +13,9 @@ public class InterBlockPosition {
 
 	public InterBlockPosition(@Nonnull BlockPos pos, @Nonnull EnumFacing side) {
 		axis = side.getAxis();
-		if(side.getAxisDirection() == EnumFacing.AxisDirection.POSITIVE){
+		if (side.getAxisDirection() == EnumFacing.AxisDirection.POSITIVE) {
 			lowerPos = pos;
-		}else{
+		} else {
 			lowerPos = pos.offset(side);
 		}
 	}

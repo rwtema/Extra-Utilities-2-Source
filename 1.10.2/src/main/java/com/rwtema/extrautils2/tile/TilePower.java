@@ -5,18 +5,14 @@ import com.rwtema.extrautils2.backend.IMetaProperty;
 import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.commands.CommandPowerSharing;
 import com.rwtema.extrautils2.gui.backend.IDynamicHandler;
-import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.network.SpecialChat;
+import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.power.Freq;
 import com.rwtema.extrautils2.power.IPower;
 import com.rwtema.extrautils2.power.IWorldPowerMultiplier;
 import com.rwtema.extrautils2.power.PowerManager;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.OverridingMethodsMustInvokeSuper;
-
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,6 +24,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 public abstract class TilePower extends XUTile implements IPower {
 	public final static String NBT_FREQUENCY = "Frequency";

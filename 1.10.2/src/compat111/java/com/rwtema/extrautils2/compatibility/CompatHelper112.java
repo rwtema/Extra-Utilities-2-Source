@@ -3,8 +3,6 @@ package com.rwtema.extrautils2.compatibility;
 import com.google.common.base.Optional;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUBlock;
-import com.rwtema.extrautils2.machine.MechEnchantmentRecipe;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;

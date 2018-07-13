@@ -2,12 +2,13 @@ package com.rwtema.extrautils2.utils.datastructures;
 
 import gnu.trove.list.TLinkable;
 import gnu.trove.list.linked.TLinkedList;
+
+import javax.annotation.Nonnull;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.annotation.Nonnull;
 
 public class WeakQueue<T> extends AbstractQueue<T> {
 	final ReferenceQueue<T> q = new ReferenceQueue<>();
@@ -89,13 +90,12 @@ public class WeakQueue<T> extends AbstractQueue<T> {
 	}
 
 	private class NodeIterator implements Iterator<T> {
-		public NodeIterator() {
-			this.iterator = new ArrayList<>(list).iterator();
-		}
-
 		Iterator<Node> iterator;
 		Node curNode;
 		T next;
+		public NodeIterator() {
+			this.iterator = new ArrayList<>(list).iterator();
+		}
 
 		@Override
 		public void remove() {

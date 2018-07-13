@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.backend.model;
 
-import com.google.common.collect.ImmutableList;
 import com.rwtema.extrautils2.backend.XUBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -36,15 +35,15 @@ public class PassthruModelBlock extends NullModel {
 	@Nonnull
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
-		if(state == null || !(state instanceof XUBlockState) || state.getBlock() != block){
+		if (state == null || !(state instanceof XUBlockState) || state.getBlock() != block) {
 			return getQuadsNoWorld(state, side, rand);
 		}
 		ThreadLocal<MutableModel> result = ((XUBlockState) state).result;
-		if(result == null){
+		if (result == null) {
 			return getQuadsNoWorld(state, side, rand);
 		}
 		MutableModel model = result.get();
-		if(model == null){
+		if (model == null) {
 			return getQuadsNoWorld(state, side, rand);
 		}
 		return model.getQuads(state, side, rand);

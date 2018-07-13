@@ -9,11 +9,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class Test extends Chunk {
+	private World worldObj;
+
 	public Test(World worldIn, int x, int z) {
 		super(worldIn, x, z);
 	}
-
-	private World worldObj;
 
 	public int getLightSubtracted(BlockPos pos, int amount) {
 		return Lighting.getCombinedLight(worldObj, pos, getLightSubtractedPassThru(pos, amount));
@@ -23,11 +23,11 @@ public class Test extends Chunk {
 		return 0;
 	}
 
-	public void run(){
+	public void run() {
 		GLState.resetStateQuads();
 	}
 
-	public void test(){
+	public void test() {
 		ItemStack stack = new ItemStack(Items.COMMAND_BLOCK_MINECART);
 		StackHelper.increase(stack);
 	}

@@ -135,7 +135,7 @@ public class StringHelper {
 		return string;
 	}
 
-	public static String formatPercent(double v){
+	public static String formatPercent(double v) {
 		return NumberFormat.getPercentInstance(Locale.UK).format(v);
 	}
 
@@ -163,7 +163,7 @@ public class StringHelper {
 			builder.append(d).append("d");
 		flag |= h > 0;
 		if (h > 0 || (incExtras && flag))
-			builder.append( h).append("h");
+			builder.append(h).append("h");
 		flag |= m > 0;
 		if (m > 0 || (incExtras && flag))
 			builder.append(m).append("m");

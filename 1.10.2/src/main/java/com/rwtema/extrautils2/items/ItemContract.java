@@ -4,22 +4,10 @@ import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUItemFlatMetadata;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.eventhandlers.ItemEntityInteractionOverride;
-import com.rwtema.extrautils2.gui.backend.DynamicContainer;
-import com.rwtema.extrautils2.gui.backend.DynamicGui;
-import com.rwtema.extrautils2.gui.backend.DynamicWindow;
-import com.rwtema.extrautils2.gui.backend.IDynamicHandler;
-import com.rwtema.extrautils2.gui.backend.IWidget;
-import com.rwtema.extrautils2.gui.backend.WidgetButton;
-import com.rwtema.extrautils2.gui.backend.WidgetEntity;
-import com.rwtema.extrautils2.gui.backend.WidgetRawData;
-import com.rwtema.extrautils2.gui.backend.WidgetTextMultiline;
-import com.rwtema.extrautils2.gui.backend.WidgetTextSmallText;
+import com.rwtema.extrautils2.gui.backend.*;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
-import java.math.BigInteger;
-import java.util.UUID;
-import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,6 +23,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.math.BigInteger;
+import java.util.UUID;
 
 public class ItemContract extends XUItemFlatMetadata implements IDynamicHandler {
 	public static final String TAG_UNDER_CONTRACT = "Contracted";

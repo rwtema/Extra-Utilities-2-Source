@@ -19,10 +19,10 @@ public class BoxSingleQuad extends Box {
 						 Vec3d pos2, float u2, float v2,
 						 Vec3d pos3, float u3, float v3) {
 		this(
-				new UV(pos0,u0,v0),
-				new UV(pos1,u1,v1),
-				new UV(pos2,u2,v2),
-				new UV(pos3,u3,v3)
+				new UV(pos0, u0, v0),
+				new UV(pos1, u1, v1),
+				new UV(pos2, u2, v2),
+				new UV(pos3, u3, v3)
 		);
 
 	}

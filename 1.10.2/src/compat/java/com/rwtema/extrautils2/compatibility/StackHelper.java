@@ -12,6 +12,7 @@ public class StackHelper {
 	public static boolean isNull(@Nullable ItemStack stack) {
 		return stack == null;
 	}
+
 	public static boolean isNonNull(@Nullable ItemStack stack) {
 		return stack != null;
 	}
@@ -50,12 +51,12 @@ public class StackHelper {
 	}
 
 	@Nonnull
-	public static ItemStack loadFromNBT(@Nonnull NBTTagCompound tag){
+	public static ItemStack loadFromNBT(@Nonnull NBTTagCompound tag) {
 		return ItemStack.func_77949_a(tag);
 	}
 
 	@Nonnull
-	public static ItemStack safeCopy(@Nonnull ItemStack stack){
+	public static ItemStack safeCopy(@Nonnull ItemStack stack) {
 		return ItemStack.func_77944_b(stack);
 	}
 
@@ -64,13 +65,13 @@ public class StackHelper {
 		return null;
 	}
 
-	public static NBTTagCompound serializeSafe(ItemStack stack){
-		if(stack == null) return new NBTTagCompound();
+	public static NBTTagCompound serializeSafe(ItemStack stack) {
+		if (stack == null) return new NBTTagCompound();
 		return stack.serializeNBT();
 	}
 
-	public static ItemStack deserializeSafe(@Nonnull NBTTagCompound tag){
-		if(tag == null) return empty();
+	public static ItemStack deserializeSafe(@Nonnull NBTTagCompound tag) {
+		if (tag == null) return empty();
 		return ItemStack.func_77949_a(tag);
 	}
 }

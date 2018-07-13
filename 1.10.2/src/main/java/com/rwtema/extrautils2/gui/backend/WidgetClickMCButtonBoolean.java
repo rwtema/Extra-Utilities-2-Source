@@ -11,7 +11,6 @@ public abstract class WidgetClickMCButtonBoolean extends WidgetClickMCButtonChoi
 	}
 
 
-
 	public static class NBTBoolean extends WidgetClickMCButtonBoolean {
 		final NBTSerializable.NBTBoolean nbtBoolean;
 

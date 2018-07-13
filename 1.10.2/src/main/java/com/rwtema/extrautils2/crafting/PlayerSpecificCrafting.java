@@ -149,6 +149,11 @@ public abstract class PlayerSpecificCrafting implements RecipeCompat, IRecipeInf
 		return IRecipe.class;
 	}
 
+	@Override
+	public boolean canFit(int width, int height) {
+		return ((RecipeCompat) recipe).canFit(width, height);
+	}
+
 	protected class EventHandler {
 		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
@@ -194,10 +199,5 @@ public abstract class PlayerSpecificCrafting implements RecipeCompat, IRecipeInf
 			EntityPlayerSP player = Minecraft.getMinecraft().player;
 			return player != null && isValidForCrafting(player) && player.openContainer == inv.eventHandler;
 		}
-	}
-
-	@Override
-	public boolean canFit(int width, int height) {
-		return ((RecipeCompat)recipe).canFit(width, height);
 	}
 }

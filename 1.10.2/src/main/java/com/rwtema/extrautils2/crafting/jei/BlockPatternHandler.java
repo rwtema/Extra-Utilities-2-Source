@@ -2,15 +2,11 @@ package com.rwtema.extrautils2.crafting.jei;
 
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.compatibility.CompatClientHelper;
+import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.structure.PatternRecipe;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.MCTimer;
 import com.rwtema.extrautils2.utils.client.GLStateAttributes;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
@@ -18,7 +14,6 @@ import mezz.jei.api.recipe.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
-import com.rwtema.extrautils2.render.IVertexBuffer;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -28,6 +23,12 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class BlockPatternHandler {
 	public static final String uid = ExtraUtils2.MODID + ".blockPatterns";

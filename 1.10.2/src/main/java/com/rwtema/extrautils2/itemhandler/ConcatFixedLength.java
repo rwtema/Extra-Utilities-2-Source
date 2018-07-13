@@ -1,11 +1,11 @@
 package com.rwtema.extrautils2.itemhandler;
 
-import java.util.Arrays;
-
 import com.rwtema.extrautils2.utils.ItemStackNonNull;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+
+import java.util.Arrays;
 
 public class ConcatFixedLength implements IItemHandlerModifiableCompat {
 	final IItemHandler[] handlers;

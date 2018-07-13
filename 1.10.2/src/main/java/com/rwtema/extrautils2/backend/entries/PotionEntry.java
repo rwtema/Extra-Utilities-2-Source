@@ -2,12 +2,13 @@ package com.rwtema.extrautils2.backend.entries;
 
 import com.rwtema.extrautils2.potion.PotionsHelper;
 import com.rwtema.extrautils2.potion.XUPotion;
-import java.util.List;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
+
+import java.util.List;
 
 public abstract class PotionEntry<T extends XUPotion> extends Entry<T> {
 	final String tooltip;

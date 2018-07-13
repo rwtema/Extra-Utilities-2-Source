@@ -2,16 +2,16 @@ package com.rwtema.extrautils2.backend.model;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Nonnull;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ItemOverride;
 import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.block.model.SimpleBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Map;
 
 public abstract class NullModel extends SimpleBakedModel {
 	protected static final List<BakedQuad> EMPTY_QUADS = ImmutableList.of();

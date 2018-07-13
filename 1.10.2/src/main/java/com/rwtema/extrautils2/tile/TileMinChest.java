@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
 public class TileMinChest extends XUTile implements IDynamicHandler {
-	IItemHandler HANDLER = registerNBT("item", new SingleStackHandler(){
+	IItemHandler HANDLER = registerNBT("item", new SingleStackHandler() {
 		@Override
 		protected void onContentsChanged() {
 			markDirty();

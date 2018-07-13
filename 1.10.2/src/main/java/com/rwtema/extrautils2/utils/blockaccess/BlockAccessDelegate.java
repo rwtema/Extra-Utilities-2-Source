@@ -87,12 +87,12 @@ public class BlockAccessDelegate extends CompatBlockAccess implements IBlockAcce
 
 	@Nullable
 	public IBlockAccess getBase() {
-		if(base == this) return null;
+		if (base == this) return null;
 		return base;
 	}
 
 	public void setBase(@Nullable IBlockAccess base) {
-		if(base == this) throw new IllegalStateException();
+		if (base == this) throw new IllegalStateException();
 		if (base instanceof BlockAccessDelegate) {
 			setBase(((BlockAccessDelegate) base).getBase());
 		}

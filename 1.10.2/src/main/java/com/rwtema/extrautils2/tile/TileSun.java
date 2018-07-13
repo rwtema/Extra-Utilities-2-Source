@@ -4,13 +4,14 @@ import com.rwtema.extrautils2.asm.Lighting;
 import com.rwtema.extrautils2.lighting.ILight;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.utils.helpers.LightMathHelper;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.WeakHashMap;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+
+import java.util.HashMap;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 public class TileSun extends TilePower implements ILight {
 	private static final int range = 120;

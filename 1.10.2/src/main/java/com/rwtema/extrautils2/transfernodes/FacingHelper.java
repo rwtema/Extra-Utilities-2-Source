@@ -63,7 +63,7 @@ public class FacingHelper {
 					.build()
 	);
 
-	public static final  EnumMap<EnumFacing, List<EnumFacing>> lists = CollectionHelper.populateEnumMap(EnumFacing.class, ImmutableList::of);
+	public static final EnumMap<EnumFacing, List<EnumFacing>> lists = CollectionHelper.populateEnumMap(EnumFacing.class, ImmutableList::of);
 	public static final EnumMap<EnumFacing, EnumSet<EnumFacing>> nonEqual = CollectionHelper.populateEnumMultiMap(EnumFacing.class, (FunctionABBool<EnumFacing, EnumFacing>) (facing, facing2) -> facing != facing2);
 	public static final EnumMap<EnumFacing, EnumSet<EnumFacing>> horizontalOrthogonal = CollectionHelper.populateEnumMultiMap(EnumFacing.class, (FunctionABBool<EnumFacing, EnumFacing>) (facing, facing2) -> facing.getAxis() != facing2.getAxis() && facing2.getAxis() != EnumFacing.Axis.Y);
 	public static final EnumFacing[] facingPlusNull = new EnumFacing[]{
@@ -89,6 +89,22 @@ public class FacingHelper {
 
 	public static Iterable<EnumFacing> getRandomFaceOrder() {
 		return new FaceIterRandom();
+	}
+
+	public static EnumFacing getDirectionFromEntityLiving(BlockPos pos, EntityLivingBase placer) {
+		if (Math.abs(placer.posX - (double) ((float) pos.getX() + 0.5F)) < 2.0D && Math.abs(placer.posZ - (double) ((float) pos.getZ() + 0.5F)) < 2.0D) {
+			double d0 = placer.posY + (double) placer.getEyeHeight();
+
+			if (d0 - (double) pos.getY() > 2.0D) {
+				return EnumFacing.UP;
+			}
+
+			if ((double) pos.getY() - d0 > 0.0D) {
+				return EnumFacing.DOWN;
+			}
+		}
+
+		return placer.getHorizontalFacing().getOpposite();
 	}
 
 	private static class FaceIterRandom implements Iterable<EnumFacing>, Iterator<EnumFacing> {
@@ -132,26 +148,6 @@ public class FacingHelper {
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
-	}
-
-	public static EnumFacing getDirectionFromEntityLiving(BlockPos pos, EntityLivingBase placer)
-	{
-		if (Math.abs(placer.posX - (double)((float)pos.getX() + 0.5F)) < 2.0D && Math.abs(placer.posZ - (double)((float)pos.getZ() + 0.5F)) < 2.0D)
-		{
-			double d0 = placer.posY + (double)placer.getEyeHeight();
-
-			if (d0 - (double)pos.getY() > 2.0D)
-			{
-				return EnumFacing.UP;
-			}
-
-			if ((double)pos.getY() - d0 > 0.0D)
-			{
-				return EnumFacing.DOWN;
-			}
-		}
-
-		return placer.getHorizontalFacing().getOpposite();
 	}
 
 }

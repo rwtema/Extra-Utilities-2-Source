@@ -3,7 +3,6 @@ package com.rwtema.extrautils2.particles;
 import com.rwtema.extrautils2.compatibility.EntityCompat;
 import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;

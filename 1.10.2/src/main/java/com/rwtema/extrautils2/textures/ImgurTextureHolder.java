@@ -3,18 +3,6 @@ package com.rwtema.extrautils2.textures;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.blocks.BlockScreen;
 import com.rwtema.extrautils2.tile.TileScreen;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.regex.Pattern;
-import javax.annotation.Nonnull;
-import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IImageBuffer;
 import net.minecraft.client.renderer.texture.SimpleTexture;
@@ -24,6 +12,18 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nonnull;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
 
 public class ImgurTextureHolder {
 
@@ -92,7 +92,7 @@ public class ImgurTextureHolder {
 	}
 
 	public static ImgurTextureHolder getTex(String tex) {
-		if(tex.length() == 0) return _default;
+		if (tex.length() == 0) return _default;
 		ImgurTextureHolder imgurTextureHolder = holder.get(tex);
 		if (imgurTextureHolder != null) return imgurTextureHolder;
 		imgurTextureHolder = new ImgurTextureHolder(tex);

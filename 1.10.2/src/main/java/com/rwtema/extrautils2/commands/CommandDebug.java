@@ -8,9 +8,6 @@ import com.rwtema.extrautils2.power.PowerManager;
 import com.rwtema.extrautils2.utils.LogHelper;
 import gnu.trove.iterator.TObjectLongIterator;
 import gnu.trove.map.hash.TObjectLongHashMap;
-import java.util.Collection;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -21,6 +18,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
+
+import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.List;
 
 public class CommandDebug extends CommandBase {
 	@Nonnull

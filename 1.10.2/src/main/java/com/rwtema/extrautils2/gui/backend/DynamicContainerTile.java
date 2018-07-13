@@ -1,10 +1,10 @@
 package com.rwtema.extrautils2.gui.backend;
 
 import com.rwtema.extrautils2.tile.XUTile;
-import com.rwtema.extrautils2.utils.helpers.ColorHelper;
-import javax.annotation.Nonnull;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import javax.annotation.Nonnull;
 
 public class DynamicContainerTile extends DynamicContainer {
 	protected final TileEntity tile;

@@ -4,7 +4,6 @@ import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.compatibility.CompatClientHelper;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.items.ItemLawSword;
-import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelRenderer;
@@ -18,6 +17,8 @@ import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+
+import javax.annotation.Nonnull;
 
 public class LayerSword implements LayerRenderer<AbstractClientPlayer> {
 	public static final ResourceLocation temaSword = new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "textures/rwtema_sword.png");

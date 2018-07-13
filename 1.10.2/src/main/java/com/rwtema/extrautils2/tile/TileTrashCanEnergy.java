@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 public class TileTrashCanEnergy extends XUTile {
 
-	IEnergyStorage ABSORB_HANDLER = new IEnergyStorage(){
+	IEnergyStorage ABSORB_HANDLER = new IEnergyStorage() {
 
 		@Override
 		public int receiveEnergy(int maxReceive, boolean simulate) {

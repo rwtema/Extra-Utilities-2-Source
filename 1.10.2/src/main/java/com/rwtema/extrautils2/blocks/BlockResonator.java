@@ -5,11 +5,12 @@ import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.tile.TilePower;
 import com.rwtema.extrautils2.tile.TileResonator;
-import javax.annotation.Nonnull;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockResonator extends XUBlockStatic {
 	public BlockResonator() {
@@ -19,7 +20,7 @@ public class BlockResonator extends XUBlockStatic {
 	@Override
 	public BoxModel getModel(IBlockState state) {
 		final BoxModel boxes = new BoxModel();
-		boxes.addBoxI(0,0,0,16,15,16, "resonator_side").setTextureSides(0, "resonator_bottom", 1, "resonator_top");
+		boxes.addBoxI(0, 0, 0, 16, 15, 16, "resonator_side").setTextureSides(0, "resonator_bottom", 1, "resonator_top");
 		return boxes;
 	}
 

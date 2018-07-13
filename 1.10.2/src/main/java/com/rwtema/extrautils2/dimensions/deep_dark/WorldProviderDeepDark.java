@@ -30,10 +30,6 @@ public class WorldProviderDeepDark extends XUWorldProvider {
 	ChunkProviderDeepDark chunkProviderDeepDark;
 
 
-	public boolean hasSkyLight() {
-		return false;
-	}
-
 	public WorldProviderDeepDark() {
 		super(XU2Entries.deep_dark);
 		this.doesWaterVaporize = false;
@@ -97,6 +93,10 @@ public class WorldProviderDeepDark extends XUWorldProvider {
 				}
 			}
 		}
+	}
+
+	public boolean hasSkyLight() {
+		return false;
 	}
 
 	@Override

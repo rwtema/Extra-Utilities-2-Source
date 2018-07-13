@@ -22,7 +22,6 @@ public class PlayerPowerManager {
 	static HashMap<Pair<ID<EntityPlayer>, IPlayerPowerCreator>, PlayerPower> powerServer = new HashMap<>();
 
 
-
 	public static void clear() {
 		powerServer.clear();
 	}

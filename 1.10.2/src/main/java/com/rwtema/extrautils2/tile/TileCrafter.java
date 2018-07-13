@@ -369,9 +369,9 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 					genericStacks[i] = (ItemStack) o;
 				}
 
-				if(input.get(i) instanceof Predicate){
+				if (input.get(i) instanceof Predicate) {
 					recipeMatchers[i] = ((Predicate<ItemStack>) input.get(i));
-				}else {
+				} else {
 					recipeMatchers[i] = Matchers.createMatcher(o, true);
 				}
 			}

@@ -3,11 +3,10 @@ package com.rwtema.extrautils2.gui.backend;
 import com.google.common.collect.ImmutableList;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.utils.Lang;
-
-import java.util.List;
-
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import net.minecraft.client.renderer.texture.TextureManager;
+
+import java.util.List;
 
 public abstract class WidgetEnergy extends WidgetBase implements IWidgetServerNetwork {
 
@@ -53,7 +52,7 @@ public abstract class WidgetEnergy extends WidgetBase implements IWidgetServerNe
 
 	@Override
 	public List<String> getToolTip() {
-		if(totalEnergy == -1) return null;
+		if (totalEnergy == -1) return null;
 		return ImmutableList.of(Lang.translateArgs("%s / %s RF", StringHelper.format(currentEnergy), StringHelper.format(totalEnergy)));
 	}
 

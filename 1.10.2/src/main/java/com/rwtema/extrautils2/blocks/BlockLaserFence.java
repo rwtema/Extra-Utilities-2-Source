@@ -37,11 +37,11 @@ public class BlockLaserFence extends XUBlockStatic {
 		BoxModel model = new BoxModel();
 		model.addBoxI(8, 8, 8, 12, 12, 12, "laser_fence_side");
 		for (EnumFacing facing : EnumFacing.values()) {
-			model.addBoxI(5, 2 ,5 , 11, 4, 11, "laser_fence_side").rotateToSide(facing);
-			model.addBoxI(6, 0 ,6 , 10, 2, 10, "laser_fence_side").rotateToSide(facing);
+			model.addBoxI(5, 2, 5, 11, 4, 11, "laser_fence_side").rotateToSide(facing);
+			model.addBoxI(6, 0, 6, 10, 2, 10, "laser_fence_side").rotateToSide(facing);
 
-			model.addBoxI(5, 2 ,5 , 11, 4, 11, "laser_fence_color").rotateToSide(facing).setTint(0);
-			model.addBoxI(6, 0 ,6 , 10, 2, 10, "laser_fence_color").rotateToSide(facing).setTint(0);
+			model.addBoxI(5, 2, 5, 11, 4, 11, "laser_fence_color").rotateToSide(facing).setTint(0);
+			model.addBoxI(6, 0, 6, 10, 2, 10, "laser_fence_color").rotateToSide(facing).setTint(0);
 		}
 		return model;
 	}

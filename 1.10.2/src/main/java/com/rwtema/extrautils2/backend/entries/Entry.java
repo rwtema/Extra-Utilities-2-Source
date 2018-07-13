@@ -9,19 +9,15 @@ import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.crafting.CraftingHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 public abstract class Entry<T> implements IItemStackMaker {

@@ -13,7 +13,7 @@ public class BlockPowerOverload extends XUBlockStatic {
 	@Override
 	public BoxModel getModel(IBlockState state) {
 		BoxModel boxes = new BoxModel();
-		boxes.addBoxI(1,1,1,15,15,15,"power_overloader");
+		boxes.addBoxI(1, 1, 1, 15, 15, 15, "power_overloader");
 		return boxes;
 	}
 }

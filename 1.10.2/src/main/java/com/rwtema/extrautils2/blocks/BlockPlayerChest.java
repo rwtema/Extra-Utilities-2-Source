@@ -6,7 +6,6 @@ import com.rwtema.extrautils2.backend.XUBlockStaticRotation;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.tile.TilePlayerChest;
 import com.rwtema.extrautils2.tile.TilePower;
-import javax.annotation.Nonnull;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
@@ -14,8 +13,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockPlayerChest extends XUBlockStaticRotation {
-	public static final IMetaProperty<Boolean> PLAYER_ONLINE = new IMetaProperty.WrapTile<Boolean, TilePlayerChest>(TilePlayerChest.class, PropertyBool.create("player_online")){
+	public static final IMetaProperty<Boolean> PLAYER_ONLINE = new IMetaProperty.WrapTile<Boolean, TilePlayerChest>(TilePlayerChest.class, PropertyBool.create("player_online")) {
 
 		@Override
 		public Boolean getValue(TilePlayerChest tile) {
@@ -30,7 +31,7 @@ public class BlockPlayerChest extends XUBlockStaticRotation {
 	@Override
 	protected BoxModel createBaseModel(IBlockState baseState) {
 		BoxModel boxes = new BoxModel();
-		boxes.addBoxI(1,0,1,15,14,15,"player_chest_side").setTextureSides(0, "player_chest_bottom", 1, "player_chest_top", 3, "player_chest_front");
+		boxes.addBoxI(1, 0, 1, 15, 14, 15, "player_chest_side").setTextureSides(0, "player_chest_bottom", 1, "player_chest_top", 3, "player_chest_front");
 		return boxes;
 	}
 

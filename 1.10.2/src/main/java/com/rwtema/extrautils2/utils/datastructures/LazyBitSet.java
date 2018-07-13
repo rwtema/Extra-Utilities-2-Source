@@ -4,32 +4,31 @@ import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
 public class LazyBitSet {
-	long calc, result;
-
 	final IntPredicate predicate;
+	long calc, result;
 
 	public LazyBitSet(IntPredicate predicate) {
 		this.predicate = predicate;
 	}
 
-	public boolean get(int bitIndex){
+	public boolean get(int bitIndex) {
 		long mask = 1L << bitIndex;
 		if ((calc & mask) == 0) {
 			calc |= mask;
 			if (predicate.test(bitIndex)) {
 				result |= mask;
-			}else{
+			} else {
 				result &= ~mask;
 			}
 		}
 		return (result & mask) != 0;
 	}
 
-	public void invalidateAll(){
+	public void invalidateAll() {
 		calc = 0;
 	}
 
-	public void invalide(int bitIndex){
+	public void invalide(int bitIndex) {
 		calc &= (1 << bitIndex);
 	}
 
@@ -39,7 +38,7 @@ public class LazyBitSet {
 			super(t -> predicate.test(clazz.getEnumConstants()[t]));
 		}
 
-		public boolean get(T t){
+		public boolean get(T t) {
 			return get(t.ordinal());
 		}
 	}

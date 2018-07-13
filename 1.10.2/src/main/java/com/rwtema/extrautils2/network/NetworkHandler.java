@@ -6,10 +6,6 @@ import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.utils.LogHelper;
 import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
 import io.netty.channel.ChannelFutureListener;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.EnumMap;
-import java.util.Map;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
@@ -19,6 +15,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class NetworkHandler {
 

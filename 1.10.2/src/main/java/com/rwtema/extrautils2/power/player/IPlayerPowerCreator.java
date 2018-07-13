@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 public interface IPlayerPowerCreator {
 	PlayerPower createPower(EntityPlayer player, ItemStack params);
 
-	default boolean shouldOverride(PlayerPower playerPower, EntityPlayer player, ItemStack stack, boolean isSelected){
+	default boolean shouldOverride(PlayerPower playerPower, EntityPlayer player, ItemStack stack, boolean isSelected) {
 		return false;
 	}
 }

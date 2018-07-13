@@ -5,7 +5,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SwordStrengthHandler {
 	@SideOnly(Side.CLIENT)
-	public void run(){
+	public void run() {
 
 	}
 }

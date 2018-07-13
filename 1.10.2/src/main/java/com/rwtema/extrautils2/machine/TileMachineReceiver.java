@@ -7,7 +7,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nullable;
 
-public class TileMachineReceiver extends TileMachine  {
+public class TileMachineReceiver extends TileMachine {
 	PublicEnergyWrapper.Receive receive = new PublicEnergyWrapper.Receive(storage);
 
 	@Override

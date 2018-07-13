@@ -9,13 +9,6 @@ import com.rwtema.extrautils2.utils.PositionPool;
 import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
 import com.rwtema.extrautils2.utils.helpers.BlockStates;
 import gnu.trove.map.hash.TObjectIntHashMap;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.TreeSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -32,6 +25,8 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.ItemStackHandler;
+
+import java.util.*;
 
 public class TileQuarryConvoluted extends XUTile implements ITickable {
 	static final EnumFacing[][] sidePriority =
@@ -114,7 +109,7 @@ public class TileQuarryConvoluted extends XUTile implements ITickable {
 							if (!digger.dead) {
 								double curDist = digger.target.distanceSq(digger.pos.x, digger.pos.y, digger.pos.z);
 								for (Digger digger1 : diggers) {
-									if(!digger.active.value) continue;
+									if (!digger.active.value) continue;
 									double curDistOther = digger1.target.distanceSq(digger1.pos.x, digger1.pos.y, digger1.pos.z);
 									double newDist = digger.target.distanceSq(digger1.pos.x, digger1.pos.y, digger1.pos.z);
 									double newDistOther = digger1.target.distanceSq(digger.pos.x, digger.pos.y, digger.pos.z);
@@ -361,7 +356,7 @@ public class TileQuarryConvoluted extends XUTile implements ITickable {
 							world.setBlockState(offset, getSludgeBlock().getDefaultState());
 						}
 					}
-				}else{
+				} else {
 					world.setBlockState(target, getSludgeBlock().getDefaultState());
 				}
 			}

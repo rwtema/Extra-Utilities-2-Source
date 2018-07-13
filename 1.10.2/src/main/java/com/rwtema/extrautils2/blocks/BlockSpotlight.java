@@ -2,19 +2,9 @@ package com.rwtema.extrautils2.blocks;
 
 import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.backend.XUBlockStateCreator;
-import com.rwtema.extrautils2.backend.model.Box;
-import com.rwtema.extrautils2.backend.model.BoxModel;
-import com.rwtema.extrautils2.backend.model.BoxRotatable;
-import com.rwtema.extrautils2.backend.model.BoxSingleQuad;
-import com.rwtema.extrautils2.backend.model.Textures;
-import com.rwtema.extrautils2.backend.model.UV;
+import com.rwtema.extrautils2.backend.model.*;
 import com.rwtema.extrautils2.tile.TileSpotlight;
 import com.rwtema.extrautils2.utils.Lang;
-import java.util.List;
-import java.util.Random;
-import java.util.WeakHashMap;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -33,6 +23,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.Vector3f;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+import java.util.WeakHashMap;
 
 public class BlockSpotlight extends XUBlock {
 

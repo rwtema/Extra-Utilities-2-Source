@@ -3,7 +3,6 @@ package com.rwtema.extrautils2.itemhandler;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.utils.ItemStackNonNull;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 public abstract class PublicWrapper implements IItemHandlerModifiableCompat {

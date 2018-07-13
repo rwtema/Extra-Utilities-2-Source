@@ -1,9 +1,10 @@
 package com.rwtema.extrautils2.grids;
 
 import com.rwtema.extrautils2.utils.datastructures.WeakSet;
-import java.lang.ref.ReferenceQueue;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.lang.ref.ReferenceQueue;
 
 public class GridHandler {
 	public final static ReferenceQueue<? super XUTileGrid> gridQueue = new ReferenceQueue<Object>();

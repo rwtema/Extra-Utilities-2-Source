@@ -188,7 +188,7 @@ public class Textures {
 
 			if (item.block.allowOverride() && !checkMissingModelLocation(modelRegistry, missingModel, location))
 				continue;
-			modelRegistry.putObject(location, item.block.createItemBlockPassThruModel( item));
+			modelRegistry.putObject(location, item.block.createItemBlockPassThruModel(item));
 		}
 
 
@@ -290,8 +290,7 @@ public class Textures {
 
 	@Nonnull
 	private DefaultStateMapper createStateMapper() {
-		return new DefaultStateMapper()
-		{
+		return new DefaultStateMapper() {
 			@Nonnull
 			@Override
 			public String getPropertyString(Map<IProperty<?>, Comparable<?>> values) {
@@ -300,7 +299,7 @@ public class Textures {
 				for (Map.Entry<IProperty<?>, Comparable<?>> entry : values.entrySet()) {
 					IProperty<?> iproperty = entry.getKey();
 
-					if(iproperty instanceof IMetaProperty) continue;
+					if (iproperty instanceof IMetaProperty) continue;
 
 					if (stringbuilder.length() != 0) {
 						stringbuilder.append(",");

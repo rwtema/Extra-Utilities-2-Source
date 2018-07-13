@@ -15,10 +15,6 @@ import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import gnu.trove.map.hash.TObjectFloatHashMap;
 import gnu.trove.map.hash.TObjectIntHashMap;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
-import javax.annotation.Nonnull;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +22,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 
 public class ContainerPowerReport extends DynamicContainer {
 	public ContainerPowerReport(final EntityPlayer player) {

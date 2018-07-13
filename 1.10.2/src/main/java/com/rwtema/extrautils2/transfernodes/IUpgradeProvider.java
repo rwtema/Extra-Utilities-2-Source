@@ -1,7 +1,8 @@
 package com.rwtema.extrautils2.transfernodes;
 
-import javax.annotation.Nullable;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nullable;
 
 public interface IUpgradeProvider {
 	@Nullable

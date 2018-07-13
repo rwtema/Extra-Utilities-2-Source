@@ -241,7 +241,7 @@ public class ChunkProviderDeepDark implements ChunkGeneratorCompat {
 					blockpos.add(this.random.nextInt(16) + 8, this.random.nextInt(256), this.random.nextInt(16) + 8));
 		}
 
-		if(seedOffset != 0){
+		if (seedOffset != 0) {
 			return;
 		}
 
@@ -266,8 +266,6 @@ public class ChunkProviderDeepDark implements ChunkGeneratorCompat {
 	}
 
 
-
-
 	@Override
 	public void recreateStructures(@Nonnull Chunk chunkIn, int x, int z) {
 		for (MapGenStructure mapgenstructure : this.structureGenerators) {
@@ -275,7 +273,6 @@ public class ChunkProviderDeepDark implements ChunkGeneratorCompat {
 			mapgenstructure.generate(this.world, x, z, null);
 		}
 	}
-
 
 
 	enum GenStates {

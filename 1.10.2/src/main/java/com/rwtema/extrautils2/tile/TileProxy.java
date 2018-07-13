@@ -9,8 +9,6 @@ import com.rwtema.extrautils2.network.XUPacketServerToClient;
 import com.rwtema.extrautils2.utils.ItemStackNonNull;
 import com.rwtema.extrautils2.utils.datastructures.ItemRef;
 import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagIntArray;
@@ -29,6 +27,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TileProxy extends XUTile {
 	public NBTSerializable.NBTObject<Vec3i, NBTTagIntArray> block_offset = registerNBT("block", new NBTSerializable.NBTObject<Vec3i, NBTTagIntArray>(BlockPos.ORIGIN) {

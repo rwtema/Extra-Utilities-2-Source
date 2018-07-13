@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.client.MaterialRenderInfo;
 import slimeknights.tconstruct.library.materials.IMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
@@ -69,7 +68,7 @@ public abstract class XUTinkerMaterial {
 		}
 	}
 
-	public abstract void addTraits() ;
+	public abstract void addTraits();
 
 	public void addTrait(ITrait trait) {
 		addTrait(trait, null);

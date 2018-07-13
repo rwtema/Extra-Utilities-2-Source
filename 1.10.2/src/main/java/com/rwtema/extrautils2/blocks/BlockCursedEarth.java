@@ -378,7 +378,7 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 
 	public static class EventHandler {
 		@SubscribeEvent
-		public void preventReinforcements(ZombieEvent.SummonAidEvent event){
+		public void preventReinforcements(ZombieEvent.SummonAidEvent event) {
 			EntityZombie summoner = event.getSummoner();
 			NBTTagCompound nbt = summoner.getEntityData();
 			if (nbt.hasKey("CursedEarth", Constants.NBT.TAG_INT)) {

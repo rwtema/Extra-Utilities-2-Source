@@ -6,7 +6,6 @@ import com.rwtema.extrautils2.network.XUPacketServerToClient;
 import com.rwtema.extrautils2.power.player.PlayerPowerManager;
 import com.rwtema.extrautils2.utils.XURandom;
 import com.rwtema.extrautils2.utils.datastructures.WeakLinkedSet;
-import com.rwtema.extrautils2.utils.helpers.CollectionHelper;
 import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.iterator.TIntObjectIterator;
@@ -21,7 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.ChunkEvent;
@@ -335,7 +333,7 @@ public class PowerManager {
 	}
 
 	@SubscribeEvent
-	public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event){
+	public void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
 		playersDirty = true;
 	}
 

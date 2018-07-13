@@ -1,6 +1,7 @@
 package com.rwtema.extrautils2.grids;
 
 import gnu.trove.set.hash.THashSet;
+
 import java.lang.ref.WeakReference;
 
 public final class TileGridRef<T extends XUTileGrid> extends WeakReference<T> {

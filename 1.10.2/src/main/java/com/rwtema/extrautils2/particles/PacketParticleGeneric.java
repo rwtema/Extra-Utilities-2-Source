@@ -58,7 +58,7 @@ public class PacketParticleGeneric extends XUPacketServerToClient {
 			@SideOnly(Side.CLIENT)
 			public void spawnParticle(Object[] params) {
 				Entity entity = Minecraft.getMinecraft().world.getEntityByID(getParam(Integer.class, params, 0));
-				if(entity != null){
+				if (entity != null) {
 
 				}
 			}

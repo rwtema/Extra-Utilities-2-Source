@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.gui.backend;
 
 
-import java.util.List;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -12,11 +11,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class WidgetSlot extends Slot implements IWidget {
 	boolean isISided;
+	int side;
 	private int x;
 	private int y;
-	int side;
 
 	public WidgetSlot(IInventory inv, int slot, int x, int y) {
 		super(inv, slot, x + 1, y + 1);

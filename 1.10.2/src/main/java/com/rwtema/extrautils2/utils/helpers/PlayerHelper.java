@@ -1,11 +1,9 @@
 package com.rwtema.extrautils2.utils.helpers;
 
-import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;

@@ -2,10 +2,6 @@ package com.rwtema.extrautils2.dimensions.dream_dimension;
 
 import com.rwtema.extrautils2.compatibility.ChunkGeneratorCompat;
 import com.rwtema.extrautils2.utils.helpers.BlockStates;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -18,6 +14,11 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.event.ForgeEventFactory;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class ChunkProviderDream implements ChunkGeneratorCompat {
 	static final int base = (1 << 25) - 1;

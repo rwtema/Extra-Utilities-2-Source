@@ -1,25 +1,21 @@
 package com.rwtema.extrautils2.asm;
 
 import com.rwtema.extrautils2.utils.Lang;
-import java.util.ArrayList;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.LdcInsnNode;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.*;
+
+import java.util.ArrayList;
 
 public class LangGetterTransformer implements IClassTransformer {
-	boolean initLoading = false;
-
 	static String LANG_CLASS;
 
 	static {
 		LANG_CLASS = "com.rwtema.extrautils2.utils.Lang";
 	}
 
+	boolean initLoading = false;
 	String LANG_TYPE = LANG_CLASS.replace('.', '/');
 
 	ArrayList<String> translating = null;

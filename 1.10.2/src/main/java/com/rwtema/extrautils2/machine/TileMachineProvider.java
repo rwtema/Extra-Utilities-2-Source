@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.LinkedHashSet;
 
-public class TileMachineProvider extends TileMachine  {
+public class TileMachineProvider extends TileMachine {
 
 	PublicEnergyWrapper.Extract extract = new PublicEnergyWrapper.Extract(storage);
 
@@ -54,7 +54,7 @@ public class TileMachineProvider extends TileMachine  {
 				int energyAtTime2 = (int) (((float) energyOutput * Math.min(totalTime, processTime + speed)) / (float) totalTime);
 				if (!processEnergy(energyAtTime2 - energyAtTime1)) {
 					setInactive();
-					if((world.getTotalWorldTime() % ROLLBACK_INTERVAL) == 0){
+					if ((world.getTotalWorldTime() % ROLLBACK_INTERVAL) == 0) {
 						processTime += 1;
 
 						if (processTime >= totalTime) {

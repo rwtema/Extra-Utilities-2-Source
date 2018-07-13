@@ -9,7 +9,6 @@ import org.apache.commons.lang3.tuple.Pair;
 public class WidgetTextMultiline extends WidgetText {
 
 
-
 	public WidgetTextMultiline(int x, int y, String msg) {
 		super(x, y, msg);
 	}
