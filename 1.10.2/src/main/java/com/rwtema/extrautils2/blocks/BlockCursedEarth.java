@@ -114,11 +114,10 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 			EntityLivingBase living = (EntityLivingBase) mob;
 			BlockCursedEarth.applyAttribute(living, SharedMonsterAttributes.ATTACK_DAMAGE, new AttributeModifier(uuid, "CursedEarth", 1.5, 1));
 			BlockCursedEarth.applyAttribute(living, SharedMonsterAttributes.MOVEMENT_SPEED, new AttributeModifier(uuid, "CursedEarth", 1.2, 1));
-			if (living instanceof EntityZombie) {
-				IAttributeInstance attributeInstanceByName = living.getAttributeMap().getAttributeInstanceByName("zombie.spawnReinforcements");
-				if (attributeInstanceByName != null) {
-					attributeInstanceByName.setBaseValue(0);
-				}
+
+			IAttributeInstance attributeInstanceByName = living.getAttributeMap().getAttributeInstanceByName("zombie.spawnReinforcements");
+			if (attributeInstanceByName != null) {
+				attributeInstanceByName.setBaseValue(0);
 			}
 		}
 		if (!mob.world.spawnEntity(mob)) {
