@@ -14,7 +14,6 @@ import com.rwtema.extrautils2.blocks.*;
 import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.compatibility.XUShapedRecipe;
 import com.rwtema.extrautils2.crafting.*;
-import com.rwtema.extrautils2.structure.PatternRecipe;
 import com.rwtema.extrautils2.dimensions.DimensionEntry;
 import com.rwtema.extrautils2.dimensions.WorldWall;
 import com.rwtema.extrautils2.dimensions.deep_dark.TeleporterDeepDark;
@@ -35,6 +34,7 @@ import com.rwtema.extrautils2.quarry.BlockQuarry;
 import com.rwtema.extrautils2.quarry.BlockQuarryProxy;
 import com.rwtema.extrautils2.quarry.TileQuarry;
 import com.rwtema.extrautils2.quarry.TileQuarryProxy;
+import com.rwtema.extrautils2.structure.PatternRecipe;
 import com.rwtema.extrautils2.tile.*;
 import com.rwtema.extrautils2.transfernodes.*;
 import com.rwtema.extrautils2.utils.LogHelper;
@@ -908,7 +908,7 @@ public class XU2Entries {
 					"obsidian",
 					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), antiFlying));
 
-			PotionType antiFlying2 = PotionsHelper.registerPotionType(new PotionEffect(value, 8 * 60 * 20));
+			PotionType antiFlying2 = PotionsHelper.registerDerivedPotionType(new PotionEffect(value, 8 * 60 * 20), antiFlying, ".long");
 			BrewingRecipeRegistry.addRecipe(
 					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), antiFlying),
 					"dustRedstone",
