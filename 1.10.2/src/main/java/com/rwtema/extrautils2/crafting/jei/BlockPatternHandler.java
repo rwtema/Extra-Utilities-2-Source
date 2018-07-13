@@ -19,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import com.rwtema.extrautils2.render.IVertexBuffer;
+import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -134,7 +135,8 @@ public class BlockPatternHandler {
 
 					TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
 					textureManager.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-					textureManager.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
+					ITextureObject texture = textureManager.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+					texture.setBlurMipmap(false, false);
 
 					GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 					GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
@@ -194,6 +196,7 @@ public class BlockPatternHandler {
 					}
 					GlStateManager.popMatrix();
 					states.restore();
+					texture.restoreLastBlurMipmap();
 				}
 
 				public void renderLayer(BlockRendererDispatcher blockrendererdispatcher, IVertexBuffer buffer, BlockRenderLayer renderLayer, List<BlockPos> toRender) {
