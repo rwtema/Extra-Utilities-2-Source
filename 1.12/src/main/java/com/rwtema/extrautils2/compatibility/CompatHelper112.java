@@ -1,6 +1,7 @@
 package com.rwtema.extrautils2.compatibility;
 
 import com.rwtema.extrautils2.ExtraUtils2;
+import com.rwtema.extrautils2.XU2Entries112;
 import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.machine.MechEnchantmentRecipe;
 import net.minecraft.client.util.ITooltipFlag;
@@ -69,5 +70,7 @@ public class CompatHelper112 {
 	}
 
 
-
+	public static void loadVersionSpecificEntries() {
+		XU2Entries112.init();
+	}
 }

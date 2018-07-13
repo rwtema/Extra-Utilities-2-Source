@@ -61,4 +61,7 @@ public class CompatHelper112 {
 	}
 
 
+	public static void loadVersionSpecificEntries() {
+
+	}
 }
