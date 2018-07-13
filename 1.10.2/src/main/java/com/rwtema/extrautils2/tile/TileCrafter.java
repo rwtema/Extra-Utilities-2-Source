@@ -4,6 +4,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
+import com.google.common.util.concurrent.ListenableFutureTask;
 import com.rwtema.extrautils2.backend.ModifyingBakedModel;
 import com.rwtema.extrautils2.compatibility.CompatClientHelper;
 import com.rwtema.extrautils2.compatibility.CraftingHelper112;
@@ -17,7 +18,9 @@ import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.render.IVertexBuffer;
 import com.rwtema.extrautils2.tile.tesr.ITESRHook;
 import com.rwtema.extrautils2.utils.CapGetter;
+import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.MCTimer;
+import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
@@ -27,8 +30,11 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -36,11 +42,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -69,15 +75,47 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 		}
 	});
 	private final ItemStackHandler recipeSlots = registerNBT("recipe", new XUTileItemStackHandler(9, this));
-	private final ItemStackHandler contents = registerNBT("contents", new XUTileItemStackHandler(27, this));
+	private final ItemStackHandler output = registerNBT("output", new XUTileItemStackHandler(9, this));
+	private final StackDump extraStacks = registerNBT("extrastacks", new StackDump());
+	private final ItemStackHandler contents = registerNBT("contents", new XUTileItemStackHandler(9, this) {
+		@Override
+		public void deserializeNBT(NBTTagCompound nbt) {
 
+			super.deserializeNBT(nbt);
+			if (getSlots() == 27) {
+				List<ItemStack> prevStacks = this.stacks;
+
+				ArrayList<ItemStack> dumpStacks = Lists.newArrayList();
+				for (int i = 9; i < 27; i++) {
+					ItemStack stack = prevStacks.get(i);
+					if (StackHelper.isNonNull(stack)) {
+						dumpStacks.add(stack);
+					}
+				}
+				if (!dumpStacks.isEmpty()) {
+					MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+					if (server != null) {
+						synchronized (server.futureTaskQueue) {
+							server.futureTaskQueue.add(ListenableFutureTask.create(() -> dumpStacks.forEach(extraStacks::addStack), Boolean.TRUE));
+						}
+					}
+				}
+
+				setSize(9);
+				for (int i = 0; i < 9; i++) {
+					stacks.set(i, prevStacks.get(i));
+				}
+			}
+		}
+	});
 	private final SingleStackHandler ghostOutput = new SingleStackHandler();
 
 	IRecipe curRecipe;
 	Predicate<ItemStack>[] recipeMatchers = null;
 	ItemStack[] genericStacks;
 	XUCrafter crafter = new XUCrafter();
-	IItemHandler publicOutputSlot = ConcatItemHandler.concatNonNull(contents);
+	IItemHandler publicOutputSlot = ConcatItemHandler.concatNonNull(new PublicWrapper.Insert(contents), new PublicWrapper.Extract(output));
+	private NBTSerializable.NBTEnum<ContainerMode> mode = registerNBT("mode", new NBTSerializable.NBTEnum<ContainerMode>(ContainerMode.CONTAINER_ITEMS_STAY_IN_INPUT));
 
 	public static String errLog(IRecipe recipe) {
 		if (recipe == null) return "[null recipe]";
@@ -93,6 +131,10 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 	@Override
 	protected void operate() {
 		if (world.isRemote) return;
+		if (extraStacks.hasStacks()) {
+			extraStacks.attemptDump(output);
+		}
+
 		if (curRecipe == NullRecipe.INSTANCE) return;
 
 		if (genericStacks == null) return;
@@ -116,12 +158,13 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 			return;
 		}
 
-		IItemHandler copy = InventoryHelper.copyHandler(contents);
+		IItemHandler copyContents = InventoryHelper.copyHandler(contents);
+		IItemHandler copyOutput = InventoryHelper.copyHandler(output);
 
 		for (int i = 0; i < 9; i++) {
 			if (matched.get(i)) continue;
 
-			ItemStack take = takeItem(i, recipeMatchers[i], copy, false, crafter);
+			ItemStack take = takeItem(i, recipeMatchers[i], copyContents, false, crafter);
 			if (StackHelper.isNonNull(take)) {
 				matched.set(i);
 			}
@@ -185,19 +228,19 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 			return;
 		}
 
-		ItemStack output = curRecipe.getCraftingResult(crafter);
+		ItemStack outputStack = curRecipe.getCraftingResult(crafter);
 
-		if (StackHelper.isNull(output)) {
+		if (StackHelper.isNull(outputStack)) {
 			return;
 		}
 
-		if (StackHelper.isNonNull(InventoryHelper.insert(copy, output, false))) {
+		if (StackHelper.isNonNull(InventoryHelper.insert(copyOutput, outputStack, false))) {
 			return;
 		}
 
 		for (ItemStack stack : curRecipe.getRemainingItems(crafter)) {
 			if (StackHelper.isNonNull(stack)) {
-				if (StackHelper.isNonNull(InventoryHelper.insert(copy, stack, false))) {
+				if (StackHelper.isNonNull(InventoryHelper.insert(mode.value == ContainerMode.CONTAINER_ITEMS_STAY_IN_INPUT ? copyContents : copyOutput, stack, false))) {
 					return;
 				}
 			}
@@ -209,12 +252,12 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 		}
 
 
-		output = curRecipe.getCraftingResult(crafter);
-		InventoryHelper.insert(contents, output, false);
+		outputStack = curRecipe.getCraftingResult(crafter);
+		InventoryHelper.insert(this.output, outputStack, false);
 
 		for (ItemStack stack : curRecipe.getRemainingItems(crafter)) {
 			if (StackHelper.isNonNull(stack))
-				InventoryHelper.insert(contents, stack, false);
+				InventoryHelper.insert(mode.value == ContainerMode.CONTAINER_ITEMS_STAY_IN_INPUT ? contents : output, stack, false);
 		}
 	}
 
@@ -268,7 +311,7 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 
 			List<Object> input = CraftingHelper112.getRecipeInputs(curRecipe);
 
-			if(input.isEmpty()){
+			if (input.isEmpty()) {
 				curRecipe = NullRecipe.INSTANCE;
 				if (StackHelper.isNonNull(ghostOutput.getStack()))
 					markForUpdate();
@@ -326,7 +369,11 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 					genericStacks[i] = (ItemStack) o;
 				}
 
-				recipeMatchers[i] = Matchers.createMatcher(o, true);
+				if(input.get(i) instanceof Predicate){
+					recipeMatchers[i] = ((Predicate<ItemStack>) input.get(i));
+				}else {
+					recipeMatchers[i] = Matchers.createMatcher(o, true);
+				}
 			}
 
 		}
@@ -375,7 +422,6 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 	public IItemHandler getItemHandler(EnumFacing facing) {
 		return publicOutputSlot;
 	}
-
 
 	@Override
 	public DynamicContainer getDynamicContainer(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -438,6 +484,11 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	}
 
+	public enum ContainerMode {
+		CONTAINER_ITEMS_TO_OUTPUT,
+		CONTAINER_ITEMS_STAY_IN_INPUT
+	}
+
 	public static class CrafterContainer extends DynamicContainerTile {
 		public WidgetSlotGhost[] ghostSlots = new WidgetSlotGhost[9];
 
@@ -449,6 +500,8 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 			addTitle("AutoCrafter");
 
 			crop();
+
+			height -= 8;
 
 			int u = height;
 
@@ -470,6 +523,20 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 				}
 			});
 
+			addWidget(new WidgetClickMCButtonChoices<ContainerMode>(l, u + 18) {
+				@Override
+				protected void onSelectedServer(ContainerMode marker) {
+					tileCrafter.mode.value = marker;
+				}
+
+				@Override
+				public ContainerMode getSelectedValue() {
+					return tileCrafter.mode.value;
+				}
+			}
+					.addChoice(ContainerMode.CONTAINER_ITEMS_TO_OUTPUT, new ItemStack(Items.BUCKET), Lang.translate("Move Ancillary Items To Output"))
+					.addChoice(ContainerMode.CONTAINER_ITEMS_STAY_IN_INPUT, new ItemStack(Blocks.CHEST), Lang.translate("Keep Ancillary Items In Input")));
+
 			for (int y = 0; y < 3; y++) {
 				for (int x = 0; x < 3; x++) {
 					int i = x + y * 3;
@@ -485,19 +552,29 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 
 
 			crop();
+			height -= 2;
+			addWidget(new WidgetTextTranslate(4, height, Lang.getKey("Input Inventory"), DynamicContainer.playerInvWidth));
+			crop();
+			height -= 4;
 
-			for (int y = 0; y < 3; y++) {
+			for (int y = 0; y < 1; y++) {
 				for (int x = 0; x < 9; x++) {
-					addWidget(new WidgetSlotItemHandler(tileCrafter.contents, x + y * 9, 4 + x * 18, height + 4 + y * 18));
+					addWidget(new WidgetSlotItemHandler(tileCrafter.contents, x + y * 9, 4 + x * 18, height + y * 18));
 				}
 			}
 
+			crop();
+			addWidget(new WidgetTextTranslate(4, height, Lang.getKey("Output Inventory"), DynamicContainer.playerInvWidth));
+			crop();
+			height -= 4;
+
+			for (int i = 0; i < 9; i++) {
+				addWidget(new WidgetSlotItemHandler(tileCrafter.output, i, 4 + i * 18, height));
+			}
+
 			cropAndAddPlayerSlots(player.inventory);
-
-
 			validate();
 		}
 	}
-
 
 }
