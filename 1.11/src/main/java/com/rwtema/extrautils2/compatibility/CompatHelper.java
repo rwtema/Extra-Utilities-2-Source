@@ -1,6 +1,7 @@
 package com.rwtema.extrautils2.compatibility;
 
 import com.rwtema.extrautils2.ExtraUtils2;
+import com.rwtema.extrautils2.itemhandler.IItemHandlerCompat;
 import com.rwtema.extrautils2.itemhandler.XUCrafter;
 import com.rwtema.extrautils2.machine.MechEnchantmentRecipe;
 import com.rwtema.extrautils2.utils.datastructures.ArrayAccess;
@@ -32,6 +33,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -135,5 +137,30 @@ public class CompatHelper {
 		NonNullList<E> list1 = NonNullList.create();
 		list1.addAll(list);
 		return list1;
+	}
+
+	public static IItemHandlerCompat wrapItemHandlerCompat(IItemHandler handler) {
+		if (handler instanceof IItemHandlerCompat) return (IItemHandlerCompat) handler;
+		return new IItemHandlerCompat() {
+			public int getSlotLimit(int slot) {
+				return handler.getSlotLimit(slot);
+			}
+
+			public int getSlots() {
+				return handler.getSlots();
+			}
+
+			public ItemStack getStackInSlot(int slot) {
+				return handler.getStackInSlot(slot);
+			}
+
+			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+				return handler.insertItem(slot, stack, simulate);
+			}
+
+			public ItemStack extractItem(int slot, int amount, boolean simulate) {
+				return handler.extractItem(slot, amount, simulate);
+			}
+		};
 	}
 }
