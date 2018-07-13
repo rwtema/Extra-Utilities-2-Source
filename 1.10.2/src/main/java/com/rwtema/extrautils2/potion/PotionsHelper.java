@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.potion;
 
 import com.rwtema.extrautils2.ExtraUtils2;
-import com.rwtema.extrautils2.compatibility.CompatHelper;
 import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.utils.Lang;
 import net.minecraft.init.Items;
@@ -72,6 +71,12 @@ public class PotionsHelper {
 		String name = potion.getName().substring("effect.".length());
 		addSimplePotionKeys(name, ((XUPotion) potion).xuName);
 		return registerPotionType(potionEffect, name);
+	}
+
+	public static PotionType registerDerivedPotionType(PotionEffect potionEffect, PotionType base, String suffix){
+		String resourcePathIn = base.getRegistryName().getResourcePath() + suffix;
+		addSimplePotionKeys(resourcePathIn, ((XUPotion) potionEffect.getPotion()).xuName);
+		return PotionsHelper.registerPotionType(potionEffect, resourcePathIn);
 	}
 
 	public static void registerPotion(XUPotion potion, String tooltip) {

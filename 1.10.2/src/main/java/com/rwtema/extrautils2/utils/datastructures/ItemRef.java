@@ -273,7 +273,7 @@ public abstract class ItemRef implements IMatcher, IItemStackMaker, IMatcherMake
 
 		@Override
 		public ItemRef toCraftingVersion() {
-			if (!item.getHasSubtypes()) return createSimpleItem(item);
+			if (!item.getHasSubtypes() || meta == OreDictionary.WILDCARD_VALUE ) return createSimpleItem(item);
 			return this;
 		}
 

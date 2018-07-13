@@ -60,6 +60,12 @@ public class MutableModel implements ICompatPerspectiveAwareModel {
 		for (ArrayList<BakedQuad> sidedQuad : sidedQuads) {
 			sidedQuad.clear();
 		}
+		for (Pair<? extends IBakedModel, Matrix4f> pair : transformMap.values()) {
+			IBakedModel model = pair.getKey();
+			if (model instanceof MutableModel && model != this) {
+				((MutableModel) model).clear();
+			}
+		}
 	}
 
 	@Nonnull

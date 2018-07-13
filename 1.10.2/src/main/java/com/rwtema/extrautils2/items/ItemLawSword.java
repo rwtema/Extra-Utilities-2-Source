@@ -8,7 +8,6 @@ import com.rwtema.extrautils2.backend.model.*;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.network.XUPacketServerToClient;
-import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.MCTimer;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
 import com.rwtema.extrautils2.utils.helpers.PlayerHelper;

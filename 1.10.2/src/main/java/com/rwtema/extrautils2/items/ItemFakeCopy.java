@@ -15,6 +15,7 @@ import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.datastructures.ThreadLocalBoolean;
+import com.rwtema.extrautils2.utils.helpers.QuadHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -120,7 +121,7 @@ public class ItemFakeCopy extends XUItem {
 					ArrayList<BakedQuad> list = Lists.newArrayListWithExpectedSize(original.size());
 					TextureAtlasSprite sprite = Textures.getSprite("cardboard");
 					for (BakedQuad quad : original) {
-						list.addAll(PassthruModelItem.trySplitQuad(quad, sprite));
+						list.addAll(QuadHelper.trySplitQuad(quad, sprite));
 					}
 					return list;
 				}

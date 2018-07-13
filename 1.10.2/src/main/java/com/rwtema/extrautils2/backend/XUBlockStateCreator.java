@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.backend;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -13,12 +12,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MapPopulator;
-import net.minecraftforge.common.property.IUnlistedProperty;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;
@@ -81,10 +78,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 		LinkedHashSet<IBlockState> significantStates = new LinkedHashSet<>();
 
 		for (IBlockState validState : myStates) {
-			for (IProperty hiddenProperty : hiddenProperties) {
-				Comparable comparable = this.defaultValues.get(hiddenProperty);
-				validState = validState.withProperty(hiddenProperty, comparable);
-			}
+			validState = collapseStateToMetaState(worldProperties, dropProperties, hiddenProperties, defaultState, validState);
 			significantStates.add(validState);
 		}
 
@@ -94,10 +88,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 			state2meta.put(meta2state[i], i);
 
 		for (IBlockState validState : validStates) {
-			IBlockState significantState = validState;
-			for (IProperty hiddenProperty : hiddenProperties) {
-				significantState = significantState.withProperty(hiddenProperty, this.defaultValues.get(hiddenProperty));
-			}
+			IBlockState significantState = collapseStateToMetaState(worldProperties, dropProperties, hiddenProperties, defaultState, validState);
 			state2meta.putIfAbsent(validState, state2meta.get(significantState));
 		}
 
@@ -109,14 +100,10 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 
 		LinkedHashSet<IBlockState> dropMetas = new LinkedHashSet<>();
 		for (IBlockState validState : validStates) {
-			IBlockState metaState = validState;
+			IBlockState metaState = collapseStateToMetaState(worldProperties, dropProperties, hiddenProperties, defaultState, validState);
 			for (IProperty property : worldProperties) {
-				metaState = metaState.withProperty(property, this.defaultValues.get(property));
+				metaState = metaState.withProperty(property, collapseToProperDropState(metaState, property));
 			}
-			for (IProperty hiddenProperty : hiddenProperties) {
-				metaState = metaState.withProperty(hiddenProperty, this.defaultValues.get(hiddenProperty));
-			}
-
 			dropMetas.add(metaState);
 		}
 
@@ -129,7 +116,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 			if (!state2dropMeta.containsKey(validState)) {
 				IBlockState metaState = validState;
 				for (IProperty property : worldProperties) {
-					metaState = metaState.withProperty(property, this.defaultValues.get(property));
+					metaState = metaState.withProperty(property, collapseToProperDropState(metaState, property));
 				}
 				for (IProperty hiddenProperty : hiddenProperties) {
 					metaState = metaState.withProperty(hiddenProperty, this.defaultValues.get(hiddenProperty));
@@ -169,6 +156,28 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 			xuBlockState.metadata = state2meta.get(xuBlockState);
 			xuBlockState.dropMeta = state2dropMeta.get(xuBlockState);
 		}
+	}
+
+	private IBlockState collapseStateToMetaState(@Nonnull IProperty<? extends Comparable>[] worldProperties, @Nonnull IProperty<? extends Comparable>[] dropProperties, @Nonnull IMetaProperty<? extends Comparable>[] hiddenProperties, IBlockState defaultState, IBlockState validState) {
+		IBlockState significantState = validState;
+		for (IProperty hiddenProperty : hiddenProperties) {
+			significantState = significantState.withProperty(hiddenProperty, this.defaultValues.get(hiddenProperty));
+		}
+		for (IProperty<? extends Comparable> iProperty : worldProperties) {
+			significantState = collapseToProperMetaState(iProperty, significantState, defaultState);
+		}
+		for (IProperty<? extends Comparable> iProperty : dropProperties) {
+			significantState = collapseToProperMetaState(iProperty, significantState, defaultState);
+		}
+		return significantState;
+	}
+
+	protected IBlockState collapseToProperMetaState(IProperty<? extends Comparable> iProperty, IBlockState validState, IBlockState defaultState) {
+		return validState;
+	}
+
+	protected Comparable collapseToProperDropState(IBlockState metaState, IProperty property) {
+		return this.defaultValues.get(property);
 	}
 
 
