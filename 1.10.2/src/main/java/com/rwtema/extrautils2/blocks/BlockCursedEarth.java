@@ -47,8 +47,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.ZombieEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -375,6 +377,14 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 	}
 
 	public static class EventHandler {
+		@SubscribeEvent
+		public void preventReinforcements(ZombieEvent.SummonAidEvent event){
+			EntityZombie summoner = event.getSummoner();
+			NBTTagCompound nbt = summoner.getEntityData();
+			if (nbt.hasKey("CursedEarth", Constants.NBT.TAG_INT)) {
+				event.setResult(Event.Result.DENY);
+			}
+		}
 
 		@SubscribeEvent
 		public void cureCurse(PlayerInteractEvent.EntityInteract event) {
