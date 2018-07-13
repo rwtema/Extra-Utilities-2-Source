@@ -4,18 +4,28 @@ import com.rwtema.extrautils2.backend.XUBlockStaticRotation;
 import com.rwtema.extrautils2.backend.model.Box;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.machine.TileItemWrapper;
+import com.rwtema.extrautils2.utils.Lang;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockItemWrapper extends XUBlockStaticRotation {
 	public BlockItemWrapper() {
 		super(Material.ROCK);
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+		super.addInformation(stack, playerIn, tooltip, advanced);
+		Lang.translate("Allows items/fluids/energy to be inserted or extracted from a selected item");
 	}
 
 	@Override
