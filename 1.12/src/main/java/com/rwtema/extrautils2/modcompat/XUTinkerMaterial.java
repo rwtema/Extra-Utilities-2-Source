@@ -72,6 +72,7 @@ public abstract class XUTinkerMaterial {
 
 			fluid = new Fluid(name, still, still);
 			fluid.setTemperature(1000);
+			Lang.translate(fluid.getUnlocalizedName(), name);
 
 		} else {
 			fluid = null;
