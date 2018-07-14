@@ -9,9 +9,11 @@ import com.rwtema.extrautils2.blocks.LuxColors;
 import com.rwtema.extrautils2.power.energy.XUEnergyStorage;
 import com.rwtema.extrautils2.transfernodes.FacingHelper;
 import com.rwtema.extrautils2.utils.MCTimer;
+import com.rwtema.extrautils2.utils.client.GLStateAttributes;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -33,6 +35,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -50,21 +53,24 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.vecmath.Matrix4f;
 import java.util.*;
+import java.util.function.Supplier;
 
 public class ItemLuxSaber extends ItemSword implements IXUItem {
 
 	public static final int ENERGY_PER_HIT = 200;
 	public static final int NUM_HITS = 200;
 	public static final float OFFSET = 0.05F;
-	public static final ToolMaterial material = EnumHelper.addToolMaterial(
+	@Nonnull
+	public static final ToolMaterial material = Validate.notNull(EnumHelper.addToolMaterial(
 			"LuxSaber",
 			6,
 			2048,
 			5,
-			7,
-			5);
+			16,
+			5));
 	public static final UUID UUID = java.util.UUID.fromString("8126703D-7BDC-4E0A-98C6-C8FD511FE3A8");
 	final WeakHashMap<ItemStack, Float> stackMap = new WeakHashMap<>();
+	final ThreadLocal<Boolean> bladeOnly = ThreadLocal.withInitial(() -> false);
 	@SideOnly(Side.CLIENT)
 	ItemCameraTransforms.TransformType[] transformTypes;
 	@SideOnly(Side.CLIENT)
@@ -79,7 +85,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
 			for (int i = 0; i < LuxColors.values().length; i++) {
 				ItemStack stack = new ItemStack(this, 1, i);
@@ -124,6 +130,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IBakedModel createModel(int metadata) {
 		EnumMap<ItemCameraTransforms.TransformType, Matrix4f> enumMap = new EnumMap<>(Transforms.blockTransforms);
 		for (ItemCameraTransforms.TransformType type : ItemCameraTransforms.TransformType.values()) {
@@ -133,7 +140,35 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 			}
 		}
 
-		return new PassthruModelItem(this, enumMap);
+		return new PassthruModelItem(this, new Supplier<PassthruModelItem.ModelLayer>() {
+			@Override
+			public PassthruModelItem.ModelLayer get() {
+				return new PassthruModelItem.ModelLayer(enumMap) {
+					@Override
+					public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
+
+						if (bladeOnly.get()) {
+							if (metadata == LuxColors.BLACK.ordinal()) {
+								GlStateManager.disableTexture2D();
+								GlStateManager.tryBlendFuncSeparate(
+										GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR,
+										GlStateManager.DestFactor.ZERO,
+										GlStateManager.SourceFactor.ONE,
+										GlStateManager.DestFactor.ZERO);
+							} else {
+								GlStateManager.disableLighting();
+								GlStateManager.tryBlendFuncSeparate(
+										GlStateManager.SourceFactor.ONE,
+										GlStateManager.DestFactor.ONE,
+										GlStateManager.SourceFactor.ONE,
+										GlStateManager.DestFactor.ZERO);
+							}
+						}
+						return super.handlePerspective(cameraTransformType);
+					}
+				};
+			}
+		});
 	}
 
 	@Override
@@ -219,28 +254,31 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 		float[] saberHiltC = {24F / 2F, 0F / 2F, 28 / 2F, 3 / 2F};
 		float[] saberHiltC2 = {24F / 2F, 1F / 2F, 28 / 2F, 3 / 2F};
 
+		boolean renderBladeOnly = bladeOnly.get();
+		if (!renderBladeOnly) {
+			model.clear();
+			BoxModel standard = new BoxModel();
 
-		BoxModel standard = new BoxModel();
+			standard.addBox(0.5F - 2 / 16F, 0 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 8 / 16F, 0.5F + 2 / 16F)
+					.setTextureBounds(new float[][]{
+							saberHiltBottom, saberHiltTop,
+							saberHiltA, saberHiltA, saberHiltA, saberHiltA
+					});
+			standard.addBox(0.5F - 1.5F / 16F, 8 / 16F, 0.5F - 1.5F / 16F, 0.5F + 1.5F / 16F, 12 / 16F, 0.5F + 1.5F / 16F)
+					.setTextureBounds(new float[][]{
+							saberHiltBottom, saberHiltTop,
+							saberHiltB, saberHiltB, saberHiltB, saberHiltB
+					}).setInvisible(3);
+			standard.addBox(0.5F - 2 / 16F, 12 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 15 / 16F, 0.5F + 2 / 16F)
+					.setTextureBounds(new float[][]{
+							saberHiltBottom, saberHiltTop,
+							saberHiltC, saberHiltC, saberHiltC, saberHiltC
+					});
 
-		standard.addBox(0.5F - 2 / 16F, 0 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 8 / 16F, 0.5F + 2 / 16F)
-				.setTextureBounds(new float[][]{
-						saberHiltBottom, saberHiltTop,
-						saberHiltA, saberHiltA, saberHiltA, saberHiltA
-				});
-		standard.addBox(0.5F - 1.5F / 16F, 8 / 16F, 0.5F - 1.5F / 16F, 0.5F + 1.5F / 16F, 12 / 16F, 0.5F + 1.5F / 16F)
-				.setTextureBounds(new float[][]{
-						saberHiltBottom, saberHiltTop,
-						saberHiltB, saberHiltB, saberHiltB, saberHiltB
-				}).setInvisible(3);
-		standard.addBox(0.5F - 2 / 16F, 12 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 15 / 16F, 0.5F + 2 / 16F)
-				.setTextureBounds(new float[][]{
-						saberHiltBottom, saberHiltTop,
-						saberHiltC, saberHiltC, saberHiltC, saberHiltC
-				});
+			standard.setTexture("luxsaber");
 
-		standard.setTexture("luxsaber");
-
-		model.addBoxModel(standard);
+			model.addBoxModel(standard);
+		}
 
 		float v = MathHelper.clamp(stackMap.getOrDefault(stack, 0F), 0, 1);
 		if (v > 0) {
@@ -253,36 +291,40 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 
 			BoxModel litSaber = new BoxModel();
 
-			litSaber.addBox(0.5F - 2 / 16F, 0 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 8 / 16F, 0.5F + 2 / 16F)
-					.setTextureBounds(new float[][]{
-							saberHiltBottom, saberHiltTop,
-							saberHiltA, saberHiltA, saberHiltA, saberHiltA
-					});
-			litSaber.addBox(0.5F - 1.5F / 16F, 8 / 16F, 0.5F - 1.5F / 16F, 0.5F + 1.5F / 16F, 12 / 16F, 0.5F + 1.5F / 16F)
-					.setTextureBounds(new float[][]{
-							saberHiltBottom, saberHiltTop,
-							saberHiltB, saberHiltB, saberHiltB, saberHiltB
-					}).setInvisible(3);
 
-			litSaber.addBox(0.5F - 2 / 16F, 12 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 14 / 16F, 0.5F + 2 / 16F)
-					.setTextureBounds(new float[][]{
-							saberHiltBottom, saberHiltTop,
-							saberHiltC2, saberHiltC2, saberHiltC2, saberHiltC2
-					}).setInvisible(2);
-			litSaber.addBox(0.5F - 2 / 16F, 14 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 15 / 16F, 0.5F + 2 / 16F)
-					.setTextureBounds(new float[][]{
-							saberGlowTop, saberGlowTop,
-							saberGlowSide, saberGlowSide, saberGlowSide, saberGlowSide
-					}).setInvisible(2);
+			if (!renderBladeOnly) {
+				litSaber.addBox(0.5F - 2 / 16F, 0 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 8 / 16F, 0.5F + 2 / 16F)
+						.setTextureBounds(new float[][]{
+								saberHiltBottom, saberHiltTop,
+								saberHiltA, saberHiltA, saberHiltA, saberHiltA
+						});
+				litSaber.addBox(0.5F - 1.5F / 16F, 8 / 16F, 0.5F - 1.5F / 16F, 0.5F + 1.5F / 16F, 12 / 16F, 0.5F + 1.5F / 16F)
+						.setTextureBounds(new float[][]{
+								saberHiltBottom, saberHiltTop,
+								saberHiltB, saberHiltB, saberHiltB, saberHiltB
+						}).setInvisible(3);
+
+				litSaber.addBox(0.5F - 2 / 16F, 12 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 14 / 16F, 0.5F + 2 / 16F)
+						.setTextureBounds(new float[][]{
+								saberHiltBottom, saberHiltTop,
+								saberHiltC2, saberHiltC2, saberHiltC2, saberHiltC2
+						}).setInvisible(2);
+				litSaber.addBox(0.5F - 2 / 16F, 14 / 16F, 0.5F - 2 / 16F, 0.5F + 2 / 16F, 15 / 16F, 0.5F + 2 / 16F)
+						.setTextureBounds(new float[][]{
+								saberGlowTop, saberGlowTop,
+								saberGlowSide, saberGlowSide, saberGlowSide, saberGlowSide
+						}).setInvisible(2);
+			}
 			float v2;
 			v2 = Math.min(v * 1.2F, 1) * 0.5F;
 			float v1 = 3.0F;
-			litSaber.addBox(0.5F - v2 * 1.5F / 16F, 15 / 16F, 0.5F - v2 * 1.5F / 16F,
-					0.5F + v2 * 1.5F / 16F, 15 / 16F + v * v1, 0.5F + v2 * 1.5F / 16F)
-					.setTextureBounds(new float[][]{
-							saberTop, saberTop,
-							saberSide, saberSide, saberSide, saberSide
-					}).setInvisible(1);
+//			if (!renderBladeOnly || stack.getMetadata() != LuxColors.BLACK.ordinal())
+				litSaber.addBox(0.5F - v2 * 1.5F / 16F, 15 / 16F, 0.5F - v2 * 1.5F / 16F,
+						0.5F + v2 * 1.5F / 16F, 15 / 16F + v * v1, 0.5F + v2 * 1.5F / 16F)
+						.setTextureBounds(new float[][]{
+								saberTop, saberTop,
+								saberSide, saberSide, saberSide, saberSide
+						}).setInvisible(1);
 
 
 			v2 = Math.min(v * 1.2F, 1);
@@ -297,6 +339,20 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 			litSaber.setTexture("luxsaber");
 
 
+			ItemCameraTransforms.TransformType[] transformTypes = renderBladeOnly ?
+					new ItemCameraTransforms.TransformType[]{
+							ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND,
+							ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND,
+							ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND,
+							ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND
+					} :
+					new ItemCameraTransforms.TransformType[]{
+//							ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND,
+//							ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND,
+							ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND,
+							ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND
+					};
+			;
 			for (ItemCameraTransforms.TransformType type : transformTypes) {
 				Pair<? extends IBakedModel, Matrix4f> pair = model.transformMap.get(type);
 				IBakedModel key = pair.getKey();
@@ -321,9 +377,23 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 
 	@Override
 	public int getMaxMetadata() {
-		return 6;
+		return LuxColors.values().length - 1;
 	}
 
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void overrideRendering(RenderSpecificHandEvent event) {
+		ItemStack itemStack = event.getItemStack();
+		if (itemStack.getItem() == this) {
+			Minecraft.getMinecraft().getItemRenderer().renderItemInFirstPerson(Minecraft.getMinecraft().player, event.getPartialTicks(), event.getInterpolatedPitch(), event.getHand(), event.getSwingProgress(), event.getItemStack(), event.getEquipProgress());
+			GLStateAttributes states = GLStateAttributes.loadStates();
+			bladeOnly.set(true);
+			Minecraft.getMinecraft().getItemRenderer().renderItemInFirstPerson(Minecraft.getMinecraft().player, event.getPartialTicks(), event.getInterpolatedPitch(), event.getHand(), event.getSwingProgress(), event.getItemStack(), event.getEquipProgress());
+			bladeOnly.set(false);
+			states.restore();
+			event.setCanceled(true);
+		}
+	}
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
