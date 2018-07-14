@@ -38,7 +38,7 @@ def parseConfig(File config) {
 
 
 minecraft {
-    version = "1.10.2-12.18.3.2316"
+    version = "1.10.2-12.18.3.2511"
     runDir = "run"
     mappings = "snapshot_20170624"
     makeObfSourceJar = false
