@@ -1,5 +1,6 @@
 package json_gen;
 
+import com.google.gson.*;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.backend.XUBlockStatic;

@@ -79,7 +79,7 @@ public abstract class BlockCompat extends Block {
 	@Nullable
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
-		return super.getCollisionBoundingBox(blockState, worldIn, pos);
+		return getCollisionBoundingBoxBase(blockState, worldIn, pos);
 	}
 
 	@Override

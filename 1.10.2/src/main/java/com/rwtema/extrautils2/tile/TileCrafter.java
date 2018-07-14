@@ -6,10 +6,7 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ListenableFutureTask;
 import com.rwtema.extrautils2.backend.ModifyingBakedModel;
-import com.rwtema.extrautils2.compatibility.CompatClientHelper;
-import com.rwtema.extrautils2.compatibility.CraftingHelper112;
-import com.rwtema.extrautils2.compatibility.ICompatPerspectiveAwareModel;
-import com.rwtema.extrautils2.compatibility.StackHelper;
+import com.rwtema.extrautils2.compatibility.*;
 import com.rwtema.extrautils2.crafting.NullRecipe;
 import com.rwtema.extrautils2.gui.backend.*;
 import com.rwtema.extrautils2.itemhandler.*;
@@ -20,6 +17,7 @@ import com.rwtema.extrautils2.tile.tesr.ITESRHook;
 import com.rwtema.extrautils2.utils.CapGetter;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.MCTimer;
+import com.rwtema.extrautils2.utils.datastructures.ArrayAccess;
 import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -83,7 +81,7 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 
 			super.deserializeNBT(nbt);
 			if (getSlots() == 27) {
-				List<ItemStack> prevStacks = this.stacks;
+				ArrayAccess<ItemStack> prevStacks = CompatHelper.getArray10List11(this.stacks);
 
 				ArrayList<ItemStack> dumpStacks = Lists.newArrayList();
 				for (int i = 9; i < 27; i++) {
@@ -103,7 +101,7 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 
 				setSize(9);
 				for (int i = 0; i < 9; i++) {
-					stacks.set(i, prevStacks.get(i));
+					CompatHelper.getArray10List11(this.stacks).set(i, prevStacks.get(i));
 				}
 			}
 		}

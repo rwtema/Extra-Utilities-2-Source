@@ -24,6 +24,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.*;
 
 public class AchievementHelper {
 	private static HashMultimap<ItemRef, XUAchievement> dropMap = HashMultimap.create();

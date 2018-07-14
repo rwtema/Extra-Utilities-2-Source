@@ -218,7 +218,11 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 
 		@Override
 		public BoxModel createSaplingWorldModel() {
-			return BoxModel.crossBoxModel().setLayer(BlockRenderLayer.CUTOUT).setTexture(saplingTex);
+			BoxModel boxes = BoxModel.crossBoxModel().setLayer(BlockRenderLayer.CUTOUT).setTexture(saplingTex);
+			for (Box box : boxes) {
+				box.noCollide = true;
+			}
+			return boxes;
 		}
 
 		@Override
@@ -267,6 +271,11 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 			this.setTickRandomly(true);
 			this.setCreativeTab(CreativeTabs.DECORATIONS);
 			this.setSoundType(SoundType.PLANT);
+		}
+
+		@Override
+		public AxisAlignedBB getCollisionBoundingBoxBase(IBlockState state, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos) {
+			return NULL_AABB;
 		}
 
 		@Override
@@ -323,11 +332,6 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 				return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 			}
 			return this.canSustainBush(worldIn.getBlockState(pos.down()));
-		}
-
-		@Nullable
-		public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
-			return NULL_AABB;
 		}
 
 		/**

@@ -36,13 +36,6 @@ public class TileGrouper extends TileAdvInteractor implements IDynamicHandler, I
 				return 0;
 			return super.getStackLimit(slot, stack);
 		}
-
-		@Override
-		public int getSlotLimit(int slot) {
-			return 64;
-//			ItemStack stackInSlot = ghostSlots.getStackInSlot(slot);
-//			return StackHelper.getStacksize(stackInSlot);
-		}
 	});
 
 	private XUTileItemStackHandler outputs = registerNBT("outputs", new XUTileItemStackHandler(SLOT_COUNT, this));
@@ -52,7 +45,7 @@ public class TileGrouper extends TileAdvInteractor implements IDynamicHandler, I
 		@ItemStackNonNull
 		@Override
 		public ItemStack extractItem(int slot, int amount, boolean simulate) {
-			if (state.value != State.EXTRACTION) return ItemStack.EMPTY;
+			if (state.value != State.EXTRACTION) return StackHelper.empty();
 			ItemStack stack = handler.extractItem(slot, amount, simulate);
 			if (!simulate) {
 				for (int i = 0; i < outputs.getSlots(); i++) {
@@ -108,8 +101,8 @@ public class TileGrouper extends TileAdvInteractor implements IDynamicHandler, I
 				if (!StackHelper.isEmpty(outputs.getStackInSlot(i))) {
 					return;
 				}
-				state.value = State.INSERTION;
 			}
+			state.value = State.INSERTION;
 		}
 	}
 

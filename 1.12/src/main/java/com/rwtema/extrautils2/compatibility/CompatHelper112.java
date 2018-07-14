@@ -3,15 +3,21 @@ package com.rwtema.extrautils2.compatibility;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.XU2Entries112;
 import com.rwtema.extrautils2.backend.XUBlock;
+import com.rwtema.extrautils2.blocks.BlockCursedEarth;
 import com.rwtema.extrautils2.machine.MechEnchantmentRecipe;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGeneratorEnd;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -72,5 +78,24 @@ public class CompatHelper112 {
 
 	public static void loadVersionSpecificEntries() {
 		XU2Entries112.init();
+	}
+
+	public static EntityLiving getMobForSpawning(WorldServer world, Biome.SpawnListEntry entry) {
+		EntityLiving mob;
+		EntityEntry entityEntry = EntityRegistry.getEntry(entry.entityClass);
+
+		if (entityEntry == null || BlockCursedEarth.entity_blacklist.contains(Objects.toString(entityEntry.getRegistryName()))) {
+			mob = null;
+		}else {
+
+
+			try {
+				mob = (EntityLiving) entityEntry.newInstance(world);
+			} catch (Exception exception) {
+				exception.printStackTrace();
+				mob = null;
+			}
+		}
+		return mob;
 	}
 }

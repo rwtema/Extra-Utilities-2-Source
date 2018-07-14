@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.rwtema.extrautils2.backend.XUBlockConnectedTextureBase;
 import com.rwtema.extrautils2.backend.XUBlockStateCreator;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
+import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.network.XUPacketServerToClient;
@@ -54,8 +55,6 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -305,20 +304,9 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 		if (entry == null || !world.canCreatureTypeSpawnHere(type, entry, pos))
 			return;
 
-		EntityEntry entityEntry = EntityRegistry.getEntry(entry.entityClass);
+		EntityLiving mob = CompatHelper112.getMobForSpawning(world, entry);
 
-		if (entityEntry == null || entity_blacklist.contains(Objects.toString(entityEntry.getRegistryName()))) {
-			return;
-		}
-
-		EntityLiving mob;
-
-		try {
-			mob = (EntityLiving) entityEntry.newInstance(world);
-		} catch (Exception exception) {
-			exception.printStackTrace();
-			return;
-		}
+		if(mob == null) return;
 
 		trySpawnMob(world, pos, mob);
 	}
