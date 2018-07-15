@@ -3,6 +3,8 @@ package com.rwtema.extrautils2;
 import com.rwtema.extrautils2.backend.entries.ItemClassEntry;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.blocks.LuxColors;
+import com.rwtema.extrautils2.blocks.TreeIronWoods;
+import com.rwtema.extrautils2.blocks.XUTree;
 import com.rwtema.extrautils2.items.ItemIngredients;
 import com.rwtema.extrautils2.items.ItemLuxSaber;
 import net.minecraft.item.ItemStack;
@@ -31,6 +33,8 @@ public class XU2Entries112 {
 			}
 		}
 	};
+
+	public static final XUTree tree = new TreeIronWoods();
 
 	public static void init() {
 

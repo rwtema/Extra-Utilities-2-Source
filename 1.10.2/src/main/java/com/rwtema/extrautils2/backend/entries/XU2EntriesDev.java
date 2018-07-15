@@ -8,7 +8,6 @@ import com.rwtema.extrautils2.structure.PatternRecipe;
 import net.minecraft.init.Blocks;
 
 public class XU2EntriesDev {
-	public static final XUTree tree = new TreeIronWoods();
 
 	public static final BlockClassEntry<BlockItemWrapper> itemWrapper = new BlockClassEntry<BlockItemWrapper>(BlockItemWrapper.class, TileItemWrapper.class) {
 		@Override

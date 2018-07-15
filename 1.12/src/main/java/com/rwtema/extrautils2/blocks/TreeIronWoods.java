@@ -4,12 +4,17 @@ import com.google.common.collect.ImmutableMap;
 import com.rwtema.extrautils2.backend.PropertyEnumSimple;
 import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.backend.XUBlockStateCreator;
+import com.rwtema.extrautils2.utils.Lang;
+import com.rwtema.extrautils2.utils.XURandom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -18,6 +23,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class TreeIronWoods extends XUTree {
@@ -33,6 +39,25 @@ public class TreeIronWoods extends XUTree {
 		);
 	}
 
+	public IBlockState convert(IBlockState base, XUBlock other){
+		IBlockState result = other.getDefaultState();
+		for (Map.Entry<IProperty<?>, Comparable<?>> entry : base.getProperties().entrySet()) {
+			IProperty key = entry.getKey();
+			Comparable value = entry.getValue();
+			if (result.getProperties().containsKey(key)) {
+				//noinspection unchecked
+				result = result.withProperty(key, value);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public void addRecipes() {
+		super.addRecipes();
+		FurnaceRecipes.instance().addSmelting(value.planks.itemBlock, new ItemStack(Items.IRON_NUGGET, 1), 0);
+	}
+
 	@Override
 	protected XUBlockStateCreator.Builder getBuilder(XUBlock block) {
 		return new XUBlockStateCreator.Builder(block).addDropProperties(TREE_TYPE);
@@ -46,6 +71,19 @@ public class TreeIronWoods extends XUTree {
 	@Override
 	public XUTreeSapling getXuTreeSapling() {
 		return new XUTreeSapling() {
+			@Override
+			public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+				switch (xuBlockState.getStateFromItemStack(stack).getValue(TREE_TYPE)) {
+					case RAW:
+						tooltip.add(Lang.translate("A strange and weak sapling."));
+						break;
+					case BURNT:
+						tooltip.add(Lang.translate("It's dead."));
+						break;
+				}
+
+			}
+
 			@Override
 			public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 				if (state.getValue(TREE_TYPE) == TreeType.BURNT) return;
@@ -97,6 +135,7 @@ public class TreeIronWoods extends XUTree {
 		return new XUTreeLog() {
 			{
 				setTickRandomly(true);
+				setHardness(0.5F);
 			}
 
 			@Override
@@ -109,7 +148,13 @@ public class TreeIronWoods extends XUTree {
 			@Override
 			public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 				if (state.getValue(TREE_TYPE) == TreeType.RAW) {
-					return Blocks.LOG.getDrops(world, pos, Blocks.LOG.getDefaultState(), fortune);
+					Random r = world instanceof World ? ((World) world).rand : XURandom.rand;
+					int i = r.nextInt(10);
+					if (i == 0) {
+						return super.getDrops(world, pos, state, fortune);
+					} else {
+						return value.planks.getDrops(world, pos, value.planks.getDefaultState().withProperty(TREE_TYPE, TreeType.RAW), fortune);
+					}
 				} else {
 					return super.getDrops(world, pos, state, fortune);
 				}

@@ -10,6 +10,8 @@ import com.rwtema.extrautils2.backend.XUItemBlock;
 import com.rwtema.extrautils2.backend.entries.Entry;
 import com.rwtema.extrautils2.backend.model.*;
 import com.rwtema.extrautils2.compatibility.StackHelper;
+import com.rwtema.extrautils2.crafting.CraftingHelper;
+import com.rwtema.extrautils2.machine.FurnaceRecipe;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -18,8 +20,10 @@ import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -33,11 +37,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.storage.loot.functions.Smelt;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;
@@ -83,6 +89,7 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 		return blockState;
 	}
 
+	@SideOnly(Side.CLIENT)
 	private void addSaplingInvQuads(PassthruModelItem.ModelLayer layer, XUBlockState stateFromItemStack) {
 		getModel(stateFromItemStack).createSaplingInvModel(layer);
 	}
@@ -152,6 +159,40 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 		);
 
 
+	}
+
+	@Override
+	public void addRecipes() {
+
+		XUBlockState[] logDropStates = value.log.xuBlockState.dropmeta2state;
+		for (XUBlockState logDropState : logDropStates) {
+			StringBuilder suffix= new StringBuilder();
+			IBlockState state = value.leaves.getDefaultState();
+			for (Map.Entry<IProperty<?>, Comparable<?>> entry : logDropState.getProperties().entrySet()) {
+				if (state.getProperties().containsKey(entry.getKey())) {
+					IProperty key = entry.getKey();
+					Comparable value = entry.getValue();
+					//noinspection unchecked
+					state = state.withProperty(key, value);
+					//noinspection unchecked
+					suffix.append("_").append(key.getName(value).toLowerCase(Locale.ENGLISH));
+				}
+			}
+			CraftingHelper.addShapeless(name.toLowerCase(Locale.ENGLISH) + "_log_to_planks" + suffix,
+					new ItemStack(value.planks, 4, value.leaves.xuBlockState.getDropMetaFromState(state)),
+					new ItemStack(value.log, 1, value.log.xuBlockState.getDropMetaFromState(logDropState)));
+		}
+
+		FurnaceRecipes.instance().addSmelting(value.log.itemBlock, new ItemStack(Items.COAL, 1, 1), 0);
+//		CraftingHelper.addShapeless(name.toLowerCase(Locale.ENGLISH) + "_log_to_planks", new ItemStack(value.planks, 4),
+	}
+
+	@Override
+	public void registerOres() {
+		OreDictionary.registerOre("treeSapling", new ItemStack(value.sapling, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("treeLeaves", new ItemStack(value.leaves, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("logWood", new ItemStack(value.log, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("plankWood", new ItemStack(value.planks, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	public abstract int getHeight(World worldIn, Random rand, IBlockState state, BlockPos pos);
@@ -226,6 +267,7 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 		}
 
 		@Override
+		@SideOnly(Side.CLIENT)
 		public void createSaplingInvModel(MutableModel model) {
 			model.clear();
 			((PassthruModelItem.ModelLayer) model).addSprite(Textures.sprites.get(saplingTex));
@@ -271,6 +313,7 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 			this.setTickRandomly(true);
 			this.setCreativeTab(CreativeTabs.DECORATIONS);
 			this.setSoundType(SoundType.PLANT);
+			this.setHardness(0);
 		}
 
 		@Override
@@ -683,6 +726,18 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 		 */
 		public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 			return Item.getItemFromBlock(xuTree.value.sapling);
+		}
+
+		@Override
+		public int damageDropped(IBlockState state) {
+			IBlockState dropState = xuTree.value.sapling.getDefaultState();
+			for (Map.Entry<IProperty<?>, Comparable<?>> entry : state.getProperties().entrySet()) {
+				if (dropState.getProperties().containsKey(entry.getKey())) {
+					//noinspection unchecked,RedundantCast
+					dropState = dropState.withProperty((IProperty) entry.getKey(), (Comparable) entry.getValue());
+				}
+			}
+			return xuTree.value.sapling.xuBlockState.getDropMetaFromState(dropState);
 		}
 
 		protected int getSaplingDropChance(IBlockState state) {
