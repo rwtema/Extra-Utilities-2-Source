@@ -53,7 +53,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.vecmath.Matrix4f;
 import java.util.*;
-import java.util.function.Supplier;
 
 public class ItemLuxSaber extends ItemSword implements IXUItem {
 
@@ -140,59 +139,58 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 			}
 		}
 
-		return new PassthruModelItem(this, new Supplier<PassthruModelItem.ModelLayer>() {
+		return new PassthruModelItem(this, () -> new PassthruModelItem.ModelLayer(enumMap) {
 			@Override
-			public PassthruModelItem.ModelLayer get() {
-				return new PassthruModelItem.ModelLayer(enumMap) {
-					@Override
-					public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
-
-						if (bladeOnly.get()) {
-							if (metadata == LuxColors.BLACK.ordinal()) {
-								GlStateManager.disableTexture2D();
-								GlStateManager.tryBlendFuncSeparate(
-										GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR,
-										GlStateManager.DestFactor.ZERO,
-										GlStateManager.SourceFactor.ONE,
-										GlStateManager.DestFactor.ZERO);
-							} else {
-								GlStateManager.disableLighting();
-								GlStateManager.tryBlendFuncSeparate(
-										GlStateManager.SourceFactor.ONE,
-										GlStateManager.DestFactor.ONE,
-										GlStateManager.SourceFactor.ONE,
-										GlStateManager.DestFactor.ZERO);
-							}
-						}
-						return super.handlePerspective(cameraTransformType);
+			public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
+				if (bladeOnly.get()) {
+					if (metadata == LuxColors.BLACK.ordinal()) {
+						GlStateManager.disableTexture2D();
+						GlStateManager.tryBlendFuncSeparate(
+								GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR,
+								GlStateManager.DestFactor.ZERO,
+								GlStateManager.SourceFactor.ONE,
+								GlStateManager.DestFactor.ZERO);
+					} else {
+						GlStateManager.disableLighting();
+						GlStateManager.tryBlendFuncSeparate(
+								GlStateManager.SourceFactor.ONE,
+								GlStateManager.DestFactor.ONE,
+								GlStateManager.SourceFactor.ONE,
+								GlStateManager.DestFactor.ZERO);
 					}
-				};
+				}
+				return super.handlePerspective(cameraTransformType);
 			}
 		});
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void postTextureRegister() {
 		blank = Textures.getSprite("blank");
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public TextureAtlasSprite getBaseTexture() {
 
 		return blank;
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean renderAsTool() {
 		return true;
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clearCaches() {
 		blank = null;
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean allowOverride() {
 		return false;
 	}
@@ -213,6 +211,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		IEnergyStorage storage = Validate.notNull(stack.getCapability(CapabilityEnergy.ENERGY, null));
 		tooltip.add(String.format("%s RF /%s RF",
@@ -319,12 +318,12 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 			v2 = Math.min(v * 1.2F, 1) * 0.5F;
 			float v1 = 3.0F;
 //			if (!renderBladeOnly || stack.getMetadata() != LuxColors.BLACK.ordinal())
-				litSaber.addBox(0.5F - v2 * 1.5F / 16F, 15 / 16F, 0.5F - v2 * 1.5F / 16F,
-						0.5F + v2 * 1.5F / 16F, 15 / 16F + v * v1, 0.5F + v2 * 1.5F / 16F)
-						.setTextureBounds(new float[][]{
-								saberTop, saberTop,
-								saberSide, saberSide, saberSide, saberSide
-						}).setInvisible(1);
+			litSaber.addBox(0.5F - v2 * 1.5F / 16F, 15 / 16F, 0.5F - v2 * 1.5F / 16F,
+					0.5F + v2 * 1.5F / 16F, 15 / 16F + v * v1, 0.5F + v2 * 1.5F / 16F)
+					.setTextureBounds(new float[][]{
+							saberTop, saberTop,
+							saberSide, saberSide, saberSide, saberSide
+					}).setInvisible(1);
 
 
 			v2 = Math.min(v * 1.2F, 1);
@@ -376,6 +375,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getMaxMetadata() {
 		return LuxColors.values().length - 1;
 	}

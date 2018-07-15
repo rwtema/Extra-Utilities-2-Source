@@ -28,7 +28,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 	public static final PropertyDirection ROTATION_ALL = PropertyDirection.create("facing", Arrays.asList(EnumFacing.values()));
 	public static final PropertyDirection ROTATION_HORIZONTAL_INC_DOWN = PropertyDirection.create("facing", Arrays.asList(EnumFacing.DOWN, EnumFacing.WEST, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.SOUTH));
 	public static final Map<EnumFacing, PropertyBool> FACING_BOOLEANS = createDirectionBooleanMap(null, (name, side) -> PropertyBool.create(name));
-	public static final Comparator<IProperty> property_sorter = (a, b) -> a.getName().compareTo(b.getName());
+	public static final Comparator<IProperty> property_sorter = Comparator.comparing(IProperty::getName);
 	public final HashMap<IProperty, Comparable> defaultValues;
 	public final XUBlockState defaultState;
 	public final XUBlockState[] dropmeta2state;

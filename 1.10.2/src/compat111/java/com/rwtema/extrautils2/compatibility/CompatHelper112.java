@@ -3,8 +3,6 @@ package com.rwtema.extrautils2.compatibility;
 import com.google.common.base.Optional;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUBlock;
-import com.rwtema.extrautils2.blocks.BlockCursedEarth;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,14 +12,12 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkProviderEnd;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class CompatHelper112 {
@@ -75,9 +71,9 @@ public class CompatHelper112 {
 		EntityLiving mob;
 
 
-		if (entry == null || entry.entityClass == null || BlockCursedEarth.entity_blacklist.contains(EntityList.func_188430_a(entry.entityClass))) {
+		if (entry == null || entry.entityClass == null) {
 			mob = null;
-		}else {
+		} else {
 
 
 			try {
