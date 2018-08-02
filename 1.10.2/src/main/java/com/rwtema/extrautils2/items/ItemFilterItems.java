@@ -126,7 +126,7 @@ public class ItemFilterItems extends XUItemFlatMetadata implements IItemFilter, 
 			Item item = ghostStack.getItem();
 			if (item instanceof IItemFilter) {
 				IItemFilter filter = (IItemFilter) item;
-				if (filter.matches(ghostStack, target)) {
+				if (filter.matches(ghostStack, target) == !inverted) {
 					return !inverted;
 				}
 			}
