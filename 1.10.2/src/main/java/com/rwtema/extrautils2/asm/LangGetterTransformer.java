@@ -63,7 +63,7 @@ public class LangGetterTransformer implements IClassTransformer {
 						if (
 								("translateArgs".equals(node1.name) && "(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;".equals(node1.desc)) ||
 										("chat".equals(node1.name) && "(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/util/text/TextComponentTranslation;".equals(node1.desc))
-								) {
+						) {
 
 							for (int j = (i - 1); j >= 2; j--) {
 								if (nodes[j].getType() == AbstractInsnNode.LINE) {

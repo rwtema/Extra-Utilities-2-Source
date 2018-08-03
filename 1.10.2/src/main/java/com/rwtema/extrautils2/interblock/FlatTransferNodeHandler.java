@@ -524,7 +524,7 @@ public class FlatTransferNodeHandler extends ChunkDataModuleManager<Multimap<Blo
 		public void process(World world, TileEntity input, TileEntity output, EnumFacing direction, SingleStackHandlerFilter.EitherFilter filter) {
 			if (!capGetter.hasInterface(input, direction)
 					|| !capGetter.hasInterface(output, direction.getOpposite())
-					) {
+			) {
 				return;
 			}
 			T inputCap = capGetter.getInterface(input, direction);

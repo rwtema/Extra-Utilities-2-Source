@@ -37,9 +37,7 @@ public class BookHandler {
 				).create();
 
 				Book b;
-				try
-
-				{
+				try {
 					Language currentLanguage = Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage();
 					IResource resource = null;
 					try {
@@ -63,9 +61,7 @@ public class BookHandler {
 
 				book = b;
 
-				if (ExtraUtils2.deobf_folder && book != null)
-
-				{
+				if (ExtraUtils2.deobf_folder && book != null) {
 					HashSet<Entry> entries = Sets.newHashSet(EntryHandler.entries);
 					for (Book.Page page : book.pages) {
 						entries.remove(page.entry);

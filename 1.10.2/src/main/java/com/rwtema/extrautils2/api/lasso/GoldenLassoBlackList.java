@@ -2,14 +2,15 @@ package com.rwtema.extrautils2.api.lasso;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
-import java.util.HashMap;
-import java.util.List;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.HashMap;
+import java.util.List;
 
 @SuppressWarnings({"Convert2Lambda", "unused"})
 public class GoldenLassoBlackList {

@@ -1,11 +1,12 @@
 package com.rwtema.extrautils2.api.machine;
 
-import java.util.List;
-import java.util.function.Function;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.function.Function;
 
 public interface RecipeBuilder {
 	static RecipeBuilder newbuilder(Machine machine) {
@@ -60,7 +61,6 @@ public interface RecipeBuilder {
 
 	@Nonnull
 	Machine getMachine();
-
 
 
 	class Builder {

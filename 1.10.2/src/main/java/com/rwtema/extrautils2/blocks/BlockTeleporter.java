@@ -189,7 +189,7 @@ public class BlockTeleporter extends XUBlockStatic {
 							(worldObj = key.world) == null ||
 							!key.getEntityBoundingBox().grow(0.2, 0.2, 0.2).intersects(new AxisAlignedBB(value.pos))
 
-							) {
+					) {
 						iterator.remove();
 						continue;
 					}

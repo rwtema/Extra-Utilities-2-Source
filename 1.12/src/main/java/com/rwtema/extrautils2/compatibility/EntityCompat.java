@@ -16,7 +16,7 @@ public class EntityCompat {
 		return EntityList.getKey(entity);
 	}
 
-	public static String getKey(Class<? extends Entity> clazz){
+	public static String getKey(Class<? extends Entity> clazz) {
 		return EntityList.getKey(clazz).toString();
 	}
 }

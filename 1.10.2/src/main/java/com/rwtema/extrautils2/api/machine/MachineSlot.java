@@ -2,8 +2,8 @@ package com.rwtema.extrautils2.api.machine;
 
 public abstract class MachineSlot<T> {
 	public final String name;
-	public final int color ;
-	public final boolean optional ;
+	public final int color;
+	public final boolean optional;
 	public final int stackCapacity;
 
 

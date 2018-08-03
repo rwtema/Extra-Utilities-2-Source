@@ -42,6 +42,7 @@ public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCre
 	public final static int POWER = 32;
 	public static TObjectIntHashMap<String> serverFlyingPlayers = new TObjectIntHashMap<>(5, 0.5F, -1);
 	public static TObjectIntHashMap<String> clientFlyingPlayers = new TObjectIntHashMap<>(5, 0.5F, -1);
+
 	public ItemAngelRing() {
 		super(textures);
 		setMaxStackSize(1);

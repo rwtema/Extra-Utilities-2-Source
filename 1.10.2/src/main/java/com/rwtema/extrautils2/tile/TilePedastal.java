@@ -10,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.WorldServer;
 
-import javax.annotation.Nullable;
-
 public class TilePedastal extends XUTile implements ITickable {
 	public NBTSerializable.NBTUUID target = registerNBT("target", new NBTSerializable.NBTUUID());
 

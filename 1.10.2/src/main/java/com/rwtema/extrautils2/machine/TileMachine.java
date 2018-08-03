@@ -805,6 +805,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 	public static class ContainerMachine extends DynamicContainerTile {
 		protected final EntityPlayer player;
 		public TileMachine machine;
+
 		public ContainerMachine(final TileMachine machine, EntityPlayer player) {
 			super(machine);
 			this.player = player;

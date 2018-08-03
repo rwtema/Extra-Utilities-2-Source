@@ -40,7 +40,7 @@ public class ItemBuildersWand extends ItemSelectionWand {
 			if (StackHelper.isNonNull(stack)) {
 				if (stack.getItem() == pickBlock1.getItem() && stack.getItemDamage() == pickBlock1.getItemDamage() ||
 						(grassBlock && stack.getItem() == Item.getItemFromBlock(Blocks.DIRT))
-						) {
+				) {
 					if (player.capabilities.isCreativeMode) {
 						numBlocks = maxBlocks;
 						break;

@@ -64,7 +64,7 @@ public interface IMachineRecipe {
 
 	default Map<MachineSlotItem, ItemStack> getContainerItems(Map<MachineSlotItem, ItemStack> inputItems,
 															  Map<MachineSlotFluid, FluidStack> inputFluids) {
-		Map<MachineSlotItem, ItemStack>  map = new HashMap<>();
+		Map<MachineSlotItem, ItemStack> map = new HashMap<>();
 		for (Map.Entry<MachineSlotItem, ItemStack> entry : inputItems.entrySet()) {
 			map.put(entry.getKey(), ForgeHooks.getContainerItem(entry.getValue()));
 		}
@@ -79,13 +79,13 @@ public interface IMachineRecipe {
 
 	default Map<MachineSlotItem, ItemStack> getItemOutputsJEI(
 			Map<MachineSlotItem, ItemStack> inputItems,
-			Map<MachineSlotFluid, FluidStack> inputFluids){
+			Map<MachineSlotFluid, FluidStack> inputFluids) {
 		return getItemOutputs(inputItems, inputFluids);
 	}
 
 	default Map<MachineSlotFluid, FluidStack> getFluidOutputsJEI(
 			Map<MachineSlotItem, ItemStack> inputItems,
-			Map<MachineSlotFluid, FluidStack> inputFluids){
+			Map<MachineSlotFluid, FluidStack> inputFluids) {
 		return getFluidOutputs(inputItems, inputFluids);
 	}
 }

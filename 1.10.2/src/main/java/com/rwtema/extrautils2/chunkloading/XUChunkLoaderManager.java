@@ -132,7 +132,7 @@ public class XUChunkLoaderManager implements ForgeChunkManager.LoadingCallback, 
 				World world = chunkLoader.world();
 				if (world == null || DimensionManager.getWorld(world.provider.getDimension()) != world
 						|| !worldsLoaded.containsKey(world)
-						) {
+				) {
 					dirty = true;
 					continue;
 				}

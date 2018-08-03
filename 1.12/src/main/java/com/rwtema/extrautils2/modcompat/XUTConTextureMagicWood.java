@@ -5,11 +5,21 @@ import com.rwtema.extrautils2.utils.helpers.ColorHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-import java.awt.image.BufferedImage;
 import java.util.Map;
 
 public class XUTConTextureMagicWood extends XUTConTextureBase {
 
+
+	static int[][] offsets = {
+			{0, 1},
+			{1, 1},
+			{1, 0},
+			{1, -1},
+			{0, -1},
+			{-1, -1},
+			{-1, 0},
+			{-1, 1}
+	};
 
 	protected XUTConTextureMagicWood(ResourceLocation baseTexture, String spriteName) {
 		super(baseTexture, spriteName);
@@ -75,7 +85,7 @@ public class XUTConTextureMagicWood extends XUTConTextureBase {
 
 		for (int x = 0; x < w; x++) {
 			for (int y = 0; y < h; y++) {
-				int c = datum[coord(x,y)];
+				int c = datum[coord(x, y)];
 				pixels[x][y] = ColorHelper.brightness(c);
 				boolean nottrans = c != 0 && ColorHelper.getA(c) > 64;
 				if (nottrans) {
@@ -86,8 +96,8 @@ public class XUTConTextureMagicWood extends XUTConTextureBase {
 			}
 		}
 
-    if(div == 0)
-      div = 1;
+		if (div == 0)
+			div = 1;
 
 		mean = ((mean / div) * 2) / 4;
 
@@ -120,7 +130,7 @@ public class XUTConTextureMagicWood extends XUTConTextureBase {
 		boolean[][] interior4 = contract(interior3, n);
 
 		boolean[][] interiorCorners = multI(mult(expand(getCorners(interior2), n), interior2), interior3);
-		boolean[][] interiorCornersShift = orwise(orwise(shift(interiorCorners, -1, 0), shift(interiorCorners, 0, -1)),shift(interiorCorners, -1, -1));
+		boolean[][] interiorCornersShift = orwise(orwise(shift(interiorCorners, -1, 0), shift(interiorCorners, 0, -1)), shift(interiorCorners, -1, -1));
 
 
 		int trans = 0;
@@ -169,11 +179,10 @@ public class XUTConTextureMagicWood extends XUTConTextureBase {
 					}
 				}
 
-				valueOverride.put(IntPair.of(x,y), outpixels[x][y]);
+				valueOverride.put(IntPair.of(x, y), outpixels[x][y]);
 			}
 		}
 	}
-
 
 	private int clamp(int i) {
 		return MathHelper.clamp(i, 0, 255);
@@ -183,17 +192,6 @@ public class XUTConTextureMagicWood extends XUTConTextureBase {
 		return x >= 0 && y >= 0 && x < img.length && y < img[x].length && img[x][y];
 
 	}
-
-	static int[][] offsets = {
-			{0, 1},
-			{1, 1},
-			{1, 0},
-			{1, -1},
-			{0, -1},
-			{-1, -1},
-			{-1, 0},
-			{-1, 1}
-	};
 
 	public boolean[][] shift(boolean[][] img, int dx, int dy) {
 		int w = img.length;

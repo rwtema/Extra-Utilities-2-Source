@@ -1,6 +1,5 @@
 package com.rwtema.extrautils2.api.tools;
 
-import java.util.concurrent.Callable;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.util.EnumFacing;
@@ -8,6 +7,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.concurrent.Callable;
 
 public interface IWrench {
 	@CapabilityInject(IWrench.class)

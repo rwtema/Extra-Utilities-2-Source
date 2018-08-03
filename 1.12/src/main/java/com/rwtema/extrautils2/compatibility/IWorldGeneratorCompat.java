@@ -9,7 +9,7 @@ import java.util.Random;
 
 public interface IWorldGeneratorCompat extends IWorldGenerator {
 	@Override
-	default void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider){
+	default void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 		gen(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
 	}
 

@@ -1,8 +1,9 @@
 package com.rwtema.extrautils2.api.fluids;
 
-import javax.annotation.Nonnull;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
 
 public interface IFluidFilter {
 	boolean isFluidFilter(@Nonnull ItemStack filterStack);

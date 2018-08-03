@@ -139,7 +139,7 @@ public class CraftingHelper112 {
 		} else if (curRecipe instanceof ShapelessOreRecipe) {
 			input.addAll(curRecipe.getIngredients());
 		}
-		if(input.size() > 9){
+		if (input.size() > 9) {
 
 		}
 		return input;

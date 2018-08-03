@@ -12,16 +12,16 @@ import java.util.function.Predicate;
 
 public abstract class IngredientCompat extends Ingredient implements Predicate<ItemStack>, com.google.common.base.Predicate<ItemStack> {
 
-	public Ingredient toCompat(){
-		return this;
-	}
-
 	protected IngredientCompat(int size) {
 		super(size);
 	}
 
 	protected IngredientCompat(ItemStack... p_i47503_1_) {
 		super(p_i47503_1_);
+	}
+
+	public Ingredient toCompat() {
+		return this;
 	}
 
 	public abstract Object getStandby();
@@ -31,7 +31,7 @@ public abstract class IngredientCompat extends Ingredient implements Predicate<I
 		return test(p_apply_1_);
 	}
 
-	public static abstract class Factory<T extends Ingredient>  implements IIngredientFactory {
+	public static abstract class Factory<T extends Ingredient> implements IIngredientFactory {
 		@Nonnull
 		@Override
 		public Ingredient parse(JsonContext context, JsonObject json) {

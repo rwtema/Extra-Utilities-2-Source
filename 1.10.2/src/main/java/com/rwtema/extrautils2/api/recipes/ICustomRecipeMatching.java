@@ -1,17 +1,10 @@
 package com.rwtema.extrautils2.api.recipes;
 
-import javax.annotation.Nonnull;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagByte;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagFloat;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagLong;
-import net.minecraft.nbt.NBTTagShort;
+import net.minecraft.nbt.*;
 import net.minecraftforge.common.util.Constants;
+
+import javax.annotation.Nonnull;
 
 public interface ICustomRecipeMatching {
 
@@ -26,16 +19,16 @@ public interface ICustomRecipeMatching {
 			long a;
 			switch (id) {
 				case Constants.NBT.TAG_BYTE:
-					a = ((NBTTagByte)target).getLong();
+					a = ((NBTTagByte) target).getLong();
 					break;
 				case Constants.NBT.TAG_SHORT:
-					a = ((NBTTagShort)target).getLong();
+					a = ((NBTTagShort) target).getLong();
 					break;
 				case Constants.NBT.TAG_INT:
-					a = ((NBTTagInt)target).getLong();
+					a = ((NBTTagInt) target).getLong();
 					break;
 				case Constants.NBT.TAG_LONG:
-					a = ((NBTTagLong)target).getLong();
+					a = ((NBTTagLong) target).getLong();
 					break;
 				default:
 					throw new IllegalStateException();
@@ -44,16 +37,16 @@ public interface ICustomRecipeMatching {
 			long b;
 			switch (otherID) {
 				case Constants.NBT.TAG_BYTE:
-					b = ((NBTTagByte)inputTags).getLong();
+					b = ((NBTTagByte) inputTags).getLong();
 					break;
 				case Constants.NBT.TAG_SHORT:
-					b = ((NBTTagShort)inputTags).getLong();
+					b = ((NBTTagShort) inputTags).getLong();
 					break;
 				case Constants.NBT.TAG_INT:
-					b = ((NBTTagInt)inputTags).getLong();
+					b = ((NBTTagInt) inputTags).getLong();
 					break;
 				case Constants.NBT.TAG_LONG:
-					b = ((NBTTagLong)inputTags).getLong();
+					b = ((NBTTagLong) inputTags).getLong();
 					break;
 				default:
 					throw new IllegalStateException();
@@ -61,15 +54,15 @@ public interface ICustomRecipeMatching {
 			return a == b;
 		}
 
-		if(id ==5 || id == 6){
+		if (id == 5 || id == 6) {
 			if (otherID != 5 && otherID != 6) return false;
 			double a;
 			switch (id) {
 				case Constants.NBT.TAG_FLOAT:
-					a = ((NBTTagFloat)target).getDouble();
+					a = ((NBTTagFloat) target).getDouble();
 					break;
 				case Constants.NBT.TAG_DOUBLE:
-					a = ((NBTTagDouble)target).getDouble();
+					a = ((NBTTagDouble) target).getDouble();
 					break;
 				default:
 					throw new IllegalStateException();
@@ -78,10 +71,10 @@ public interface ICustomRecipeMatching {
 			double b;
 			switch (otherID) {
 				case Constants.NBT.TAG_FLOAT:
-					b = ((NBTTagFloat)inputTags).getDouble();
+					b = ((NBTTagFloat) inputTags).getDouble();
 					break;
 				case Constants.NBT.TAG_DOUBLE:
-					b = ((NBTTagDouble)inputTags).getDouble();
+					b = ((NBTTagDouble) inputTags).getDouble();
 					break;
 				default:
 					throw new IllegalStateException();

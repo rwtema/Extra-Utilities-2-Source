@@ -66,7 +66,7 @@ public class NBTSerializer<T> {
 			if (serializerEntry.expectedType == -1 ?
 					tag.hasKey(serializerEntry.key) :
 					tag.hasKey(serializerEntry.key, serializerEntry.expectedType)
-					) {
+			) {
 				NBTBase base = tag.getTag(serializerEntry.key);
 				serializerEntry.setter.accept(t, base);
 			}

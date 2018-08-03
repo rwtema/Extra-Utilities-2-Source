@@ -11,7 +11,7 @@ public abstract class XU2StackCreator {
 	public static XU2StackCreator INSTANCE;
 
 	// Golden Lasso
-	public abstract ItemStack getGoldenLassoCraftingStack(Class<?  extends EntityLivingBase> entity);
+	public abstract ItemStack getGoldenLassoCraftingStack(Class<? extends EntityLivingBase> entity);
 
 	public abstract ItemStack getGoldenLassoCraftingStackVillagerRequiresContract();
 

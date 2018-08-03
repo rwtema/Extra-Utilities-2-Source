@@ -4,14 +4,13 @@ import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class NBTSerializableRegisteredValue<V extends IForgeRegistryEntry<V>> implements INBTSerializable<NBTTagString> {
+	private static final ResourceLocation emptyNeverToBeFound = new ResourceLocation("EmptyNeverToBeFound");
 	final IForgeRegistry<V> registry;
 	public V value;
-	private static final ResourceLocation emptyNeverToBeFound = new ResourceLocation("EmptyNeverToBeFound");
 
 	public NBTSerializableRegisteredValue(IForgeRegistry<V> registry) {
 		this.registry = registry;

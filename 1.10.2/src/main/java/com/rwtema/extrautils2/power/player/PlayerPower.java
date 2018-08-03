@@ -20,6 +20,7 @@ public abstract class PlayerPower implements IPower, IWorldPowerMultiplier {
 	private final EntityPlayer player;
 	public int cooldown = 20;
 	public boolean invalid;
+
 	public PlayerPower(@Nonnull EntityPlayer player) {
 		this.player = player;
 		if (player instanceof EntityPlayerMP) {

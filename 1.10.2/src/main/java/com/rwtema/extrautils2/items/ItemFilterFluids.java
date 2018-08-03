@@ -220,7 +220,7 @@ public class ItemFilterFluids extends XUItemFlatMetadata implements IFluidFilter
 
 			if ((useNBT && !target.isFluidEqual(fluid)) ||
 					(!useNBT && target.getFluid() != fluid.getFluid())
-					) {
+			) {
 				continue;
 			}
 

@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
@@ -40,7 +39,7 @@ import java.util.Iterator;
 
 public class ItemCompoundBow extends ItemBow implements IXUItem {
 	public static final float DRAW_TIME = 20.0F;
-	private static WeakLinkedSet<EntityArrow>  blue_arrows = new WeakLinkedSet<>();
+	private static WeakLinkedSet<EntityArrow> blue_arrows = new WeakLinkedSet<>();
 
 	static {
 		MinecraftForge.EVENT_BUS.register(ItemCompoundBow.class);
@@ -85,9 +84,9 @@ public class ItemCompoundBow extends ItemBow implements IXUItem {
 					for (int k = 0; k < 4; ++k) {
 						double r = i / 5.0 * 0.1;
 						blue_arrow.world.spawnParticle(EnumParticleTypes.REDSTONE,
-								blue_arrow.posX + blue_arrow.motionX * (double) k / 4.0D + blue_arrow.world.rand.nextGaussian()*r ,
-								blue_arrow.posY + blue_arrow.motionY * (double) k / 4.0D+ blue_arrow.world.rand.nextGaussian()*r,
-								blue_arrow.posZ + blue_arrow.motionZ * (double) k / 4.0D+ blue_arrow.world.rand.nextGaussian()*r,
+								blue_arrow.posX + blue_arrow.motionX * (double) k / 4.0D + blue_arrow.world.rand.nextGaussian() * r,
+								blue_arrow.posY + blue_arrow.motionY * (double) k / 4.0D + blue_arrow.world.rand.nextGaussian() * r,
+								blue_arrow.posZ + blue_arrow.motionZ * (double) k / 4.0D + blue_arrow.world.rand.nextGaussian() * r,
 								92 / 255F, 151 / 255F, 224 / 255F);
 					}
 				}
@@ -175,7 +174,7 @@ public class ItemCompoundBow extends ItemBow implements IXUItem {
 			}
 
 			if (worldIn.spawnEntity(entityarrow)) {
-				if(f == 1.0F) {
+				if (f == 1.0F) {
 					PacketBlueArrow packetBlueArrow = new PacketBlueArrow(entityarrow.getEntityId());
 					((WorldServer) worldIn).getEntityTracker().sendToTracking(entityarrow, NetworkHandler.channels.get(Side.SERVER).generatePacketFrom(packetBlueArrow));
 				}

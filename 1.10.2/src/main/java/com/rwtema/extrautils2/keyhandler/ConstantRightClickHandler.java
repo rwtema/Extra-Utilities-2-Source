@@ -54,7 +54,7 @@ public class ConstantRightClickHandler {
 				|| !dest.equals(mc.objectMouseOver.getBlockPos())
 				|| mc.world.getBlockState(dest) != state
 				|| thePlayer.isRowingBoat()
-				) {
+		) {
 			dest = null;
 			state = null;
 			return;

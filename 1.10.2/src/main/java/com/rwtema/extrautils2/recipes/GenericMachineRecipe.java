@@ -139,7 +139,7 @@ public class GenericMachineRecipe implements IMachineRecipe {
 	@Override
 	public boolean matches(Map<MachineSlotItem, ItemStack> inputItems, Map<MachineSlotFluid, FluidStack> inputFluids) {
 		if (!checkForValidOutput()
-				) {
+		) {
 			return false;
 		}
 		for (MachineSlotItem slotItem : machine.itemInputs) {

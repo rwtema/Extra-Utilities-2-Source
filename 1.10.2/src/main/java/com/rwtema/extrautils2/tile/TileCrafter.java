@@ -280,7 +280,7 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 				try {
 					if (recipe.matches(crafter, world)
 							&& StackHelper.isNonNull(recipe.getCraftingResult(crafter))
-							) {
+					) {
 						curRecipe = recipe;
 						break;
 					}

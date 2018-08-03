@@ -306,7 +306,7 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 
 		EntityLiving mob = CompatHelper112.getMobForSpawning(world, entry);
 
-		if(mob == null) return;
+		if (mob == null) return;
 
 		trySpawnMob(world, pos, mob);
 	}

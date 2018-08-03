@@ -14,5 +14,5 @@ public interface IRecipeInfoWrapper<T extends IRecipe> extends IRecipe {
 	List<List<ItemStack>> getInputList();
 
 	@Nullable
-	 int[] getDimensions();
+	int[] getDimensions();
 }

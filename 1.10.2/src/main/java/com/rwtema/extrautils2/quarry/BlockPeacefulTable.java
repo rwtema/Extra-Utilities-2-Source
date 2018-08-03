@@ -7,8 +7,9 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 
 public class BlockPeacefulTable extends XUBlockStatic {
-	public static final PropertyEnumSimple<Type> TYPE = new PropertyEnumSimple<>(Type.class) ;
-	public static final PropertyBool ACTIVE = PropertyBool.create("activated") ;
+	public static final PropertyEnumSimple<Type> TYPE = new PropertyEnumSimple<>(Type.class);
+	public static final PropertyBool ACTIVE = PropertyBool.create("activated");
+
 	@Override
 	public BoxModel getModel(IBlockState state) {
 

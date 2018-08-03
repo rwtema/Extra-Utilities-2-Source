@@ -1,7 +1,6 @@
 package com.rwtema.extrautils2.compatibility;
 
 import com.rwtema.extrautils2.ExtraUtils2;
-import com.rwtema.extrautils2.entity.EntityBoomerang;
 import com.rwtema.extrautils2.itemhandler.IItemHandlerCompat;
 import com.rwtema.extrautils2.itemhandler.XUCrafter;
 import com.rwtema.extrautils2.machine.MechEnchantmentRecipe;
@@ -94,7 +93,7 @@ public class CompatHelper {
 
 	@Nonnull
 	public static ChunkGeneratorEnd getChunkProviderEnd(WorldServer world) {
-		return new ChunkGeneratorEnd(world, true, world.getSeed(), BlockPos.ORIGIN){
+		return new ChunkGeneratorEnd(world, true, world.getSeed(), BlockPos.ORIGIN) {
 			@Override
 			public Chunk generateChunk(int x, int z) {
 				Chunk chunk = super.generateChunk(x, z);
@@ -118,18 +117,11 @@ public class CompatHelper {
 		return ForgeEventFactory.canEntitySpawn(entityliving, worldServerIn, x, y, z, false);
 	}
 
-	public <E> NonNullList<E> toNonNullList(List<E> list) {
-		if (list instanceof NonNullList) return (NonNullList<E>) list;
-		NonNullList<E> list1 = NonNullList.create();
-		list1.addAll(list);
-		return list1;
-	}
-
 	public static boolean isBiomeOfType(Biome biome, BiomeDictionary.Type type) {
 		return BiomeDictionary.hasType(biome, type);
 	}
 
-	public static float getBrightness(Entity entity){
+	public static float getBrightness(Entity entity) {
 		return entity.getBrightness();
 	}
 
@@ -141,7 +133,6 @@ public class CompatHelper {
 		list1.removeIf(enchantmentEntry -> !finalEnchantment.isCompatibleWith(enchantmentEntry.enchantment));
 	}
 
-
 	public static boolean hasSky(World world) {
 		return world.provider.hasSkyLight();
 	}
@@ -150,7 +141,6 @@ public class CompatHelper {
 		EntityEntry value = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
 		return I18n.translateToLocal(value != null ? value.getName() : "entity.generic.name");
 	}
-
 
 	public static IItemHandlerCompat wrapItemHandlerCompat(IItemHandler handler) {
 		if (handler instanceof IItemHandlerCompat) return (IItemHandlerCompat) handler;
@@ -175,6 +165,13 @@ public class CompatHelper {
 				return handler.extractItem(slot, amount, simulate);
 			}
 		};
+	}
+
+	public <E> NonNullList<E> toNonNullList(List<E> list) {
+		if (list instanceof NonNullList) return (NonNullList<E>) list;
+		NonNullList<E> list1 = NonNullList.create();
+		list1.addAll(list);
+		return list1;
 	}
 
 

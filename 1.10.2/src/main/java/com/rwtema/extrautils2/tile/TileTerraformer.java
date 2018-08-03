@@ -172,14 +172,13 @@ public class TileTerraformer extends TilePower implements ITickable, IDynamicHan
 			Random rand = world.rand;
 
 
-
-			if(range == 0){
+			if (range == 0) {
 				Biome biome1 = world.getBiomeForCoordsBody(pos);
 
 				if (biome1 != target) {
 					targetPosition.setPos(pos.getX(), pos.getY(), pos.getZ());
 				}
-			}else {
+			} else {
 				int curBest = Integer.MAX_VALUE;
 				for (int i = 0; i < 100; i++) {
 					int x = rand.nextInt(range * 2 + 1) - range;

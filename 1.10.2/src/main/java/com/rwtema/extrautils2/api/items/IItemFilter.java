@@ -1,7 +1,8 @@
 package com.rwtema.extrautils2.api.items;
 
-import javax.annotation.Nonnull;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public interface IItemFilter {
 	boolean isItemFilter(@Nonnull ItemStack filterStack);

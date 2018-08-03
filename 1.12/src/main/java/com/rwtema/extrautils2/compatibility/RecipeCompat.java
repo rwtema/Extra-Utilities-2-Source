@@ -14,6 +14,10 @@ public interface RecipeCompat extends IRecipe {
 		return ForgeHooks.defaultRecipeGetRemainingItems(inv).toArray(new ItemStack[inv.getSizeInventory()]);
 	}
 
+	static int getRecipeSize(IRecipe compat) {
+		return 9;
+	}
+
 	@Nonnull
 	ItemStack[] getRemainingItemsBase(@Nonnull InventoryCrafting inv);
 
@@ -33,10 +37,6 @@ public interface RecipeCompat extends IRecipe {
 	}
 
 	default int getRecipeSize() {
-		return 9;
-	}
-
-	static int getRecipeSize(IRecipe compat){
 		return 9;
 	}
 

@@ -6,7 +6,6 @@ import com.rwtema.extrautils2.backend.entries.Entry;
 import com.rwtema.extrautils2.backend.entries.EntryHandler;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.utils.ItemStackNonNull;
-import com.rwtema.extrautils2.utils.Lang;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;

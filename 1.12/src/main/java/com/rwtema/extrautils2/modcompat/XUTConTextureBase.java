@@ -14,9 +14,6 @@ import slimeknights.tconstruct.library.client.texture.AbstractColoredTexture;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.IntBinaryOperator;
-import java.util.function.IntConsumer;
-import java.util.function.IntUnaryOperator;
 
 public abstract class XUTConTextureBase extends AbstractColoredTexture {
 	static final IntPair[] directNeighbours = new IntPair[]{
@@ -215,6 +212,13 @@ public abstract class XUTConTextureBase extends AbstractColoredTexture {
 			}
 		}
 		return c;
+	}
+
+	public static int multPixel(int col, int b) {
+		return (255 << 24) |
+				MathHelper.clamp((TexturePlasma.directColorModel.getRed(col) * b) / 255, 0, 255) << 16 |
+				MathHelper.clamp((TexturePlasma.directColorModel.getGreen(col) * b) / 255, 0, 255) << 8 |
+				MathHelper.clamp((TexturePlasma.directColorModel.getBlue(col) * b) / 255, 0, 255);
 	}
 
 	public void logImg(boolean[] img) {
@@ -428,7 +432,6 @@ public abstract class XUTConTextureBase extends AbstractColoredTexture {
 		return total / n;
 	}
 
-
 	@Override
 	protected int colorPixel(int pixel, int pxCoord) {
 		Integer valueOverride = getMipmapValue(valueOverrides, pxCoord, 0);
@@ -456,13 +459,6 @@ public abstract class XUTConTextureBase extends AbstractColoredTexture {
 		}
 
 		return pixel;
-	}
-
-	public static int multPixel(int col, int b) {
-		return (255 << 24) |
-				MathHelper.clamp((TexturePlasma.directColorModel.getRed(col) * b) / 255, 0, 255) << 16 |
-				MathHelper.clamp((TexturePlasma.directColorModel.getGreen(col) * b) / 255, 0, 255) << 8 |
-				MathHelper.clamp((TexturePlasma.directColorModel.getBlue(col) * b) / 255, 0, 255);
 	}
 
 }

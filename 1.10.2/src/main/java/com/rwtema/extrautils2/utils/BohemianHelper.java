@@ -32,7 +32,7 @@ public class BohemianHelper {
 				if (this.comeDifficulty == EnumDifficulty.EASY &&
 						this.goDifficulty == EnumDifficulty.EASY &&
 						high < 0.1 && low < 0.1
-						) {
+				) {
 					switch (Wind.direction) {
 						case DOWN:
 						case UP:

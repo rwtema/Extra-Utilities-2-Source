@@ -6,16 +6,16 @@ import slimeknights.tconstruct.library.client.MaterialRenderInfo;
 
 public class MRISupplier extends MaterialRenderInfo.AbstractMaterialRenderInfo {
 
-    private XUTinkerMaterial owner;
+	private XUTinkerMaterial owner;
 
-    public MRISupplier(String suffix, XUTinkerMaterial owner) {
-        this.owner = owner;
+	public MRISupplier(String suffix, XUTinkerMaterial owner) {
+		this.owner = owner;
 
-        setTextureSuffix(suffix);
-    }
+		setTextureSuffix(suffix);
+	}
 
-    @Override
-    public TextureAtlasSprite getTexture(ResourceLocation baseTexture, String location) {
-        return owner.createTexture(baseTexture, location);
-    }
+	@Override
+	public TextureAtlasSprite getTexture(ResourceLocation baseTexture, String location) {
+		return owner.createTexture(baseTexture, location);
+	}
 }

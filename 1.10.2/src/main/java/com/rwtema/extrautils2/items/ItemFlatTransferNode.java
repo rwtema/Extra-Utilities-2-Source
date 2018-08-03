@@ -125,7 +125,7 @@ public class ItemFlatTransferNode extends XUItemFlatMetadata implements ILeftCli
 					CapGetter.ItemHandler.hasInterface(te, side)) ||
 					(type == FlatTransferNodeHandler.FlatTransferNode.Type.FLUIDS &&
 							CapGetter.FluidHandler.hasInterface(te, side))
-					) {
+			) {
 				FlatTransferNodeHandler.FlatTransferNode newNode = new FlatTransferNodeHandler.FlatTransferNode(pos.toImmutable(), side, type, !ExtraUtils2.proxy.isAltSneaking(player));
 				Chunk chunk = world.getChunkFromBlockCoords(pos);
 

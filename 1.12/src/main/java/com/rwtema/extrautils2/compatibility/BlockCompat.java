@@ -94,16 +94,14 @@ public abstract class BlockCompat extends Block {
 
 	@Nonnull
 	@Override
-	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune){
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		NonNullList<ItemStack> stacks = NonNullList.create();
-		Random rand = world instanceof World ? ((World)world).rand : RANDOM;
+		Random rand = world instanceof World ? ((World) world).rand : RANDOM;
 
 		int count = quantityDropped(state, fortune, rand);
-		for (int i = 0; i < count; i++)
-		{
+		for (int i = 0; i < count; i++) {
 			Item item = this.getItemDropped(state, rand, fortune);
-			if (item != Items.AIR)
-			{
+			if (item != Items.AIR) {
 				stacks.add(new ItemStack(item, 1, this.damageDropped(state)));
 			}
 		}

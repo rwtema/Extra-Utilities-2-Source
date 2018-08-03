@@ -93,7 +93,28 @@ public class XU2Entries {
 	public static final IItemStackMaker redstoneCrystal = ItemIngredients.Type.REDSTONE_CRYSTAL;
 
 	public static final IItemStackMaker stoneburnt = BlockDecorativeSolid.DecorStates.stoneburnt;
+	public static final ItemClassEntry<ItemSnowglobe> snowGlobe = new ItemClassEntry<ItemSnowglobe>(ItemSnowglobe.class) {
+		@Override
+		public void addRecipes() {
+			OreDictionary.registerOre("doorWood", Items.OAK_DOOR);
+			OreDictionary.registerOre("doorWood", Items.ACACIA_DOOR);
+			OreDictionary.registerOre("doorWood", Items.JUNGLE_DOOR);
+			OreDictionary.registerOre("doorWood", Items.SPRUCE_DOOR);
+			OreDictionary.registerOre("doorWood", Items.DARK_OAK_DOOR);
+			OreDictionary.registerOre("doorWood", Items.BIRCH_DOOR);
+			OreDictionary.registerOre("doorIron", Items.IRON_DOOR);
 
+			addShapeless("snow_globe", newStack(),
+					"blockGlass", "treeSapling", Items.SNOWBALL,
+					"doorWood", "logWood", "grass",
+					Items.ENDER_PEARL, "netherStar");
+		}
+
+		@Override
+		public void registerOres() {
+			OreDictionary.registerOre("magic_snow_globe", newStack(1, 1));
+		}
+	};
 	public static ItemEntry<ItemWateringCan> wateringCan = new ItemClassEntry<ItemWateringCan>(ItemWateringCan.class) {
 		@Override
 		public void addRecipes() {
@@ -106,7 +127,6 @@ public class XU2Entries {
 			return new ItemDestructionWand(name.toLowerCase().substring(4), name, new float[]{191 / 255F, 75 / 255F, 244 / 255F}, 49);
 		}
 	};
-
 	public static ItemEntry<ItemUnstableIngots> unstableIngots = new ItemClassEntry<ItemUnstableIngots>(ItemUnstableIngots.class) {
 		@Override
 		public void loadAdditionalConfig(Configuration config) {
@@ -135,7 +155,6 @@ public class XU2Entries {
 			value.addRecipes();
 		}
 	};
-
 	public static ItemEntry<ItemBuildersWand> buildersWand = new ItemEntry<ItemBuildersWand>("ItemBuildersWand") {
 		@Override
 		public ItemBuildersWand initValue() {
@@ -233,21 +252,18 @@ public class XU2Entries {
 			addShaped("trash_can", value, "SSS", "CcC", "CCC", 'S', "stone", 'C', "cobblestone", 'c', Blocks.CHEST);
 		}
 	};
-
 	public static BlockEntry<BlockTrashCan.Fluid> trashCanFluid = new BlockClassEntry<BlockTrashCan.Fluid>("TrashCanFluid", BlockTrashCan.Fluid.class, TileTrashCanFluids.class) {
 		@Override
 		public void addRecipes() {
 			addShaped("trash_can_fluid", value, "SSS", "CcC", "CCC", 'S', "stone", 'C', "cobblestone", 'c', Items.BUCKET);
 		}
 	};
-
 	public static BlockEntry<BlockTrashCan.Energy> trashCanEnergy = new BlockClassEntry<BlockTrashCan.Energy>("TrashCanEnergy", BlockTrashCan.Energy.class, TileTrashCanEnergy.class) {
 		@Override
 		public void addRecipes() {
 			addShaped("trash_can_energy", value, "SSS", "CcC", "CCC", 'S', "stone", 'C', "cobblestone", 'c', "blockRedstone");
 		}
 	};
-
 	public static BlockEntry<BlockAngelBlock> angelBlock = new BlockEntry<BlockAngelBlock>("AngelBlock") {
 
 		@Override
@@ -487,7 +503,6 @@ public class XU2Entries {
 					XU2Entries.itemIngredients.isActive() ? ItemIngredients.Type.EVIL_DROP.newStack() : new ItemStack(Items.SKULL, 1, 1));
 		}
 	};
-
 	public static ItemEntry<ItemChickenRing> chickenRing = new ItemClassEntry<ItemChickenRing>(ItemChickenRing.class) {
 		@Override
 		public void addRecipes() {
@@ -511,7 +526,6 @@ public class XU2Entries {
 					'r', newStack(1, 0));
 		}
 	};
-
 	public static ItemEntry<ItemAngelRing> angelRing = new ItemClassEntry<ItemAngelRing>(ItemAngelRing.class) {
 		@Override
 		public void addRecipes() {
@@ -881,7 +895,6 @@ public class XU2Entries {
 			AchievementHelper.addAchievement("Remote Indexing", "Item Retrieval at distance", this, indexer);
 		}
 	};
-
 	public static PotionEntry<PotionDoom> potionDoom = new PotionEntry<PotionDoom>("potion_doom", "Kills in 60 seconds.") {
 		@Override
 		public void registerTypesAndRecipes() {
@@ -893,7 +906,6 @@ public class XU2Entries {
 			return new PotionDoom();
 		}
 	};
-
 	public static PotionEntry<PotionGravity> potionGravity = new PotionEntry<PotionGravity>("potion_gravity", "Pulls fliers down to the ground.") {
 		@Override
 		public PotionGravity initValue() {
@@ -1232,17 +1244,6 @@ public class XU2Entries {
 			return new TeleporterDeepDark(destWorld, dest, curDim);
 		}
 	};
-	public static BlockClassEntry<BlockPowerBattery> battery = new BlockClassEntry<BlockPowerBattery>(BlockPowerBattery.class, TilePowerBattery.class) {
-		@Override
-		public Set<Entry<?>> getDependencies() {
-			return ImmutableSet.of(transmitter);
-		}
-
-		@Override
-		public void addRecipes() {
-			addShaped("battery", newStack(), "SSS", "rRr", "SSS", 'S', stoneburnt, 'r', "blockRedstone", 'R', redstoneCrystal);
-		}
-	};
 	public static BlockClassEntry<BlockPowerTransmitter> transmitter = new BlockClassEntry<BlockPowerTransmitter>(BlockPowerTransmitter.class, TilePowerTransmitter.class) {
 		@Override
 		public Set<Entry<?>> getDependencies() {
@@ -1254,10 +1255,26 @@ public class XU2Entries {
 			addShaped("transmitter", newStack(4), "r", "S", 'S', stoneburnt, 'r', redstoneCrystal);
 		}
 	};
-	public static DimensionEntry specialdim = new DimensionEntry("ExtraUtils2_Quarry_Dim", -9999, WorldProviderSpecialDim.class, true) {
+	public static BlockClassEntry<BlockPowerBattery> battery = new BlockClassEntry<BlockPowerBattery>(BlockPowerBattery.class, TilePowerBattery.class) {
 		@Override
 		public Set<Entry<?>> getDependencies() {
-			return ImmutableSet.of(quarry_proxy, quarry);
+			return ImmutableSet.of(transmitter);
+		}
+
+		@Override
+		public void addRecipes() {
+			addShaped("battery", newStack(), "SSS", "rRr", "SSS", 'S', stoneburnt, 'r', "blockRedstone", 'R', redstoneCrystal);
+		}
+	};
+	public static BlockClassEntry<BlockQuarryProxy> quarry_proxy = new BlockClassEntry<BlockQuarryProxy>(BlockQuarryProxy.class, TileQuarryProxy.class) {
+		@Override
+		public Set<Entry<?>> getDependencies() {
+			return ImmutableSet.of(quarry, specialdim);
+		}
+
+		@Override
+		public void addRecipes() {
+			addShaped("quarry_proxy", newStack(), "eme", "ede", "rrr", 'e', Blocks.END_STONE, 'm', Blocks.END_ROD, 'd', Items.DIAMOND_PICKAXE, 'r', stoneburnt);
 		}
 	};
 	//	public static DimensionEntry dream_world = new DimensionEntry("dream_world", -22322, WorldProviderDreamWorld.class, false);
@@ -1284,7 +1301,7 @@ public class XU2Entries {
 					newStack(), quarry_proxy.newStack()
 			);
 
-			addShaped("quarry_base", newStack(), "mem", "ede", "mem", 'm', Blocks.END_STONE, 'd',snowGlobe.isActive() ? "magic_snow_globe" : "netherStar", 'e', stoneburnt);
+			addShaped("quarry_base", newStack(), "mem", "ede", "mem", 'm', Blocks.END_STONE, 'd', snowGlobe.isActive() ? "magic_snow_globe" : "netherStar", 'e', stoneburnt);
 		}
 
 		@Nonnull
@@ -1298,15 +1315,10 @@ public class XU2Entries {
 			TileQuarry.ENERGY_PER_OPERATION = config.get(ConfigHelper.ENERGY_CATEGORY, "Quantum Quarry: Base Energy Per Operation", 20000).getInt();
 		}
 	};
-	public static BlockClassEntry<BlockQuarryProxy> quarry_proxy = new BlockClassEntry<BlockQuarryProxy>(BlockQuarryProxy.class, TileQuarryProxy.class) {
+	public static DimensionEntry specialdim = new DimensionEntry("ExtraUtils2_Quarry_Dim", -9999, WorldProviderSpecialDim.class, true) {
 		@Override
 		public Set<Entry<?>> getDependencies() {
-			return ImmutableSet.of(quarry, specialdim);
-		}
-
-		@Override
-		public void addRecipes() {
-			addShaped("quarry_proxy", newStack(), "eme", "ede", "rrr", 'e', Blocks.END_STONE, 'm', Blocks.END_ROD, 'd', Items.DIAMOND_PICKAXE, 'r', stoneburnt);
+			return ImmutableSet.of(quarry_proxy, quarry);
 		}
 	};
 	public static BlockEntry<BlockSpike> spike_wood = new BlockEntry<BlockSpike>("spike_wood") {
@@ -1376,14 +1388,12 @@ public class XU2Entries {
 			addShaped("lantern", newStack(), "RSR", "SCS", "RrR", 'R', "dustRedstone", 'S', decorativeSolid.isActive() ? BlockDecorativeSolid.DecorStates.stoneslab : "stone", 'C', Items.COAL, 'r', Items.COMPARATOR);
 		}
 	};
-
 	public static BlockClassEntry<BlockLargishChest> largistChest = new BlockClassEntry<BlockLargishChest>(BlockLargishChest.class, TileLargishChest.class) {
 		@Override
 		public void addRecipes() {
 			addShaped("largist_chest", newStack(), "sss", "scs", "sss", 'c', Blocks.CHEST, 's', Items.STICK);
 		}
 	};
-
 	public static BlockClassEntry<BlockMiniChest> miniChest = new BlockClassEntry<BlockMiniChest>(BlockMiniChest.class, TileMinChest.class) {
 		@Override
 		public void addRecipes() {
@@ -1614,7 +1624,6 @@ public class XU2Entries {
 			MinecraftForge.EVENT_BUS.register(SquidSpawnRestrictions.class);
 		}
 	};
-
 	public static ItemClassEntry<ItemFlatTransferNode> flatTransferNode = new ItemClassEntry<ItemFlatTransferNode>(ItemFlatTransferNode.class) {
 		@Override
 		public void addRecipes() {
@@ -1622,21 +1631,18 @@ public class XU2Entries {
 			CraftingHelper.addRecipe(new AnvilRecipe(CraftingHelper.createLocation("transfer_flatnode_fluids"), newStack(8, 1), "a", " ", "n", 'a', Blocks.ANVIL, 'n', grocket.newStack(1, GrocketType.TRANSFER_NODE_FLUIDS.ordinal())));
 		}
 	};
-
 	public static BlockClassEntry<BlockAnalogCrafter> analogCrafter = new BlockClassEntry<BlockAnalogCrafter>(BlockAnalogCrafter.class, TileAnalogCrafter.class) {
 		@Override
 		public void addRecipes() {
 			addShapeless("crafter_analog", newStack(), Blocks.CRAFTING_TABLE, Blocks.CHEST, Blocks.LEVER);
 		}
 	};
-
 	public static BlockClassEntry<BlockDecorativeBedrock> decorativeBedrock = new BlockClassEntry<BlockDecorativeBedrock>(BlockDecorativeBedrock.class) {
 		@Override
 		public void addRecipes() {
 
 		}
 	};
-
 	public static Entry<WorldWall> wallWorldEntry = new Entry<WorldWall>("wall_world_type") {
 		@Override
 		protected WorldWall initValue() {
@@ -1648,8 +1654,7 @@ public class XU2Entries {
 			WorldWall.giveSpawnItems = config.get("Settings", "WallWorld_GiveSpawnItems", true).getBoolean();
 		}
 	};
-
-	public static ItemClassEntry<ItemCompoundBow> compoundBow = new ItemClassEntry<ItemCompoundBow>(ItemCompoundBow.class){
+	public static ItemClassEntry<ItemCompoundBow> compoundBow = new ItemClassEntry<ItemCompoundBow>(ItemCompoundBow.class) {
 		@Override
 		public void addRecipes() {
 			if (openium.isActive()) {
@@ -1657,7 +1662,6 @@ public class XU2Entries {
 			}
 		}
 	};
-
 	public static ItemClassEntry<ItemFireAxe> fireAxe = new ItemClassEntry<ItemFireAxe>(ItemFireAxe.class) {
 		@Override
 		public void addRecipes() {
@@ -1666,30 +1670,6 @@ public class XU2Entries {
 			}
 		}
 	};
-
-	public static final ItemClassEntry<ItemSnowglobe> snowGlobe = new ItemClassEntry<ItemSnowglobe>(ItemSnowglobe.class){
-		@Override
-		public void addRecipes() {
-			OreDictionary.registerOre("doorWood", Items.OAK_DOOR);
-			OreDictionary.registerOre("doorWood", Items.ACACIA_DOOR);
-			OreDictionary.registerOre("doorWood", Items.JUNGLE_DOOR);
-			OreDictionary.registerOre("doorWood", Items.SPRUCE_DOOR);
-			OreDictionary.registerOre("doorWood", Items.DARK_OAK_DOOR);
-			OreDictionary.registerOre("doorWood", Items.BIRCH_DOOR);
-			OreDictionary.registerOre("doorIron", Items.IRON_DOOR);
-
-			addShapeless("snow_globe", newStack(),
-					"blockGlass", "treeSapling",Items.SNOWBALL,
-					"doorWood", "logWood",  "grass",
-					Items.ENDER_PEARL, "netherStar");
-		}
-
-		@Override
-		public void registerOres() {
-			OreDictionary.registerOre("magic_snow_globe", newStack(1, 1));
-		}
-	} ;
-
 
 	public static void init() {
 

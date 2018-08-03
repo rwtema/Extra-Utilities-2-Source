@@ -66,6 +66,7 @@ public abstract class ItemSelectionWand extends XUItemFlat {
 	public final String name;
 	public final int range;
 	public final float[] col;
+
 	public ItemSelectionWand(String texture, String name, float[] col, int range) {
 		this.texture = texture;
 		this.name = name;

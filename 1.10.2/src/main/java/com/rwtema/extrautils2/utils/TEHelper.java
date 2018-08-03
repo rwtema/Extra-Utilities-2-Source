@@ -33,7 +33,7 @@ public class TEHelper {
 							key.getX() <= x_max &&
 							key.getY() <= y_max &&
 							key.getZ() <= z_max
-							) {
+					) {
 						TileEntity value = entry.getValue();
 						if (predicate.test(value)) {
 							builder.add((K) value);

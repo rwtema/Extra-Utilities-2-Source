@@ -39,7 +39,7 @@ public class TreeIronWoods extends XUTree {
 		);
 	}
 
-	public IBlockState convert(IBlockState base, XUBlock other){
+	public IBlockState convert(IBlockState base, XUBlock other) {
 		IBlockState result = other.getDefaultState();
 		for (Map.Entry<IProperty<?>, Comparable<?>> entry : base.getProperties().entrySet()) {
 			IProperty key = entry.getKey();

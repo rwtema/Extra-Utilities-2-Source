@@ -1,8 +1,9 @@
 package com.rwtema.extrautils2.api.machine;
 
 import com.google.common.collect.ImmutableList;
-import javax.annotation.Nonnull;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class XUMachineFurnace {
 	public final static MachineSlotItem INPUT = new MachineSlotItem("input");

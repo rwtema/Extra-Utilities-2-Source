@@ -11,7 +11,6 @@ import com.rwtema.extrautils2.backend.entries.Entry;
 import com.rwtema.extrautils2.backend.model.*;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.crafting.CraftingHelper;
-import com.rwtema.extrautils2.machine.FurnaceRecipe;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -37,7 +36,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.storage.loot.functions.Smelt;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.IShearable;
@@ -166,7 +164,7 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 
 		XUBlockState[] logDropStates = value.log.xuBlockState.dropmeta2state;
 		for (XUBlockState logDropState : logDropStates) {
-			StringBuilder suffix= new StringBuilder();
+			StringBuilder suffix = new StringBuilder();
 			IBlockState state = value.leaves.getDefaultState();
 			for (Map.Entry<IProperty<?>, Comparable<?>> entry : logDropState.getProperties().entrySet()) {
 				if (state.getProperties().containsKey(entry.getKey())) {

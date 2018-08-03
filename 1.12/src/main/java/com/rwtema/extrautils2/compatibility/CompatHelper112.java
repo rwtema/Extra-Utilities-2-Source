@@ -4,9 +4,7 @@ import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.XU2Entries112;
 import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.blocks.BlockCursedEarth;
-import com.rwtema.extrautils2.machine.MechEnchantmentRecipe;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,6 +25,8 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import java.util.*;
 
 public class CompatHelper112 {
+
+	static HashSet<ResourceLocation> registeredRecipes = new HashSet<>();
 
 	@SideOnly(Side.CLIENT)
 	public static List<String> getTooltip(ItemStack itemStack, EntityPlayer player, boolean advancedItemTooltips) {
@@ -57,11 +57,9 @@ public class CompatHelper112 {
 		return new VillagerRegistry.VillagerProfession(ExtraUtils2.MODID + ":" + name1, ExtraUtils2.MODID + ":textures/villagers/" + texture1 + ".png", "minecraft:textures/entity/zombie_villager/zombie_farmer.png");
 	}
 
-	static HashSet<ResourceLocation> registeredRecipes = new HashSet<>();
-
 	public static void addRecipe(IRecipe recipe) {
 		if (!registeredRecipes.add(recipe.getRegistryName())) {
-			throw  new IllegalArgumentException(recipe.getRegistryName() + " was added twice");
+			throw new IllegalArgumentException(recipe.getRegistryName() + " was added twice");
 		}
 		register(recipe);
 	}
@@ -86,7 +84,7 @@ public class CompatHelper112 {
 
 		if (entityEntry == null || BlockCursedEarth.entity_blacklist.contains(Objects.toString(entityEntry.getRegistryName()))) {
 			mob = null;
-		}else {
+		} else {
 
 
 			try {

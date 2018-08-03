@@ -16,8 +16,6 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.utils.HarvestLevels;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
-import slimeknights.tconstruct.tools.TinkerTraits;
-import slimeknights.tconstruct.tools.traits.TraitWritable;
 
 import java.util.List;
 import java.util.Map;

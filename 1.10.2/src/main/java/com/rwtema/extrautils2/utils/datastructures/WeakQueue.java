@@ -93,6 +93,7 @@ public class WeakQueue<T> extends AbstractQueue<T> {
 		Iterator<Node> iterator;
 		Node curNode;
 		T next;
+
 		public NodeIterator() {
 			this.iterator = new ArrayList<>(list).iterator();
 		}
