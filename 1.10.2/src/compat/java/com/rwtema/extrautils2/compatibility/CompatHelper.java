@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -30,6 +31,8 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.world.gen.ChunkProviderEnd;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.items.IItemHandler;
 
@@ -152,5 +155,16 @@ public class CompatHelper {
 				return handler.extractItem(slot, amount, simulate);
 			}
 		};
+	}
+
+	public static boolean BiomeHasType(Biome biome, BiomeDictionary.Type type) {
+		for (BiomeDictionary.Type type1 : BiomeDictionary.getTypesForBiome(biome)) {
+			if(type1.equals(type)) return true;
+		}
+		return false;
+	}
+
+	public static Event.Result canSpawnEvent(WorldServer worldServerIn, EntityLiving entityliving, float x, float y, float z) {
+		return ForgeEventFactory.canEntitySpawn(entityliving, worldServerIn, x, y, z);
 	}
 }
