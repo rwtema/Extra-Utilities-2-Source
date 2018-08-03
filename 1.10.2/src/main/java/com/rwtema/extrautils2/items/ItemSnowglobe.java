@@ -258,7 +258,6 @@ public class ItemSnowglobe extends XUItem {
 
 
 		if (needsUpdate) {
-
 			input.setTagCompound(tagCompound);
 			int numBiomes = 0;
 			for (String s : nbt_keys.values()) {
