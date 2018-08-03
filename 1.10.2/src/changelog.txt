@@ -1,1 +1,4 @@
-- Fix server crash
+- Add compound bow
+- Add magical snow globe
+- Terraformer can now have range 0 (which corresponds to changing only the block the terraformer is placed on)
+- Add missing localizations
