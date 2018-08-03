@@ -195,31 +195,37 @@ public class ItemCompoundBow extends ItemBow implements IXUItem {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean renderAsTool() {
 		return true;
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getMaxMetadata() {
 		return 0;
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerTextures() {
 		Textures.register(tex);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IBakedModel createModel(int metadata) {
 		return new PassthruModelItem(this);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public TextureAtlasSprite getBaseTexture() {
 		return Textures.getSprite(tex[0]);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entityIn) {
 		int val;
 		if (entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack) {
@@ -241,16 +247,19 @@ public class ItemCompoundBow extends ItemBow implements IXUItem {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void postTextureRegister() {
 
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clearCaches() {
 
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean allowOverride() {
 		return true;
 	}

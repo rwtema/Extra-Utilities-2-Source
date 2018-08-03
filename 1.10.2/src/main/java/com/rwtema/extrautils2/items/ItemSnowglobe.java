@@ -181,6 +181,7 @@ public class ItemSnowglobe extends XUItem {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addItemColors(ItemColors itemColors, BlockColors blockColors) {
 		itemColors.registerItemColorHandler((stack, tintIndex) -> tintIndex, this);
 	}
