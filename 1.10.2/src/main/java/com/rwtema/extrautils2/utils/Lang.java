@@ -57,13 +57,8 @@ public class Lang {
 					ResourceLocation resourceLocation = new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/en_US.lang");
 					try {
 						IResource resource = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation);
-						InputStream stream = null;
-						try {
-							stream = resource.getInputStream();
+						try (InputStream stream = resource.getInputStream()) {
 							readStream(stream, false);
-						} finally {
-							if (stream != null)
-								stream.close();
 						}
 					} catch (IOException e) {
 						throw Throwables.propagate(e);

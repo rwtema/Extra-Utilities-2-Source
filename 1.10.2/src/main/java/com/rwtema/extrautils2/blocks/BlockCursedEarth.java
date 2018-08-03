@@ -513,6 +513,7 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 		public Runnable doStuffClient() {
 			return new Runnable() {
 				@Override
+				@SideOnly(Side.CLIENT)
 				public void run() {
 					Entity entity = Minecraft.getMinecraft().world.getEntityByID(entityId);
 					if (entity != null) {

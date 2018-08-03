@@ -173,9 +173,7 @@ public class ItemFakeCopy extends XUItem {
 		Long aLong = lastTooltipTime.get(stack);
 		if (aLong != null) {
 			long l = System.currentTimeMillis() - aLong;
-			if (l <= 1000) {
-				return true;
-			}
+			return l <= 1000;
 		}
 		return false;
 	}

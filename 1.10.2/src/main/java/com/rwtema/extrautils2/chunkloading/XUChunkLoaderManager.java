@@ -180,9 +180,7 @@ public class XUChunkLoaderManager implements ForgeChunkManager.LoadingCallback, 
 
 
 	public ForgeChunkManager.Ticket getPlayerTicket(GameProfile profile, World world) {
-		HashMap<GameProfile, ForgeChunkManager.Ticket> gameProfileTicketHashMap = playerTickets.get(world);
-		if (gameProfileTicketHashMap == null)
-			playerTickets.put(world, gameProfileTicketHashMap = new HashMap<>());
+		HashMap<GameProfile, ForgeChunkManager.Ticket> gameProfileTicketHashMap = playerTickets.computeIfAbsent(world, k -> new HashMap<>());
 
 		ForgeChunkManager.Ticket ticket = gameProfileTicketHashMap.get(profile);
 

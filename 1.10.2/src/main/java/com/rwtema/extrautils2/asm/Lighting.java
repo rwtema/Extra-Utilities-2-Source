@@ -16,11 +16,7 @@ public class Lighting {
 	private static final EnumSkyBlock[] removeTypes = new EnumSkyBlock[]{null, EnumSkyBlock.BLOCK, EnumSkyBlock.SKY};
 
 	public static void register(ILight light, WeakHashMap<World, HashMap<EnumSkyBlock, Set<ILight>>> lightType) {
-		HashMap<EnumSkyBlock, Set<ILight>> enumMap = lightType.get(light.getLightWorld());
-		if (enumMap == null) {
-			enumMap = new HashMap<>();
-			lightType.put(light.getLightWorld(), enumMap);
-		}
+		HashMap<EnumSkyBlock, Set<ILight>> enumMap = lightType.computeIfAbsent(light.getLightWorld(), k -> new HashMap<>());
 
 		for (EnumSkyBlock type : light.getLightType()) {
 			Set<ILight> lightMap = enumMap.get(type);

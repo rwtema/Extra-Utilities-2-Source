@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public interface IWidget {
-	public static final IWidget NULL_INSTANCE = new IWidget() {
+	IWidget NULL_INSTANCE = new IWidget() {
 
 		@Override
 		public int getX() {

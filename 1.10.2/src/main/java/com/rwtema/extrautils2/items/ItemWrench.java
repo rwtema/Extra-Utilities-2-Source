@@ -102,12 +102,7 @@ public class ItemWrench extends XUItemFlatMetadata implements IWrench, ITool, IT
 
 	@Override
 	public boolean leftClick(World world, EntityPlayer player, ItemStack stack) {
-		if (XU2Entries.flatTransferNode.isActive()) {
-			if (XU2Entries.flatTransferNode.value.leftClick(world, player, stack)) {
-				return true;
-			}
-		}
-		return false;
+		return XU2Entries.flatTransferNode.isActive() && XU2Entries.flatTransferNode.value.leftClick(world, player, stack);
 	}
 
 	@Override

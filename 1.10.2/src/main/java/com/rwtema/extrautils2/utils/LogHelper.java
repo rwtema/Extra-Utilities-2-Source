@@ -11,12 +11,7 @@ import java.util.Date;
 import java.util.HashSet;
 
 public class LogHelper {
-	private static final ThreadLocal<HashSet<String>> one_time_strings_set = new ThreadLocal<HashSet<String>>() {
-		@Override
-		protected HashSet<String> initialValue() {
-			return new HashSet<>();
-		}
-	};
+	private static final ThreadLocal<HashSet<String>> one_time_strings_set = ThreadLocal.withInitial(() -> new HashSet<>());
 	private static final ArrayList<String> one_time_strings = new ArrayList<>();
 	public static Logger logger = LogManager.getLogger(ExtraUtils2.MODID);
 	public static boolean isDeObf = false;
@@ -38,28 +33,28 @@ public class LogHelper {
 
 	public static void debug(Object info, Object... info2) {
 		if (isDeObf) {
-			String temp = "Debug: " + info;
+			StringBuilder temp = new StringBuilder("Debug: " + info);
 			for (Object t : info2)
-				temp = temp + " " + t;
+				temp.append(" ").append(t);
 
 			logger.info(info);
 		}
 	}
 
 	public static void info(Object info, Object... info2) {
-		String temp = "" + info;
+		StringBuilder temp = new StringBuilder("" + info);
 		for (Object t : info2)
-			temp = temp + " " + t;
+			temp.append(" ").append(t);
 
 		logger.info(info);
 	}
 
 	public static void fine(Object info, Object... info2) {
-		String temp = "" + info;
+		StringBuilder temp = new StringBuilder("" + info);
 		for (Object t : info2)
-			temp = temp + " " + t;
+			temp.append(" ").append(t);
 
-		logger.debug(temp);
+		logger.debug(temp.toString());
 	}
 
 	public static void errorThrowable(String message, Throwable t) {
@@ -67,9 +62,9 @@ public class LogHelper {
 	}
 
 	public static void error(Object info, Object... info2) {
-		String temp = "" + info;
+		StringBuilder temp = new StringBuilder("" + info);
 		for (Object t : info2)
-			temp = temp + " " + t;
+			temp.append(" ").append(t);
 
 		logger.error(info);
 	}

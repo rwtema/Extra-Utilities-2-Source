@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 public class WeakQueue<T> extends AbstractQueue<T> {
 	final ReferenceQueue<T> q = new ReferenceQueue<>();
-	TLinkedList<Node> list = new TLinkedList<Node>();
+	TLinkedList<Node> list = new TLinkedList<>();
 
 	@Override
 	public int size() {

@@ -330,7 +330,7 @@ public class CollectionHelper {
 	}
 
 	public static <K, V> Map<K, V> createMap(Collection<K> collection, Function<K, V> function) {
-		ImmutableMap.Builder<K, V> builder = ImmutableMap.<K, V>builder();
+		ImmutableMap.Builder<K, V> builder = ImmutableMap.builder();
 		for (K k : collection) {
 			V apply = function.apply(k);
 			if (apply != null) {

@@ -54,7 +54,7 @@ class DischantEnergyRecipe extends EnergyBaseRecipe {
 		ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
 		for (Enchantment enchantment : Enchantment.REGISTRY) {
 			for (int i = enchantment.getMinLevel(); i <= enchantment.getMaxLevel(); i++) {
-				builder.add(((ItemEnchantedBook) Items.ENCHANTED_BOOK).getEnchantedItemStack(new EnchantmentData(enchantment, i)));
+				builder.add(((ItemEnchantedBook)Items.ENCHANTED_BOOK).getEnchantedItemStack(new EnchantmentData(enchantment, i)));
 			}
 		}
 		return builder.build();

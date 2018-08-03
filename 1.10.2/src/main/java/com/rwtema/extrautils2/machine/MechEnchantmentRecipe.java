@@ -144,7 +144,7 @@ public class MechEnchantmentRecipe implements IMachineRecipe {
 		for (Enchantment enchantment : list) {
 			if (flag) {
 				//noinspection AccessStaticViaInstance
-				((ItemEnchantedBook) Items.ENCHANTED_BOOK).addEnchantment(stack, new EnchantmentData(enchantment, enchantType.getLevel.applyAsInt(enchantment)));
+				((ItemEnchantedBook)Items.ENCHANTED_BOOK).addEnchantment(stack, new EnchantmentData(enchantment, enchantType.getLevel.applyAsInt(enchantment)));
 			} else {
 				stack.addEnchantment(enchantment, enchantType.getLevel.applyAsInt(enchantment));
 			}

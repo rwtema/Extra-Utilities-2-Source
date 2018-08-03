@@ -59,7 +59,7 @@ public class ItemSickle extends ItemTool implements IXUItem {
 	static ThreadLocal<Boolean> calling = new ThreadLocalBoolean(false);
 	private final String name;
 	public HashMap<String, Integer> toolRanges = CollectionHelper.populateMap(
-			new HashMap<String, Integer>(),
+			new HashMap<>(),
 			ToolMaterial.WOOD.toString(), 1,
 			ToolMaterial.STONE.toString(), 2,
 			ToolMaterial.IRON.toString(), 3,

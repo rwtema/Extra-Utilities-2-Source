@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BlockPowerBattery extends XUBlockStatic {
 
-	{
+	static {
 		EnergyTransfer.init();
 	}
 

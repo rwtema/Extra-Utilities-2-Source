@@ -244,21 +244,18 @@ public class ItemSnowglobe extends XUItem {
 		boolean needsUpdate = false;
 		if (tagCompound == null)
 			tagCompound = new NBTTagCompound();
-		HashSet<Biome> biomes = new HashSet<>();
-		for (BlockPos.MutableBlockPos blockPos : BlockPos.MutableBlockPos.getAllInBoxMutable(pos.add(-2, 0, -2), pos.add(2, 0, 2))) {
-			biomes.add(world.getBiome(blockPos));
-		}
-		for (Biome biome : biomes) {
-			for (BiomeDictionary.Type type : types) {
-				if (CompatHelper.BiomeHasType(biome, type)) {
-					String key = nbt_keys.get(type);
-					if (!tagCompound.getBoolean(key)) {
-						needsUpdate = true;
-						tagCompound.setBoolean(key, true);
-					}
+
+		Biome biome = world.getBiome(pos);
+		for (BiomeDictionary.Type type : types) {
+			if (CompatHelper.BiomeHasType(biome, type)) {
+				String key = nbt_keys.get(type);
+				if (!tagCompound.getBoolean(key)) {
+					needsUpdate = true;
+					tagCompound.setBoolean(key, true);
 				}
 			}
 		}
+
 
 		if (needsUpdate) {
 

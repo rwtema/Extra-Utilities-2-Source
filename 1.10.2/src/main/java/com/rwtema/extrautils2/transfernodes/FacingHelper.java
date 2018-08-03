@@ -35,11 +35,11 @@ public class FacingHelper {
 
 	public static final EnumMap<EnumFacing, ToIntFunction<BlockPos>> blockFaceGetters = new EnumMap<>(
 			ImmutableMap.<EnumFacing, ToIntFunction<BlockPos>>builder()
-					.put(EnumFacing.DOWN, t -> t.getY())
+					.put(EnumFacing.DOWN, Vec3i::getY)
 					.put(EnumFacing.UP, t -> t.getY() + 1)
-					.put(EnumFacing.NORTH, t -> t.getZ())
+					.put(EnumFacing.NORTH, Vec3i::getZ)
 					.put(EnumFacing.SOUTH, t -> t.getZ() + 1)
-					.put(EnumFacing.WEST, t -> t.getX())
+					.put(EnumFacing.WEST, Vec3i::getX)
 					.put(EnumFacing.EAST, t -> t.getX() + 1)
 					.build()
 	);
@@ -64,8 +64,8 @@ public class FacingHelper {
 	);
 
 	public static final EnumMap<EnumFacing, List<EnumFacing>> lists = CollectionHelper.populateEnumMap(EnumFacing.class, ImmutableList::of);
-	public static final EnumMap<EnumFacing, EnumSet<EnumFacing>> nonEqual = CollectionHelper.populateEnumMultiMap(EnumFacing.class, (FunctionABBool<EnumFacing, EnumFacing>) (facing, facing2) -> facing != facing2);
-	public static final EnumMap<EnumFacing, EnumSet<EnumFacing>> horizontalOrthogonal = CollectionHelper.populateEnumMultiMap(EnumFacing.class, (FunctionABBool<EnumFacing, EnumFacing>) (facing, facing2) -> facing.getAxis() != facing2.getAxis() && facing2.getAxis() != EnumFacing.Axis.Y);
+	public static final EnumMap<EnumFacing, EnumSet<EnumFacing>> nonEqual = CollectionHelper.populateEnumMultiMap(EnumFacing.class, (facing, facing2) -> facing != facing2);
+	public static final EnumMap<EnumFacing, EnumSet<EnumFacing>> horizontalOrthogonal = CollectionHelper.populateEnumMultiMap(EnumFacing.class, (facing, facing2) -> facing.getAxis() != facing2.getAxis() && facing2.getAxis() != EnumFacing.Axis.Y);
 	public static final EnumFacing[] facingPlusNull = new EnumFacing[]{
 			null, EnumFacing.DOWN, EnumFacing.UP, EnumFacing.WEST, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.NORTH
 	};

@@ -1411,11 +1411,9 @@ public class XU2Entries {
 		public void addRecipes() {
 			Machine[] generators = TileRainbowGenerator.GENERATORS;
 
-			ArrayList<Object> top = new ArrayList<>();
-			ArrayList<Object> bottom = new ArrayList<>();
 			char[] chars = new char[]{'1', '2', '3', '4', '5', '6', '7', '8'};
-			top.addAll(ImmutableList.of("123", "4c5", "678", 'c', redstoneCrystal));
-			bottom.addAll(ImmutableList.of("123", "4c5", "678", 'c', redstoneCrystal));
+			ArrayList<Object> top = new ArrayList<>(ImmutableList.of("123", "4c5", "678", 'c', redstoneCrystal));
+			ArrayList<Object> bottom = new ArrayList<>(ImmutableList.of("123", "4c5", "678", 'c', redstoneCrystal));
 			for (int i = 0; i < 8; i++) {
 				top.add(chars[i]);
 				top.add(machineEntry.value.createStack(generators[i]));

@@ -69,7 +69,7 @@ public class BiomeManip {
 
 				PlayerChunkMapEntry entry = playerChunkMap.getEntry(chunkPos.x, chunkPos.z);
 				if (entry != null) {
-					entry.sendPacket(NetworkHandler.channels.get(Side.SERVER).generatePacketFrom(new PacketBiomeChange(biome, changeSet.toArray(new BlockPos[changeSet.size()]))));
+					entry.sendPacket(NetworkHandler.channels.get(Side.SERVER).generatePacketFrom(new PacketBiomeChange(biome, changeSet.toArray(new BlockPos[0]))));
 				}
 			}
 		}

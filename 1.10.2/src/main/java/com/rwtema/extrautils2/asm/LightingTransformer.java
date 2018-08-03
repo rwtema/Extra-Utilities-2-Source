@@ -26,95 +26,99 @@ public class LightingTransformer implements IClassTransformer {
 		if (bytes == null)
 			return null;
 
-		if (s.equals("net.minecraft.world.chunk.Chunk")) {
-			ClassNode classNode = new ClassNode();
-			ClassReader classReader = new ClassReader(bytes);
-			classReader.accept(classNode, 0);
-			String getLightSubtractedName = null;
-			MethodNode m = null;
-			String passThru = "getLightSubtractedPassThru";
-			for (MethodNode method : classNode.methods) {
-				if (getLightSubtracted.contains(method.name)) {
-					m = method;
-					getLightSubtractedName = method.name;
-					method.name = passThru;
+		switch (s) {
+			case "net.minecraft.world.chunk.Chunk": {
+				ClassNode classNode = new ClassNode();
+				ClassReader classReader = new ClassReader(bytes);
+				classReader.accept(classNode, 0);
+				String getLightSubtractedName = null;
+				MethodNode m = null;
+				String passThru = "getLightSubtractedPassThru";
+				for (MethodNode method : classNode.methods) {
+					if (getLightSubtracted.contains(method.name)) {
+						m = method;
+						getLightSubtractedName = method.name;
+						method.name = passThru;
+					}
 				}
-			}
-			String worldObjFieldName = getField(classNode, world);
-			if (getLightSubtractedName == null || worldObjFieldName == null) {
-				ClassTransformerHandler.logger.info("Chunk Failed - " + getLightSubtractedName + " " + worldObjFieldName);
-				return bytes;
-			}
-			MethodNode methodNode = new MethodNode(m.access, getLightSubtractedName, m.desc, m.signature, m.exceptions.toArray(new String[m.exceptions.size()]));
-			methodNode.visitCode();
-			methodNode.visitVarInsn(ALOAD, 0);
-			methodNode.visitFieldInsn(GETFIELD, "net/minecraft/world/chunk/Chunk", worldObjFieldName, "Lnet/minecraft/world/World;");
-			methodNode.visitVarInsn(ALOAD, 1);
-			methodNode.visitVarInsn(ALOAD, 0);
-			methodNode.visitVarInsn(ALOAD, 1);
-			methodNode.visitVarInsn(ILOAD, 2);
-			methodNode.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/world/chunk/Chunk", passThru, m.desc, false);
-			methodNode.visitMethodInsn(INVOKESTATIC, "com/rwtema/extrautils2/asm/Lighting", "getCombinedLight", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;I)I", false);
-			methodNode.visitInsn(IRETURN);
-			classNode.methods.add(methodNode);
-			ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-			classNode.accept(writer);
-			return writer.toByteArray();
-		} else if (s.equals("net.minecraft.world.World")) {
-			ClassNode classNode = new ClassNode();
-			ClassReader classReader = new ClassReader(bytes);
-			classReader.accept(classNode, 0);
-			if (overrideType(classNode, getLightFor, exceptions)) {
-				ClassTransformerHandler.logger.info("World failed -" + getLightFor.toString() + " " + exceptions.toString());
-				return bytes;
-			}
-			if (FMLLaunchHandler.side() == Side.CLIENT) {
-				if (overrideType(classNode, getLightFromNeighborsFor, null)) {
-					ClassTransformerHandler.logger.info("World failed -" + getLightFromNeighborsFor.toString());
+				String worldObjFieldName = getField(classNode, world);
+				if (getLightSubtractedName == null || worldObjFieldName == null) {
+					ClassTransformerHandler.logger.info("Chunk Failed - " + getLightSubtractedName + " " + worldObjFieldName);
+					return bytes;
 				}
+				MethodNode methodNode = new MethodNode(m.access, getLightSubtractedName, m.desc, m.signature, m.exceptions.toArray(new String[m.exceptions.size()]));
+				methodNode.visitCode();
+				methodNode.visitVarInsn(ALOAD, 0);
+				methodNode.visitFieldInsn(GETFIELD, "net/minecraft/world/chunk/Chunk", worldObjFieldName, "Lnet/minecraft/world/World;");
+				methodNode.visitVarInsn(ALOAD, 1);
+				methodNode.visitVarInsn(ALOAD, 0);
+				methodNode.visitVarInsn(ALOAD, 1);
+				methodNode.visitVarInsn(ILOAD, 2);
+				methodNode.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/world/chunk/Chunk", passThru, m.desc, false);
+				methodNode.visitMethodInsn(INVOKESTATIC, "com/rwtema/extrautils2/asm/Lighting", "getCombinedLight", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;I)I", false);
+				methodNode.visitInsn(IRETURN);
+				classNode.methods.add(methodNode);
+				ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+				classNode.accept(writer);
+				return writer.toByteArray();
 			}
-			ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-			classNode.accept(writer);
-			return writer.toByteArray();
-		} else if (s.equals("net.minecraft.world.ChunkCache")) {
-			if (FMLLaunchHandler.side() != Side.CLIENT)
-				return bytes;
-			ClassNode classNode = new ClassNode();
-			ClassReader classReader = new ClassReader(bytes);
-			classReader.accept(classNode, 0);
-			String getLightForExtName = null;
-			MethodNode m = null;
-			String passThru = "getLightForExtPassThru";
-			for (MethodNode method : classNode.methods) {
-				if (getLightForExt.contains(method.name)) {
-					m = method;
-					getLightForExtName = method.name;
-					method.name = passThru;
+			case "net.minecraft.world.World": {
+				ClassNode classNode = new ClassNode();
+				ClassReader classReader = new ClassReader(bytes);
+				classReader.accept(classNode, 0);
+				if (overrideType(classNode, getLightFor, exceptions)) {
+					ClassTransformerHandler.logger.info("World failed -" + getLightFor.toString() + " " + exceptions.toString());
+					return bytes;
 				}
+				if (FMLLaunchHandler.side() == Side.CLIENT) {
+					if (overrideType(classNode, getLightFromNeighborsFor, null)) {
+						ClassTransformerHandler.logger.info("World failed -" + getLightFromNeighborsFor.toString());
+					}
+				}
+				ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+				classNode.accept(writer);
+				return writer.toByteArray();
 			}
-			String worldObjFieldName = getField(classNode, world);
-			if (getLightForExtName == null || worldObjFieldName == null) {
-				ClassTransformerHandler.logger.info("Chunk Failed - " + getLightForExtName + " " + worldObjFieldName);
+			case "net.minecraft.world.ChunkCache": {
+				if (FMLLaunchHandler.side() != Side.CLIENT)
+					return bytes;
+				ClassNode classNode = new ClassNode();
+				ClassReader classReader = new ClassReader(bytes);
+				classReader.accept(classNode, 0);
+				String getLightForExtName = null;
+				MethodNode m = null;
+				String passThru = "getLightForExtPassThru";
+				for (MethodNode method : classNode.methods) {
+					if (getLightForExt.contains(method.name)) {
+						m = method;
+						getLightForExtName = method.name;
+						method.name = passThru;
+					}
+				}
+				String worldObjFieldName = getField(classNode, world);
+				if (getLightForExtName == null || worldObjFieldName == null) {
+					ClassTransformerHandler.logger.info("Chunk Failed - " + getLightForExtName + " " + worldObjFieldName);
+					return bytes;
+				}
+				MethodNode methodNode = new MethodNode(m.access, getLightForExtName, m.desc, m.signature, m.exceptions.toArray(new String[m.exceptions.size()]));
+				methodNode.visitCode();
+				methodNode.visitVarInsn(ALOAD, 0);
+				methodNode.visitFieldInsn(GETFIELD, "net/minecraft/world/ChunkCache", worldObjFieldName, "Lnet/minecraft/world/World;");
+				methodNode.visitVarInsn(ALOAD, 1);
+				methodNode.visitVarInsn(ALOAD, 2);
+				methodNode.visitVarInsn(ALOAD, 0);
+				methodNode.visitVarInsn(ALOAD, 1);
+				methodNode.visitVarInsn(ALOAD, 2);
+				methodNode.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/world/ChunkCache", passThru, m.desc, false);
+				methodNode.visitMethodInsn(INVOKESTATIC, "com/rwtema/extrautils2/asm/Lighting", "getLightFor", "(Lnet/minecraft/world/World;Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;I)I", false);
+				methodNode.visitInsn(IRETURN);
+				classNode.methods.add(methodNode);
+				ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+				classNode.accept(writer);
+				return writer.toByteArray();
+			}
+			default:
 				return bytes;
-			}
-			MethodNode methodNode = new MethodNode(m.access, getLightForExtName, m.desc, m.signature, m.exceptions.toArray(new String[m.exceptions.size()]));
-			methodNode.visitCode();
-			methodNode.visitVarInsn(ALOAD, 0);
-			methodNode.visitFieldInsn(GETFIELD, "net/minecraft/world/ChunkCache", worldObjFieldName, "Lnet/minecraft/world/World;");
-			methodNode.visitVarInsn(ALOAD, 1);
-			methodNode.visitVarInsn(ALOAD, 2);
-			methodNode.visitVarInsn(ALOAD, 0);
-			methodNode.visitVarInsn(ALOAD, 1);
-			methodNode.visitVarInsn(ALOAD, 2);
-			methodNode.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/world/ChunkCache", passThru, m.desc, false);
-			methodNode.visitMethodInsn(INVOKESTATIC, "com/rwtema/extrautils2/asm/Lighting", "getLightFor", "(Lnet/minecraft/world/World;Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;I)I", false);
-			methodNode.visitInsn(IRETURN);
-			classNode.methods.add(methodNode);
-			ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-			classNode.accept(writer);
-			return writer.toByteArray();
-		} else {
-			return bytes;
 		}
 	}
 
@@ -162,7 +166,7 @@ public class LightingTransformer implements IClassTransformer {
 				}
 			}
 
-		MethodNode methodNode = new MethodNode(m.access, getLightForName, m.desc, m.signature, m.exceptions.toArray(new String[m.exceptions.size()]));
+		MethodNode methodNode = new MethodNode(m.access, getLightForName, m.desc, m.signature, m.exceptions.toArray(new String[0]));
 		methodNode.visitCode();
 		methodNode.visitVarInsn(ALOAD, 0);
 		methodNode.visitVarInsn(ALOAD, 1);

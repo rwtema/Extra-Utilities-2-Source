@@ -19,9 +19,7 @@ public abstract class VillagerEntrySimple extends VillagerEntry<VillagerRegistry
 
 	@Override
 	public VillagerRegistry.VillagerProfession initValue() {
-		String name1 = villager_name;
-		String texture1 = texture;
-		return CompatHelper112.getVillagerProfession(name1, texture1);
+		return CompatHelper112.getVillagerProfession(villager_name, texture);
 	}
 
 }

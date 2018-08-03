@@ -18,13 +18,7 @@ public class TileLoaderManager {
 	@SubscribeEvent
 	public void checkLoad(TickEvent.ServerTickEvent event) {
 		synchronized (loadingTiles) {
-			for (Iterator<XUTile> iterator = loadingTiles.iterator(); iterator.hasNext(); ) {
-				XUTile loadingTile = iterator.next();
-				if (loadingTile.isLoaded()) {
-
-					iterator.remove();
-				}
-			}
+			loadingTiles.removeIf(loadingTile -> loadingTile.isLoaded());
 		}
 	}
 }

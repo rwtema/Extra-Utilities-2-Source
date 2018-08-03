@@ -296,11 +296,11 @@ public class JEIMachine extends BlankRecipeCategory<JEIMachine.JEIMachineRecipe.
 				Map<MachineSlotFluid, FluidStack> fluids = buildMap(parentRecipe.machine.fluidInputs, parentRecipe.fluids);
 
 				Map<MachineSlotItem, ItemStack> itemOutputs = parentRecipe.recipe.getItemOutputs(items, fluids);
-				List<ItemStack> collect = itemOutputs.values().stream().filter(f -> StackHelper.isNonNull(f)).collect(Collectors.toList());
+				List<ItemStack> collect = itemOutputs.values().stream().filter(StackHelper::isNonNull).collect(Collectors.toList());
 				ingredients.setOutputs(ItemStack.class, collect);
 
 				Map<MachineSlotFluid, FluidStack> fluidOutputs = parentRecipe.recipe.getFluidOutputs(items, fluids);
-				List<FluidStack> collect1 = fluidOutputs.values().stream().filter(f -> f != null).collect(Collectors.toList());
+				List<FluidStack> collect1 = fluidOutputs.values().stream().filter(Objects::nonNull).collect(Collectors.toList());
 				ingredients.setOutputs(FluidStack.class, collect1);
 			}
 

@@ -49,7 +49,7 @@ public class TileQuarryConvoluted extends XUTile implements ITickable {
 		}
 	};
 	NBTSerializable.NBTCollection<ChunkPos, Set<ChunkPos>, NBTTagLong> deadChunks = registerNBT("captured_chunks",
-			new NBTSerializable.NBTCollection<ChunkPos, Set<ChunkPos>, NBTTagLong>(new HashSet<>(),
+			new NBTSerializable.NBTCollection<>(new HashSet<>(),
 					chunkPos -> new NBTTagLong(((long) chunkPos.x << 32) | (chunkPos.z & 0xFFFFFFFFL)),
 					nbtTagLong -> {
 						long c = nbtTagLong.getLong();

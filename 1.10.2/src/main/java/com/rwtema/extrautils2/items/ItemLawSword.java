@@ -428,7 +428,7 @@ public class ItemLawSword extends ItemSword implements IXUItem {
 			if (!tagCompound.hasKey("XU|Sword", 1))
 				return;
 
-			Byte t = tagCompound.getByte("XU|Sword");
+			byte t = tagCompound.getByte("XU|Sword");
 			t--;
 
 			if (t == 0) {

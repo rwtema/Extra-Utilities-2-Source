@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public class BlockRainbowGenerator extends XUBlockStatic {
-	public final static PropertyEnumSimple<State> PROPERTY_STATE = new PropertyEnumSimple<State>(State.class);
+	public final static PropertyEnumSimple<State> PROPERTY_STATE = new PropertyEnumSimple<>(State.class);
 
 	@Nonnull
 	@Override

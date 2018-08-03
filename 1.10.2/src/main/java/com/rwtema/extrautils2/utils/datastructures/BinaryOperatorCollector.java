@@ -21,7 +21,7 @@ public class BinaryOperatorCollector<T> implements Collector<T, MutableReference
 
 	@Override
 	public Supplier<MutableReference<T>> supplier() {
-		return () -> new MutableReference.Impl<T>(initialValue);
+		return () -> new MutableReference.Impl<>(initialValue);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class BinaryOperatorCollector<T> implements Collector<T, MutableReference
 		return (holder, holder2) -> {
 			if (holder.get() == null) return holder2;
 			if (holder2.get() == null) return holder;
-			return new MutableReference.Impl<T>(combine.apply(holder.get(), holder2.get()));
+			return new MutableReference.Impl<>(combine.apply(holder.get(), holder2.get()));
 		};
 	}
 

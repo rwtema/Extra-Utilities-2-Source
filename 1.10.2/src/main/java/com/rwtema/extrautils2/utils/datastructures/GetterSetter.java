@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public interface GetterSetter<T> extends Consumer<T>, Supplier<T> {
 
-	public static class ContainerSlot implements GetterSetter<ItemStack> {
+	class ContainerSlot implements GetterSetter<ItemStack> {
 		final Slot slot;
 
 		public ContainerSlot(Slot slot) {
@@ -29,7 +29,7 @@ public interface GetterSetter<T> extends Consumer<T>, Supplier<T> {
 		}
 	}
 
-	public static class InvSlot implements GetterSetter<ItemStack> {
+	class InvSlot implements GetterSetter<ItemStack> {
 		final IInventory inventory;
 		final int slot;
 
@@ -49,7 +49,7 @@ public interface GetterSetter<T> extends Consumer<T>, Supplier<T> {
 		}
 	}
 
-	public static class PlayerHand implements GetterSetter<ItemStack> {
+	class PlayerHand implements GetterSetter<ItemStack> {
 		final InventoryPlayer inventoryPlayer;
 
 		public PlayerHand(InventoryPlayer inventoryPlayer) {

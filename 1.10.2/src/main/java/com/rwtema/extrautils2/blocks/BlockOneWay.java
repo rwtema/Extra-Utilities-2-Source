@@ -73,7 +73,6 @@ public class BlockOneWay extends XUBlockStatic {
 				.setTexture("strange_glass_one_way_side")
 				.setTextureSides(EnumFacing.DOWN, "strange_glass_one_way", EnumFacing.UP, "strange_glass_one_way_opening")
 				.setInvisible(EnumFacing.UP);
-		;
 
 		model.addBox(0, 1 / 1024F, 0, 1, 1 / 1024F, 1)
 				.setTextureSides(EnumFacing.UP, "strange_glass_one_way_reverse")

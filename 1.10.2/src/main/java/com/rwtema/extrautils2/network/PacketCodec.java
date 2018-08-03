@@ -21,8 +21,7 @@ public class PacketCodec extends FMLIndexedMessageToMessageCodec<XUPacketBase> {
 	public static HashMap<String, Class<? extends XUPacketBase>> classes = new HashMap<>();
 
 	public PacketCodec() {
-		ArrayList<String> t = new ArrayList<>();
-		t.addAll(classes.keySet());
+		ArrayList<String> t = new ArrayList<>(classes.keySet());
 
 		Collections.sort(t);
 

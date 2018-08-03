@@ -16,7 +16,7 @@ public interface ILeftClickHandler {
 	boolean leftClick(World world, EntityPlayer player, ItemStack stack);
 
 	@NetworkHandler.XUPacket
-	public static class PacketSendLeftClick extends XUPacketClientToServer {
+	class PacketSendLeftClick extends XUPacketClientToServer {
 		static {
 			MinecraftForge.EVENT_BUS.register(PacketSendLeftClick.class);
 		}

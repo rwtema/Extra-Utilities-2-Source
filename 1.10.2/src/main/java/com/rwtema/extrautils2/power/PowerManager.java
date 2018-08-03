@@ -73,7 +73,7 @@ public class PowerManager {
 		for (Map.Entry<World, TObjectFloatHashMap<IWorldPowerMultiplier>> entry : providers.entrySet()) {
 			if (entry.getValue().containsKey(multiplier)) {
 				float am = entry.getValue().get(multiplier);
-				if (am != Float.NaN) {
+				if (!Float.isNaN(am)) {
 					total += am * multiplier.multiplier(entry.getKey());
 				}
 			}

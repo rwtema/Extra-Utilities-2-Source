@@ -44,7 +44,7 @@ public class EntryHandler {
 			if (entry.enabled) {
 				activeEntries.add(entry);
 				if (entry instanceof IItemStackMaker) {
-					stackEntries.add(((IItemStackMaker) entry));
+					stackEntries.add(entry);
 				}
 			}
 		}

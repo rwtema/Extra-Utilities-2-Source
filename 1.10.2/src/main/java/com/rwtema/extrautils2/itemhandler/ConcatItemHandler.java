@@ -19,7 +19,7 @@ public class ConcatItemHandler implements IItemHandlerCompat {
 	}
 
 	public ConcatItemHandler(Collection<IItemHandler> handlers) {
-		this.handlers = handlers.toArray(new IItemHandler[handlers.size()]);
+		this.handlers = handlers.toArray(new IItemHandler[0]);
 	}
 
 	public static IItemHandler concatNonNull(IItemHandler... values) {
@@ -46,7 +46,7 @@ public class ConcatItemHandler implements IItemHandlerCompat {
 		if (nonNullHandlers.size() == 1) return nonNullHandlers.get(0);
 
 		if (fixedLength)
-			return ConcatFixedLength.create(nonNullHandlers.toArray(new IItemHandler[nonNullHandlers.size()]));
+			return ConcatFixedLength.create(nonNullHandlers.toArray(new IItemHandler[0]));
 
 		return new ConcatItemHandler(nonNullHandlers);
 	}

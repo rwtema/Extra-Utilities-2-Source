@@ -45,7 +45,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class BlockTeleporter extends XUBlockStatic {
-	public static final PropertyEnumSimple<Type> property_type = new PropertyEnumSimple<Type>(Type.class);
+	public static final PropertyEnumSimple<Type> property_type = new PropertyEnumSimple<>(Type.class);
 	public static final PropertyBool property_unbreakable = PropertyBool.create("unbreakable");
 	public static EnumMap<Side, WeakHashMap<Entity, TeleportingEntityEntry>> teleportingEntities = new EnumMap<>(Side.class);
 

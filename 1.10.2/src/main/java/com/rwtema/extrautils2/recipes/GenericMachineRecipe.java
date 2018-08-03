@@ -172,7 +172,7 @@ public class GenericMachineRecipe implements IMachineRecipe {
 	public Map<MachineSlotItem, ItemStack> getItemOutputs(Map<MachineSlotItem, ItemStack> inputItems, Map<MachineSlotFluid, FluidStack> inputFluids) {
 		HashMap<MachineSlotItem, ItemStack> map = new HashMap<>();
 		if (hasMultipleOutputs) {
-			Set<String> mods = inputItems.values().stream().filter(stack -> StackHelper.isNonNull(stack)).map(stack -> stack.getItem().getRegistryName().getResourceDomain()).collect(Collectors.toSet());
+			Set<String> mods = inputItems.values().stream().filter(StackHelper::isNonNull).map(stack -> stack.getItem().getRegistryName().getResourceDomain()).collect(Collectors.toSet());
 			outputItemStackMap.forEach(((machineSlotItem, itemStacks) -> {
 				int size = outputAmountMap.get(machineSlotItem);
 				if (size < 0) size = 0;

@@ -22,6 +22,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 public class XUBlockStateCreator extends BlockStateContainerCompat {
 	public static final PropertyDirection ROTATION_HORIZONTAL = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -82,7 +83,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 			significantStates.add(validState);
 		}
 
-		meta2state = significantStates.toArray(new IBlockState[significantStates.size()]);
+		meta2state = significantStates.toArray(new IBlockState[0]);
 
 		for (int i = 0; i < meta2state.length; i++)
 			state2meta.put(meta2state[i], i);
@@ -107,7 +108,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 			dropMetas.add(metaState);
 		}
 
-		dropmeta2state = dropMetas.toArray(new XUBlockState[dropMetas.size()]);
+		dropmeta2state = dropMetas.toArray(new XUBlockState[0]);
 
 		for (int i = 0; i < dropmeta2state.length; i++)
 			state2dropMeta.put(dropmeta2state[i], i);
@@ -180,16 +181,11 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 		return new EnumMap<>(
 				MapPopulator.createMap(
 						Lists.newArrayList(EnumFacing.values()),
-						Lists.transform(Lists.newArrayList(EnumFacing.values()),
-								new Function<EnumFacing, T>() {
-									@Nullable
-									@Override
-									public T apply(EnumFacing input) {
-										String dirName = input.getName().toLowerCase();
-										if (name != null) dirName = name + "_" + dirName;
-										return function.apply(dirName, input);
-									}
-								})));
+						Lists.newArrayList(EnumFacing.values()).stream().map(input -> {
+							String dirName = input.getName().toLowerCase();
+							if (name != null) dirName = name + "_" + dirName;
+							return function.apply(dirName, input);
+						}).collect(Collectors.toList())));
 	}
 
 	public static IProperty<?>[] joinProperties(IProperty[] a, IProperty[] b) {
@@ -324,9 +320,9 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 
 
 		public XUBlockStateCreator build() {
-			IProperty<?>[] worldProperties = this.worldProperties.toArray(new IProperty[this.worldProperties.size()]);
-			IProperty<?>[] dropProperties = this.dropProperties.toArray(new IProperty[this.dropProperties.size()]);
-			IMetaProperty<?>[] hiddenProperties = this.metaProperties.toArray(new IMetaProperty[this.metaProperties.size()]);
+			IProperty<?>[] worldProperties = this.worldProperties.toArray(new IProperty[0]);
+			IProperty<?>[] dropProperties = this.dropProperties.toArray(new IProperty[0]);
+			IMetaProperty<?>[] hiddenProperties = this.metaProperties.toArray(new IMetaProperty[0]);
 			return new XUBlockStateCreator(block, worldProperties, dropProperties, hiddenProperties, defaultValues.isEmpty() ? null : defaultValues);
 		}
 	}

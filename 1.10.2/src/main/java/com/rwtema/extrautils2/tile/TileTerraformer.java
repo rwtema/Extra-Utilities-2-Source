@@ -413,7 +413,7 @@ public class TileTerraformer extends TilePower implements ITickable, IDynamicHan
 
 					packet.writeInt(tile.transformTime.value);
 
-					TObjectIntHashMap<BlockTerraformer.Type> transformationRequirements = tile.getTransformationRequirements(current, biome);
+					TObjectIntHashMap<BlockTerraformer.Type> transformationRequirements = getTransformationRequirements(current, biome);
 					packet.writeShort(transformationRequirements.size());
 					HashSet<BlockTerraformer.Type> missingTypes = new HashSet<>();
 					for (BlockTerraformer.Type type : transformationRequirements.keySet()) {

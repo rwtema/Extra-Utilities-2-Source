@@ -122,7 +122,7 @@ public class ItemBoomerang extends XUItemFlat {
 			WeakReference<EntityBoomerang> reference = boomerangOwners.get(playerIn);
 			if (reference != null) {
 				EntityBoomerang boomerang = reference.get();
-				if (boomerang != null && !boomerang.isDead) return false;
+				return boomerang == null || boomerang.isDead;
 			}
 		}
 		return true;

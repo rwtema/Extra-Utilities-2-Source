@@ -227,7 +227,7 @@ public class Textures {
 							out.println("# " + new ItemStack(block).getDisplayName());
 							out.println("blockstates/" + nameForObject.getResourcePath() + ".json");
 							out.println("variants={");
-							for (String s : createStateMapper().putStateModelLocations(block).values().stream().map(ModelResourceLocation::getVariant).sorted().collect(Collectors.toSet())) {
+							for (String s : createStateMapper().putStateModelLocations(block).values().stream().map(ModelResourceLocation::getVariant).sorted().collect(Collectors.toList())) {
 								out.println("\t" + s);
 							}
 							out.println("}");

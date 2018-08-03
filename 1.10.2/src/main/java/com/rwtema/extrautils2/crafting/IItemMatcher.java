@@ -8,8 +8,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import javax.annotation.Nonnull;
 
 public interface IItemMatcher {
-	IItemMatcher CRAFTING = (IItemMatcher) (slot, target) -> OreDictionary.itemMatches(target, slot, false);
-	IItemMatcher EXACT = (IItemMatcher) (slot, target) -> StackHelper.isNonNull(slot) && ItemHandlerHelper.canItemStacksStack(slot, target);
+	IItemMatcher CRAFTING = (slot, target) -> OreDictionary.itemMatches(target, slot, false);
+	IItemMatcher EXACT = (slot, target) -> StackHelper.isNonNull(slot) && ItemHandlerHelper.canItemStacksStack(slot, target);
 
 	boolean itemsMatch(ItemStack slot, @Nonnull ItemStack target);
 }

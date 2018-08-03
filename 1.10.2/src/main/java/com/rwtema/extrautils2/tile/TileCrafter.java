@@ -113,7 +113,7 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 	ItemStack[] genericStacks;
 	XUCrafter crafter = new XUCrafter();
 	IItemHandler publicOutputSlot = ConcatItemHandler.concatNonNull(new PublicWrapper.Insert(contents), new PublicWrapper.Extract(output));
-	private NBTSerializable.NBTEnum<ContainerMode> mode = registerNBT("mode", new NBTSerializable.NBTEnum<ContainerMode>(ContainerMode.CONTAINER_ITEMS_STAY_IN_INPUT));
+	private NBTSerializable.NBTEnum<ContainerMode> mode = registerNBT("mode", new NBTSerializable.NBTEnum<>(ContainerMode.CONTAINER_ITEMS_STAY_IN_INPUT));
 
 	public static String errLog(IRecipe recipe) {
 		if (recipe == null) return "[null recipe]";

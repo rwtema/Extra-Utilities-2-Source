@@ -32,9 +32,7 @@ public abstract class SingleInputStackMatchRecipeBase implements IMachineRecipe 
 	public List<Pair<Map<MachineSlotItem, List<ItemStack>>, Map<MachineSlotFluid, List<FluidStack>>>> getJEIInputItemExamples() {
 		List<Pair<Map<MachineSlotItem, List<ItemStack>>, Map<MachineSlotFluid, List<FluidStack>>>> list = new ArrayList<>();
 		Collection<ItemStack> values = getInputValues();
-		values.stream().filter(StackHelper::isNonNull).forEach(stack -> {
-			list.add(Pair.of(ImmutableMap.of(inputSlot, ImmutableList.of(stack)), ImmutableMap.of()));
-		});
+		values.stream().filter(StackHelper::isNonNull).forEach(stack -> list.add(Pair.of(ImmutableMap.of(inputSlot, ImmutableList.of(stack)), ImmutableMap.of())));
 
 		return list;
 	}

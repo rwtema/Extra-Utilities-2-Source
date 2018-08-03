@@ -67,7 +67,7 @@ public class FluidColors {
 
 			if (pn == 0) return -1;
 
-			float[] rgb = CIELabHelper.lab2rgb(pr / pn, pg / pn, pb / pn, new float[3]);
+			float[] rgb = CIELabHelper.lab2rgb(pr / (float)pn, pg / (float)pn, pb / (float)pn, new float[3]);
 
 			return ColorHelper.colorClamp(rgb[0], rgb[1], rgb[2], 1);
 		}

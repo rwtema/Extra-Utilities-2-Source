@@ -38,6 +38,6 @@ public abstract class ItemRefComparator implements Comparator<ItemRef> {
 	protected abstract int doCompare(ItemRef o1, ItemRef o2);
 
 	public int compareInt(int a, int b) {
-		return (a < b) ? -1 : ((a == b) ? 0 : 1);
+		return Integer.compare(a, b);
 	}
 }

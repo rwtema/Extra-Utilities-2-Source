@@ -129,19 +129,19 @@ public class BookHandler {
 		StringBuilder builder = new StringBuilder("Table of Contents\n\n");
 		int k = 2;
 		for (int key : keys) {
-			String line = contents.get(key);
+			StringBuilder line = new StringBuilder(contents.get(key));
 			int a = key + offset;
 			while (fontRenderer.listFormattedStringToWidth(line + " " + a, 116).size() > 1) {
-				line = line.substring(0, line.length() - 1);
+				line = new StringBuilder(line.substring(0, line.length() - 1));
 			}
 
-			line = line + " ";
+			line.append(" ");
 
 			while (fontRenderer.listFormattedStringToWidth(line + " " + a, 116).size() == 1) {
-				line = line + " ";
+				line.append(" ");
 			}
 
-			line = line + a;
+			line.append(a);
 			builder.append(line).append('\n');
 			k++;
 			if (k >= 13) {

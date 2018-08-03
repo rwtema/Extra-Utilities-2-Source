@@ -70,7 +70,7 @@ public class CompatHelper {
 	}
 
 	public static <E> ArrayAccess<E> getArray10List11(E[] list) {
-		return new ArrayAccess.WrapArray<E>(list);
+		return new ArrayAccess.WrapArray<>(list);
 	}
 
 	public static BiomeDictionary.Type[] getTypesForBiome(Biome biome) {

@@ -120,8 +120,6 @@ public class ChunkProviderDream implements ChunkGeneratorCompat {
 		BlockFalling.fallInstantly = false;
 	}
 
-	;
-
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
 		return false;

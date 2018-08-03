@@ -65,7 +65,7 @@ class FoodEnergyRecipe extends EnergyBaseRecipe {
 			} else if (potion == MobEffects.SATURATION) {
 				healAmount += (potionId.getAmplifier() + 1) / 2F;
 			} else if (potion == MobEffects.REGENERATION) {
-				healAmount += potionId.getDuration() / (50 >> potionId.getAmplifier()) / 4F;
+				healAmount += potionId.getDuration() / (float)(50 >> potionId.getAmplifier()) / 4F;
 			} else if (potion == MobEffects.ABSORPTION) {
 				healAmount += (potionId.getAmplifier() + 1) / 2F;
 			} else {

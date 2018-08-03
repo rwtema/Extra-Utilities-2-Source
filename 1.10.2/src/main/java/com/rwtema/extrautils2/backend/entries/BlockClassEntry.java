@@ -8,12 +8,14 @@ public class BlockClassEntry<T extends XUBlock> extends BlockEntry<T> {
 	Class<T> clazz;
 
 
+	@SafeVarargs
 	public BlockClassEntry(String name, Class<T> clazz, Class<? extends TileEntity>... teClazzes) {
 		super(name, teClazzes);
 		this.clazz = clazz;
 	}
 
 
+	@SafeVarargs
 	public BlockClassEntry(Class<T> clazz, Class<? extends TileEntity>... teClazzes) {
 		this(StringHelper.erasePrefix(clazz.getSimpleName(), "Block"), clazz, teClazzes);
 	}

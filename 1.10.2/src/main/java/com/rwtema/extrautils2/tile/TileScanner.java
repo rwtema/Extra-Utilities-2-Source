@@ -81,7 +81,7 @@ public class TileScanner extends XUTile implements ITickable, IDynamicHandler {
 		}
 
 	});
-	NBTSerializableRegisteredValue<Block> storedBlock = registerNBT("block", new NBTSerializableRegisteredValue<Block>(ForgeRegistries.BLOCKS));
+	NBTSerializableRegisteredValue<Block> storedBlock = registerNBT("block", new NBTSerializableRegisteredValue<>(ForgeRegistries.BLOCKS));
 	NBTSerializable.HashMapSerializable<String, HashSet<String>, NBTTagList> storedPropertyBlacklist = registerNBT("props", new NBTSerializable.HashMapSerializable<>(
 			UnaryOperator.identity(),
 			UnaryOperator.identity(),
@@ -306,15 +306,10 @@ public class TileScanner extends XUTile implements ITickable, IDynamicHandler {
 					int j = 0;
 					if (value != null) {
 						List<IProperty<?>> properties = Lists.newArrayList(value.getBlockState().getProperties());
-						Collections.sort(properties, new Comparator<IProperty<?>>() {
-							@Override
-							public int compare(IProperty<?> o1, IProperty<?> o2) {
-								return ComparisonChain.start()
-										.compare(o1.getValueClass().getSimpleName(), o2.getValueClass().getSimpleName())
-										.compare(o1.getName(), o2.getName())
-										.result();
-							}
-						});
+						properties.sort((o1, o2) -> ComparisonChain.start()
+								.compare(o1.getValueClass().getSimpleName(), o2.getValueClass().getSimpleName())
+								.compare(o1.getName(), o2.getName())
+								.result());
 
 						for (IProperty property : properties) {
 							PropertyText propertyText = textCache[j];
@@ -328,12 +323,12 @@ public class TileScanner extends XUTile implements ITickable, IDynamicHandler {
 								button.show(property.getName(), property.getName((Comparable) val));
 								w.add(button);
 								if (w.size() == BUTTONS_PER_ROW) {
-									wRows.add(w.toArray(new IWidget[w.size()]));
+									wRows.add(w.toArray(new IWidget[0]));
 									w = new ArrayList<>();
 								}
 							}
 							if (!w.isEmpty()) {
-								wRows.add(w.toArray(new IWidget[w.size()]));
+								wRows.add(w.toArray(new IWidget[0]));
 							}
 						}
 					}

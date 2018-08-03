@@ -82,12 +82,12 @@ public class MultiBlockStateBuilder<T extends XUBlock> {
 	}
 
 	public List<T> createBlocks(T firstBlock) {
-		IProperty<?>[] worldProperties = this.worldProperties.toArray(new IProperty[this.worldProperties.size()]);
-		IProperty<?>[] dropProperties = this.dropProperties.toArray(new IProperty[this.dropProperties.size()]);
+		IProperty<?>[] worldProperties = this.worldProperties.toArray(new IProperty[0]);
+		IProperty<?>[] dropProperties = this.dropProperties.toArray(new IProperty[0]);
 		IProperty<?>[] properties = XUBlockStateCreator.joinProperties(worldProperties, dropProperties);
 		Arrays.sort(properties, XUBlockStateCreator.property_sorter);
 
-		IMetaProperty<?>[] metaProperties = this.metaProperties.toArray(new IMetaProperty[this.metaProperties.size()]);
+		IMetaProperty<?>[] metaProperties = this.metaProperties.toArray(new IMetaProperty[0]);
 
 		List<Collection<? extends Comparable<?>>> allowedValues = Lists.newArrayList();
 
@@ -156,8 +156,7 @@ public class MultiBlockStateBuilder<T extends XUBlock> {
 						return xuBlockState;
 					}
 
-					Map<IProperty<?>, Comparable<?>> cleanProps = new HashMap<>();
-					cleanProps.putAll(properties);
+					Map<IProperty<?>, Comparable<?>> cleanProps = new HashMap<>(properties);
 					for (IMetaProperty metaProperty : metaProperties) {
 						cleanProps.remove(metaProperty);
 					}
@@ -202,7 +201,7 @@ public class MultiBlockStateBuilder<T extends XUBlock> {
 				if (defaultValues.containsKey(property)) {
 					obj = defaultValues.get(property);
 				} else {
-					obj = (Comparable) Collections.min(property.getAllowedValues());
+					obj = Collections.min(property.getAllowedValues());
 				}
 				state = (XUBlockState) state.withProperty(property, obj);
 			}

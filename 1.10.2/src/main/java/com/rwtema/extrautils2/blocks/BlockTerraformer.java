@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.function.Supplier;
 
 public class BlockTerraformer extends XUBlockStatic {
-	public static final PropertyEnumSimple<Type> TYPE = new PropertyEnumSimple<Type>(Type.class);
+	public static final PropertyEnumSimple<Type> TYPE = new PropertyEnumSimple<>(Type.class);
 	public static final List<Pair<Type, Type>> OPPOSITES;
 
 	static {

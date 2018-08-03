@@ -30,9 +30,9 @@ import java.util.List;
 
 public interface ITESREnchantment<T extends XUTile> extends ITESRHookSimple<T> {
 
-	static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+	ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
-	public static void renderModel(List<BakedQuad> listQuads, BlockPos pos, int color, double dx, double dy, double dz) {
+	static void renderModel(List<BakedQuad> listQuads, BlockPos pos, int color, double dx, double dy, double dz) {
 		Tessellator tessellator = Tessellator.getInstance();
 		IVertexBuffer vertexbuffer = IVertexBuffer.getVertexBuffer(tessellator);
 		int i = 0;

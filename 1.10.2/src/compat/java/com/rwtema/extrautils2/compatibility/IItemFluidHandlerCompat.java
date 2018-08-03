@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 
 public interface IItemFluidHandlerCompat extends IFluidHandler {
 	@Nullable
-	public static IItemFluidHandlerCompat getFluidHandler(ItemStack stack) {
+	static IItemFluidHandlerCompat getFluidHandler(ItemStack stack) {
 		final IFluidHandler fluidHandler = FluidUtil.getFluidHandler(stack);
 		if (fluidHandler == null) return null;
 

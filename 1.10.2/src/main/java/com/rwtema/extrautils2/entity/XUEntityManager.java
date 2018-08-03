@@ -83,12 +83,7 @@ public class XUEntityManager {
 			@Override
 			@SideOnly(Side.CLIENT)
 			public void run() {
-				RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, new IRenderFactory<EntityBoomerang>() {
-					@Override
-					public Render<? super EntityBoomerang> createRenderFor(RenderManager renderManager) {
-						return new RenderEntityBoomerang(renderManager);
-					}
-				});
+				RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, RenderEntityBoomerang::new);
 			}
 		});
 	}

@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class BlockSimpleDecorative extends XUBlockStatic {
-	public static final PropertyEnumSimple<Type> TYPE = new PropertyEnumSimple<Type>(Type.class);
+	public static final PropertyEnumSimple<Type> TYPE = new PropertyEnumSimple<>(Type.class);
 
 	@Nonnull
 	@Override

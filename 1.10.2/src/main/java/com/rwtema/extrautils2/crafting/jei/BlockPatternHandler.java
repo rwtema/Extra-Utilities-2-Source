@@ -124,7 +124,7 @@ public class BlockPatternHandler {
 					double c = MathHelper.cos((float) (Math.PI * angle / 180.0));
 					double s = MathHelper.sin((float) (Math.PI * angle / 180.0));
 
-					Collections.sort(toRender, (o1, o2) ->
+					toRender.sort((o1, o2) ->
 							-Double.compare(
 									o1.getZ() * c - o1.getX() * s,
 									o2.getX() * c - o2.getX() * s

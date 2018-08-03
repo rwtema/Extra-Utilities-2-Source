@@ -31,7 +31,6 @@ public class CapGetter<T> {
 		}
 	};
 	public static CapGetter<IFluidHandler> FluidHandler = new CapGetter<>(IFluidHandler.class);
-	public static ArrayList<CapGetter<?>> caps = Lists.newArrayList(ItemHandler, PipeConnect, FluidHandler, energyReceiver);
 	private static IdentityHashMap<String, Capability<?>> providers = ObfuscationReflectionHelper.getPrivateValue(CapabilityManager.class, CapabilityManager.INSTANCE, "providers");
 	public static CapGetter<IEnergyStorage> energyReceiver = new CapGetter<IEnergyStorage>(IEnergyStorage.class
 	) {
@@ -63,6 +62,7 @@ public class CapGetter<T> {
 			return anInterface != null && anInterface.canReceive() ? anInterface : null;
 		}
 	};
+	public static ArrayList<CapGetter<?>> caps = Lists.newArrayList(ItemHandler, PipeConnect, FluidHandler, energyReceiver);
 	final Class<T> clazz;
 	final Converter<?, T>[] converters;
 	boolean init;

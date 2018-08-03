@@ -13,7 +13,7 @@ public class SetKey<T> {
 
 	@SafeVarargs
 	public static <T> SetKey<T> of(T... elements) {
-		return new SetKey<T>(ImmutableSet.copyOf(elements));
+		return new SetKey<>(ImmutableSet.copyOf(elements));
 	}
 
 	@Override

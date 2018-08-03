@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface ISolidWorldTexture {
 	@SideOnly(Side.CLIENT)
-	public static List<TextureComponent> handleTexture(TextureAtlasSprite icon) {
+	static List<TextureComponent> handleTexture(TextureAtlasSprite icon) {
 		return Textures.simpleCompositeTextureCache.computeIfAbsent(
 				icon,
 				Textures.simpleCompostiteFunction

@@ -14,7 +14,7 @@ public class Inversion<T> implements Predicate<T> {
 			return predicate.negate();
 		}
 
-		return new Inversion<T>(predicate);
+		return new Inversion<>(predicate);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 public class KeyAlt {
-	private static Map<EntityPlayer, Boolean> keyMap = Collections.synchronizedMap(new WeakHashMap<EntityPlayer, Boolean>());
+	private static Map<EntityPlayer, Boolean> keyMap = Collections.synchronizedMap(new WeakHashMap<>());
 
 	static {
 		MinecraftForge.EVENT_BUS.register(new KeyAlt());

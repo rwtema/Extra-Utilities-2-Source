@@ -53,7 +53,7 @@ import java.util.*;
 
 public class EntityBoomerang extends Entity implements IEntityAdditionalSpawnData, IProjectile {
 	public final static WeakHashMap<Object, WeakReference<EntityBoomerang>> boomerangOwners = new WeakHashMap<>();
-	public final static WeakHashMap<Object, WeakReference<EntityBoomerang>> boomerangOwnersClient = ExtraUtils2.proxy.nullifyOnServer(new WeakHashMap<Object, WeakReference<EntityBoomerang>>());
+	public final static WeakHashMap<Object, WeakReference<EntityBoomerang>> boomerangOwnersClient = ExtraUtils2.proxy.nullifyOnServer(new WeakHashMap<>());
 
 	private static final DataParameter<Byte> DATAWATCHER_OUT_FLAG = EntityDataManager.createKey(EntityBoomerang.class, DataSerializers.BYTE);
 	private static final DataParameter<Rotations> DATAWATCHER_HOME = EntityDataManager.createKey(EntityBoomerang.class, DataSerializers.ROTATIONS);

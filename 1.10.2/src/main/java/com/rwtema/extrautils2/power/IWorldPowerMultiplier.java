@@ -20,7 +20,7 @@ public interface IWorldPowerMultiplier {
 		}
 	};
 
-	public static float capPower(float input, @Nullable TreeMap<Float, Pair<Float, Float>> efficiencyLevels) {
+	static float capPower(float input, @Nullable TreeMap<Float, Pair<Float, Float>> efficiencyLevels) {
 		if (efficiencyLevels == null || efficiencyLevels.isEmpty() || input < efficiencyLevels.firstKey()) return input;
 
 		Map.Entry<Float, Pair<Float, Float>> calc = efficiencyLevels.floorEntry(input);
@@ -28,7 +28,7 @@ public interface IWorldPowerMultiplier {
 		return calc.getValue().getKey() + (input - calc.getKey()) * calc.getValue().getValue();
 	}
 
-	public static TreeMap<Float, Pair<Float, Float>> createCapsTree(float[][] caps) {
+	static TreeMap<Float, Pair<Float, Float>> createCapsTree(float[][] caps) {
 		if (caps.length == 0) return null;
 		TreeMap<Float, Pair<Float, Float>> map = new TreeMap<>();
 		float curTotal = caps[0][0];

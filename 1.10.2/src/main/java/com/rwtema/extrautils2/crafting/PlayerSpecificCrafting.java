@@ -29,6 +29,8 @@ import org.apache.commons.lang3.Validate;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class PlayerSpecificCrafting implements RecipeCompat, IRecipeInfoWrapper<IRecipe> {
 	public final IRecipe recipe;

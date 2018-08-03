@@ -92,8 +92,6 @@ public enum GrocketType {
 	BoxModel[] cache = new BoxModel[6];
 
 
-	;
-
 	@Nonnull
 	public static BoxModel createBasicBox(String s3) {
 		BoxModel model = new BoxModel();

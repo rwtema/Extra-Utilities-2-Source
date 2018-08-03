@@ -838,7 +838,7 @@ public class NBTSerializable {
 	}
 
 	public static class NBTEnumIntMap<T extends Enum<T>> implements INBTSerializable<NBTTagList> {
-		public final TObjectIntHashMap<T> map = new TObjectIntHashMap<T>(10, 0.5F, 0);
+		public final TObjectIntHashMap<T> map = new TObjectIntHashMap<>(10, 0.5F, 0);
 		private final Class<T> clazz;
 
 		public NBTEnumIntMap(Class<T> clazz) {

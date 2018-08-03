@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import javax.annotation.Nonnull;
 
 public class SpecialDimCompat {
-	public static final FieldSetter<World, WorldProvider> providerFieldSetter = new FieldSetter<World, WorldProvider>(World.class, "field_73011_w", "provider");
+	public static final FieldSetter<World, WorldProvider> providerFieldSetter = new FieldSetter<>(World.class, "field_73011_w", "provider");
 	public static final FieldSetter<ChunkProviderEnd, World> endWorldFieldSetter = new FieldSetter<>(ChunkProviderEnd.class, "field_73230_p", "world", "worldObj");
 	public static final FieldSetter<ChunkProviderHell, World> hellWorldFieldSetter = new FieldSetter<>(ChunkProviderHell.class, "field_185952_n", "world", "worldObj");
 	public static ChunkProviderEnd tempEnd = null;

@@ -16,7 +16,7 @@ public class IterableConcatBuilder<E> {
 
 	private List<E> initBackup() {
 		if (backupIterable == null) {
-			this.backupIterable = new ArrayList<E>();
+			this.backupIterable = new ArrayList<>();
 			this.iterables.add(backupIterable);
 		}
 		return backupIterable;

@@ -181,12 +181,7 @@ public class FlatTransferNodeHandler extends ChunkDataModuleManager<Multimap<Blo
 				node.isDead = true;
 			}
 		}
-		for (Iterator<FlatTransferNode> iterator = entries.values().iterator(); iterator.hasNext(); ) {
-			FlatTransferNode node = iterator.next();
-			if (node.isDead) {
-				iterator.remove();
-			}
-		}
+		entries.values().removeIf(node -> node.isDead);
 		return entries.isEmpty();
 	}
 

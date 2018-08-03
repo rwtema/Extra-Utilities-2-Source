@@ -338,11 +338,11 @@ public abstract class XUTConTextureBase extends AbstractColoredTexture {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				if (input[coord(x, y)]) {
-					output[coord(x, y)] |= true;
+					output[coord(x, y)] = true;
 					for (IntPair offset : offsets) {
 						int coord = coord(x + offset.x, y + offset.y, width, height);
 						if (coord != -1) {
-							output[coord] |= true;
+							output[coord] = true;
 						}
 					}
 
