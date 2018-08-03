@@ -89,6 +89,9 @@ public class XUJEIPlugin extends BlankModPlugin implements IModPlugin {
 		if (XU2Entries.blockSpotlight.isActive()) {
 			jeiHelpers.getItemBlacklist().addItemToBlacklist(XU2Entries.blockSpotlight.newStack(1, OreDictionary.WILDCARD_VALUE));
 		}
+		if(XU2Entries.snowGlobe.isActive()){
+			registry.addDescription(XU2Entries.snowGlobe.newStack(1, 1), Lang.translate("Craft a regular magic snow globe and take it on a world tour to special biomes to activate it."));
+		}
 
 		if (XU2Entries.sunCrystal.isActive())
 			registry.addDescription(XU2Entries.sunCrystal.newStack(1), Lang.translate("Craft an empty Sun Crystal first, then throw the crystal on the ground in direct sunlight."));

@@ -2,6 +2,7 @@ package com.rwtema.extrautils2.backend.entries;
 
 import com.google.common.collect.ImmutableMap;
 import com.rwtema.extrautils2.blocks.*;
+import com.rwtema.extrautils2.items.ItemSnowglobe;
 import com.rwtema.extrautils2.machine.TileGrouper;
 import com.rwtema.extrautils2.machine.TileItemWrapper;
 import com.rwtema.extrautils2.structure.PatternRecipe;

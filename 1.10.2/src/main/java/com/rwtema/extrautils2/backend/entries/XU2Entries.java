@@ -1284,7 +1284,7 @@ public class XU2Entries {
 					newStack(), quarry_proxy.newStack()
 			);
 
-			addShaped("quarry_base", newStack(), "mem", "ede", "mem", 'm', Blocks.END_STONE, 'd', "netherStar", 'e', stoneburnt);
+			addShaped("quarry_base", newStack(), "mem", "ede", "mem", 'm', Blocks.END_STONE, 'd',snowGlobe.isActive() ? "magic_snow_globe" : "netherStar", 'e', stoneburnt);
 		}
 
 		@Nonnull
@@ -1649,6 +1649,15 @@ public class XU2Entries {
 		}
 	};
 
+	public static ItemClassEntry<ItemCompoundBow> compoundBow = new ItemClassEntry<ItemCompoundBow>(ItemCompoundBow.class){
+		@Override
+		public void addRecipes() {
+			if (openium.isActive()) {
+				addShaped("compound_bow", newStack(), true, " iS", "s S", " iS", 'i', openium.newStack(1, BlockOpinium.NUM_TIERS - 1), 's', "ingotIron", 'S', "string");
+			}
+		}
+	};
+
 	public static ItemClassEntry<ItemFireAxe> fireAxe = new ItemClassEntry<ItemFireAxe>(ItemFireAxe.class) {
 		@Override
 		public void addRecipes() {
@@ -1657,6 +1666,29 @@ public class XU2Entries {
 			}
 		}
 	};
+
+	public static final ItemClassEntry<ItemSnowglobe> snowGlobe = new ItemClassEntry<ItemSnowglobe>(ItemSnowglobe.class){
+		@Override
+		public void addRecipes() {
+			OreDictionary.registerOre("doorWood", Items.OAK_DOOR);
+			OreDictionary.registerOre("doorWood", Items.ACACIA_DOOR);
+			OreDictionary.registerOre("doorWood", Items.JUNGLE_DOOR);
+			OreDictionary.registerOre("doorWood", Items.SPRUCE_DOOR);
+			OreDictionary.registerOre("doorWood", Items.DARK_OAK_DOOR);
+			OreDictionary.registerOre("doorWood", Items.BIRCH_DOOR);
+			OreDictionary.registerOre("doorIron", Items.IRON_DOOR);
+
+			addShapeless("snow_globe", newStack(),
+					"blockGlass", "treeSapling",Items.SNOWBALL,
+					"doorWood", "logWood",  "grass",
+					Items.ENDER_PEARL, "netherStar");
+		}
+
+		@Override
+		public void registerOres() {
+			OreDictionary.registerOre("magic_snow_globe", newStack(1, 1));
+		}
+	} ;
 
 
 	public static void init() {
