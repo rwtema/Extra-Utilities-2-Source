@@ -157,7 +157,7 @@ public class TileTerraformer extends TilePower implements ITickable, IDynamicHan
 			return;
 		}
 
-		if (range.value <= 0) return;
+		if (range.value < 0) return;
 
 		if (this.targetPosition.equals(BlockPos.ORIGIN)) {
 			if (findingCooldown > 0) {
@@ -167,26 +167,35 @@ public class TileTerraformer extends TilePower implements ITickable, IDynamicHan
 
 			BlockPos.MutableBlockPos temp_pos = new BlockPos.MutableBlockPos();
 
-			int range = MathHelper.clamp(this.range.value, 1, MAX_TRANSFORMATION_RANGE);
+			int range = MathHelper.clamp(this.range.value, 0, MAX_TRANSFORMATION_RANGE);
 
 			Random rand = world.rand;
 
-			int curBest = Integer.MAX_VALUE;
 
-			for (int i = 0; i < 100; i++) {
-				int x = rand.nextInt(range * 2 + 1) - range;
-				int z = rand.nextInt(range * 2 + 1) - range;
-				temp_pos.setPos(pos.getX() + x, pos.getY(), pos.getZ() + z);
 
-				if (!world.isBlockLoaded(temp_pos)) continue;
-
-				Biome biome1 = world.getBiomeForCoordsBody(temp_pos);
+			if(range == 0){
+				Biome biome1 = world.getBiomeForCoordsBody(pos);
 
 				if (biome1 != target) {
-					int d = x * x + z * z;
-					if (d < curBest) {
-						curBest = d;
-						this.targetPosition.setPos(temp_pos);
+					targetPosition.setPos(pos.getX(), pos.getY(), pos.getZ());
+				}
+			}else {
+				int curBest = Integer.MAX_VALUE;
+				for (int i = 0; i < 100; i++) {
+					int x = rand.nextInt(range * 2 + 1) - range;
+					int z = rand.nextInt(range * 2 + 1) - range;
+					temp_pos.setPos(pos.getX() + x, pos.getY(), pos.getZ() + z);
+
+					if (!world.isBlockLoaded(temp_pos)) continue;
+
+					Biome biome1 = world.getBiomeForCoordsBody(temp_pos);
+
+					if (biome1 != target) {
+						int d = x * x + z * z;
+						if (d < curBest) {
+							curBest = d;
+							this.targetPosition.setPos(temp_pos);
+						}
 					}
 				}
 			}
@@ -433,9 +442,9 @@ public class TileTerraformer extends TilePower implements ITickable, IDynamicHan
 						if (tile.targetBiome.isEmpty()) {
 							return Lang.translate("No biome marker.");
 						}
-						if (range == 0) {
-							return Lang.translate("Range is set to zero.");
-						}
+//						if (range == 0) {
+//							return Lang.translate("Range is set to zero.");
+//						}
 						return Lang.translate("Searching...");
 					}
 
