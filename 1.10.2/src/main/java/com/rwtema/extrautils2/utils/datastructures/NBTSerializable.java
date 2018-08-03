@@ -869,4 +869,19 @@ public class NBTSerializable {
 			}
 		}
 	}
+
+	public static class NBTUUID implements INBTSerializable<NBTTagString> {
+		public UUID value = null;
+
+		@Override
+		public NBTTagString serializeNBT() {
+
+			return new NBTTagString(value.toString());
+		}
+
+		@Override
+		public void deserializeNBT(NBTTagString nbt) {
+			value = UUID.fromString(nbt.getString());
+		}
+	}
 }
