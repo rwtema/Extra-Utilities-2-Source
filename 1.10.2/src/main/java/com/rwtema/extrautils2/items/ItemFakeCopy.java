@@ -182,7 +182,7 @@ public class ItemFakeCopy extends XUItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
+	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entity) {
 		model.addTintedSprite(Textures.getSprite("cardboard"), true, 0);
 	}
 

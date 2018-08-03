@@ -13,7 +13,7 @@ public class PropertyEnumSimple<T extends Enum<T>> extends PropertyHelper<T> {
 	EnumMap<T, String> propertyNames;
 
 	public PropertyEnumSimple(Class<T> valueClass) {
-		this(valueClass, valueClass.getSimpleName().toLowerCase());
+		this(valueClass, valueClass.getSimpleName().toLowerCase(Locale.ENGLISH));
 	}
 
 	public PropertyEnumSimple(Class<T> valueClass, String name) {

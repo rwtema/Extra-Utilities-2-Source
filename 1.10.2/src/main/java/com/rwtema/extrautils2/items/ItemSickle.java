@@ -18,6 +18,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -100,7 +101,7 @@ public class ItemSickle extends ItemTool implements IXUItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
+	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entity) {
 		model.addSprite(sprite);
 	}
 

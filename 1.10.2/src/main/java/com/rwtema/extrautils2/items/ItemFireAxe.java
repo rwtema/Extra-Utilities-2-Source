@@ -108,7 +108,7 @@ public class ItemFireAxe extends ItemAxe implements IXUItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
+	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entity) {
 		model.addSprite(sprite);
 	}
 

@@ -4,12 +4,14 @@ import com.rwtema.extrautils2.backend.model.PassthruModelItem;
 import com.rwtema.extrautils2.backend.model.Textures;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public interface IXUItemTexture extends IXUItem {
 	@Override
 	default void registerTextures() {
-		for (int i = 0; i < getMaxMetadata(); i++) {
+		for (int i = 0; i <= getMaxMetadata(); i++) {
 			Textures.register(getTexture(i));
 		}
 	}
@@ -27,7 +29,7 @@ public interface IXUItemTexture extends IXUItem {
 	}
 
 	@Override
-	default void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
+	default void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entity) {
 		model.addSprite(Textures.getSprite(getTexture(stack.getMetadata())));
 	}
 

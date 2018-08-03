@@ -147,7 +147,7 @@ public class PassthruModelItem extends NullModel {
 		public IBakedModel handleItemState(@Nonnull IBakedModel originalModel, ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
 			try {
 				ModelLayer model = modelFactory.get();
-				item.addQuads(model, stack);
+				item.addQuads(model, stack, world,entity );
 				return model;
 			} catch (Throwable throwable) {
 				CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Getting model for itemstack");

@@ -5,6 +5,7 @@ import com.rwtema.extrautils2.backend.model.PassthruModelItem;
 import com.rwtema.extrautils2.backend.model.Textures;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -49,7 +50,7 @@ public abstract class XUItemFood extends ItemFood implements IXUItem {
 	}
 
 	@Override
-	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
+	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entity) {
 		model.addTintedSprite(sprite, true, -1);
 	}
 

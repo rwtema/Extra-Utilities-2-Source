@@ -3,9 +3,13 @@ package com.rwtema.extrautils2.backend;
 import com.rwtema.extrautils2.backend.model.PassthruModelItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public interface IXUItem extends IRegisterItemColors {
 	@SideOnly(Side.CLIENT)
@@ -18,7 +22,7 @@ public interface IXUItem extends IRegisterItemColors {
 	TextureAtlasSprite getBaseTexture();
 
 	@SideOnly(Side.CLIENT)
-	void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack);
+	void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity);
 
 	@SideOnly(Side.CLIENT)
 	void postTextureRegister();

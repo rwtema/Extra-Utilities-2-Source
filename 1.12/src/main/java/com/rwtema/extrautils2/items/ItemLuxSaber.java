@@ -245,7 +245,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
+	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entity) {
 		float[] saberHiltBottom = {24 / 2F, 27 / 2F, 28 / 2F, 31 / 2F};
 		float[] saberHiltTop = {28 / 2F, 27 / 2F, 32 / 2F, 31 / 2F};
 		float[] saberHiltA = {24F / 2F, 7F / 2F, 28 / 2F, 15 / 2F};

@@ -217,7 +217,7 @@ public class ItemLawSword extends ItemSword implements IXUItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
+	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entity) {
 		if (this.sword == null) {
 			float sc = 16F / 32F;
 			float[] handleUV = new float[]{0 * 16F, 0 * 16F, 5F * sc, 16 * sc};

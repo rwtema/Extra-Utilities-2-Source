@@ -3,7 +3,9 @@ package com.rwtema.extrautils2.backend;
 import com.rwtema.extrautils2.backend.model.PassthruModelItem;
 import com.rwtema.extrautils2.backend.model.Textures;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -42,7 +44,7 @@ public abstract class XUItemFlat extends XUItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack) {
+	public void addQuads(PassthruModelItem.ModelLayer model, ItemStack stack, World world, EntityLivingBase entity) {
 		for (int i = 0; i < getRenderLayers(stack); i++) {
 			model.addTintedSprite(getSprite(stack, i), renderLayerIn3D(stack, i), getTint(stack, i));
 		}
