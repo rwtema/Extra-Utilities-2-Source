@@ -3,6 +3,7 @@ package com.rwtema.extrautils2.compatibility;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -115,5 +116,12 @@ public abstract class BlockCompat extends Block {
 
 	public boolean causesDownwardCurrent(IBlockAccess worldIn, @Nonnull BlockPos pos, EnumFacing side) {
 		return false;
+	}
+
+	@Nonnull
+	@Deprecated
+	public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
+	{
+		return isSideSolid(p_193383_2_,p_193383_1_, p_193383_3_, p_193383_4_) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
 	}
 }
