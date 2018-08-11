@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.rwtema.extrautils2.backend.XUItem;
 import com.rwtema.extrautils2.backend.model.*;
 import com.rwtema.extrautils2.compatibility.CompatHelper;
+import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.transfernodes.FacingHelper;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.blockaccess.CompatBlockAccess;
@@ -290,8 +291,9 @@ public class ItemSnowglobe extends XUItem {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void renderHand(RenderSpecificHandEvent event) {
+		@Nullable
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
-		if (player != null && player.isHandActive() && event.getItemStack().getItem() == this && player.getItemInUseCount() > 0 && player.getActiveHand() == event.getHand()) {
+		if (player != null && player.isHandActive() && player.getItemInUseCount() > 0 && player.getActiveHand() == event.getHand() && StackHelper.isNonNull(event.getItemStack()) && event.getItemStack().getItem() == this ) {
 			GlStateManager.pushMatrix();
 			GlStateManager.enableCull();
 			boolean flag1 = (event.getHand() == EnumHand.MAIN_HAND) == (player.getPrimaryHand() == EnumHandSide.RIGHT);
