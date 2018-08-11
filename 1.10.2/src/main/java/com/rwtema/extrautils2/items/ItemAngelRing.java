@@ -110,6 +110,8 @@ public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCre
 	}
 
 	public static class PlayerPowerAngelRing extends PlayerPower {
+		public static final int INACTIVE_POWER = 1;
+		public static final int ACTIVE_POWER = 32;
 		int type;
 		boolean wasFlying = false;
 
@@ -199,17 +201,17 @@ public class ItemAngelRing extends XUItemFlatMetadata implements IPlayerPowerCre
 
 			if (player.capabilities.isFlying) {
 				wasFlying = true;
-				power = 32;
+				power = ACTIVE_POWER;
 			}
 
 			if (wasFlying) {
 				if (player.onGround) {
 					wasFlying = false;
-					power = 0;
+					power = INACTIVE_POWER;
 				}
-				power = 32;
+				power = ACTIVE_POWER;
 			} else
-				power = 0;
+				power = INACTIVE_POWER;
 		}
 
 		@Override
