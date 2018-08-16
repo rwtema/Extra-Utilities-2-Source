@@ -43,7 +43,7 @@ public class BookHandler {
 					try {
 						try {
 							resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/" + currentLanguage.getLanguageCode().toLowerCase() + ".json"));
-						} catch (IOException err) {
+						} catch (IOException | NullPointerException err) {
 							resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/en_us.json"));
 						}
 
