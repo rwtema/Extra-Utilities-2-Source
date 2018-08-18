@@ -1,5 +1,6 @@
 package com.rwtema.extrautils2.backend.entries;
 
+import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.potion.PotionsHelper;
 import com.rwtema.extrautils2.potion.XUPotion;
 import net.minecraft.init.Items;
@@ -37,6 +38,6 @@ public abstract class PotionEntry<T extends XUPotion> extends Entry<T> {
 			}
 		}
 
-		return ItemStack.EMPTY;
+		return StackHelper.empty();
 	}
 }
