@@ -1,5 +1,7 @@
 package com.rwtema.extrautils2.power;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
 import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.network.XUPacketServerToClient;
@@ -10,6 +12,7 @@ import com.rwtema.extrautils2.utils.helpers.PlayerHelper;
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TObjectFloatIterator;
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.linked.TIntLinkedList;
 import gnu.trove.map.hash.TIntIntHashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -288,9 +291,11 @@ public class PowerManager {
 
 		PowerFreq powerFreq = frequencyHolders.get(i);
 		if (powerFreq == null) {
-			powerFreq = new PowerFreq(i);
-			powerFreq.dirty = true;
-			frequencyHolders.put(i, powerFreq);
+			synchronized (MUTEX) {
+				powerFreq = new PowerFreq(i);
+				powerFreq.dirty = true;
+				frequencyHolders.put(i, powerFreq);
+			}
 		}
 		return powerFreq;
 	}
@@ -440,19 +445,19 @@ public class PowerManager {
 			}
 
 
-			TIntObjectIterator<PowerFreq> iterator = frequencyHolders.iterator();
-			while (iterator.hasNext()) {
-				iterator.advance();
-				PowerFreq value = iterator.value();
-				if (value.dirty || value.refresh_delta == p) {
-					if (value.refresh()) {
-						value.dirty = false;
+			ImmutableList<PowerFreq> powerFreqs = ImmutableList.copyOf(frequencyHolders.valueCollection());
+			List<Integer> toRemove = new ArrayList<>();
+			for (PowerFreq powerFreq : powerFreqs) {
+				if (powerFreq.dirty || powerFreq.refresh_delta == p) {
+					if (powerFreq.refresh()) {
+						powerFreq.dirty = false;
 					} else {
-						iterator.remove();
+						toRemove.add(powerFreq.frequency);
 					}
 				} else
-					value.quickRefresh();
+					powerFreq.quickRefresh();
 			}
+			toRemove.forEach(frequencyHolders::remove);
 		}
 	}
 
