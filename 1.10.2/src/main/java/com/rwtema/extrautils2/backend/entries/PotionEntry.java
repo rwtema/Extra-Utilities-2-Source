@@ -37,6 +37,6 @@ public abstract class PotionEntry<T extends XUPotion> extends Entry<T> {
 			}
 		}
 
-		throw new IllegalStateException();
+		return ItemStack.EMPTY;
 	}
 }
