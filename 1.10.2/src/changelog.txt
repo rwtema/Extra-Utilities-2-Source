@@ -1,1 +1,3 @@
-- Fix crash when current language is null.
+- Add a check to prevent CME's in the power grid system. Should fix issues with shift-clicking into GUIs.
+- Fix various issues and crashes related to Lux Sabers
+- Fix crash when potions are unregistered.
