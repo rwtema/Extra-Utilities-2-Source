@@ -6,7 +6,6 @@ import com.google.common.collect.Multimap;
 import com.rwtema.extrautils2.backend.IXUItem;
 import com.rwtema.extrautils2.backend.model.*;
 import com.rwtema.extrautils2.blocks.LuxColors;
-import com.rwtema.extrautils2.power.energy.XUEnergyStorage;
 import com.rwtema.extrautils2.transfernodes.FacingHelper;
 import com.rwtema.extrautils2.utils.MCTimer;
 import com.rwtema.extrautils2.utils.client.GLStateAttributes;
@@ -65,8 +64,8 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 			6,
 			2048,
 			5,
-			16,
-			5));
+			7,
+			15));
 	public static final UUID UUID = java.util.UUID.fromString("8126703D-7BDC-4E0A-98C6-C8FD511FE3A8");
 	final WeakHashMap<ItemStack, Float> stackMap = new WeakHashMap<>();
 	final ThreadLocal<Boolean> bladeOnly = ThreadLocal.withInitial(() -> false);
@@ -87,9 +86,10 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
 			for (int i = 0; i < LuxColors.values().length; i++) {
+				items.add(new ItemStack(this, 1, i));
 				ItemStack stack = new ItemStack(this, 1, i);
-				IEnergyStorage xuItemEnergyStorage = Validate.notNull(stack.getCapability(CapabilityEnergy.ENERGY, null));
-				xuItemEnergyStorage.receiveEnergy(xuItemEnergyStorage.getMaxEnergyStored(), false);
+				XUItemEnergyStorage xuItemEnergyStorage = (XUItemEnergyStorage)Validate.notNull(stack.getCapability(CapabilityEnergy.ENERGY, null));
+				xuItemEnergyStorage.setEnergyStored(xuItemEnergyStorage.getMaxEnergyStored());
 				items.add(stack);
 			}
 
@@ -101,7 +101,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 		NBTTagCompound tagCompound = stack.getTagCompound();
 		if (tagCompound != null) {
 			IEnergyStorage storage = Validate.notNull(stack.getCapability(CapabilityEnergy.ENERGY, null));
-			return storage.getEnergyStored() / (double) storage.getMaxEnergyStored();
+			return 1 - storage.getEnergyStored() / (double) storage.getMaxEnergyStored();
 		}
 		return super.getDurabilityForDisplay(stack);
 	}
@@ -201,11 +201,9 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 		int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
 
 		if (!EnchantmentDurability.negateDamage(stack, i, target.getRNG())) {
-			XUEnergyStorage capability = (XUEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
+			XUItemEnergyStorage capability = (XUItemEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
 			if (capability == null) throw new IllegalStateException();
-			capability.setMaxExtract(ENERGY_PER_HIT);
-			capability.extractEnergy(ENERGY_PER_HIT, false);
-			capability.setMaxExtract(0);
+			capability.setEnergyStored(Math.max(0, capability.getEnergyStored() - ENERGY_PER_HIT));
 		}
 		return true;
 	}
@@ -214,7 +212,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		IEnergyStorage storage = Validate.notNull(stack.getCapability(CapabilityEnergy.ENERGY, null));
-		tooltip.add(String.format("%s RF /%s RF",
+		tooltip.add(String.format("%s RF / %s RF",
 				StringHelper.format(storage.getEnergyStored()),
 				StringHelper.format(storage.getMaxEnergyStored())));
 	}
@@ -222,7 +220,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 	@Nullable
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-		return new XUItemEnergyStorage(stack, ENERGY_PER_HIT * NUM_HITS, ENERGY_PER_HIT * 10, 0);
+		return new XUItemEnergyStorage(stack, ENERGY_PER_HIT * NUM_HITS, ENERGY_PER_HIT, 0);
 	}
 
 	@Nonnull
@@ -410,7 +408,7 @@ public class ItemLuxSaber extends ItemSword implements IXUItem {
 		for (EntityPlayer player : world.getEntities(EntityPlayer.class, s -> true)) {
 			for (ItemStack stack : player.getHeldEquipment()) {
 				if (stack.getItem() == this) {
-					double durabilityForDisplay = getDurabilityForDisplay(stack);
+					double durabilityForDisplay = 1 - getDurabilityForDisplay(stack);
 					if (durabilityForDisplay != 0) {
 						stackMap.put(stack, Math.min(prevMap.getOrDefault(stack, 0F) + OFFSET, 1));
 					}
