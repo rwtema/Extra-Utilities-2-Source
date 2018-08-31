@@ -457,6 +457,7 @@ public class ItemIngredients extends XUItemFlatMetadata implements IUpgradeProvi
 								ItemStack dropStack = new ItemStack(XU2Entries.mobSpawner.value);
 								dropStack.setTagCompound(nbt);
 								Block.spawnAsEntity(worldIn, pos, dropStack);
+								StackHelper.decrease(stack);
 							}
 						}
 					}
