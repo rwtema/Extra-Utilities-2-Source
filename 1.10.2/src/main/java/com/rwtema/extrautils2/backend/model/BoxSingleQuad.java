@@ -152,7 +152,7 @@ public class BoxSingleQuad extends Box {
 
 	@Override
 	public List<BakedQuad> makeQuads(@Nullable EnumFacing side) {
-		if (side != null) return ImmutableList.of();
+		if (side != null) return null;
 
 		if (doubleSided) {
 			UV[] v2 = new UV[vecs.length];

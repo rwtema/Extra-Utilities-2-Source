@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.Vector3f;
 
+import javax.annotation.Nonnull;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector4f;
 import java.util.Arrays;
@@ -274,6 +275,7 @@ public class QuadHelper {
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Nonnull
 	public static BakedQuad createBakedQuad(UV[] vecs, String texture, boolean addShading, int tint) {
 		Vector3f a = new Vector3f(), b = new Vector3f(), c = new Vector3f();
 		Vector3f.sub(vecs[1].toVector3f(), vecs[0].toVector3f(), a);

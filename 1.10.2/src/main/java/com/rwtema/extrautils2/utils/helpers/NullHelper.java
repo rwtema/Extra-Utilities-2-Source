@@ -12,6 +12,7 @@ public class NullHelper {
 
 	@Nullable
 	public static <T> T nullable(@Nullable T t) {
+		if(dummy != null) return (T)dummy;
 		return t;
 	}
 
