@@ -238,6 +238,14 @@ public class TreeIronWoods extends XUTree {
 			}
 
 			@Override
+			protected ItemStack getAppleDrop(IBlockAccess world, BlockPos pos, IBlockState state, Random rand, int fortune, int chance) {
+				if (state.getValue(TREE_TYPE) == TreeType.BURNT) {
+					return new ItemStack(Items.BLAZE_POWDER);
+				}
+				return super.getAppleDrop(world, pos, state, rand, fortune, chance);
+			}
+
+			@Override
 			public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 				super.updateTick(worldIn, pos, state, rand);
 				performUpdate(worldIn, pos, state, rand);
@@ -253,12 +261,13 @@ public class TreeIronWoods extends XUTree {
 			@Override
 			public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
 				IBlockState blockState = world.getBlockState(pos);
-				return blockState.getValue(TREE_TYPE) != TreeType.BURNT;
+				return true;
 			}
 
 			@Override
 			public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
-				return ENCOURAGABILITY;
+				IBlockState blockState = world.getBlockState(pos);
+				return blockState.getValue(TREE_TYPE) == TreeType.BURNT ? 0 : ENCOURAGABILITY;
 			}
 
 			@Override
@@ -270,6 +279,7 @@ public class TreeIronWoods extends XUTree {
 				IBlockState blockState = worldIn.getBlockState(pos);
 				if (blockState.getValue(TREE_TYPE) == TreeType.BURNT)
 					if (!entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase && !EnchantmentHelper.hasFrostWalkerEnchantment((EntityLivingBase) entityIn)) {
+						entityIn.setFire(1);
 						entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
 					}
 
@@ -310,7 +320,7 @@ public class TreeIronWoods extends XUTree {
 								if (rand.nextBoolean()) continue;
 								BlockPos offset2 = pos.offset(enumFacing2);
 								IBlockState blockState2 = worldIn.getBlockState(offset2);
-								if (blockState2.getBlock() == Blocks.FIRE || blockState2.getBlock().isAir(blockState2, worldIn, offset2)) {
+								if (blockState2.getBlock() == Blocks.FIRE || blockState2.getBlock().isAir(blockState2, worldIn, offset2) || blockState2.getBlock().isReplaceable(worldIn, offset2) ) {
 									worldIn.setBlockState(offset2, Blocks.FIRE.getDefaultState().withProperty(BlockFire.AGE, 0), 3);
 								}
 							}
