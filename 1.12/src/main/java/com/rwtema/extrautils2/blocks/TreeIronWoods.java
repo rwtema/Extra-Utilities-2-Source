@@ -4,21 +4,33 @@ import com.google.common.collect.ImmutableMap;
 import com.rwtema.extrautils2.backend.PropertyEnumSimple;
 import com.rwtema.extrautils2.backend.XUBlock;
 import com.rwtema.extrautils2.backend.XUBlockStateCreator;
+import com.rwtema.extrautils2.eventhandlers.DropsHandler;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.XURandom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.*;
+import net.minecraft.world.storage.loot.conditions.LootCondition;
+import net.minecraft.world.storage.loot.conditions.RandomChance;
+import net.minecraft.world.storage.loot.functions.LootFunction;
+import net.minecraft.world.storage.loot.functions.SetMetadata;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -55,7 +67,27 @@ public class TreeIronWoods extends XUTree {
 	@Override
 	public void addRecipes() {
 		super.addRecipes();
+
 		FurnaceRecipes.instance().addSmelting(value.planks.itemBlock, new ItemStack(Items.IRON_NUGGET, 1), 0);
+
+		XUTreeSapling sapling = value.sapling;
+		int metaFromState = sapling.getMetaFromState(sapling.getDefaultState().withProperty(TREE_TYPE, TreeType.RAW));
+		DropsHandler.lootDrops.put(LootTableList.CHESTS_NETHER_BRIDGE,
+				new LootPool(
+						new LootEntry[]{
+								new LootEntryItem(
+										Item.getItemFromBlock(sapling), 1, 0
+										, new LootFunction[]{new SetMetadata(new LootCondition[0], new RandomValueRange(metaFromState, metaFromState))}
+										, new LootCondition[]{
+										new RandomChance(0.1F)
+								}, "ferrousjuniperSapling")
+						},
+						new LootCondition[0],
+						new RandomValueRange(0, 3),
+						new RandomValueRange(0, 0),
+						"xuLootDropOfEvil"
+				)
+		);
 	}
 
 	@Override
@@ -215,12 +247,13 @@ public class TreeIronWoods extends XUTree {
 			@Override
 			public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
 				IBlockState blockState = world.getBlockState(pos);
-				return blockState.getValue(TREE_TYPE) == TreeType.BURNT ? 60 : 0;
+				return blockState.getValue(TREE_TYPE) == TreeType.BURNT ? 0 : 0;
 			}
 
 			@Override
 			public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
-				return true;
+				IBlockState blockState = world.getBlockState(pos);
+				return blockState.getValue(TREE_TYPE) != TreeType.BURNT;
 			}
 
 			@Override
@@ -232,6 +265,17 @@ public class TreeIronWoods extends XUTree {
 			public boolean isFireSource(@Nonnull World world, BlockPos pos, EnumFacing side) {
 				return true;
 			}
+
+			public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+				IBlockState blockState = worldIn.getBlockState(pos);
+				if (blockState.getValue(TREE_TYPE) == TreeType.BURNT)
+					if (!entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase && !EnchantmentHelper.hasFrostWalkerEnchantment((EntityLivingBase) entityIn)) {
+						entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
+					}
+
+				super.onEntityWalk(worldIn, pos, entityIn);
+			}
+
 		};
 	}
 
@@ -251,7 +295,11 @@ public class TreeIronWoods extends XUTree {
 	private void performUpdate(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (state.getValue(TREE_TYPE) == TreeType.RAW) {
 			for (EnumFacing facing : EnumFacing.values()) {
-				if (worldIn.getBlockState(pos.offset(facing)).getBlock() == Blocks.FIRE) {
+				IBlockState fireState = worldIn.getBlockState(pos.offset(facing));
+				if (fireState.getBlock() == Blocks.FIRE
+						|| fireState.getMaterial() == Material.FIRE
+						|| (fireState.getBlock() == value.leaves && fireState.getValue(TREE_TYPE) == TreeType.BURNT)
+				) {
 					for (EnumFacing enumFacing : EnumFacing.values()) {
 						BlockPos offset = pos.offset(enumFacing);
 						IBlockState blockState = worldIn.getBlockState(offset);
