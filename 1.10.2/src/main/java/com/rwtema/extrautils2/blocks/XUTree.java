@@ -806,6 +806,9 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 			}
 			if(rand.nextInt(chance) == 0){
 				ItemStack stack = getAppleDrop(world, pos, state, rand, fortune, chance);
+				if(StackHelper.isNonNull(stack)){
+					drops.add(stack);
+				}
 			}
 			return drops;
 		}
