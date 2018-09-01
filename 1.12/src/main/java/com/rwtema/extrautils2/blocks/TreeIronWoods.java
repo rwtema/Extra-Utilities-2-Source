@@ -181,7 +181,7 @@ public class TreeIronWoods extends XUTree {
 			public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
 				if (state.getValue(TREE_TYPE) == TreeType.RAW) {
 					Random r = world instanceof World ? ((World) world).rand : XURandom.rand;
-					int i = r.nextInt(10);
+					int i = r.nextInt(100);
 					if (i == 0) {
 						return super.getDrops(world, pos, state, fortune);
 					} else {

@@ -50,6 +50,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
@@ -684,6 +685,7 @@ public class TileIndexer extends TilePower implements ITickable, IDynamicHandler
 				tileIndexer.order(read, b, speed);
 			}
 
+			@Nullable
 			@Override
 			@SideOnly(Side.CLIENT)
 			public XUPacketBuffer getPacketToSend(int mouseButton) {

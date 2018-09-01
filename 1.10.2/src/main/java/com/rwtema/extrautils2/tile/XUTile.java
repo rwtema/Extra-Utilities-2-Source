@@ -13,6 +13,7 @@ import com.rwtema.extrautils2.gui.backend.IDynamicHandler;
 import com.rwtema.extrautils2.itemhandler.InventoryHelper;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 import com.rwtema.extrautils2.render.IVertexBuffer;
+import com.rwtema.extrautils2.utils.datastructures.NBTSerializable;
 import com.rwtema.extrautils2.utils.helpers.NullHelper;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -157,29 +158,23 @@ public abstract class XUTile extends TileEntity {
 		return t;
 	}
 
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		if (nbtHandlers != null)
-			for (Map.Entry<String, INBTSerializable> entry : nbtHandlers.entrySet()) {
-				NBTBase tag = compound.getTag(entry.getKey());
-				if (tag != null) {
-					entry.getValue().deserializeNBT(tag);
-				}
-			}
+		if (nbtHandlers != null) {
+			Map<String, INBTSerializable> nbtHandlers = this.nbtHandlers;
+			NBTSerializable.loadData(compound, nbtHandlers);
+		}
 	}
 
 	@Nonnull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
-		if (nbtHandlers != null)
-			for (Map.Entry<String, INBTSerializable> entry : nbtHandlers.entrySet()) {
-				String key = entry.getKey();
-				NBTBase value = entry.getValue().serializeNBT();
-				compound.setTag(key, value);
-			}
+		if (nbtHandlers != null) {
+			NBTSerializable.saveData(compound, nbtHandlers);
+		}
 		return compound;
 	}
 

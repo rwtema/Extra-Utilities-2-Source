@@ -57,6 +57,27 @@ public class NBTSerializable {
 		return new NBTTagLong(value);
 	}
 
+	public static NBTTagCompound saveData(NBTTagCompound compound, Map<String, INBTSerializable> nbtHandlers) {
+		nbtHandlers.forEach(
+				(key,value) -> {
+					compound.setTag(key, value.serializeNBT());
+				}
+		);
+		return compound;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void loadData(NBTTagCompound compound, Map<String, INBTSerializable> nbtHandlers) {
+		nbtHandlers.forEach((key, value)->{
+			if (compound.hasKey(key)) {
+				NBTBase tag = compound.getTag(key);
+				if (tag != null) {
+					value.deserializeNBT(tag);
+				}
+			}
+		});
+	}
+
 	public static class Text implements INBTSerializable<NBTTagString> {
 		@Nonnull
 		String s;
@@ -677,6 +698,14 @@ public class NBTSerializable {
 		public void deserializeNBT(NBTTagLong nbt) {
 			setPos(BlockPos.fromLong(nbt.getLong()));
 		}
+
+		public void setX(int x){
+			this.x = x;
+		}
+
+		public void setZ(int z){
+			this.z = z;
+		}
 	}
 
 	public static class NBTCollection<E, C extends Collection<E>, T extends NBTBase> implements INBTSerializable<NBTTagList> {
@@ -884,4 +913,6 @@ public class NBTSerializable {
 			value = UUID.fromString(nbt.getString());
 		}
 	}
+
+
 }
