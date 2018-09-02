@@ -19,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -67,6 +69,7 @@ public class BlockInteractionProxy extends XUBlockStatic {
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public  void onSelect(DrawBlockHighlightEvent event){
 		RayTraceResult movingObjectPositionIn = event.getTarget();
 		if ( movingObjectPositionIn.typeOfHit == RayTraceResult.Type.BLOCK)
