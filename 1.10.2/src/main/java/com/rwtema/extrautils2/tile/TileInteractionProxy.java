@@ -2,6 +2,7 @@ package com.rwtema.extrautils2.tile;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.rwtema.extrautils2.gui.backend.*;
 import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
@@ -14,21 +15,23 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.items.CapabilityItemHandler;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -39,6 +42,7 @@ public class TileInteractionProxy extends TilePower implements ITickable, IRemot
 	public static final BiConsumer<NBTSerializable.NBTMutableBlockPos, Integer> SET_POS_X = NBTSerializable.NBTMutableBlockPos::setPosX;
 	public static final BiConsumer<NBTSerializable.NBTMutableBlockPos, Integer> SET_POS_Y = NBTSerializable.NBTMutableBlockPos::setPosY;
 	public static final BiConsumer<NBTSerializable.NBTMutableBlockPos, Integer> SET_POS_Z = NBTSerializable.NBTMutableBlockPos::setPosZ;
+	public static final Set<Capability<?>> VALID_CAPS = ImmutableSet.of(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, CapabilityEnergy.ENERGY);
 	public NBTSerializable.NBTMutableBlockPos targetA = registerNBT("target_a", new NBTSerializable.NBTMutableBlockPos());
 	public NBTSerializable.NBTMutableBlockPos targetB = registerNBT("target_b", new NBTSerializable.NBTMutableBlockPos());
 	public NBTSerializable.NBTMutableBlockPos currentPos = registerNBT("pos", new NBTSerializable.NBTMutableBlockPos());
@@ -85,7 +89,7 @@ public class TileInteractionProxy extends TilePower implements ITickable, IRemot
 
 		verifyPos();
 
-		if(currentPos.equals(BlockPos.ORIGIN)){
+		if (currentPos.equals(BlockPos.ORIGIN)) {
 			return Optional.empty();
 		}
 
@@ -187,7 +191,7 @@ public class TileInteractionProxy extends TilePower implements ITickable, IRemot
 
 	@Override
 	public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing) {
-		if (searching || world.isRemote) return null;
+		if (searching || world.isRemote || !VALID_CAPS.contains(capability)) return null;
 		BlockPos add = getPos().add(currentPos);
 
 		if (getPos().equals(add) || !world.isBlockLoaded(add)) return null;
