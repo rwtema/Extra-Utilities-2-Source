@@ -81,8 +81,9 @@ public class TileSuperMobSpawner extends TileAdvInteractor implements ITESRHook 
 	}
 
 	@Override
-	protected void operate() {
+	protected boolean operate() {
 		logic.updateSpawner();
+		return true;
 	}
 
 	@Override

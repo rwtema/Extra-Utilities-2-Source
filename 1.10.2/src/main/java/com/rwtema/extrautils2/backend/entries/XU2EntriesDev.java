@@ -1,12 +1,12 @@
 package com.rwtema.extrautils2.backend.entries;
 
 import com.google.common.collect.ImmutableMap;
-import com.rwtema.extrautils2.blocks.BlockGrouper;
-import com.rwtema.extrautils2.blocks.BlockItemWrapper;
-import com.rwtema.extrautils2.blocks.BlockOneWay;
+import com.rwtema.extrautils2.blocks.*;
 import com.rwtema.extrautils2.machine.TileGrouper;
 import com.rwtema.extrautils2.machine.TileItemWrapper;
 import com.rwtema.extrautils2.structure.PatternRecipe;
+import com.rwtema.extrautils2.tile.TileInteractionProxy;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 
 public class XU2EntriesDev {
@@ -81,4 +81,17 @@ public class XU2EntriesDev {
 
 	}
 
+	private static class BlockColorsBlockEntry extends BlockEntry<BlockColors> {
+		private String tex;
+
+		public BlockColorsBlockEntry(String tex) {
+			super("colored_" + tex);
+			this.tex = tex;
+		}
+
+		@Override
+		protected BlockColors initValue() {
+			return new BlockColors(Material.ROCK, "minecraft:blocks/" + tex);
+		}
+	}
 }

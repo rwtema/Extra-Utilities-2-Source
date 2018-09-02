@@ -127,22 +127,22 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 	}
 
 	@Override
-	protected void operate() {
-		if (world.isRemote) return;
+	protected boolean operate() {
+		if (world.isRemote) return true;
 		if (extraStacks.hasStacks()) {
 			extraStacks.attemptDump(output);
 		}
 
-		if (curRecipe == NullRecipe.INSTANCE) return;
+		if (curRecipe == NullRecipe.INSTANCE) return false;
 
-		if (genericStacks == null) return;
+		if (genericStacks == null) return false;
 
 		List<IItemHandler> adjHandlers = getAdjacentHandlers();
 
 		crafter.loadStacks(genericStacks);
 
 		if (!curRecipe.matches(crafter, world))
-			return;
+			return false;
 
 		BitSet matched = new BitSet(9);
 
@@ -153,7 +153,7 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 		}
 
 		if (matched.cardinality() == 9) {
-			return;
+			return false;
 		}
 
 		IItemHandler copyContents = InventoryHelper.copyHandler(contents);
@@ -198,7 +198,7 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 			}
 
 			if (clone.cardinality() < 9)
-				return;
+				return false;
 
 
 			for (int i = 0; i < 9; i++) {
@@ -219,27 +219,27 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 		}
 
 		if (matched.cardinality() < 9) {
-			return;
+			return false;
 		}
 
 		if (!curRecipe.matches(crafter, world)) {
-			return;
+			return false;
 		}
 
 		ItemStack outputStack = curRecipe.getCraftingResult(crafter);
 
 		if (StackHelper.isNull(outputStack)) {
-			return;
+			return false;
 		}
 
 		if (StackHelper.isNonNull(InventoryHelper.insert(copyOutput, outputStack, false))) {
-			return;
+			return false;
 		}
 
 		for (ItemStack stack : curRecipe.getRemainingItems(crafter)) {
 			if (StackHelper.isNonNull(stack)) {
 				if (StackHelper.isNonNull(InventoryHelper.insert(mode.value == ContainerMode.CONTAINER_ITEMS_STAY_IN_INPUT ? copyContents : copyOutput, stack, false))) {
-					return;
+					return false;
 				}
 			}
 		}
@@ -257,6 +257,7 @@ public class TileCrafter extends TileAdvInteractor implements ITickable, IDynami
 			if (StackHelper.isNonNull(stack))
 				InventoryHelper.insert(mode.value == ContainerMode.CONTAINER_ITEMS_STAY_IN_INPUT ? contents : output, stack, false);
 		}
+		return true;
 	}
 
 	@Override

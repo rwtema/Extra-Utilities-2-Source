@@ -76,7 +76,7 @@ public class TileGrouper extends TileAdvInteractor implements IDynamicHandler, I
 	}
 
 	@Override
-	protected void operate() {
+	protected boolean operate() {
 		if (state.value == State.INSERTION) {
 			boolean flag = false;
 			for (int i = 0; i < SLOT_COUNT; i++) {
@@ -87,7 +87,7 @@ public class TileGrouper extends TileAdvInteractor implements IDynamicHandler, I
 					if (redstone_state.value == RedstoneState.OPERATE_REDSTONE_PULSE) {
 						pulses.value++;
 					}
-					return;
+					return false;
 				}
 			}
 
@@ -99,11 +99,12 @@ public class TileGrouper extends TileAdvInteractor implements IDynamicHandler, I
 		} else {
 			for (int i = 0; i < SLOT_COUNT; i++) {
 				if (!StackHelper.isEmpty(outputs.getStackInSlot(i))) {
-					return;
+					return false;
 				}
 			}
 			state.value = State.INSERTION;
 		}
+		return true;
 	}
 
 	enum State {

@@ -93,7 +93,8 @@ public class ColorHelper {
 		float af = ColorHelper.getAF(color);
 		if (af == 0) return 0;
 
-		return colorClamp(ColorHelper.getRF(color),
+		return colorClamp(
+				ColorHelper.getRF(color),
 				ColorHelper.getGF(color),
 				ColorHelper.getBF(color),
 				af * alpha

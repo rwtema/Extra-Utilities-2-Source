@@ -27,6 +27,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -34,8 +35,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -119,18 +122,33 @@ public class TileScanner extends XUTile implements ITickable, IDynamicHandler {
 	@Override
 	public void update() {
 		if (world.isRemote) return;
-		IBlockState state = getScannedBlockState();
-		boolean b = checkState(state);
+		boolean b = calcCurrentState();
 		if (b != redstone.value) {
 			redstone.value = b;
 			CompatHelper.notifyNeighborsOfStateChange(world, getPos(), getXUBlock());
 		}
 	}
 
+	public boolean calcCurrentState() {
+		IBlockState state = getScannedBlockState();
+		return checkState(state);
+	}
+
 	@Nonnull
 	public IBlockState getScannedBlockState() {
 		EnumFacing side = getBlockState().getValue(XUBlockStateCreator.ROTATION_ALL);
 		BlockPos offset = getPos().offset(side);
+		TileEntity tileEntity = world.getTileEntity(offset);
+		World world = getWorld();
+		if(tileEntity instanceof IRemoteTarget){
+			Optional<Pair<World, BlockPos>> targetPos = ((IRemoteTarget) tileEntity).getTargetPos();
+			if(targetPos.isPresent()){
+				Pair<World, BlockPos> pair = targetPos.get();
+				world = pair.getLeft();
+				offset = pair.getRight();
+			}
+		}
+
 		IBlockState state = world.getBlockState(offset);
 		return state.getActualState(world, offset);
 	}
@@ -224,6 +242,7 @@ public class TileScanner extends XUTile implements ITickable, IDynamicHandler {
 			});
 
 			addWidget(new WidgetClickMCButtonText(Lang.translate("Set to Current Block"), w + 12, 6 + 9 + (20 - 9) / 2, 120, 20) {
+				@Nullable
 				@Override
 				public XUPacketBuffer getPacketToSend(int mouseButton) {
 					return new XUPacketBuffer();
@@ -385,6 +404,7 @@ public class TileScanner extends XUTile implements ITickable, IDynamicHandler {
 				super("", 0, 0, ContainerScanner.BUTTON_WIDTH, ContainerScanner.BUTTON_HEIGHT);
 			}
 
+			@Nullable
 			@Override
 			public XUPacketBuffer getPacketToSend(int mouseButton) {
 				if (property != null && value != null) {

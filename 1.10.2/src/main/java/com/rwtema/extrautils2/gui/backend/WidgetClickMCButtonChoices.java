@@ -90,6 +90,7 @@ public abstract class WidgetClickMCButtonChoices<T> extends WidgetClickMCButtonB
 		return tooltip != null ? ImmutableList.of(Lang.translate(tooltip)) : null;
 	}
 
+	@Nullable
 	@Override
 	public XUPacketBuffer getPacketToSend(int mouseButton) {
 		if (mouseButton == 1) {

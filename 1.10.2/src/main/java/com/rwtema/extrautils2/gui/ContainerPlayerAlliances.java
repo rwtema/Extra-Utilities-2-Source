@@ -17,6 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
@@ -119,6 +120,7 @@ public class ContainerPlayerAlliances extends DynamicContainer {
 		for (int i = 0; i < NUM_VERTICAL_ENTRIES; i++) {
 			final int k = i;
 			addWidget(new WidgetClickMCButtonText("", 4, 17 + i * BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT) {
+				@Nullable
 				@Override
 				public XUPacketBuffer getPacketToSend(int mouseButton) {
 					XUPacketBuffer pkt = new XUPacketBuffer();

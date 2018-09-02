@@ -688,6 +688,17 @@ public class NBTSerializable {
 	}
 
 	public static class NBTMutableBlockPos extends BlockPos.MutableBlockPos implements INBTSerializable<NBTTagLong> {
+		public NBTMutableBlockPos() {
+			super();
+		}
+
+		public NBTMutableBlockPos(BlockPos pos) {
+			super(pos);
+		}
+
+		public NBTMutableBlockPos(int x_, int y_, int z_) {
+			super(x_, y_, z_);
+		}
 
 		@Override
 		public NBTTagLong serializeNBT() {
@@ -699,11 +710,15 @@ public class NBTSerializable {
 			setPos(BlockPos.fromLong(nbt.getLong()));
 		}
 
-		public void setX(int x){
+		public void setPosX(int x){
 			this.x = x;
 		}
 
-		public void setZ(int z){
+		public void setPosY(int y){
+			this.y = y;
+		}
+
+		public void setPosZ(int z){
 			this.z = z;
 		}
 	}

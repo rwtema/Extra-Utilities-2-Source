@@ -4,6 +4,8 @@ import com.rwtema.extrautils2.network.XUPacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public abstract class WidgetClickBase extends WidgetBase implements IWidgetMouseInput, IWidgetClientNetwork {
 	@SideOnly(Side.CLIENT)
 	protected boolean mouseOver;
@@ -41,6 +43,7 @@ public abstract class WidgetClickBase extends WidgetBase implements IWidgetMouse
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Nullable
 	public abstract XUPacketBuffer getPacketToSend(int mouseButton);
 
 	@Override

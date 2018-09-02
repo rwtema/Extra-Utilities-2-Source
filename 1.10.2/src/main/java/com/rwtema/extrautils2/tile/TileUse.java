@@ -2,7 +2,6 @@ package com.rwtema.extrautils2.tile;
 
 import com.google.common.collect.Iterables;
 import com.rwtema.extrautils2.backend.XUBlockStateCreator;
-import com.rwtema.extrautils2.backend.model.XUBlockState;
 import com.rwtema.extrautils2.blocks.BlockAdvInteractor;
 import com.rwtema.extrautils2.compatibility.BlockCompat;
 import com.rwtema.extrautils2.compatibility.CompatHelper;
@@ -26,6 +25,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSeedFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -41,8 +41,10 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import static net.minecraftforge.common.ForgeHooks.onLeftClickBlock;
@@ -71,15 +73,29 @@ public class TileUse extends TileAdvInteractor {
 	}
 
 	@Override
-	public void operate() {
+	public boolean operate() {
 		if (!extraStacks.stacks.isEmpty()) {
 			extraStacks.attemptDump(contents);
-			return;
+			return false;
 		}
 
-		XUBlockState state = getBlockState();
-		EnumFacing side = state.getValue(XUBlockStateCreator.ROTATION_ALL);
+		EnumFacing side = getBlockState().getValue(XUBlockStateCreator.ROTATION_ALL);
 		BlockPos pos = getPos().offset(side);
+
+		World world = this.world;
+		TileEntity tileEntity = world.getTileEntity(pos);
+		if (tileEntity instanceof IRemoteTarget) {
+			if (world.isRemote) return true;
+
+			Optional<Pair<World, BlockPos>> targetPos = ((IRemoteTarget) tileEntity).getTargetPos();
+			if (!targetPos.isPresent()) {
+				return false;
+			} else {
+				Pair<World, BlockPos> pair = targetPos.get();
+				world = pair.getLeft();
+				pos = pair.getRight();
+			}
+		}
 
 		int slotNo = 0;
 		ItemStack stack = null;
@@ -110,7 +126,7 @@ public class TileUse extends TileAdvInteractor {
 
 
 		if (fakePlayer == null) {
-			fakePlayer = new XUFakePlayer((WorldServer) world, owner, Lang.getItemName(getXUBlock()));
+			fakePlayer = new XUFakePlayer((WorldServer) this.world, owner, Lang.getItemName(getXUBlock()));
 		}
 
 		ItemStack copy;
@@ -135,6 +151,8 @@ public class TileUse extends TileAdvInteractor {
 		float hitY = (float) (fakePlayer.posY - pos.getY());
 		float hitZ = (float) (fakePlayer.posZ - pos.getZ());
 
+		boolean success = false;
+
 		try {
 			switch (mode.value) {
 				case GENERIC_CLICK:
@@ -147,9 +165,10 @@ public class TileUse extends TileAdvInteractor {
 								}
 								fakePlayer.interactionManager.blockRemoving(pos);
 								fakePlayer.interactionManager.cancelDestroyingBlock();
+								success = true;
 								break;
 							case RIGHT_CLICK:
-								fakePlayer.interactionManager.processRightClick(fakePlayer, world, copy, EnumHand.MAIN_HAND);
+								success = fakePlayer.interactionManager.processRightClick(fakePlayer, world, copy, EnumHand.MAIN_HAND) == EnumActionResult.SUCCESS;
 								break;
 						}
 					}
@@ -158,7 +177,7 @@ public class TileUse extends TileAdvInteractor {
 					if (button.value == Button.RIGHT_CLICK && StackHelper.isNonNull(copy)) {
 						if (blockState.getBlock().isReplaceable(world, pos)) {
 							if (copy.getItem() instanceof ItemSeedFood) {
-								ItemCompat.invokeOnItemUse(copy, fakePlayer, world, pos.down(), EnumHand.MAIN_HAND, EnumFacing.UP, hitX, hitY, hitZ);
+								success = ItemCompat.invokeOnItemUse(copy, fakePlayer, world, pos.down(), EnumHand.MAIN_HAND, EnumFacing.UP, hitX, hitY, hitZ) == EnumActionResult.SUCCESS;
 							} else if (copy.getItem() instanceof ItemBlock) {
 								ItemBlock itemBlock = (ItemBlock) copy.getItem();
 
@@ -167,6 +186,7 @@ public class TileUse extends TileAdvInteractor {
 									int i = itemBlock.getMetadata(copy.getMetadata());
 									IBlockState placedState = BlockCompat.invokeGetStateForPlacement(itemBlock.getBlock(), world, pos, side, hitX, hitY, hitZ, i, fakePlayer, EnumHand.MAIN_HAND, stack);
 									if (itemBlock.placeBlockAt(copy, fakePlayer, world, pos, side, hitX, hitY, hitZ, placedState)) {
+										success = true;
 										StackHelper.decrease(copy);
 									}
 								}
@@ -189,6 +209,9 @@ public class TileUse extends TileAdvInteractor {
 								}
 								fakePlayer.interactionManager.blockRemoving(pos);
 								fakePlayer.interactionManager.cancelDestroyingBlock();
+								success = true;
+							} else {
+								success = false;
 							}
 							break;
 						case RIGHT_CLICK:
@@ -196,7 +219,9 @@ public class TileUse extends TileAdvInteractor {
 								RightClickBlock event = BlockCompat.onRightClickBlock(fakePlayer, EnumHand.MAIN_HAND, copy, pos, side, rayTraceEyeHitVec(fakePlayer, 2));
 								if (!event.isCanceled() && event.getUseItem() != Result.DENY) {
 									if (ItemCompat.invokeOnItemUseFirst(copy, fakePlayer, world, pos, side, hitX, hitY, hitZ, EnumHand.MAIN_HAND) == EnumActionResult.PASS) {
-										copy.onItemUse(fakePlayer, world, pos, EnumHand.MAIN_HAND, side, hitX, hitY, hitZ);
+										success = copy.onItemUse(fakePlayer, world, pos, EnumHand.MAIN_HAND, side, hitX, hitY, hitZ) == EnumActionResult.SUCCESS;
+									} else {
+										success = true;
 									}
 								}
 							}
@@ -207,6 +232,7 @@ public class TileUse extends TileAdvInteractor {
 				case ACTIVATE_BLOCK_WITH_ITEM:
 					switch (button.value) {
 						case LEFT_CLICK:
+							success = true;
 							LeftClickBlock event2 = onLeftClickBlock(fakePlayer, pos, side, rayTraceEyeHitVec(fakePlayer, 2));
 							if (!event2.isCanceled() && event2.getUseBlock() != Result.DENY) {
 								blockState.getBlock().onBlockClicked(world, pos, fakePlayer);
@@ -216,22 +242,26 @@ public class TileUse extends TileAdvInteractor {
 						case RIGHT_CLICK:
 							RightClickBlock event = BlockCompat.onRightClickBlock(fakePlayer, EnumHand.MAIN_HAND, copy, pos, side, rayTraceEyeHitVec(fakePlayer, 2));
 							if (!event.isCanceled() && event.getUseBlock() != Result.DENY) {
-								CompatHelper.activateBlock(blockState.getBlock(), world, pos, blockState, fakePlayer, EnumHand.MAIN_HAND, copy, side, hitX, hitY, hitZ);
+								success = CompatHelper.activateBlock(blockState.getBlock(), world, pos, blockState, fakePlayer, EnumHand.MAIN_HAND, copy, side, hitX, hitY, hitZ);
+							} else {
+								success = true;
 							}
 							break;
 					}
 					break;
 
 				case USE_ITEM:
+					success = false;
 					if (StackHelper.isNonNull(copy) && button.value == Button.RIGHT_CLICK)
 						fakePlayer.interactionManager.processRightClick(fakePlayer, world, copy, EnumHand.MAIN_HAND);
+
 					break;
 				case ENTITY:
 					BlockAdvInteractor.Use.rayTraceFlag.set(true);
 					Vec3d start = new Vec3d(fakePlayer.posX, fakePlayer.posY + (double) fakePlayer.getEyeHeight(), fakePlayer.posZ);
 					Vec3d vec3d1 = fakePlayer.getVectorForRotationPublic(fakePlayer.rotationPitch, fakePlayer.rotationYaw);
 					Vec3d end = start.addVector(vec3d1.x * (double) 3, vec3d1.y * (double) 3, vec3d1.z * (double) 3);
-					RayTraceResult trace = fakePlayer.world.rayTraceBlocks(start, end, false, false, true);
+					RayTraceResult trace = world.rayTraceBlocks(start, end, false, false, true);
 					BlockAdvInteractor.Use.rayTraceFlag.set(false);
 
 					if (trace != null && trace.hitVec != null) {
@@ -316,6 +346,10 @@ public class TileUse extends TileAdvInteractor {
 		inventory.clear();
 		fakePlayer.setSneaking(false);
 		fakePlayer.updateAttributes();
+		if (tileEntity instanceof IRemoteTarget) {
+			((IRemoteTarget) tileEntity).onSuccessfulInteract(world, pos, side, success);
+		}
+		return true;
 	}
 
 	@Override

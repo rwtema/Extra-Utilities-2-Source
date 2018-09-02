@@ -22,6 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -31,11 +32,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class TileMine extends TileAdvInteractor {
 	private final static ItemStack genericDigger = new ItemStack(Items.DIAMOND_PICKAXE, 1);
@@ -84,19 +87,34 @@ public class TileMine extends TileAdvInteractor {
 	}
 
 	@Override
-	public void operate() {
+	public boolean operate() {
 		if (!extraStacks.stacks.isEmpty()) {
 			extraStacks.attemptDump(contents);
-			return;
+			return false;
 		}
 
-
+		boolean success = false;
 		XUBlockState state = getBlockState();
 
 		EnumFacing side = state.getValue(XUBlockStateCreator.ROTATION_ALL);
 		BlockPos offset = getPos().offset(side);
 
-		if (world.isAirBlock(offset)) return;
+		World world = this.world;
+		TileEntity tileEntity = world.getTileEntity(offset);
+		if (tileEntity instanceof IRemoteTarget) {
+			if (world.isRemote) return true;
+
+			Optional<Pair<World, BlockPos>> targetPos = ((IRemoteTarget) tileEntity).getTargetPos();
+			if (!targetPos.isPresent()) {
+				return false;
+			} else {
+				Pair<World, BlockPos> pair = targetPos.get();
+				world = pair.getLeft();
+				offset = pair.getRight();
+			}
+		}
+
+		if (world.isAirBlock(offset)) return false;
 
 		if (fakePlayer == null) {
 			fakePlayer = new XUFakePlayer((WorldServer) world, owner, Lang.getItemName(getXUBlock()));
@@ -111,15 +129,15 @@ public class TileMine extends TileAdvInteractor {
 		}
 
 		IBlockState blockState = world.getBlockState(offset);
-		if (blockState.getMaterial().isLiquid()) return;
+		if (blockState.getMaterial().isLiquid()) return false;
 
 		float hardness = blockState.getPlayerRelativeBlockHardness(fakePlayer, world, offset);
-		if (hardness == 0) return;
+		if (hardness == 0) return false;
 
 		fakePlayer.setHeldItem(EnumHand.MAIN_HAND, diggerTool.copy());
 		fakePlayer.setLocationEdge(offset, side);
 		ItemCaptureHandler.startCapturing();
-		fakePlayer.interactionManager.tryHarvestBlock(offset);
+		success = fakePlayer.interactionManager.tryHarvestBlock(offset);
 		LinkedList<ItemStack> stacks = ItemCaptureHandler.stopCapturing();
 		for (ItemStack stack : stacks) {
 			InventoryHelper.insertWithRunoff(contents, stack, extraStacks);
@@ -135,6 +153,10 @@ public class TileMine extends TileAdvInteractor {
 		}
 
 		fakePlayer.clearInventory();
+		if(tileEntity instanceof IRemoteTarget){
+			((IRemoteTarget) tileEntity).onSuccessfulInteract(world, pos, side, success );
+		}
+		return true;
 	}
 
 	@Override

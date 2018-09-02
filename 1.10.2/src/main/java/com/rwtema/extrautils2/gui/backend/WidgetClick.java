@@ -3,6 +3,7 @@ package com.rwtema.extrautils2.gui.backend;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public abstract class WidgetClick extends WidgetClickBase {
 
@@ -18,8 +19,8 @@ public abstract class WidgetClick extends WidgetClickBase {
 
 	public abstract void onClick(byte b);
 
+	@Nullable
 	@Override
-	@Nonnull
 	public XUPacketBuffer getPacketToSend(int mouseButton) {
 		XUPacketBuffer pkt = new XUPacketBuffer();
 		pkt.writeByte(mouseButton);

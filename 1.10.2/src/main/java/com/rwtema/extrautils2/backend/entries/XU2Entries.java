@@ -39,6 +39,7 @@ import com.rwtema.extrautils2.tile.*;
 import com.rwtema.extrautils2.transfernodes.*;
 import com.rwtema.extrautils2.utils.LogHelper;
 import com.rwtema.extrautils2.utils.XURandom;
+import com.rwtema.extrautils2.utils.helpers.OreDicHelper;
 import com.rwtema.extrautils2.villagers.EmeraldForPotions;
 import com.rwtema.extrautils2.villagers.EntityAINinjaPoof;
 import com.rwtema.extrautils2.villagers.GenericTrade;
@@ -1666,6 +1667,20 @@ public class XU2Entries {
 			if (openium.isActive()) {
 				addShaped("fire_axe", newStack(), true, "ii", "is", " s", 'i', openium.newStack(1, BlockOpinium.NUM_TIERS - 1), 's', Items.STICK);
 			}
+		}
+	};
+
+	public static BlockClassEntry<BlockInteractionProxy> interactionProxy = new BlockClassEntry<BlockInteractionProxy>(BlockInteractionProxy.class, TileInteractionProxy.class){
+		@Override
+		public void addRecipes() {
+			addShaped("porcupine",
+				newStack(),
+				"ses",
+				"epe",
+				"ses",
+				'e', Items.ENDER_PEARL,
+				's', "string",
+				'p', powerManager.isActive() ? powerManager.newStack() : redstoneCrystal.newStack());
 		}
 	};
 

@@ -9,6 +9,7 @@ import java.util.function.DoubleBinaryOperator;
 
 public class VecHelper {
 	public static Vec3d addSide(Vec3d vec, EnumFacing side, double mult) {
+		if(side == null) return vec;
 		return vec.addVector(
 				side.getFrontOffsetX() * mult,
 				side.getFrontOffsetY() * mult,

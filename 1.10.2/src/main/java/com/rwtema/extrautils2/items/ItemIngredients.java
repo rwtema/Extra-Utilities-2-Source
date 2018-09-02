@@ -193,6 +193,8 @@ public class ItemIngredients extends XUItemFlatMetadata implements IUpgradeProvi
 	}
 
 	public enum Type implements IItemStackMaker, IUpgradeProvider {
+		BUTTON_UP(-10),
+		BUTTON_DOWN(-9),
 		BIOME_MARKER_BLANK(-8),
 		ENCHANTED_BOOK_SKELETON(-7),
 		FILTER_SKELETON(-6),

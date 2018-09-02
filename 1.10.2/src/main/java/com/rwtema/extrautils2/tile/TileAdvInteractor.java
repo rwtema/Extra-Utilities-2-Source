@@ -89,15 +89,19 @@ public abstract class TileAdvInteractor extends TilePower implements ITickable, 
 				break;
 		}
 
-		cooldown.value += 20;
-		operate();
+		while (cooldown.value <= 0) {
+			cooldown.value += 20;
+			if(!operate()){
+
+			}
+		}
 	}
 
 	public boolean preOperate() {
 		return true;
 	}
 
-	protected abstract void operate();
+	protected abstract boolean operate();
 
 	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
