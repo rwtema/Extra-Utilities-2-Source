@@ -1,4 +1,2 @@
-- Added Ender Porcupine, a 'phantom-face'-like that slowly iterates through a range of block positions.
-- Added Ferrous-Juniper trees. Strange trees whose saplings are found in nether fortress chests.
-- Added tooltip for Resturbed spawners to show what entity is present within.
-- Drop of evil is now consumed when creating a resturbed spawner.
+- Fix crash on servers
+- Add missing localizations
