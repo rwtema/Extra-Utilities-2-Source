@@ -3,6 +3,7 @@ package com.rwtema.extrautils2.tile;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.rwtema.extrautils2.compatibility.CompatHelper;
 import com.rwtema.extrautils2.gui.backend.*;
 import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
@@ -68,7 +69,7 @@ public class TileInteractionProxy extends TilePower implements ITickable, IRemot
 			time = totalWorldTime;
 			nextPos();
 			markForUpdate();
-			world.notifyNeighborsOfStateChange(pos, getBlockType(), true);
+			CompatHelper.notifyNeighbours(world, pos, getBlockType());
 			markDirty();
 			power.value = Math.abs(currentPos.getX()) + Math.abs(currentPos.getY()) + Math.abs(currentPos.getZ());
 //			((WorldServer) world).spawnParticle(EnumParticleTypes.REDSTONE,

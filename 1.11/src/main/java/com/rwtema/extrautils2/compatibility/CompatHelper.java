@@ -174,4 +174,9 @@ public class CompatHelper {
 			}
 		};
 	}
+
+	public static void notifyNeighbours(World world, BlockPos pos, Block block) {
+		world.notifyNeighborsOfStateChange(pos, block, true);
+	}
+
 }

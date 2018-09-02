@@ -167,4 +167,9 @@ public class CompatHelper {
 	public static Event.Result canSpawnEvent(WorldServer worldServerIn, EntityLiving entityliving, float x, float y, float z) {
 		return ForgeEventFactory.canEntitySpawn(entityliving, worldServerIn, x, y, z);
 	}
+
+	public static void notifyNeighbours(World world, BlockPos pos, Block block) {
+		world.notifyNeighborsOfStateChange(pos, block);
+	}
+
 }

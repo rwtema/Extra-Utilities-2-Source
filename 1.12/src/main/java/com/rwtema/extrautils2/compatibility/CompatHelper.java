@@ -167,6 +167,10 @@ public class CompatHelper {
 		};
 	}
 
+	public static void notifyNeighbours(World world, BlockPos pos, Block block) {
+		world.notifyNeighborsOfStateChange(pos, block, true);
+	}
+
 	public <E> NonNullList<E> toNonNullList(List<E> list) {
 		if (list instanceof NonNullList) return (NonNullList<E>) list;
 		NonNullList<E> list1 = NonNullList.create();
