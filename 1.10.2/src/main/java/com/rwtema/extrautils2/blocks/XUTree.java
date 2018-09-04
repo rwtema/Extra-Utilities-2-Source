@@ -274,8 +274,10 @@ public abstract class XUTree extends Entry<XUTree.TreeBlocks> {
 		@Override
 		public BoxModel createLeavesModel() {
 			BoxModel model = BoxModel.newStandardBlock(leavesTex);
-			model.get(0).setTint(0);
-			model.get(0).setLayer(BlockRenderLayer.CUTOUT);
+			Box box = model.get(0);
+			model.renderAsNormalBlock = false;
+			box.setTint(0);
+			box.setLayer(BlockRenderLayer.CUTOUT);
 			return model;
 		}
 
