@@ -172,6 +172,18 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 				};
 			}
 		},
+		burnt_quartz{
+			@Override
+			public void addRecipes() {
+
+			}
+		},
+		rainbow {
+			@Override
+			public void addRecipes() {
+
+			}
+		}
 //		block_evil{
 //			@Override
 //			public void addRecipes() {

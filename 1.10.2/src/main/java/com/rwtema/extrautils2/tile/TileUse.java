@@ -175,7 +175,7 @@ public class TileUse extends TileAdvInteractor {
 					break;
 				case PLACE_BLOCK:
 					if (button.value == Button.RIGHT_CLICK && StackHelper.isNonNull(copy)) {
-						if (blockState.getBlock().isReplaceable(world, pos)) {
+						if (blockState.getBlock().isReplaceable(world, pos) ) {
 							if (copy.getItem() instanceof ItemSeedFood) {
 								success = ItemCompat.invokeOnItemUse(copy, fakePlayer, world, pos.down(), EnumHand.MAIN_HAND, EnumFacing.UP, hitX, hitY, hitZ) == EnumActionResult.SUCCESS;
 							} else if (copy.getItem() instanceof ItemBlock) {
@@ -185,7 +185,7 @@ public class TileUse extends TileAdvInteractor {
 								if (!world.isRemote) {
 									int i = itemBlock.getMetadata(copy.getMetadata());
 									IBlockState placedState = BlockCompat.invokeGetStateForPlacement(itemBlock.getBlock(), world, pos, side, hitX, hitY, hitZ, i, fakePlayer, EnumHand.MAIN_HAND, stack);
-									if (itemBlock.placeBlockAt(copy, fakePlayer, world, pos, side, hitX, hitY, hitZ, placedState)) {
+									if (placedState.getBlock().canPlaceBlockOnSide(world,pos, side) && itemBlock.placeBlockAt(copy, fakePlayer, world, pos, side, hitX, hitY, hitZ, placedState)) {
 										success = true;
 										StackHelper.decrease(copy);
 									}
