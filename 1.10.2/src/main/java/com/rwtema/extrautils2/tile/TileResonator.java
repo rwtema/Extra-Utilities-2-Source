@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.compatibility.StackHelper;
+import com.rwtema.extrautils2.crafting.ResonatorRecipe;
 import com.rwtema.extrautils2.gui.backend.*;
 import com.rwtema.extrautils2.itemhandler.*;
 import com.rwtema.extrautils2.network.XUPacketBuffer;
@@ -11,13 +12,10 @@ import com.rwtema.extrautils2.power.IWorldPowerMultiplier;
 import com.rwtema.extrautils2.power.PowerManager;
 import com.rwtema.extrautils2.transfernodes.Upgrade;
 import com.rwtema.extrautils2.utils.Lang;
-import com.rwtema.extrautils2.utils.helpers.CollectionHelper;
 import com.rwtema.extrautils2.utils.helpers.NBTHelper;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
-import gnu.trove.set.hash.TCustomHashSet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -31,7 +29,6 @@ import org.apache.logging.log4j.util.Strings;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 
 public class TileResonator extends TilePower implements ITickable, IWorldPowerMultiplier, IDynamicHandler {
@@ -214,40 +211,6 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	public void handleDescriptionPacket(XUPacketBuffer packet) {
 		super.handleDescriptionPacket(packet);
 		displayStack = packet.readItemStack();
-	}
-
-	public static class ResonatorRecipe {
-		public static HashSet<Item> WildCardItems = new HashSet<>();
-		public static TCustomHashSet<ItemStack> SpecificItems = new TCustomHashSet<>(CollectionHelper.HASHING_STRATEGY_ITEMSTACK);
-
-		public ItemStack input;
-		public ItemStack output;
-		public int energy;
-		public boolean addOwnerTag;
-
-		public ResonatorRecipe(ItemStack input, ItemStack output, int energy, boolean addOwnerTag) {
-			this.input = input;
-			this.output = output;
-			this.energy = energy;
-			this.addOwnerTag = addOwnerTag;
-		}
-
-		@Override
-		public String toString() {
-			return "ResonatorRecipe{" +
-					"input=" + input +
-					", output=" + output +
-					", energy=" + energy +
-					'}';
-		}
-
-		public boolean shouldProgress(TileResonator resonator, int frequency) {
-			return true;
-		}
-
-		public String getRequirementText() {
-			return "";
-		}
 	}
 
 	public class ContainerResonator extends DynamicContainerTile {
