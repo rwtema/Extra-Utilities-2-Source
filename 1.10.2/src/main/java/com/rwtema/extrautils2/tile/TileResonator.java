@@ -75,7 +75,13 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	}
 
 	public static void register(ItemStack input, ItemStack output, int energy, boolean addOwnerTag) {
-		resonatorRecipes.add(new ResonatorRecipe(input, output, energy, addOwnerTag));
+		ResonatorRecipe recipe = new ResonatorRecipe(input, output, energy, addOwnerTag);
+		register(recipe);
+	}
+
+	public static void register(ResonatorRecipe recipe) {
+		resonatorRecipes.add(recipe);
+		ItemStack input = recipe.input;
 		if (input.getItemDamage() == OreDictionary.WILDCARD_VALUE || !input.getHasSubtypes())
 			ResonatorRecipe.WildCardItems.add(input.getItem());
 		else
@@ -124,6 +130,9 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	@Override
 	public void update() {
 		if (world.isRemote || !active || currentRecipe == null) return;
+		if(!currentRecipe.shouldProgress(this, frequency())){
+			return;
+		}
 		progress += 4 * (1 + upgrades.getLevel(Upgrade.SPEED));
 		markDirty();
 		if (progress >= currentRecipe.energy) {
@@ -229,6 +238,10 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 					", output=" + output +
 					", energy=" + energy +
 					'}';
+		}
+
+		public boolean shouldProgress(TileResonator resonator, int frequency) {
+			return true;
 		}
 	}
 
