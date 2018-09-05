@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.logging.log4j.util.Strings;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -243,6 +244,10 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 		public boolean shouldProgress(TileResonator resonator, int frequency) {
 			return true;
 		}
+
+		public String getRequirementText() {
+			return "";
+		}
 	}
 
 	public class ContainerResonator extends DynamicContainerTile {
@@ -263,6 +268,16 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 					if (recipe == null)
 						return 0;
 					return recipe.energy / (float) (1 + TileResonator.this.upgrades.getLevel(Upgrade.SPEED));
+				}
+
+				@Override
+				public List<String> getToolTip() {
+					ResonatorRecipe currentRecipe = TileResonator.this.currentRecipe;
+					if(currentRecipe != null && Strings.isNotBlank( currentRecipe.getRequirementText())){
+						return ImmutableList.<String>builder().add(currentRecipe.getRequirementText()).addAll(super.getToolTip()).build();
+					}
+
+					return super.getToolTip();
 				}
 
 				@Override

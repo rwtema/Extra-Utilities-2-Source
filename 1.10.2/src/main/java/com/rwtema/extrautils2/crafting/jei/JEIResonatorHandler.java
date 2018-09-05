@@ -13,10 +13,12 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 
 public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler.ResonatorWrapper> implements IRecipeHandler<TileResonator.ResonatorRecipe>, IRecipeCategory<JEIResonatorHandler.ResonatorWrapper> {
 
@@ -90,19 +92,19 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 
 	@Override
 	public void drawExtras(@Nonnull Minecraft minecraft) {
-		slotDrawable.draw(minecraft, slotX0, 0);
-		slotDrawable.draw(minecraft, slotX1, 0);
-		arrowBack.draw(minecraft, arrowX, 0);
+		slotDrawable.draw(minecraft, slotX0, 14);
+		slotDrawable.draw(minecraft, slotX1, 14);
+		arrowBack.draw(minecraft, arrowX, 14);
 	}
 
 	@Override
 	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull ResonatorWrapper recipeWrapper, @Nonnull IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-		guiItemStacks.init(0, true, slotX0, 0);
+		guiItemStacks.init(0, true, slotX0, 14);
 		guiItemStacks.set(0, recipeWrapper.resonatorRecipe.input);
 
-		guiItemStacks.init(1, false, slotX1, 0);
+		guiItemStacks.init(1, false, slotX1, 14);
 		guiItemStacks.set(1, recipeWrapper.resonatorRecipe.output);
 	}
 
@@ -110,10 +112,12 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 	public static class ResonatorWrapper extends BlankRecipeWrapper {
 		private final TileResonator.ResonatorRecipe resonatorRecipe;
 		String energyString;
+		String txtString;
 
 		public ResonatorWrapper(TileResonator.ResonatorRecipe resonatorRecipe) {
 			this.resonatorRecipe = resonatorRecipe;
 			energyString = Lang.translateArgs("%s GP", StringHelper.niceFormat(resonatorRecipe.energy / 100.0));
+			txtString = resonatorRecipe.getRequirementText();
 		}
 
 		@Override
@@ -130,7 +134,15 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 
 		@Override
 		public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-
+			int stringWidth = minecraft.fontRenderer.getStringWidth(energyString);
+			minecraft.fontRenderer.drawSplitString(energyString, Math.max(slotX0, (recipeWidth - stringWidth) / 2), (18 - 9) / 2, BETWEEN_DIST, Color.gray.getRGB());
+			stringWidth = minecraft.fontRenderer.getStringWidth(txtString);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(recipeWidth / 2F ,(18 - 9) / 2 + 18 + 12 ,0 );
+			GlStateManager.scale(0.75,0.75, 1);
+			minecraft.fontRenderer.drawString(txtString,
+					 - stringWidth / 2, 0, Color.gray.getRGB());
+			GlStateManager.popMatrix();
 		}
 
 		@Override
