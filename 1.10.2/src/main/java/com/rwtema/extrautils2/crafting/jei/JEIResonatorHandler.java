@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.gui.backend.DynamicGui;
-import com.rwtema.extrautils2.tile.TileResonator;
+import com.rwtema.extrautils2.crafting.ResonatorRecipe;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
 
-public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler.ResonatorWrapper> implements IRecipeHandler<TileResonator.ResonatorRecipe>, IRecipeCategory<JEIResonatorHandler.ResonatorWrapper> {
+public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler.ResonatorWrapper> implements IRecipeHandler<ResonatorRecipe>, IRecipeCategory<JEIResonatorHandler.ResonatorWrapper> {
 
 
 	public static final String uid = ExtraUtils2.MODID + ".resonator";
@@ -35,8 +35,8 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 
 	@Nonnull
 	@Override
-	public Class<TileResonator.ResonatorRecipe> getRecipeClass() {
-		return TileResonator.ResonatorRecipe.class;
+	public Class<ResonatorRecipe> getRecipeClass() {
+		return ResonatorRecipe.class;
 	}
 
 	@Nonnull
@@ -46,18 +46,18 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 
 	@Nonnull
 	@Override
-	public String getRecipeCategoryUid(@Nonnull TileResonator.ResonatorRecipe recipe) {
+	public String getRecipeCategoryUid(@Nonnull ResonatorRecipe recipe) {
 		return uid;
 	}
 
 	@Nonnull
 	@Override
-	public IRecipeWrapper getRecipeWrapper(@Nonnull TileResonator.ResonatorRecipe recipe) {
+	public IRecipeWrapper getRecipeWrapper(@Nonnull ResonatorRecipe recipe) {
 		return new ResonatorWrapper(recipe);
 	}
 
 	@Override
-	public boolean isRecipeValid(@Nonnull TileResonator.ResonatorRecipe recipe) {
+	public boolean isRecipeValid(@Nonnull ResonatorRecipe recipe) {
 		return true;
 	}
 
@@ -110,11 +110,11 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 
 
 	public static class ResonatorWrapper extends BlankRecipeWrapper {
-		private final TileResonator.ResonatorRecipe resonatorRecipe;
+		private final ResonatorRecipe resonatorRecipe;
 		String energyString;
 		String txtString;
 
-		public ResonatorWrapper(TileResonator.ResonatorRecipe resonatorRecipe) {
+		public ResonatorWrapper(ResonatorRecipe resonatorRecipe) {
 			this.resonatorRecipe = resonatorRecipe;
 			energyString = Lang.translateArgs("%s GP", StringHelper.niceFormat(resonatorRecipe.energy / 100.0));
 			txtString = resonatorRecipe.getRequirementText();

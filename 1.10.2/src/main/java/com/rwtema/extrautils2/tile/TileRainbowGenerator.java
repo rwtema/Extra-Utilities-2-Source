@@ -75,7 +75,8 @@ public class TileRainbowGenerator extends TilePower implements ITickable, ITESRH
 			XUMachineGenerators.SLIME_GENERATOR,
 			XUMachineGenerators.SURVIVALIST_GENERATOR,
 			XUMachineGenerators.TNT_GENERATOR};
-	private static final ResourceLocation rainbowGenerators = new ResourceLocation(ExtraUtils2.MODID, "rainbowGenerators");
+	public static final ResourceLocation rainbowGenerators
+			= new ResourceLocation(ExtraUtils2.MODID, "rainbowGenerators");
 	static final Collection<ResourceLocation> rainbowGeneratorsCollection = ImmutableList.of(rainbowGenerators);
 
 	static {

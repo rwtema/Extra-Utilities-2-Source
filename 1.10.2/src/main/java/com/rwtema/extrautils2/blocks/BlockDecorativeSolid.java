@@ -6,11 +6,15 @@ import com.rwtema.extrautils2.backend.XUBlockStateCreator;
 import com.rwtema.extrautils2.backend.entries.IItemStackMaker;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.crafting.CraftingHelper;
+import com.rwtema.extrautils2.power.PowerManager;
 import com.rwtema.extrautils2.textures.ConnectedTexture;
 import com.rwtema.extrautils2.textures.ISolidWorldTexture;
 import com.rwtema.extrautils2.textures.TextureLocation;
 import com.rwtema.extrautils2.textures.TextureRandom;
+import com.rwtema.extrautils2.crafting.ResonatorRecipe;
+import com.rwtema.extrautils2.tile.TileRainbowGenerator;
 import com.rwtema.extrautils2.tile.TileResonator;
+import com.rwtema.extrautils2.utils.Lang;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +29,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 import java.util.List;
+
+import static com.rwtema.extrautils2.tile.TileRainbowGenerator.rainbowGenerators;
 
 public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 	public static final PropertyEnumSimple<DecorStates> decor = new PropertyEnumSimple<>(DecorStates.class);
@@ -175,13 +182,38 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 		burnt_quartz{
 			@Override
 			public void addRecipes() {
-
+				if (XU2Entries.resonator.enabled) {
+					TileResonator.register(new ItemStack(Blocks.QUARTZ_BLOCK), newStack(1), 800);
+				}
 			}
 		},
 		rainbow {
 			@Override
 			public void addRecipes() {
+				if (XU2Entries.resonator.enabled) {
+					TileResonator.register(new ResonatorRecipe(stoneburnt.newStack(1), newStack(1), 800, false){
+						@Override
+						public String getRequirementText() {
+							return Lang.translate("[Requires an active Rainbow Generator]");
+						}
 
+						@Override
+						public boolean shouldProgress(TileResonator resonator, int frequency) {
+							PowerManager.PowerFreq freq = PowerManager.instance.getPowerFreqRaw(frequency);
+							if (freq != null) {
+								Collection<TileRainbowGenerator> s = freq.getSubTypes(rainbowGenerators);
+								if (s != null) {
+									for (TileRainbowGenerator power : s) {
+										if (power.providing) {
+											return true;
+										}
+									}
+								}
+							}
+							return false;
+						}
+					});
+				}
 			}
 		}
 //		block_evil{
