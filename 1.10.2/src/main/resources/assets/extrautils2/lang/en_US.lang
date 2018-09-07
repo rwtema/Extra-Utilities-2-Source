@@ -83,9 +83,9 @@ attribute.name.extrautils2.souldamage=Permanent Damage
 
 death.attack.darkness=%1$s was consumed by shadows
 death.attack.darkness.player=%1$s was consumed by shadows while fighting %2$s
-death.attack.doom=%1$s met his doom
-death.attack.doom.item=%1$s met his doom
-death.attack.doom.player=%1$s met his doom whilst fighting %2$s
+death.attack.doom=%1$s met their doom
+death.attack.doom.item=%1$s met their doom
+death.attack.doom.player=%1$s met their doom whilst fighting %2$s
 death.attack.spike=%1$s walked on x pointy spike (ouchies)
 death.attack.spike.item=%1$s walked on x pointy spike (ouchies)
 death.attack.spike.player=%1$s fell on some spikes whilst fighting %2$s (ouchies)
