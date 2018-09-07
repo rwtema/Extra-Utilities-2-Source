@@ -6,12 +6,12 @@ import com.rwtema.extrautils2.backend.XUBlockStateCreator;
 import com.rwtema.extrautils2.backend.entries.IItemStackMaker;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.crafting.CraftingHelper;
+import com.rwtema.extrautils2.crafting.ResonatorRecipe;
 import com.rwtema.extrautils2.power.PowerManager;
 import com.rwtema.extrautils2.textures.ConnectedTexture;
 import com.rwtema.extrautils2.textures.ISolidWorldTexture;
 import com.rwtema.extrautils2.textures.TextureLocation;
 import com.rwtema.extrautils2.textures.TextureRandom;
-import com.rwtema.extrautils2.crafting.ResonatorRecipe;
 import com.rwtema.extrautils2.tile.TileRainbowGenerator;
 import com.rwtema.extrautils2.tile.TileResonator;
 import com.rwtema.extrautils2.utils.Lang;
@@ -93,7 +93,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 		stonecross {
 			@Override
 			public void addRecipes() {
-
+				CraftingHelper.addShapeless(name(), newStack(4), borderstone, borderstone, borderstone, borderstone);
 			}
 		},
 		stoneslab {
@@ -120,7 +120,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 		truchet {
 			@Override
 			public void addRecipes() {
-
+				CraftingHelper.addShapeless("truchet", newStack(4), stoneslab, borderstone, stoneslab, borderstone);
 			}
 
 			@Nonnull
@@ -140,7 +140,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 		blue_quartz {
 			@Override
 			public void addRecipes() {
-
+//				TileResonator.register(new ItemStack(Blocks.LAPIS_BLOCK), newStack(1), 800);
 			}
 
 			@Nonnull
@@ -179,7 +179,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 				};
 			}
 		},
-		burnt_quartz{
+		burnt_quartz {
 			@Override
 			public void addRecipes() {
 				if (XU2Entries.resonator.enabled) {
@@ -191,7 +191,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 			@Override
 			public void addRecipes() {
 				if (XU2Entries.resonator.enabled) {
-					TileResonator.register(new ResonatorRecipe(stoneburnt.newStack(1), newStack(1), 800, false){
+					TileResonator.register(new ResonatorRecipe(stoneburnt.newStack(1), newStack(1), 6400, false) {
 						@Override
 						public String getRequirementText() {
 							return Lang.translate("[Requires an active Rainbow Generator]");
