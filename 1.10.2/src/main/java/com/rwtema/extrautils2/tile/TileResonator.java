@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.oredict.OreDictionary;
-import org.apache.logging.log4j.util.Strings;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -45,6 +44,11 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	ResonatorRecipe currentRecipe = null;
 	int progress = 0;
 	ItemStack displayStack;
+	private SingleStackHandler OUTPUT = new SingleStackHandler() {
+		protected void onContentsChanged() {
+			TileResonator.this.onInputChanged();
+		}
+	};
 	private ItemStackHandler INPUT = new XUTileItemStackHandler(1, this) {
 		@Override
 		protected void onContentsChanged(int slot) {
@@ -59,11 +63,6 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 							!ResonatorRecipe.SpecificItems.contains(stack)))
 				return 0;
 			return super.getStackLimit(slot, stack);
-		}
-	};
-	private SingleStackHandler OUTPUT = new SingleStackHandler() {
-		protected void onContentsChanged() {
-			TileResonator.this.onInputChanged();
 		}
 	};
 	private IItemHandler handler = ConcatItemHandler.concatNonNull(new PublicWrapper.Insert(INPUT), new PublicWrapper.Extract(OUTPUT));
@@ -128,7 +127,7 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	@Override
 	public void update() {
 		if (world.isRemote || !active || currentRecipe == null) return;
-		if(!currentRecipe.shouldProgress(this, frequency())){
+		if (!currentRecipe.shouldProgress(this, frequency())) {
 			return;
 		}
 		progress += 4 * (1 + upgrades.getLevel(Upgrade.SPEED));
@@ -236,7 +235,7 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 				@Override
 				public List<String> getToolTip() {
 					ResonatorRecipe currentRecipe = TileResonator.this.currentRecipe;
-					if(currentRecipe != null && !StringHelper.isBlank( currentRecipe.getRequirementText())){
+					if (currentRecipe != null && !StringHelper.isBlank(currentRecipe.getRequirementText())) {
 						return ImmutableList.<String>builder().add(currentRecipe.getRequirementText()).addAll(super.getToolTip()).build();
 					}
 
