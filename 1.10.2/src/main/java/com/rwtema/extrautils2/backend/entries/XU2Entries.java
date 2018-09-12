@@ -15,6 +15,7 @@ import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.compatibility.XUShapedRecipe;
 import com.rwtema.extrautils2.crafting.*;
 import com.rwtema.extrautils2.dimensions.DimensionEntry;
+import com.rwtema.extrautils2.dimensions.TeleportCapabilitiesUpdateHandler;
 import com.rwtema.extrautils2.dimensions.WorldWall;
 import com.rwtema.extrautils2.dimensions.deep_dark.TeleporterDeepDark;
 import com.rwtema.extrautils2.dimensions.deep_dark.WorldProviderDeepDark;
@@ -362,6 +363,13 @@ public class XU2Entries {
 			CraftingHelper.addRecipe(new AlwaysLast.XUShapedRecipeAlwaysLast(CraftingHelper.createLocation("shortcut_chest"), new ItemStack(Blocks.CHEST, 4), "WWW", "W W", "WWW", 'W', "logWood"));
 			CraftingHelper.addRecipe(new AlwaysLast.XUShapedRecipeAlwaysLast(CraftingHelper.createLocation("shortcut_stick"), new ItemStack(Items.STICK, 16), "W", "W", 'W', "logWood"));
 			CraftingHelper.addRecipe(new AlwaysLast.XUShapedRecipeAlwaysLast(CraftingHelper.createLocation("shortcut_hopper"), new ItemStack(Blocks.HOPPER, 1), "IWI", "IWI", " I ", 'W', "logWood", 'I', "ingotIron"));
+		}
+	};
+
+	public static VoidEntry telportFix = new VoidEntry("sendCapabilitiesAfterDimensionChange")  {
+		@Override
+		public void preInitLoad() {
+			MinecraftForge.EVENT_BUS.register(TeleportCapabilitiesUpdateHandler.class);
 		}
 	};
 	public static ItemEntrySickle[] sickles = new ItemEntrySickle[]{
