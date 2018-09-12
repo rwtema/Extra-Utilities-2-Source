@@ -59,7 +59,7 @@ public class NBTSerializable {
 
 	public static NBTTagCompound saveData(NBTTagCompound compound, Map<String, INBTSerializable> nbtHandlers) {
 		nbtHandlers.forEach(
-				(key,value) -> {
+				(key, value) -> {
 					compound.setTag(key, value.serializeNBT());
 				}
 		);
@@ -68,7 +68,7 @@ public class NBTSerializable {
 
 	@SuppressWarnings("unchecked")
 	public static void loadData(NBTTagCompound compound, Map<String, INBTSerializable> nbtHandlers) {
-		nbtHandlers.forEach((key, value)->{
+		nbtHandlers.forEach((key, value) -> {
 			if (compound.hasKey(key)) {
 				NBTBase tag = compound.getTag(key);
 				if (tag != null) {
@@ -78,7 +78,7 @@ public class NBTSerializable {
 		});
 	}
 
-	public static class Text implements INBTSerializable<NBTTagString> {
+	public static class Text implements INBTSerializable<NBTTagString>, IPacketSerializable {
 		@Nonnull
 		String s;
 
@@ -105,9 +105,19 @@ public class NBTSerializable {
 		public String deserialize(NBTTagString nbt) {
 			return nbt.getString();
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeString(s);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			s = t.readString();
+		}
 	}
 
-	public static class Long implements INBTSerializable<NBTTagLong> {
+	public static class Long implements INBTSerializable<NBTTagLong>, IPacketSerializable {
 		public long value;
 
 		@Override
@@ -119,9 +129,19 @@ public class NBTSerializable {
 		public void deserializeNBT(NBTTagLong nbt) {
 			value = nbt.getLong();
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeLong(value);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			value = t.readLong();
+		}
 	}
 
-	public static class BitsSmall implements INBTSerializable<NBTTagByte>, ISimpleBitSet {
+	public static class BitsSmall implements INBTSerializable<NBTTagByte>, ISimpleBitSet, IPacketSerializable {
 		byte bitSet;
 
 		public BitsSmall(byte b) {
@@ -170,10 +190,20 @@ public class NBTSerializable {
 		public boolean isEmpty() {
 			return bitSet != 0;
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeByte(bitSet);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			bitSet = t.readByte();
+		}
 	}
 
 
-	public static class BitsLong implements INBTSerializable<NBTPrimitive>, ISimpleBitSet {
+	public static class BitsLong implements INBTSerializable<NBTPrimitive>, ISimpleBitSet, IPacketSerializable {
 		long bitSet;
 
 		@Override
@@ -218,9 +248,19 @@ public class NBTSerializable {
 		public boolean isEmpty() {
 			return bitSet != 0;
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeLong(bitSet);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			bitSet = t.readLong();
+		}
 	}
 
-	public static class Int implements INBTSerializable<NBTTagInt> {
+	public static class Int implements INBTSerializable<NBTTagInt>, IPacketSerializable {
 		public int value;
 
 		public Int(int value) {
@@ -249,9 +289,19 @@ public class NBTSerializable {
 		public void deserializeNBT(NBTTagInt nbt) {
 			value = deserialize(nbt);
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeInt(value);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			value = t.readInt();
+		}
 	}
 
-	public static class Float implements INBTSerializable<NBTTagFloat> {
+	public static class Float implements INBTSerializable<NBTTagFloat>, IPacketSerializable {
 		public float value;
 
 		public Float() {
@@ -271,9 +321,19 @@ public class NBTSerializable {
 		public void deserializeNBT(NBTTagFloat nbt) {
 			value = nbt.getFloat();
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeFloat(value);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			value = t.readFloat();
+		}
 	}
 
-	public static class NBTDouble implements INBTSerializable<NBTTagDouble> {
+	public static class NBTDouble implements INBTSerializable<NBTTagDouble>, IPacketSerializable {
 		public double value;
 
 		public NBTDouble(double value) {
@@ -289,9 +349,19 @@ public class NBTSerializable {
 		public void deserializeNBT(NBTTagDouble nbt) {
 			value = nbt.getDouble();
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeDouble(value);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			value = t.readDouble();
+		}
 	}
 
-	public static class NBTBoolean implements INBTSerializable<NBTTagByte> {
+	public static class NBTBoolean implements INBTSerializable<NBTTagByte>, IPacketSerializable {
 		public boolean value;
 
 		public NBTBoolean() {
@@ -311,9 +381,19 @@ public class NBTSerializable {
 		public void deserializeNBT(NBTTagByte nbt) {
 			value = nbt.getByte() != 0;
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeBoolean(value);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			value = t.readBoolean();
+		}
 	}
 
-	public static class NBTEnumNullable<T extends Enum<T>> implements INBTSerializable<NBTTagShort> {
+	public static class NBTEnumNullable<T extends Enum<T>> implements INBTSerializable<NBTTagShort>, IPacketSerializable {
 		private final Class<T> clazz;
 		public T value;
 
@@ -329,16 +409,23 @@ public class NBTSerializable {
 
 		@Override
 		public void deserializeNBT(NBTTagShort nbt) {
-			T[] enumConstants = clazz.getEnumConstants();
 			short i = nbt.getShort();
-			if (i == -1)
-				value = null;
-			else
-				value = enumConstants[i];
+			value = i != -1 ? clazz.getEnumConstants()[i] : null;
+		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeShort(value == null ? -1 : (short) value.ordinal());
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			short i = t.readShort();
+			value = i != -1 ? clazz.getEnumConstants()[i] : null;
 		}
 	}
 
-	public static class NBTEnum<T extends Enum<T>> implements INBTSerializable<NBTTagShort> {
+	public static class NBTEnum<T extends Enum<T>> implements INBTSerializable<NBTTagShort>, IPacketSerializable {
 		@Nonnull
 		public T value;
 
@@ -360,9 +447,19 @@ public class NBTSerializable {
 				throw new NullPointerException();
 			value = enumConstants[i];
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeShort(value.ordinal());
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			value = value.getDeclaringClass().getEnumConstants()[t.readShort()];
+		}
 	}
 
-	public static class NBTStack implements INBTSerializable<NBTBase> {
+	public static class NBTStack implements INBTSerializable<NBTBase>, IPacketSerializable {
 		ItemStack value = StackHelper.empty();
 
 		public void setStackRaw(ItemStack other) {
@@ -402,9 +499,19 @@ public class NBTSerializable {
 		public boolean isNull() {
 			return StackHelper.isNull(value);
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeItemStack(value);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			value = t.readItemStack();
+		}
 	}
 
-	public abstract static class NBTNullable<T extends INBTSerializable<K>, K extends NBTBase> implements INBTSerializable<NBTBase> {
+	public abstract static class NBTNullable<T extends INBTSerializable<K> & IPacketSerializable, K extends NBTBase> implements INBTSerializable<NBTBase>, IPacketSerializable {
 		T value;
 
 		@Override
@@ -427,6 +534,24 @@ public class NBTSerializable {
 		}
 
 		public abstract T newBlankValue();
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			if (value == null) {
+				t.writeBoolean(false);
+			} else {
+				t.writeBoolean(true);
+				value.writeToPacket(t);
+			}
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			if (t.readBoolean()) {
+				value = newBlankValue();
+				value.readFromPacket(t);
+			}
+		}
 	}
 
 	public static class MapSerializable<K, V, K_NBT extends NBTBase, V_NBT extends NBTBase> implements INBTSerializable<NBTTagList> {
@@ -506,7 +631,7 @@ public class NBTSerializable {
 		}
 	}
 
-	public static class NBTResourceLocationSerializable implements INBTSerializable<NBTTagString> {
+	public static class NBTResourceLocationSerializable implements INBTSerializable<NBTTagString>, IPacketSerializable {
 		ResourceLocation location;
 
 		public NBTResourceLocationSerializable(ResourceLocation location) {
@@ -533,6 +658,16 @@ public class NBTSerializable {
 		@Override
 		public void deserializeNBT(NBTTagString nbt) {
 			location = deserialize(nbt);
+		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeString(location.toString());
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			location = new ResourceLocation(t.readString());
 		}
 	}
 
@@ -627,7 +762,7 @@ public class NBTSerializable {
 		}
 	}
 
-	public static class Vec implements INBTSerializable<NBTTagCompound> {
+	public static class Vec implements INBTSerializable<NBTTagCompound>, IPacketSerializable {
 		public double x, y, z;
 
 		public void set(Vec3d vec) {
@@ -687,7 +822,7 @@ public class NBTSerializable {
 		protected abstract V deserialize(V_NBT nbt);
 	}
 
-	public static class NBTMutableBlockPos extends BlockPos.MutableBlockPos implements INBTSerializable<NBTTagLong> {
+	public static class NBTMutableBlockPos extends BlockPos.MutableBlockPos implements INBTSerializable<NBTTagLong>, IPacketSerializable {
 		public NBTMutableBlockPos() {
 			super();
 		}
@@ -710,16 +845,26 @@ public class NBTSerializable {
 			setPos(BlockPos.fromLong(nbt.getLong()));
 		}
 
-		public void setPosX(int x){
+		public void setPosX(int x) {
 			this.x = x;
 		}
 
-		public void setPosY(int y){
+		public void setPosY(int y) {
 			this.y = y;
 		}
 
-		public void setPosZ(int z){
+		public void setPosZ(int z) {
 			this.z = z;
+		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeBlockPos(this);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			setPos(t.readBlockPos());
 		}
 	}
 
@@ -787,7 +932,7 @@ public class NBTSerializable {
 		}
 	}
 
-	public static final class NBTBlockState implements INBTSerializable<NBTTagCompound> {
+	public static final class NBTBlockState implements INBTSerializable<NBTTagCompound>, IPacketSerializable {
 		@Nullable
 		public IBlockState value;
 
@@ -834,9 +979,23 @@ public class NBTSerializable {
 				value = getBlockState(location, meta);
 			}
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeNBT(serializeNBT());
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			NBTTagCompound nbt = t.readNBT();
+			if (nbt == null)
+				value = null;
+			else
+				deserializeNBT(nbt);
+		}
 	}
 
-	public static final class NBTChunkPos implements INBTSerializable<NBTTagLong> {
+	public static final class NBTChunkPos implements INBTSerializable<NBTTagLong>, IPacketSerializable {
 		public int x, z;
 
 		public NBTChunkPos() {
@@ -879,6 +1038,19 @@ public class NBTSerializable {
 			x = (int) (c >> 32);
 			z = (int) c;
 		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			long c = ((long) x << 32) | (z & 0xFFFFFFFFL);
+			t.writeLong(c);
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			long c = t.readLong();
+			x = (int) (c >> 32);
+			z = (int) c;
+		}
 	}
 
 	public static class NBTEnumIntMap<T extends Enum<T>> implements INBTSerializable<NBTTagList> {
@@ -914,7 +1086,7 @@ public class NBTSerializable {
 		}
 	}
 
-	public static class NBTUUID implements INBTSerializable<NBTTagString> {
+	public static class NBTUUID implements INBTSerializable<NBTTagString>, IPacketSerializable {
 		public UUID value = null;
 
 		@Override
@@ -926,6 +1098,16 @@ public class NBTSerializable {
 		@Override
 		public void deserializeNBT(NBTTagString nbt) {
 			value = UUID.fromString(nbt.getString());
+		}
+
+		@Override
+		public void writeToPacket(XUPacketBuffer t) {
+			t.writeString(value.toString());
+		}
+
+		@Override
+		public void readFromPacket(XUPacketBuffer t) {
+			value = UUID.fromString(t.readString());
 		}
 	}
 
