@@ -1,2 +1,4 @@
-- Fix crash on servers
-- Add missing localizations
+Add Quartzburnt and Rainbow stone.
+Add crafting recipes for decorative blocks.
+Change leaves to not be solid blocks.
+Add handler to prevent desyncing on nether teleport.
