@@ -236,7 +236,7 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 				@Override
 				public List<String> getToolTip() {
 					ResonatorRecipe currentRecipe = TileResonator.this.currentRecipe;
-					if(currentRecipe != null && Strings.isNotBlank( currentRecipe.getRequirementText())){
+					if(currentRecipe != null && !StringHelper.isBlank( currentRecipe.getRequirementText())){
 						return ImmutableList.<String>builder().add(currentRecipe.getRequirementText()).addAll(super.getToolTip()).build();
 					}
 

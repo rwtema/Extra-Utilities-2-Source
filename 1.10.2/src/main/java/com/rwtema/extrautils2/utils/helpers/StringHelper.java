@@ -3,6 +3,7 @@ package com.rwtema.extrautils2.utils.helpers;
 import gnu.trove.map.hash.TIntIntHashMap;
 
 import javax.annotation.Nonnegative;
+import javax.annotation.Nullable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -179,4 +180,7 @@ public class StringHelper {
 	}
 
 
+	public static boolean isBlank(@Nullable String s) {
+		return s == null || s.trim().isEmpty();
+	}
 }
