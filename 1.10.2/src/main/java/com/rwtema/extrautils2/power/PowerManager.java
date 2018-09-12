@@ -55,7 +55,7 @@ public class PowerManager {
 	private final WeakLinkedSet<IPower> powersToRemove = new WeakLinkedSet<>();
 	public WeakHashMap<IPower, PowerFreq> assignedValues = new WeakHashMap<>();
 	int p = 0;
-	boolean dirty = true;
+	public boolean dirty = true;
 	UnloadedChunkPower unloadedChunkManager = new UnloadedChunkPower();
 	private boolean playersDirty = true;
 
@@ -478,7 +478,7 @@ public class PowerManager {
 		TIntHashSet playerFreqs = new TIntHashSet();
 		WeakLinkedSet<EntityPlayerMP> players = new WeakLinkedSet<>();
 		int refresh_delta = XURandom.rand.nextInt(REFRESH_TIME);
-		boolean dirty = true;
+		public boolean dirty = true;
 		private WeakHashMap<World, TObjectFloatHashMap<IWorldPowerMultiplier>> worldPowerCreators = new WeakHashMap<>();
 		private WeakHashMap<World, TObjectFloatHashMap<IWorldPowerMultiplier>> worldPowerDrainers = new WeakHashMap<>();
 
