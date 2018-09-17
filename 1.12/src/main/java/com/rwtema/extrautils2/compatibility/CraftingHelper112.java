@@ -11,9 +11,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.common.crafting.IShapedRecipe;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import javax.annotation.Nonnull;
@@ -111,36 +114,24 @@ public class CraftingHelper112 {
 	@Nonnull
 	public static List<Object> getRecipeInputs(IRecipe curRecipe) {
 		List<Object> input = new ArrayList<>();
-		if (curRecipe instanceof ShapedRecipes || curRecipe instanceof ShapedOreRecipe) {
+		if (curRecipe instanceof IShapedRecipe) {
 			int w, h;
 			List<Ingredient> inputs;
-			if (curRecipe instanceof ShapedOreRecipe) {
-				ShapedOreRecipe recipe = (ShapedOreRecipe) curRecipe;
-				inputs = recipe.getIngredients();
-				w = recipe.getWidth();
-				h = recipe.getHeight();
-			} else {
-				ShapedRecipes recipe = (ShapedRecipes) curRecipe;
-				inputs = recipe.recipeItems;
-				w = recipe.recipeWidth;
-				h = recipe.recipeHeight;
-			}
+
+			IShapedRecipe recipe = (IShapedRecipe) curRecipe;
+			inputs = recipe.getIngredients();
+			w = recipe.getRecipeWidth();
+			h = recipe.getRecipeHeight();
+
 			Object[] inputs3x3 = new Object[9];
 			for (int x = 0; x < w; x++) {
 				for (int y = 0; y < h; y++) {
-					if (x >= 0 && x < w && y >= 0 && y < h) {
-						inputs3x3[x + y * 3] = inputs.get(x + y * w);
-					}
+					inputs3x3[x + y * 3] = inputs.get(x + y * w);
 				}
 			}
 			Collections.addAll(input, inputs3x3);
-		} else if (curRecipe instanceof ShapelessRecipes) {
-			input.addAll(((ShapelessRecipes) curRecipe).recipeItems);
-		} else if (curRecipe instanceof ShapelessOreRecipe) {
+		} else {
 			input.addAll(curRecipe.getIngredients());
-		}
-		if (input.size() > 9) {
-
 		}
 		return input;
 	}
