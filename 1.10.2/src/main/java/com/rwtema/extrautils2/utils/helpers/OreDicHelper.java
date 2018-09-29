@@ -6,11 +6,9 @@ import com.rwtema.extrautils2.utils.datastructures.ItemRef;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OreDicHelper {
 	final static HashMultimap<String, ItemRef> registeredOres = HashMultimap.create();
@@ -33,7 +31,7 @@ public class OreDicHelper {
 
 	public static String extendVanillaOres(String oreName, ItemStack... stacks) {
 		ArrayList<ItemStack> itemStacks = Lists.newArrayList(stacks);
-		itemStacks.removeIf(stack -> OreDictionary.getOres(oreName).stream().anyMatch( target-> OreDictionary.itemMatches(target, stack, false)));
+		itemStacks.removeIf(stack -> OreDictionary.getOres(oreName).stream().anyMatch(target -> OreDictionary.itemMatches(target, stack, false)));
 		for (ItemStack stack : itemStacks) {
 			OreDictionary.registerOre(oreName, stack);
 		}
