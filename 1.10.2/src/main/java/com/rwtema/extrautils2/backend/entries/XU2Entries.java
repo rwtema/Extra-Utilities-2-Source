@@ -251,7 +251,7 @@ public class XU2Entries {
 	public static BlockEntry<BlockTrashCan> trashCan = new BlockClassEntry<BlockTrashCan>(BlockTrashCan.class, TileTrashCan.class) {
 		@Override
 		public void addRecipes() {
-			addShaped("trash_can", value, "SSS", "CcC", "CCC", 'S', "stone", 'C', "cobblestone", 'c', Blocks.CHEST);
+			addShaped("trash_can", value, "SSS", "CcC", "CCC", 'S', "stone", 'C', "cobblestone", 'c', CHEST_WOOD);
 		}
 	};
 	public static BlockEntry<BlockTrashCan.Fluid> trashCanFluid = new BlockClassEntry<BlockTrashCan.Fluid>("TrashCanFluid", BlockTrashCan.Fluid.class, TileTrashCanFluids.class) {
@@ -565,7 +565,7 @@ public class XU2Entries {
 	public static ItemClassEntry<ItemBagOfHolding> bagOfHolding = new ItemClassEntry<ItemBagOfHolding>(ItemBagOfHolding.class) {
 		@Override
 		public void addRecipes() {
-			addShaped("bag_of_holding", newStack(), "ggg", "cBc", "ggg", 'g', "ingotGold", 'c', Blocks.CHEST, 'B', magical_wood);
+			addShaped("bag_of_holding", newStack(), "ggg", "cBc", "ggg", 'g', "ingotGold", 'c', CHEST_WOOD, 'B', magical_wood);
 		}
 	};
 	public static BlockClassEntry<BlockDecorativeGlass> decorativeGlass = new BlockClassEntry<BlockDecorativeGlass>(BlockDecorativeGlass.class) {
@@ -793,6 +793,9 @@ public class XU2Entries {
 			addShaped("filter_fluids", newStack(), "rsr", "sSs", "rsr", 'r', "gemLapis", 's', "stickWood", 'S', "string");
 		}
 	};
+	public static final String CHEST_WOOD = OreDicHelper.extendVanillaOres("chestWood",
+			new ItemStack(Blocks.CHEST),
+			new ItemStack(Blocks.TRAPPED_CHEST));
 	//	public static BlockClassEntry<BlockEvil> evilBlock = new BlockClassEntry<BlockEvil>(BlockEvil.class, TileEvil.class) {
 //		@Override
 //		public void addRecipes() {
@@ -813,7 +816,7 @@ public class XU2Entries {
 					"SCS", 'P',
 					pipe, 'R',
 					"dustRedstone", 'S',
-					"stone", 'C', "chestWood");
+					"stone", 'C', CHEST_WOOD);
 
 			CraftingHelper.addShaped("transfer_filter_items",
 					newStack(4, GrocketType.FILTER_ITEMS.ordinal()),
@@ -1154,7 +1157,7 @@ public class XU2Entries {
 					"IRI", 'I',
 					"ingotIron", 'R',
 					"dustRedstone",
-					'C', ImmutableList.of(Blocks.CHEST, Blocks.TRAPPED_CHEST));
+					'C', CHEST_WOOD);
 
 
 			addShaped("machine_furnace",
@@ -1580,7 +1583,7 @@ public class XU2Entries {
 	public static BlockClassEntry<BlockTrashChest> trashChest = new BlockClassEntry<BlockTrashChest>(BlockTrashChest.class, TileTrashChest.class) {
 		@Override
 		public void addRecipes() {
-			addShapeless("trash_chest", newStack(), Blocks.CHEST, XU2Entries.trashCan, "dustRedstone");
+			addShapeless("trash_chest", newStack(), CHEST_WOOD, XU2Entries.trashCan, "dustRedstone");
 		}
 	};
 	public static BlockClassEntry<BlockOpinium> openium = new BlockClassEntry<BlockOpinium>(BlockOpinium.class) {
@@ -1639,7 +1642,7 @@ public class XU2Entries {
 	public static BlockClassEntry<BlockAnalogCrafter> analogCrafter = new BlockClassEntry<BlockAnalogCrafter>(BlockAnalogCrafter.class, TileAnalogCrafter.class) {
 		@Override
 		public void addRecipes() {
-			addShapeless("crafter_analog", newStack(), Blocks.CRAFTING_TABLE, Blocks.CHEST, Blocks.LEVER);
+			addShapeless("crafter_analog", newStack(), Blocks.CRAFTING_TABLE, CHEST_WOOD, Blocks.LEVER);
 		}
 	};
 	public static BlockClassEntry<BlockDecorativeBedrock> decorativeBedrock = new BlockClassEntry<BlockDecorativeBedrock>(BlockDecorativeBedrock.class) {
