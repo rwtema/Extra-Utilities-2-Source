@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ZenRegister
-@ZenClass
+@ZenClass(XUTweaker.PACKAGE_NAME_BASE + "IMachineRegistry")
 public class IMachineRegistry {
 
 
@@ -20,8 +20,8 @@ public class IMachineRegistry {
 	public static IMachine createNewMachine(@Nonnull String name,
 											int energyBufferSize,
 											int energyTransferLimit,
-											List<ISlot> inputSlots,
-											List<ISlot> outputSlots,
+											List<IMachineSlot> inputSlots,
+											List<IMachineSlot> outputSlots,
 											@Nonnull String frontTexture,
 											@Nonnull String frontTextureActive) {
 		return createNewMachine(name, energyBufferSize, energyTransferLimit, inputSlots, outputSlots, frontTexture, frontTextureActive, 0xffffff);
@@ -31,8 +31,8 @@ public class IMachineRegistry {
 	public static IMachine createNewMachine(@Nonnull String name,
 											int energyBufferSize,
 											int energyTransferLimit,
-											List<ISlot> inputSlots,
-											List<ISlot> outputSlots,
+											List<IMachineSlot> inputSlots,
+											List<IMachineSlot> outputSlots,
 											@Nonnull String frontTexture,
 											@Nonnull String frontTextureActive,
 											int color) {
@@ -43,8 +43,8 @@ public class IMachineRegistry {
 	public static IMachine createNewGenerator(@Nonnull String name,
 											  int energyBufferSize,
 											  int energyTransferLimit,
-											  List<ISlot> inputSlots,
-											  List<ISlot> outputSlots,
+											  List<IMachineSlot> inputSlots,
+											  List<IMachineSlot> outputSlots,
 											  @Nonnull String frontTexture,
 											  @Nonnull String frontTextureActive) {
 		return createNewGenerator(name, energyBufferSize, energyTransferLimit, inputSlots, outputSlots, frontTexture, frontTextureActive, 0xffffff);
@@ -54,8 +54,8 @@ public class IMachineRegistry {
 	public static IMachine createNewGenerator(@Nonnull String name,
 											  int energyBufferSize,
 											  int energyTransferLimit,
-											  List<ISlot> inputSlots,
-											  List<ISlot> outputSlots,
+											  List<IMachineSlot> inputSlots,
+											  List<IMachineSlot> outputSlots,
 											  @Nonnull String frontTexture,
 											  @Nonnull String frontTextureActive,
 											  int color) {
@@ -65,8 +65,8 @@ public class IMachineRegistry {
 	public static IMachine createNewMachine(@Nonnull String name,
 											int energyBufferSize,
 											int energyTransferLimit,
-											List<ISlot> inputSlots,
-											List<ISlot> outputSlots,
+											List<IMachineSlot> inputSlots,
+											List<IMachineSlot> outputSlots,
 											@Nonnull String frontTexture,
 											@Nonnull String frontTextureActive,
 											int color,

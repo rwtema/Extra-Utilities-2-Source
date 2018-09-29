@@ -5,6 +5,10 @@ import java.util.Objects;
 public class ObjWrapper<T> {
 	public final T object;
 
+	public ObjWrapper(T object) {
+		this.object = object;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -16,10 +20,6 @@ public class ObjWrapper<T> {
 	@Override
 	public int hashCode() {
 		return Objects.hash(object);
-	}
-
-	public ObjWrapper(T object) {
-		this.object = object;
 	}
 
 	public T getInternal() {

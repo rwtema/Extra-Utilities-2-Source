@@ -12,6 +12,10 @@ public class GenericAction implements IAction {
 		this.description = description;
 	}
 
+	public static void run(Runnable runnable, String description) {
+		CraftTweakerAPI.apply(new GenericAction(runnable, description));
+	}
+
 	@Override
 	public void apply() {
 		runnable.run();
@@ -20,9 +24,5 @@ public class GenericAction implements IAction {
 	@Override
 	public String describe() {
 		return description;
-	}
-
-	public static void run(Runnable runnable, String description){
-		CraftTweakerAPI.apply(new GenericAction(runnable, description));
 	}
 }

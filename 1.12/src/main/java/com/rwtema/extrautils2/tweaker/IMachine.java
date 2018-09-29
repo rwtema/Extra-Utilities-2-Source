@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-@ZenClass
+@ZenClass(XUTweaker.PACKAGE_NAME_BASE + "IMachine")
 @ZenRegister
 public class IMachine extends ObjWrapper<Machine> {
 	public IMachine(Machine object) {
@@ -71,28 +71,28 @@ public class IMachine extends ObjWrapper<Machine> {
 	}
 
 	@ZenMethod
-	public List<ISlot> getInputSlots() {
-		return Stream.concat(object.itemInputs.stream(), object.fluidInputs.stream()).map(ISlot::new).collect(Collectors.toList());
+	public List<IMachineSlot> getInputSlots() {
+		return Stream.concat(object.itemInputs.stream(), object.fluidInputs.stream()).map(IMachineSlot::new).collect(Collectors.toList());
 	}
 
 	@ZenMethod
-	public List<ISlot> getOutputSlots() {
-		return Stream.concat(object.itemOutputs.stream(), object.fluidOutputs.stream()).map(ISlot::new).collect(Collectors.toList());
+	public List<IMachineSlot> getOutputSlots() {
+		return Stream.concat(object.itemOutputs.stream(), object.fluidOutputs.stream()).map(IMachineSlot::new).collect(Collectors.toList());
 	}
 
 	@ZenMethod
-	public ISlot getSlot(String slotName) {
+	public IMachineSlot getSlot(String slotName) {
 		for (MachineSlot slot : object.itemInputs) {
-			if (slot.name.equals(slotName)) return new ISlot(slot);
+			if (slot.name.equals(slotName)) return new IMachineSlot(slot);
 		}
 		for (MachineSlot slot : object.itemOutputs) {
-			if (slot.name.equals(slotName)) return new ISlot(slot);
+			if (slot.name.equals(slotName)) return new IMachineSlot(slot);
 		}
 		for (MachineSlot slot : object.fluidInputs) {
-			if (slot.name.equals(slotName)) return new ISlot(slot);
+			if (slot.name.equals(slotName)) return new IMachineSlot(slot);
 		}
 		for (MachineSlot slot : object.fluidOutputs) {
-			if (slot.name.equals(slotName)) return new ISlot(slot);
+			if (slot.name.equals(slotName)) return new IMachineSlot(slot);
 		}
 		return null;
 	}

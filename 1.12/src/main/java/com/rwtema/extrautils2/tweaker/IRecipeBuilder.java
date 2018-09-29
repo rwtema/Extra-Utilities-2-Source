@@ -5,7 +5,6 @@ import com.rwtema.extrautils2.api.machine.MachineSlotFluid;
 import com.rwtema.extrautils2.api.machine.MachineSlotItem;
 import com.rwtema.extrautils2.api.machine.RecipeBuilder;
 import crafttweaker.api.item.IIngredient;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import stanhebben.zenscript.annotations.ZenGetter;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class IRecipeBuilder extends ObjWrapper<RecipeBuilder> {
 
-	HashMap<ISlot, String> trackedOutputs = new HashMap<>();
+	HashMap<IMachineSlot, String> trackedOutputs = new HashMap<>();
 
 	public IRecipeBuilder(RecipeBuilder object) {
 		super(object);
@@ -45,12 +44,12 @@ public class IRecipeBuilder extends ObjWrapper<RecipeBuilder> {
 
 	@ZenMethod
 	public IRecipeBuilder setInput(String slot, IIngredient ingredient) {
-		ISlot slot1 = getMachine().getSlot(slot);
+		IMachineSlot slot1 = getMachine().getSlot(slot);
 		return setInput(slot1, ingredient);
 	}
 
 	@ZenMethod
-	public IRecipeBuilder setInput(ISlot slot, IIngredient ingredient) {
+	public IRecipeBuilder setInput(IMachineSlot slot, IIngredient ingredient) {
 		MachineSlot machineSlot = slot.object;
 		if (machineSlot instanceof MachineSlotItem) {
 			object.setItemInput((MachineSlotItem) machineSlot, getItemStackList(ingredient), ingredient.getAmount());
@@ -70,11 +69,11 @@ public class IRecipeBuilder extends ObjWrapper<RecipeBuilder> {
 
 	@ZenMethod
 	public IRecipeBuilder setOutput(String slot, IIngredient stack) {
-		ISlot slot1 = getMachine().getSlot(slot);
+		IMachineSlot slot1 = getMachine().getSlot(slot);
 		return setOutput(slot1, stack);
 	}
 
-	private IRecipeBuilder setOutput(ISlot slot, IIngredient stack) {
+	private IRecipeBuilder setOutput(IMachineSlot slot, IIngredient stack) {
 		MachineSlot machineSlot = slot.object;
 		if (machineSlot instanceof MachineSlotItem) {
 			List<ItemStack> itemStackList = getItemStackList(stack);
@@ -105,14 +104,14 @@ public class IRecipeBuilder extends ObjWrapper<RecipeBuilder> {
 	}
 
 	@ZenMethod
-	public IRecipeBuilder setOutput(ISlot slot, IIngredient stack, int probability) {
+	public IRecipeBuilder setOutput(IMachineSlot slot, IIngredient stack, int probability) {
 		setOutput(slot, stack);
 		setProbability(slot, probability);
 		return this;
 	}
 
 	@ZenMethod
-	public IRecipeBuilder setProbability(ISlot slot, float probability) {
+	public IRecipeBuilder setProbability(IMachineSlot slot, float probability) {
 		object.setProbability(slot.object, probability);
 		return this;
 	}

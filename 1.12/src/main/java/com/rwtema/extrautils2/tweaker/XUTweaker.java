@@ -12,13 +12,14 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass
+@ZenClass(XUTweaker.PACKAGE_NAME_BASE + "XUTweaker")
 @ZenRegister
 public class XUTweaker {
+	public static final String PACKAGE_NAME_BASE = "extrautilities2.Tweaker.";
 
 	@ZenMethod
 	public static void allowSurvivalFlight() {
-		GenericAction.run(()->MinecraftForge.EVENT_BUS.register(new Object() {
+		GenericAction.run(() -> MinecraftForge.EVENT_BUS.register(new Object() {
 			@SubscribeEvent
 			public void tick(TickEvent.PlayerTickEvent event) {
 				event.player.capabilities.allowFlying = true;
@@ -27,8 +28,8 @@ public class XUTweaker {
 	}
 
 	@ZenMethod
-	public static void disableNetherPortals(){
-		GenericAction.run(()->MinecraftForge.EVENT_BUS.register(new Object() {
+	public static void disableNetherPortals() {
+		GenericAction.run(() -> MinecraftForge.EVENT_BUS.register(new Object() {
 			@SubscribeEvent
 			public void tick(BlockEvent.PortalSpawnEvent event) {
 				event.setCanceled(true);
@@ -41,7 +42,7 @@ public class XUTweaker {
 		return internal instanceof ItemStack ? (ItemStack) internal : ItemStack.EMPTY;
 	}
 
-	public static FluidStack createFluidStack(ILiquidStack stack){
+	public static FluidStack createFluidStack(ILiquidStack stack) {
 		Object internal = stack.getInternal();
 		return internal instanceof FluidStack ? ((FluidStack) internal) : null;
 	}
