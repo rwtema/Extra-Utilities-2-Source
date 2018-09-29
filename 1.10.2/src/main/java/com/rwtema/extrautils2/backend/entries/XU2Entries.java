@@ -813,9 +813,7 @@ public class XU2Entries {
 					"SCS", 'P',
 					pipe, 'R',
 					"dustRedstone", 'S',
-					"stone", 'C', ImmutableList.of(
-							new ItemStack(Blocks.CHEST),
-							new ItemStack(Blocks.TRAPPED_CHEST)));
+					"stone", 'C', "chestWood");
 
 			CraftingHelper.addShaped("transfer_filter_items",
 					newStack(4, GrocketType.FILTER_ITEMS.ordinal()),
