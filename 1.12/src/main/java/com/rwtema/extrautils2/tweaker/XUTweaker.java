@@ -34,7 +34,7 @@ public class XUTweaker {
 			public void tick(BlockEvent.PortalSpawnEvent event) {
 				event.setCanceled(true);
 			}
-		}), "Enabling flight for all players");
+		}), "Disabling nether portal creation");
 	}
 
 	public static ItemStack createItemStack(IItemStack stack) {

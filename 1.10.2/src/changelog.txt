@@ -1,4 +1,2 @@
-Add Quartzburnt and Rainbow stone.
-Add crafting recipes for decorative blocks.
-Change leaves to not be solid blocks.
-Add handler to prevent desyncing on nether teleport.
+Various recipes now use "chestWood"
+Add integration for CraftTweaker (wip)
