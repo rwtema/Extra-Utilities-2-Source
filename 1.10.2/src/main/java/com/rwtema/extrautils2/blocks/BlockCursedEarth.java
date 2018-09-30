@@ -68,6 +68,7 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 	public static final WeakLinkedSet<Entity> cursedClient = new WeakLinkedSet<>();
 	static final UUID uuid = UUID.fromString("E53E0344-EA5E-4F71-98F6-40791198D8FE");
 	public static Set<String> entity_blacklist = new HashSet<>();
+	public static boolean spawnParticles = true;
 	ISolidWorldTexture tex;
 	ISolidWorldTexture side;
 	ISolidWorldTexture bottom;
@@ -156,14 +157,16 @@ public class BlockCursedEarth extends XUBlockConnectedTextureBase {
 
 	@Override
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		int numParticles = (MAX_DECAY - stateIn.getValue(DECAY));
-		for (int i = 0; i < numParticles; i++) {
-			worldIn.spawnParticle(
-					EnumParticleTypes.SMOKE_NORMAL,
-					pos.getX() + rand.nextDouble(),
-					pos.getY() + 1.01,
-					pos.getZ() + rand.nextDouble(),
-					0.0D, 0.0D, 0.0D);
+		if (spawnParticles) {
+			int numParticles = (MAX_DECAY - stateIn.getValue(DECAY));
+			for (int i = 0; i < numParticles; i++) {
+				worldIn.spawnParticle(
+						EnumParticleTypes.SMOKE_NORMAL,
+						pos.getX() + rand.nextDouble(),
+						pos.getY() + 1.01,
+						pos.getZ() + rand.nextDouble(),
+						0.0D, 0.0D, 0.0D);
+			}
 		}
 	}
 
