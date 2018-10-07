@@ -371,7 +371,7 @@ public abstract class XUBlock extends BlockCompat implements IRegisterItemColors
 					if (item != null) {
 						ItemStack stack = new ItemStack(item, 1, this.damageDropped(state));
 						stack.setTagCompound(saveInfo);
-						return ImmutableList.of(stack);
+						return Lists.newArrayList(stack);
 					}
 				}
 			}
