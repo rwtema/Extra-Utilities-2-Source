@@ -280,14 +280,17 @@ public class JEIMachine extends BlankRecipeCategory<JEIMachine.JEIMachineRecipe.
 			public void getIngredients(@Nonnull IIngredients ingredients) {
 				ArrayList<List<ItemStack>> objects = new ArrayList<>();
 				for (MachineSlotItem slot : parentRecipe.machine.itemInputs) {
-					objects.add(parentRecipe.inputs.get(slot));
+					List<ItemStack> stacks = parentRecipe.inputs.get(slot);
+					if(stacks != null) objects.add(stacks);
 				}
 
 				ingredients.setInputLists(ItemStack.class, objects);
 
 				ArrayList<List<FluidStack>> fluidObjects = new ArrayList<>();
 				for (MachineSlotFluid slot : parentRecipe.machine.fluidInputs) {
-					fluidObjects.add(parentRecipe.fluids.get(slot));
+					List<FluidStack> list = parentRecipe.fluids.get(slot);
+					if (list != null)
+						fluidObjects.add(list);
 				}
 
 				ingredients.setInputLists(FluidStack.class, fluidObjects);
@@ -308,8 +311,9 @@ public class JEIMachine extends BlankRecipeCategory<JEIMachine.JEIMachineRecipe.
 				ImmutableMap.Builder<K, V> builder = ImmutableMap.builder();
 				for (K k : list) {
 					List<V> objects = inputs.get(k);
-					V v = objects.stream().findAny().orElse(null);
-					builder.put(k, v);
+					if (objects != null) {
+						objects.stream().findAny().ifPresent(v -> builder.put(k, v));
+					}
 				}
 				return builder.build();
 			}

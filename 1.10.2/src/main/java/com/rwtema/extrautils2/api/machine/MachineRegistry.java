@@ -12,31 +12,8 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 public class MachineRegistry {
-	private final static LinkedHashMap<String, Machine> machines;
+	private final static LinkedHashMap<String, Machine> machines = new LinkedHashMap<>();
 	private static Logger logger = LogManager.getLogger("ExtraMachinaAPI");
-
-	static {
-		machines = new LinkedHashMap<>();
-		registerInternal(XUMachineFurnace.INSTANCE);
-		registerInternal(XUMachineCrusher.INSTANCE);
-		registerInternal(XUMachineEnchanter.INSTANCE);
-		registerInternal(XUMachineGenerators.SURVIVALIST_GENERATOR);
-		registerInternal(XUMachineGenerators.FURNACE_GENERATOR);
-		registerInternal(XUMachineGenerators.CULINARY_GENERATOR);
-		registerInternal(XUMachineGenerators.LAVA_GENERATOR);
-		registerInternal(XUMachineGenerators.REDSTONE_GENERATOR);
-		registerInternal(XUMachineGenerators.ENDER_GENERATOR);
-		registerInternal(XUMachineGenerators.POTION_GENERATOR);
-		registerInternal(XUMachineGenerators.PINK_GENERATOR);
-		registerInternal(XUMachineGenerators.OVERCLOCK_GENERATOR);
-		registerInternal(XUMachineGenerators.TNT_GENERATOR);
-		registerInternal(XUMachineGenerators.NETHERSTAR_GENERATOR);
-		registerInternal(XUMachineGenerators.DRAGON_GENERATOR);
-		registerInternal(XUMachineGenerators.ICE_GENERATOR);
-		registerInternal(XUMachineGenerators.DEATH_GENERATOR);
-		registerInternal(XUMachineGenerators.ENCHANT_GENERATOR);
-		registerInternal(XUMachineGenerators.SLIME_GENERATOR);
-	}
 
 	public static Machine register(@Nonnull Machine machine) {
 		return register(machine, Loader.instance().activeModContainer());
@@ -58,12 +35,6 @@ public class MachineRegistry {
 	public static boolean deregister(Machine machine) {
 		logger.trace(machine.name + " was deregistered by " + machine.container);
 		return machines.remove(machine.name) == machine;
-	}
-
-	private static Machine registerInternal(@Nonnull Machine machine) {
-		logger.trace("Registering internal machine " + machine.name);
-		registerMachineDo(machine);
-		return machine;
 	}
 
 	@Nullable

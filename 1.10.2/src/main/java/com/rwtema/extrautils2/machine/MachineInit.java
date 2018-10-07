@@ -393,6 +393,26 @@ public class MachineInit {
 
 			}
 		};
+
+		MachineRegistry.register(XUMachineFurnace.INSTANCE);
+		MachineRegistry.register(XUMachineCrusher.INSTANCE);
+		MachineRegistry.register(XUMachineEnchanter.INSTANCE);
+		MachineRegistry.register(XUMachineGenerators.SURVIVALIST_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.FURNACE_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.CULINARY_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.LAVA_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.REDSTONE_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.ENDER_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.POTION_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.PINK_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.OVERCLOCK_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.TNT_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.NETHERSTAR_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.DRAGON_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.ICE_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.DEATH_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.ENCHANT_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.SLIME_GENERATOR);
 	}
 
 	private static void spawnParticlesNearby(World world, AxisAlignedBB radius, float r, float g, float b) {
@@ -590,4 +610,25 @@ public class MachineInit {
 	}
 
 
+	public static void register() {
+		MachineRegistry.register(XUMachineFurnace.INSTANCE);
+		MachineRegistry.register(XUMachineCrusher.INSTANCE);
+		MachineRegistry.register(XUMachineEnchanter.INSTANCE);
+		MachineRegistry.register(XUMachineGenerators.SURVIVALIST_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.FURNACE_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.CULINARY_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.LAVA_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.REDSTONE_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.ENDER_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.POTION_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.PINK_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.OVERCLOCK_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.TNT_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.NETHERSTAR_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.DRAGON_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.ICE_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.DEATH_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.ENCHANT_GENERATOR);
+		MachineRegistry.register(XUMachineGenerators.SLIME_GENERATOR);
+	}
 }

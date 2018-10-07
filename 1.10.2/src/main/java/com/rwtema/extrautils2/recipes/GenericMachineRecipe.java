@@ -127,7 +127,7 @@ public class GenericMachineRecipe implements IMachineRecipe {
 	}
 
 	public boolean matchesSlotFluid(MachineSlotFluid slot, FluidStack stack) {
-		if (stack != null)
+		if (stack != null && inputFluidStackMap.containsKey(slot))
 			for (String fluidName : inputFluidStackMap.get(slot)) {
 				if (fluidName != null && fluidName.matches(stack.getFluid().getName())) {
 					return true;
