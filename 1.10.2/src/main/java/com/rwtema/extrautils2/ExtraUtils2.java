@@ -25,6 +25,7 @@ import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.potion.PotionsHelper;
 import com.rwtema.extrautils2.power.Freq;
 import com.rwtema.extrautils2.power.PowerManager;
+import com.rwtema.extrautils2.tweaker.XUTweaker;
 import com.rwtema.extrautils2.utils.LogHelper;
 import com.rwtema.extrautils2.utils.errors.LegalException;
 import com.rwtema.extrautils2.utils.errors.LegalException.LawLevel;
@@ -69,6 +70,8 @@ public class ExtraUtils2 {
 	public static ExtraUtils2 instance;
 	public static String version;
 
+	public static RuntimeException toThrow = null;
+
 	static {
 		boolean d;
 		try {
@@ -107,6 +110,7 @@ public class ExtraUtils2 {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		checkThrow();
 		ExtraUtils2.version = event.getModMetadata().version;
 		NetworkHandler.init(event.getAsmData());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
@@ -132,7 +136,7 @@ public class ExtraUtils2 {
 
 		XUChunkLoaderManager.init();
 		GameRegistry.registerWorldGenerator(SingleChunkWorldGenManager.INSTANCE, 0);
-
+		checkThrow();
 	}
 
 	public <R> R test() {
@@ -141,6 +145,7 @@ public class ExtraUtils2 {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
+		checkThrow();
 		OreDicHelper.extendVanillaOre("bricksStone", Blocks.STONEBRICK);
 		OreDicHelper.extendVanillaOre("endstone", Blocks.END_STONE);
 		OreDicHelper.extendVanillaOre("obsidian", Blocks.OBSIDIAN);
@@ -155,10 +160,12 @@ public class ExtraUtils2 {
 				BookHandler.init();
 			}
 		});
+		checkThrow();
 	}
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		checkThrow();
 		EntryHandler.postInit();
 
 
@@ -184,11 +191,12 @@ public class ExtraUtils2 {
 				ClientCommandHandler.instance.registerCommand(new CommandPowerSharing());
 			}
 		});
-
+		checkThrow();
 	}
 
 	@Mod.EventHandler
 	public void complete(FMLLoadCompleteEvent event) {
+		checkThrow();
 		if (config.hasChanged()) {
 			config.save();
 		}
@@ -222,6 +230,12 @@ public class ExtraUtils2 {
 	public void getIMC(FMLInterModComms.IMCEvent event) {
 		for (FMLInterModComms.IMCMessage message : event.getMessages()) {
 			IMCHandler.handle(message);
+		}
+	}
+
+	public void checkThrow() {
+		if (toThrow != null) {
+			throw toThrow;
 		}
 	}
 
