@@ -1,10 +1,9 @@
 package com.rwtema.extrautils2.crafting.jei;
 
-import com.google.common.collect.ImmutableList;
 import com.rwtema.extrautils2.ExtraUtils2;
+import com.rwtema.extrautils2.api.resonator.IResonatorRecipe;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.gui.backend.DynamicGui;
-import com.rwtema.extrautils2.crafting.ResonatorRecipe;
 import com.rwtema.extrautils2.utils.Lang;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -20,7 +19,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
 
-public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler.ResonatorWrapper> implements IRecipeHandler<ResonatorRecipe>, IRecipeCategory<JEIResonatorHandler.ResonatorWrapper> {
+public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler.ResonatorWrapper> implements IRecipeHandler<IResonatorRecipe>, IRecipeCategory<JEIResonatorHandler.ResonatorWrapper> {
 
 
 	public static final String uid = ExtraUtils2.MODID + ".resonator";
@@ -35,8 +34,8 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 
 	@Nonnull
 	@Override
-	public Class<ResonatorRecipe> getRecipeClass() {
-		return ResonatorRecipe.class;
+	public Class<IResonatorRecipe> getRecipeClass() {
+		return IResonatorRecipe.class;
 	}
 
 	@Nonnull
@@ -46,19 +45,19 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 
 	@Nonnull
 	@Override
-	public String getRecipeCategoryUid(@Nonnull ResonatorRecipe recipe) {
+	public String getRecipeCategoryUid(@Nonnull IResonatorRecipe recipe) {
 		return uid;
 	}
 
 	@Nonnull
 	@Override
-	public IRecipeWrapper getRecipeWrapper(@Nonnull ResonatorRecipe recipe) {
+	public IRecipeWrapper getRecipeWrapper(@Nonnull IResonatorRecipe recipe) {
 		return new ResonatorWrapper(recipe);
 	}
 
 	@Override
-	public boolean isRecipeValid(@Nonnull ResonatorRecipe recipe) {
-		return true;
+	public boolean isRecipeValid(@Nonnull IResonatorRecipe recipe) {
+		return !recipe.getInputs().isEmpty();
 	}
 
 	@Nonnull
@@ -102,28 +101,28 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
 		guiItemStacks.init(0, true, slotX0, 14);
-		guiItemStacks.set(0, recipeWrapper.resonatorRecipe.input);
+		guiItemStacks.set(0, recipeWrapper.IResonatorRecipe.getInputs());
 
 		guiItemStacks.init(1, false, slotX1, 14);
-		guiItemStacks.set(1, recipeWrapper.resonatorRecipe.output);
+		guiItemStacks.set(1, recipeWrapper.IResonatorRecipe.getOutput());
 	}
 
 
 	public static class ResonatorWrapper extends BlankRecipeWrapper {
-		private final ResonatorRecipe resonatorRecipe;
+		private final IResonatorRecipe IResonatorRecipe;
 		String energyString;
 		String txtString;
 
-		public ResonatorWrapper(ResonatorRecipe resonatorRecipe) {
-			this.resonatorRecipe = resonatorRecipe;
-			energyString = Lang.translateArgs("%s GP", StringHelper.niceFormat(resonatorRecipe.energy / 100.0));
-			txtString = resonatorRecipe.getRequirementText();
+		public ResonatorWrapper(IResonatorRecipe IResonatorRecipe) {
+			this.IResonatorRecipe = IResonatorRecipe;
+			energyString = Lang.translateArgs("%s GP", StringHelper.niceFormat(IResonatorRecipe.getEnergy() / 100.0));
+			txtString = IResonatorRecipe.getRequirementText();
 		}
 
 		@Override
 		public void getIngredients(@Nonnull IIngredients ingredients) {
-			ingredients.setInputs(ItemStack.class, ImmutableList.of(resonatorRecipe.input));
-			ingredients.setOutput(ItemStack.class, resonatorRecipe.output);
+			ingredients.setInputs(ItemStack.class, IResonatorRecipe.getInputs());
+			ingredients.setOutput(ItemStack.class, IResonatorRecipe.getOutput());
 		}
 
 //			@Override
@@ -138,10 +137,10 @@ public class JEIResonatorHandler extends BlankRecipeCategory<JEIResonatorHandler
 			minecraft.fontRenderer.drawSplitString(energyString, Math.max(slotX0, (recipeWidth - stringWidth) / 2), (18 - 9) / 2, BETWEEN_DIST, Color.gray.getRGB());
 			stringWidth = minecraft.fontRenderer.getStringWidth(txtString);
 			GlStateManager.pushMatrix();
-			GlStateManager.translate(recipeWidth / 2F ,(18 - 9) / 2 + 18 + 12 ,0 );
-			GlStateManager.scale(0.75,0.75, 1);
+			GlStateManager.translate(recipeWidth / 2F, (18 - 9) / 2 + 18 + 12, 0);
+			GlStateManager.scale(0.75, 0.75, 1);
 			minecraft.fontRenderer.drawString(txtString,
-					 - stringWidth / 2, 0, Color.gray.getRGB());
+					-stringWidth / 2, 0, Color.gray.getRGB());
 			GlStateManager.popMatrix();
 		}
 

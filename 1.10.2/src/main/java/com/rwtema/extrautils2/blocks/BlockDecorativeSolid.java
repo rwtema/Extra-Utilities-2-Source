@@ -21,6 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -198,7 +199,7 @@ public class BlockDecorativeSolid extends XUBlockConnectedTextureBase {
 						}
 
 						@Override
-						public boolean shouldProgress(TileResonator resonator, int frequency) {
+						public boolean shouldProgress(TileEntity resonator, int frequency, ItemStack input) {
 							PowerManager.PowerFreq freq = PowerManager.instance.getPowerFreqRaw(frequency);
 							if (freq != null) {
 								Collection<TileRainbowGenerator> s = freq.getSubTypes(rainbowGenerators);

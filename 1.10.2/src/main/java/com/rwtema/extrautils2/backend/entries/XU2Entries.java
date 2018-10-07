@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.achievements.AchievementHelper;
 import com.rwtema.extrautils2.api.machine.*;
+import com.rwtema.extrautils2.api.resonator.ResonatorRecipes;
 import com.rwtema.extrautils2.backend.ClientRunnable;
 import com.rwtema.extrautils2.backend.XUBlockStateCreator;
 import com.rwtema.extrautils2.blocks.*;
@@ -381,6 +382,13 @@ public class XU2Entries {
 	};
 	public static BlockClassEntry<BlockPowerOverload> overload = new BlockClassEntry<>(BlockPowerOverload.class, TilePowerOverload.class);
 	public static BlockClassEntry<BlockResonator> resonator = new BlockClassEntry<BlockResonator>(BlockResonator.class, TileResonator.class) {
+		@Override
+		public void preInitRegister() {
+			super.preInitRegister();
+			ResonatorRecipes.registerRecipe = TileResonator::register;
+			ResonatorRecipes.removeRecipe = TileResonator::removeRecipe;
+		}
+
 		@Override
 		public void addAchievements() {
 			AchievementHelper.addAchievement("Power Resonator", "Imbue energy to objects", this, BlockPassiveGenerator.GeneratorType.SOLAR);

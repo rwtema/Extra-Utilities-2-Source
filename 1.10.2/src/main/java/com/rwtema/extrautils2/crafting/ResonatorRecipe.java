@@ -1,17 +1,14 @@
 package com.rwtema.extrautils2.crafting;
 
-import com.rwtema.extrautils2.tile.TileResonator;
-import com.rwtema.extrautils2.utils.helpers.CollectionHelper;
-import gnu.trove.set.hash.TCustomHashSet;
-import net.minecraft.item.Item;
+import com.google.common.collect.ImmutableList;
+import com.rwtema.extrautils2.api.resonator.IResonatorRecipe;
+import com.rwtema.extrautils2.compatibility.StackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
-import java.util.HashSet;
+import java.util.List;
 
-public class ResonatorRecipe {
-	public static HashSet<Item> WildCardItems = new HashSet<>();
-	public static TCustomHashSet<ItemStack> SpecificItems = new TCustomHashSet<>(CollectionHelper.HASHING_STRATEGY_ITEMSTACK);
-
+public class ResonatorRecipe implements IResonatorRecipe {
 	public ItemStack input;
 	public ItemStack output;
 	public int energy;
@@ -33,11 +30,33 @@ public class ResonatorRecipe {
 				'}';
 	}
 
-	public boolean shouldProgress(TileResonator resonator, int frequency) {
+	@Override
+	public boolean shouldProgress(TileEntity resonator, int frequency, ItemStack input) {
 		return true;
 	}
 
-	public String getRequirementText() {
-		return "";
+	@Override
+	public List<ItemStack> getInputs() {
+		return ImmutableList.of(input);
+	}
+
+	@Override
+	public ItemStack getOutput() {
+		return output;
+	}
+
+	@Override
+	public int getNumberOfInputsToConsume(ItemStack input) {
+		return StackHelper.getStacksize(input);
+	}
+
+	@Override
+	public int getEnergy() {
+		return energy;
+	}
+
+	@Override
+	public boolean shouldAddOwnerTag() {
+		return addOwnerTag;
 	}
 }

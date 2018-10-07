@@ -3,6 +3,7 @@ package com.rwtema.extrautils2.tile;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.rwtema.extrautils2.ExtraUtils2;
+import com.rwtema.extrautils2.api.resonator.IResonatorRecipe;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.crafting.ResonatorRecipe;
 import com.rwtema.extrautils2.gui.backend.*;
@@ -23,16 +24,16 @@ import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 
 public class TileResonator extends TilePower implements ITickable, IWorldPowerMultiplier, IDynamicHandler {
 
-	public static final ArrayList<ResonatorRecipe> resonatorRecipes = new ArrayList<>();
+	public static final ArrayList<IResonatorRecipe> resonatorRecipes = new ArrayList<>();
 	public final float MULTIPLIER = 1 / 100.0F;
 	public SingleStackHandlerUpgrades upgrades = registerNBT("upgrades", new SingleStackHandlerUpgrades(EnumSet.of(Upgrade.SPEED)) {
 		@Override
@@ -41,7 +42,7 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 			PowerManager.instance.markDirty(TileResonator.this);
 		}
 	});
-	ResonatorRecipe currentRecipe = null;
+	IResonatorRecipe currentRecipe = null;
 	int progress = 0;
 	ItemStack displayStack;
 	private SingleStackHandler OUTPUT = new SingleStackHandler() {
@@ -58,11 +59,14 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 
 		@Override
 		protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
-			if (StackHelper.isNull(stack) ||
-					(!ResonatorRecipe.WildCardItems.contains(stack.getItem()) &&
-							!ResonatorRecipe.SpecificItems.contains(stack)))
-				return 0;
-			return super.getStackLimit(slot, stack);
+			if (!StackHelper.isNull(stack)) {
+				for (IResonatorRecipe resonatorRecipe : resonatorRecipes) {
+					if (resonatorRecipe.matches(stack) && StackHelper.getStacksize(stack) >= resonatorRecipe.getNumberOfInputsToConsume(stack)) {
+						return super.getStackLimit(slot, stack);
+					}
+				}
+			}
+			return 0;
 		}
 	};
 	private IItemHandler handler = ConcatItemHandler.concatNonNull(new PublicWrapper.Insert(INPUT), new PublicWrapper.Extract(OUTPUT));
@@ -76,13 +80,9 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 		register(recipe);
 	}
 
-	public static void register(ResonatorRecipe recipe) {
+	public static boolean register(IResonatorRecipe recipe) {
 		resonatorRecipes.add(recipe);
-		ItemStack input = recipe.input;
-		if (input.getItemDamage() == OreDictionary.WILDCARD_VALUE || !input.getHasSubtypes())
-			ResonatorRecipe.WildCardItems.add(input.getItem());
-		else
-			ResonatorRecipe.SpecificItems.add(new ItemStack(input.getItem(), 1, input.getItemDamage()));
+		return true;
 	}
 
 	@Override
@@ -113,11 +113,11 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 		}
 	}
 
-	public ResonatorRecipe getPotentialOutput() {
+	public IResonatorRecipe getPotentialOutput() {
 		ItemStack input = INPUT.getStackInSlot(0);
 		if (StackHelper.isNonNull(input))
-			for (ResonatorRecipe resonatorRecipe : resonatorRecipes) {
-				if (OreDictionary.itemMatches(resonatorRecipe.input, input, false) && StackHelper.getStacksize(resonatorRecipe.input) <= StackHelper.getStacksize(input)) {
+			for (IResonatorRecipe resonatorRecipe : resonatorRecipes) {
+				if (resonatorRecipe.matches(input)) {
 					return resonatorRecipe;
 				}
 			}
@@ -127,23 +127,25 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	@Override
 	public void update() {
 		if (world.isRemote || !active || currentRecipe == null) return;
-		if (!currentRecipe.shouldProgress(this, frequency())) {
+		ItemStack inputStack = INPUT.getStackInSlot(0);
+		if (!currentRecipe.shouldProgress(this, frequency(), inputStack)) {
 			return;
 		}
 		progress += 4 * (1 + upgrades.getLevel(Upgrade.SPEED));
 		markDirty();
-		if (progress >= currentRecipe.energy) {
+
+		if (progress >= currentRecipe.getEnergy(inputStack)) {
 			ItemStack stack = getOutputStack();
 
-			INPUT.extractItem(0, StackHelper.getStacksize(currentRecipe.input), false);
+			INPUT.extractItem(0, currentRecipe.getNumberOfInputsToConsume(inputStack), false);
 			OUTPUT.insertItem(0, stack, false);
 			progress = 0;
 		}
 	}
 
 	private ItemStack getOutputStack() {
-		ItemStack stack = currentRecipe.output.copy();
-		if (currentRecipe.addOwnerTag) {
+		ItemStack stack = currentRecipe.getOutput(INPUT.getStackInSlot(0)).copy();
+		if (currentRecipe.shouldAddOwnerTag()) {
 			NBTHelper.getOrInitTagCompound(stack).setInteger("Freq", frequency);
 		}
 		return stack;
@@ -200,8 +202,8 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	@Override
 	public void addToDescriptionPacket(XUPacketBuffer packet) {
 		super.addToDescriptionPacket(packet);
-		ResonatorRecipe recipe = getPotentialOutput();
-		ItemStack outStack = recipe != null ? recipe.output : null;
+		IResonatorRecipe recipe = getPotentialOutput();
+		ItemStack outStack = recipe != null ? recipe.getOutput(INPUT.getStackInSlot(0)) : null;
 		packet.writeItemStack(outStack);
 
 	}
@@ -210,6 +212,17 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 	public void handleDescriptionPacket(XUPacketBuffer packet) {
 		super.handleDescriptionPacket(packet);
 		displayStack = packet.readItemStack();
+	}
+
+	public static IResonatorRecipe removeRecipe(ItemStack stack) {
+		for (Iterator<IResonatorRecipe> iterator = resonatorRecipes.iterator(); iterator.hasNext(); ) {
+			IResonatorRecipe resonatorRecipe = iterator.next();
+			if (resonatorRecipe.matches(stack)) {
+				iterator.remove();
+				return resonatorRecipe;
+			}
+		}
+		return null;
 	}
 
 	public class ContainerResonator extends DynamicContainerTile {
@@ -226,15 +239,14 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 				@Override
 				protected float getMaxTime() {
 					if (!active) return -1;
-					ResonatorRecipe recipe = TileResonator.this.currentRecipe;
+					IResonatorRecipe recipe = TileResonator.this.currentRecipe;
 					if (recipe == null)
 						return 0;
-					return recipe.energy / (float) (1 + TileResonator.this.upgrades.getLevel(Upgrade.SPEED));
+					return recipe.getEnergy(TileResonator.this.INPUT.getStackInSlot(0)) / (float) (1 + TileResonator.this.upgrades.getLevel(Upgrade.SPEED));
 				}
 
 				@Override
 				public List<String> getToolTip() {
-					ResonatorRecipe currentRecipe = TileResonator.this.currentRecipe;
 					if (currentRecipe != null && !StringHelper.isBlank(currentRecipe.getRequirementText())) {
 						return ImmutableList.<String>builder().add(currentRecipe.getRequirementText()).addAll(super.getToolTip()).build();
 					}
@@ -263,13 +275,13 @@ public class TileResonator extends TilePower implements ITickable, IWorldPowerMu
 			addWidget(new WidgetTextData(8, 20, 160) {
 				@Override
 				public void addToDescription(XUPacketBuffer packet) {
-					ResonatorRecipe recipe = TileResonator.this.currentRecipe;
+					IResonatorRecipe recipe = TileResonator.this.currentRecipe;
 					if (recipe == null) {
 						packet.writeBoolean(false);
 					} else {
 						packet.writeBoolean(true);
 						packet.writeInt(progress);
-						packet.writeInt(recipe.energy);
+						packet.writeInt(recipe.getEnergy(INPUT.getStackInSlot(0)));
 					}
 				}
 
