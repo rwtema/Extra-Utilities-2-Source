@@ -1003,9 +1003,7 @@ public class XU2Entries {
 			BrewingRecipeRegistry.addRecipe(new BrewingOreRecipe(
 					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionsHelper.getAwkwardPotionType()),
 					Lists.newArrayList(
-							new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.ROSE.getMeta()),
-							new ItemStack(BlockFlower.EnumFlowerType.POPPY.getBlockType().getBlock(), 1, BlockFlower.EnumFlowerType.POPPY.getMeta()),
-							new ItemStack(BlockFlower.EnumFlowerType.RED_TULIP.getBlockType().getBlock(), 1, BlockFlower.EnumFlowerType.RED_TULIP.getMeta())
+							new ItemStack(Blocks.LIT_PUMPKIN)
 					),
 					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), relapse)));
 		}
@@ -1032,6 +1030,23 @@ public class XU2Entries {
 							new ItemStack(BlockFlower.EnumFlowerType.RED_TULIP.getBlockType().getBlock(), 1, BlockFlower.EnumFlowerType.RED_TULIP.getMeta())
 					),
 					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), love)));
+		}
+	};
+	public static PotionEntry<PotionPurge> potionPurge = new PotionEntry<PotionPurge>("potion_Purge", null) {
+		@Override
+		public PotionPurge initValue() {
+			return new PotionPurge();
+		}
+
+		@Override
+		public void registerTypesAndRecipes() {
+			PotionType Purge = PotionsHelper.registerPotionType(new PotionEffect(value));
+			BrewingRecipeRegistry.addRecipe(new BrewingOreRecipe(
+					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionsHelper.getAwkwardPotionType()),
+					Lists.newArrayList(
+							new ItemStack(Items.ROTTEN_FLESH)
+					),
+					PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), Purge)));
 		}
 	};
 	public static VillagerEntrySimple alchemist = new VillagerEntrySimple("alchemist") {
