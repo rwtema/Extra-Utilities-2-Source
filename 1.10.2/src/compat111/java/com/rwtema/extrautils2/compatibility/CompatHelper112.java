@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.potion.PotionHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
@@ -15,6 +16,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collection;
 import java.util.List;
@@ -84,5 +86,19 @@ public class CompatHelper112 {
 			}
 		}
 		return mob;
+	}
+
+	public static <T> T getPotionInput(PotionHelper.MixPredicate<T> predicate) {
+		Object input = predicate.input;
+		return (T) input;
+	}
+
+	public static <T > T getPotionOutput(PotionHelper.MixPredicate<T> predicate) {
+		Object output = predicate.output;
+		return (T) output;
+	}
+
+	public static <T> Pair<T, T> createLink(PotionHelper.MixPredicate<T> t) {
+		return Pair.of(getPotionInput(t), getPotionOutput(t));
 	}
 }

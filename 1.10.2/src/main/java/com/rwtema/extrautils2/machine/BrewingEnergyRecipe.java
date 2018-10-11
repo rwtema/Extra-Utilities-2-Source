@@ -3,8 +3,8 @@ package com.rwtema.extrautils2.machine;
 
 import com.google.common.collect.Iterables;
 import com.rwtema.extrautils2.ExtraUtils2;
+import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.compatibility.StackHelper;
-import com.rwtema.extrautils2.potion.PotionsHelper;
 import com.rwtema.extrautils2.utils.LogHelper;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
@@ -17,7 +17,6 @@ import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.brewing.AbstractBrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
@@ -40,10 +39,10 @@ class BrewingEnergyRecipe extends EnergyBaseRecipe {
 
 
 			for (PotionHelper.MixPredicate<Item> predicate : PotionHelper.POTION_ITEM_CONVERSIONS) {
-				potions.put(PotionsHelper.getPotionInput(predicate), 0);
+				potions.put(CompatHelper112.getPotionInput(predicate), 0);
 			}
 			for (PotionHelper.MixPredicate<Item> predicate : PotionHelper.POTION_ITEM_CONVERSIONS) {
-				potions.remove(PotionsHelper.getPotionOutput(predicate));
+				potions.remove(CompatHelper112.getPotionOutput(predicate));
 			}
 			potions.put(Items.POTIONITEM, 0);
 
@@ -51,15 +50,15 @@ class BrewingEnergyRecipe extends EnergyBaseRecipe {
 			do {
 				flag = false;
 				for (PotionHelper.MixPredicate<Item> predicate : PotionHelper.POTION_ITEM_CONVERSIONS) {
-					if (potions.containsKey(PotionsHelper.getPotionInput(predicate)) && !potions.containsKey(PotionsHelper.getPotionOutput(predicate))) {
-						potions.put(PotionsHelper.getPotionOutput(predicate), potions.get(PotionsHelper.getPotionInput(predicate)) + 1);
+					if (potions.containsKey(CompatHelper112.getPotionInput(predicate)) && !potions.containsKey(CompatHelper112.getPotionOutput(predicate))) {
+						potions.put(CompatHelper112.getPotionOutput(predicate), potions.get(CompatHelper112.getPotionInput(predicate)) + 1);
 						flag = true;
 					}
 				}
 			} while (flag);
 
 			List<Pair<PotionType, PotionType>> links = new ArrayList<>();
-			links.addAll(PotionHelper.POTION_TYPE_CONVERSIONS.stream().map(this::createLink).collect(Collectors.toList()));
+			links.addAll(PotionHelper.POTION_TYPE_CONVERSIONS.stream().map(CompatHelper112::createLink).collect(Collectors.toList()));
 			links.addAll(BrewingRecipeRegistry.getRecipes().stream().filter(t -> t instanceof AbstractBrewingRecipe).map(t -> createLink((AbstractBrewingRecipe) t)).collect(Collectors.toList()));
 			links = links.stream().filter(t -> t.getLeft() != null && t.getRight() != null && t.getLeft() != t.getRight()).collect(Collectors.toList());
 
@@ -85,10 +84,6 @@ class BrewingEnergyRecipe extends EnergyBaseRecipe {
 				LogHelper.info(PotionType.REGISTRY.getNameForObject(type) + " " + types.get(type));
 			}
 		}
-	}
-
-	public <T  extends IForgeRegistryEntry.Impl<T>> Pair<T, T> createLink(PotionHelper.MixPredicate<T> t) {
-		return Pair.of(PotionsHelper.getPotionInput(t), PotionsHelper.getPotionOutput(t));
 	}
 
 	public Pair<PotionType, PotionType> createLink(AbstractBrewingRecipe recipe) {

@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
@@ -21,6 +22,8 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.IRegistryDelegate;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -95,5 +98,25 @@ public class CompatHelper112 {
 			}
 		}
 		return mob;
+	}
+
+	public static <T extends IForgeRegistryEntry.Impl<T>> T getPotionInput(PotionHelper.MixPredicate<T> predicate) {
+		Object input = predicate.input;
+		if (input instanceof IRegistryDelegate) {
+			return (T) ((IRegistryDelegate) input).get();
+		}
+		return (T) input;
+	}
+
+	public static <T extends IForgeRegistryEntry.Impl<T>> T getPotionOutput(PotionHelper.MixPredicate<T> predicate) {
+		Object output = predicate.output;
+		if (output instanceof IRegistryDelegate) {
+			return (T) ((IRegistryDelegate) output).get();
+		}
+		return (T) output;
+	}
+
+	public static <T extends IForgeRegistryEntry.Impl<T>> Pair<T, T> createLink(PotionHelper.MixPredicate<T> t) {
+		return Pair.of(getPotionInput(t), getPotionOutput(t));
 	}
 }
