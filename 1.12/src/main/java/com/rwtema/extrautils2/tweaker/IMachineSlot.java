@@ -26,6 +26,12 @@ public class IMachineSlot extends ObjWrapper<MachineSlot<?>> {
 		return new IMachineSlot(new MachineSlotItem(name, stackCapacity));
 	}
 
+
+	@ZenMethod
+	public static IMachineSlot newItemStackSlot(String name, boolean optional) {
+		return new IMachineSlot(new MachineSlotItem(name, optional, 64));
+	}
+
 	@ZenMethod
 	public static IMachineSlot newItemStackSlot(String name, boolean optional, int stackCapacity) {
 		return new IMachineSlot(new MachineSlotItem(name, optional, stackCapacity));

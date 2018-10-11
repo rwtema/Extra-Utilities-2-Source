@@ -1,7 +1,11 @@
 package com.rwtema.extrautils2.tweaker;
 
+import com.rwtema.extrautils2.RunnableClient;
 import com.rwtema.extrautils2.api.machine.*;
+import com.rwtema.extrautils2.backend.model.Textures;
 import crafttweaker.annotations.ZenRegister;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -86,6 +90,14 @@ public class IMachineRegistry {
 		;
 		Machine machine = new Machine(name, energyBufferSize, energyTransferLimit, itemInputs, fluidInputs, itemOutputs, fluidOutputs, frontTexture, frontTextureActive, energyMode, color, textureTop, textureBase, textureBottom, textureTopOverlay);
 		GenericAction.run(() -> MachineRegistry.register(machine), "Creating new machine: " + machine.name);
+		new RunnableClient() {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public void run() {
+				Textures.register(frontTexture, frontTextureActive, textureBase, textureBottom, textureTopOverlay, textureTop);
+			}
+		}.run();
+
 		return new IMachine(machine);
 	}
 

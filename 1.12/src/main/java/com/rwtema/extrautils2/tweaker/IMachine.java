@@ -1,5 +1,6 @@
 package com.rwtema.extrautils2.tweaker;
 
+import com.google.common.collect.ImmutableMap;
 import com.rwtema.extrautils2.api.machine.*;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -24,20 +25,15 @@ public class IMachine extends ObjWrapper<Machine> {
 		super(object);
 	}
 
-
 	@ZenMethod
-	public IRecipeBuilder recipeBuilder() {
-		return new IRecipeBuilder(RecipeBuilder.newbuilder(object));
+	public void addRecipe(Map<String, IIngredient> inputs, Map<String, IIngredient> outputs, int energy, int time) {
+		addRecipe(inputs, outputs, energy, time, ImmutableMap.of());
 	}
 
-
 	@ZenMethod
-	public void addRecipe(Map<String, IIngredient> inputs, Map<String, IIngredient> outputs, int energy) {
-		IRecipeBuilder builder = recipeBuilder();
-		inputs.forEach(builder::setInput);
-		outputs.forEach(builder::setOutput);
-		builder.setEnergy(energy);
-		builder.register();
+	public void addRecipe(Map<String, IIngredient> inputs, Map<String, IIngredient> outputs, int energy, int time, Map<String, Float> probabilities) {
+		CrafttweakerMachineRecipe recipe = new CrafttweakerMachineRecipe(getInternal(), inputs, outputs, probabilities, energy, time);
+		getInternal().recipes_registry.addRecipe(recipe);
 	}
 
 	@ZenMethod
@@ -96,6 +92,4 @@ public class IMachine extends ObjWrapper<Machine> {
 		}
 		return null;
 	}
-
-
 }
