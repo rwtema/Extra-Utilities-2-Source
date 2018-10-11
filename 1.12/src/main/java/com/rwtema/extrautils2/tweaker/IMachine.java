@@ -1,11 +1,12 @@
 package com.rwtema.extrautils2.tweaker;
 
-import com.google.common.collect.ImmutableMap;
 import com.rwtema.extrautils2.api.machine.*;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.item.WeightedItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
+import crafttweaker.api.liquid.WeightedLiquidStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -26,8 +27,21 @@ public class IMachine extends ObjWrapper<Machine> {
 	}
 
 	@ZenMethod
-	public void addRecipe(Map<String, IIngredient> inputs, Map<String, IIngredient> outputs, int energy, int time) {
-		addRecipe(inputs, outputs, energy, time, ImmutableMap.of());
+	public void addRecipe(Map<String, IIngredient> inputs, Map<String, Object> outputs, int energy, int time) {
+		HashMap<String, IIngredient> outMap = new HashMap<>();
+		HashMap<String, Float> probMap = new HashMap<>();
+		outputs.forEach((slot, obj) -> {
+			if (obj instanceof WeightedItemStack) {
+				probMap.put(slot, ((WeightedItemStack) obj).getChance());
+				outMap.put(slot, ((WeightedItemStack) obj).getStack());
+			} else if (obj instanceof WeightedLiquidStack) {
+				probMap.put(slot, ((WeightedLiquidStack) obj).getChance());
+				outMap.put(slot, ((WeightedLiquidStack) obj).getStack());
+			} else if (obj instanceof IIngredient) {
+				outMap.put(slot, (IIngredient) obj);
+			}
+		});
+		addRecipe(inputs, outMap, energy, time, probMap);
 	}
 
 	@ZenMethod
