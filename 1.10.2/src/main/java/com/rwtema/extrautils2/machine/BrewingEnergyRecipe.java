@@ -4,6 +4,7 @@ package com.rwtema.extrautils2.machine;
 import com.google.common.collect.Iterables;
 import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.compatibility.StackHelper;
+import com.rwtema.extrautils2.potion.PotionsHelper;
 import com.rwtema.extrautils2.utils.LogHelper;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
@@ -16,6 +17,7 @@ import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.brewing.AbstractBrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
@@ -38,10 +40,10 @@ class BrewingEnergyRecipe extends EnergyBaseRecipe {
 
 
 			for (PotionHelper.MixPredicate<Item> predicate : PotionHelper.POTION_ITEM_CONVERSIONS) {
-				potions.put(predicate.input, 0);
+				potions.put(PotionsHelper.getPotionInput(predicate), 0);
 			}
 			for (PotionHelper.MixPredicate<Item> predicate : PotionHelper.POTION_ITEM_CONVERSIONS) {
-				potions.remove(predicate.output);
+				potions.remove(PotionsHelper.getPotionOutput(predicate));
 			}
 			potions.put(Items.POTIONITEM, 0);
 
@@ -49,8 +51,8 @@ class BrewingEnergyRecipe extends EnergyBaseRecipe {
 			do {
 				flag = false;
 				for (PotionHelper.MixPredicate<Item> predicate : PotionHelper.POTION_ITEM_CONVERSIONS) {
-					if (potions.containsKey(predicate.input) && !potions.containsKey(predicate.output)) {
-						potions.put(predicate.output, potions.get(predicate.input) + 1);
+					if (potions.containsKey(PotionsHelper.getPotionInput(predicate)) && !potions.containsKey(PotionsHelper.getPotionOutput(predicate))) {
+						potions.put(PotionsHelper.getPotionOutput(predicate), potions.get(PotionsHelper.getPotionInput(predicate)) + 1);
 						flag = true;
 					}
 				}
@@ -85,8 +87,8 @@ class BrewingEnergyRecipe extends EnergyBaseRecipe {
 		}
 	}
 
-	public <T> Pair<T, T> createLink(PotionHelper.MixPredicate<T> t) {
-		return Pair.of(t.input, t.output);
+	public <T  extends IForgeRegistryEntry.Impl<T>> Pair<T, T> createLink(PotionHelper.MixPredicate<T> t) {
+		return Pair.of(PotionsHelper.getPotionInput(t), PotionsHelper.getPotionOutput(t));
 	}
 
 	public Pair<PotionType, PotionType> createLink(AbstractBrewingRecipe recipe) {

@@ -2,6 +2,7 @@ package com.rwtema.extrautils2.villagers;
 
 import com.google.common.collect.HashMultimap;
 import com.rwtema.extrautils2.compatibility.VillagerTradeCompat;
+import com.rwtema.extrautils2.potion.PotionsHelper;
 import com.rwtema.extrautils2.utils.helpers.CollectionHelper;
 import gnu.trove.map.hash.TObjectIntHashMap;
 import gnu.trove.procedure.TObjectIntProcedure;
@@ -67,7 +68,7 @@ public class EmeraldForPotions implements VillagerTradeCompat {
 
 
 		for (PotionHelper.MixPredicate<PotionType> predicate : PotionHelper.POTION_TYPE_CONVERSIONS) {
-			potionChildren.put(predicate.input, predicate.output);
+			potionChildren.put(PotionsHelper.getPotionInput(predicate), PotionsHelper.getPotionOutput(predicate));
 		}
 
 		for (IBrewingRecipe recipe : recipes) {

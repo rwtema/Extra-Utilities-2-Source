@@ -5,10 +5,7 @@ import com.rwtema.extrautils2.compatibility.CompatHelper112;
 import com.rwtema.extrautils2.utils.Lang;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
-import net.minecraft.potion.PotionUtils;
+import net.minecraft.potion.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
@@ -16,6 +13,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.IRegistryDelegate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,6 +120,22 @@ public class PotionsHelper {
 		potions.addAll(splash_potions);
 		potions.addAll(lingering_potions);
 
+	}
+
+	public static <T  extends IForgeRegistryEntry.Impl<T>> T getPotionInput(PotionHelper.MixPredicate<T> predicate) {
+		Object input = predicate.input;
+		if(input instanceof IRegistryDelegate){
+			return (T) ((IRegistryDelegate) input).get();
+		}
+		return (T) input;
+	}
+
+	public static <T  extends IForgeRegistryEntry.Impl<T>> T getPotionOutput(PotionHelper.MixPredicate<T> predicate) {
+		Object output = predicate.output;
+		if(output instanceof IRegistryDelegate){
+			return (T) ((IRegistryDelegate) output).get();
+		}
+		return (T) output;
 	}
 
 	public static class TooltipHandler {
