@@ -1,5 +1,6 @@
 package com.rwtema.extrautils2.blocks;
 
+import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUBlockStateCreator;
 import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.entries.BlockEntry;
@@ -338,7 +339,8 @@ public class BlockSpike extends XUBlockStatic {
 	public static class Creative extends BlockSpike {
 		public Creative() {
 			super(SpikeType.creative);
-			setBlockUnbreakable();
+			if(!ExtraUtils2.allowNonCreativeHarvest)
+				setBlockUnbreakable();
 			setResistance(6000000.0F);
 		}
 

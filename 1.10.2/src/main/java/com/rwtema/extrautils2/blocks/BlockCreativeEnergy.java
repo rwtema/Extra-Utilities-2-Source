@@ -1,5 +1,6 @@
 package com.rwtema.extrautils2.blocks;
 
+import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUBlockStatic;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.tile.TileCreativeEnergy;
@@ -12,7 +13,8 @@ import javax.annotation.Nonnull;
 public class BlockCreativeEnergy extends XUBlockStatic {
 	public BlockCreativeEnergy() {
 		super();
-		setBlockUnbreakable();
+		if(!ExtraUtils2.allowNonCreativeHarvest)
+			setBlockUnbreakable();
 	}
 
 	@Override

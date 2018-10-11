@@ -1,5 +1,6 @@
 package com.rwtema.extrautils2.blocks;
 
+import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.XUBlockStaticRotation;
 import com.rwtema.extrautils2.backend.model.BoxModel;
 import com.rwtema.extrautils2.tile.TileCreativeChest;
@@ -13,7 +14,8 @@ import javax.annotation.Nonnull;
 public class BlockCreativeChest extends XUBlockStaticRotation {
 	public BlockCreativeChest() {
 		super(Material.ROCK);
-		setBlockUnbreakable();
+		if(!ExtraUtils2.allowNonCreativeHarvest)
+			setBlockUnbreakable();
 	}
 
 	@Override

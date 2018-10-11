@@ -1,5 +1,6 @@
 package com.rwtema.extrautils2.tile;
 
+import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.compatibility.StackHelper;
 import com.rwtema.extrautils2.gui.backend.*;
@@ -90,17 +91,17 @@ public class TileCreativeChest extends XUTile implements IDynamicHandler {
 			}, 0, centerX - arrow_w - 4 - 18, height) {
 				@Override
 				public boolean isItemValid(ItemStack stack) {
-					return player.capabilities.isCreativeMode && super.isItemValid(stack);
+					return isCreativeMode(player) && super.isItemValid(stack);
 				}
 
 				@Override
 				public boolean canTakeStack(EntityPlayer playerIn) {
-					return player.capabilities.isCreativeMode && super.canTakeStack(playerIn);
+					return isCreativeMode(player) && super.canTakeStack(playerIn);
 				}
 
 				@Override
 				public void renderBackground(TextureManager manager, DynamicGui gui, int guiLeft, int guiTop) {
-					if (!player.capabilities.isCreativeMode)
+					if (!isCreativeMode(player))
 						GlStateManager.color(0.5F, 0.5F, 0.5F);
 					gui.drawTexturedModalRect(guiLeft + getX(), guiTop + getY(), 0, 0, 18, 18);
 					GlStateManager.color(1, 1, 1);
@@ -129,6 +130,10 @@ public class TileCreativeChest extends XUTile implements IDynamicHandler {
 
 			cropAndAddPlayerSlots(player.inventory);
 			validate();
+		}
+
+		private static boolean isCreativeMode(EntityPlayer player) {
+			return ExtraUtils2.allowNonCreativeConfig || player.capabilities.isCreativeMode;
 		}
 	}
 }

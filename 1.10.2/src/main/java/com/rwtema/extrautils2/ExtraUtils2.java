@@ -3,12 +3,14 @@ package com.rwtema.extrautils2;
 import com.google.common.collect.Iterables;
 import com.rwtema.extrautils2.asm.CoreXU2;
 import com.rwtema.extrautils2.backend.*;
+import com.rwtema.extrautils2.backend.entries.ConfigHelper;
 import com.rwtema.extrautils2.backend.entries.EntryHandler;
 import com.rwtema.extrautils2.backend.entries.XU2Entries;
 import com.rwtema.extrautils2.backend.entries.XU2EntriesDev;
 import com.rwtema.extrautils2.backend.model.ModelHandler;
 import com.rwtema.extrautils2.backend.save.SaveManager;
 import com.rwtema.extrautils2.banner.Banner;
+import com.rwtema.extrautils2.blocks.BlockCreativeChest;
 import com.rwtema.extrautils2.book.BookHandler;
 import com.rwtema.extrautils2.chunkloading.XUChunkLoaderManager;
 import com.rwtema.extrautils2.commands.CommandDebug;
@@ -25,7 +27,7 @@ import com.rwtema.extrautils2.network.NetworkHandler;
 import com.rwtema.extrautils2.potion.PotionsHelper;
 import com.rwtema.extrautils2.power.Freq;
 import com.rwtema.extrautils2.power.PowerManager;
-import com.rwtema.extrautils2.tweaker.XUTweaker;
+
 import com.rwtema.extrautils2.utils.LogHelper;
 import com.rwtema.extrautils2.utils.errors.LegalException;
 import com.rwtema.extrautils2.utils.errors.LegalException.LawLevel;
@@ -71,6 +73,8 @@ public class ExtraUtils2 {
 	public static String version;
 
 	public static RuntimeException toThrow = null;
+	public static boolean allowNonCreativeHarvest = false;
+	public static boolean allowNonCreativeConfig = false;
 
 	static {
 		boolean d;
@@ -108,6 +112,8 @@ public class ExtraUtils2 {
 		}
 	}
 
+	public  static boolean allowCreativeBlocksToBeBroken = false;
+
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		checkThrow();
@@ -116,6 +122,9 @@ public class ExtraUtils2 {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		ModelHandler.init();
 		config = new Configuration(event.getSuggestedConfigurationFile());
+		allowNonCreativeHarvest = config.getBoolean(ConfigHelper.GAMEPLAY_CATEGORY, "Creative Blocks: Breakable", false, "Allow Non-Creative players to break/harvest creative blocks.");
+		allowNonCreativeConfig = config.getBoolean(ConfigHelper.GAMEPLAY_CATEGORY, "Creative Blocks: Configurable", false, "Allow Non-Creative players to configure creative blocks.");
+
 		XU2Entries.init();
 		CompatHelper112.loadVersionSpecificEntries();
 		if (deobf_folder) {

@@ -3,6 +3,7 @@ package com.rwtema.extrautils2.blocks;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.realmsclient.gui.ChatFormatting;
+import com.rwtema.extrautils2.ExtraUtils2;
 import com.rwtema.extrautils2.achievements.AchievementHelper;
 import com.rwtema.extrautils2.backend.PropertyEnumSimple;
 import com.rwtema.extrautils2.backend.XUBlockStateCreator;
@@ -134,7 +135,7 @@ public class BlockPassiveGenerator extends XUBlockStatic {
 
 	@Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-		if (blockState == getDefaultState().withProperty(GENERATOR_TYPE, GeneratorType.CREATIVE))
+		if (blockState == getDefaultState().withProperty(GENERATOR_TYPE, GeneratorType.CREATIVE) && !ExtraUtils2.allowCreativeBlocksToBeBroken)
 			return -1;
 		return super.getBlockHardness(blockState, worldIn, pos);
 	}
