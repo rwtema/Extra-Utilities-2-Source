@@ -46,7 +46,7 @@ public class ResonatorRecipe implements IResonatorRecipe {
 	}
 
 	@Override
-	public int getNumberOfInputsToConsume(ItemStack input) {
+	public int getNumberOfInputsToConsume(ItemStack inputStack) {
 		return StackHelper.getStacksize(input);
 	}
 
