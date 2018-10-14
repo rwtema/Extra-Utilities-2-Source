@@ -59,7 +59,7 @@ public class JEIMachine extends BlankRecipeCategory<JEIMachine.JEIMachineRecipe.
 
 	public JEIMachine(Machine machine) {
 		this.machine = machine;
-		width = (machine.itemInputs.size() + machine.itemOutputs.size()) * (4 + 18) + 4 + 22;
+		width = (machine.itemInputs.size() + machine.fluidInputs.size() + machine.itemOutputs.size() + machine.fluidOutputs.size()) * (4 + 18) + 4 + 22;
 
 
 		IGuiHelper guiHelper = XUJEIPlugin.jeiHelpers.getGuiHelper();
