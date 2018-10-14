@@ -698,7 +698,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 			if (StackHelper.isNull(stack)) continue;
 			StackHelper.decrease(stack, i);
 			if (StackHelper.getStacksize(stack) <= 0) {
-				savedItems.contents.put(slot.name, containerItems.getOrDefault(slot, ItemStack.EMPTY));
+				savedItems.contents.put(slot.name, containerItems.getOrDefault(slot, StackHelper.empty()));
 			}
 		}
 
@@ -716,7 +716,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 
 
 		for (MachineSlotItem slot : machine.itemOutputs) {
-			ItemStack stack = itemOutputs.getOrDefault(slot, ItemStack.EMPTY);
+			ItemStack stack = itemOutputs.getOrDefault(slot, StackHelper.empty());
 			if (StackHelper.isNull(stack)) continue;
 			if (probabilityModifier != null && probabilityModifier.containsKey(slot)) {
 				float v = probabilityModifier.get(slot);
