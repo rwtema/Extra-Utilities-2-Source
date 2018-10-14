@@ -321,7 +321,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 
 			MachineSlotItem slotItem = machine.itemOutputs.get(slot);
 			String name = slotItem.name;
-			return savedItems.contents.getOrDefault(name, StackHelper.empty());
+			return StackHelper.safeCopy(savedItems.contents.getOrDefault(name, StackHelper.empty()));
 		}
 
 		@Override
@@ -372,7 +372,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 
 			MachineSlotItem slotItem = machine.itemInputs.get(slot);
 			String name = slotItem.name;
-			return savedItems.contents.getOrDefault(name, StackHelper.empty());
+			return StackHelper.safeCopy(savedItems.contents.getOrDefault(name, StackHelper.empty()));
 		}
 
 		@Override
