@@ -364,7 +364,7 @@ public class ItemLawSword extends ItemSword implements IXUItem {
 			GuiScreen gui = event.getGui();
 			if (gui instanceof GuiWinGame) {
 				try {
-					List<String> lines = ObfuscationReflectionHelper.getPrivateValue(GuiWinGame.class, (GuiWinGame) gui, "field_146582_i");
+					List<String> lines = ObfuscationReflectionHelper.getPrivateValue(GuiWinGame.class, (GuiWinGame) gui, "field_146582_i", "lines");
 					char[] test = "IlikebigbuttsandIcannotliethismessagevandelisedbyRWTema".toCharArray();
 					int char_index = 0;
 					main:
