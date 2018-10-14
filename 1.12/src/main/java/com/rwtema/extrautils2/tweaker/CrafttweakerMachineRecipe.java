@@ -15,6 +15,7 @@ import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -31,7 +32,7 @@ public class CrafttweakerMachineRecipe implements IMachineRecipe {
 	public final int processingTime;
 	public final int energy;
 
-	public CrafttweakerMachineRecipe(Machine machine, Map<String, IIngredient> inputs, Map<String, IIngredient> outputs, Map<String, Float> probabilities, int processingTime, int energy) {
+	public CrafttweakerMachineRecipe(Machine machine, Map<String, IIngredient> inputs, Map<String, IIngredient> outputs, Map<String, Float> probabilities, int energy, int processingTime) {
 		this.machine = machine;
 		this.inputs = inputs;
 		this.outputs = outputs;
@@ -168,7 +169,7 @@ public class CrafttweakerMachineRecipe implements IMachineRecipe {
 							}
 						}
 					}
-					map.put((MachineSlotItem) outputSlot, stack);
+					map.put((MachineSlotItem) outputSlot, Objects.requireNonNull(stack));
 				}
 			}
 		});
@@ -205,12 +206,13 @@ public class CrafttweakerMachineRecipe implements IMachineRecipe {
 	@Override
 	public Map<MachineSlotItem, ItemStack> getContainerItems(Map<MachineSlotItem, ItemStack> inputItems, Map<MachineSlotFluid, FluidStack> inputFluids) {
 		Map<MachineSlotItem, ItemStack> map = new HashMap<>();
-		for (MachineSlotItem item : inputItems.keySet()) {
-			IIngredient iIngredient = inputs.get(item.name);
+		machine.itemInputs.forEach(slot -> map.put(slot, ItemStack.EMPTY));
+		for (Map.Entry<MachineSlotItem, ItemStack> entry : inputItems.entrySet()) {
+			IIngredient iIngredient = inputs.get(entry.getKey().name);
 			if (iIngredient != null && iIngredient.hasTransformers() && iIngredient instanceof IItemStack) {
 				IItemStack iItemStack = iIngredient.applyTransform((IItemStack) iIngredient, null);
 				if (iItemStack != null) {
-					map.put(item, XUTweaker.createItemStack(iItemStack));
+					map.put(entry.getKey(), XUTweaker.createItemStack(iItemStack));
 				}
 			}
 		}
@@ -229,8 +231,8 @@ public class CrafttweakerMachineRecipe implements IMachineRecipe {
 	@Override
 	public TObjectIntMap<MachineSlot> getAmountToConsume(Map<MachineSlotItem, ItemStack> inputItems, Map<MachineSlotFluid, FluidStack> inputFluids) {
 		TObjectIntMap<MachineSlot> map = new TObjectIntHashMap<>();
-		inputItems.keySet().forEach(s -> map.put(s, 0));
-		inputFluids.keySet().forEach(s -> map.put(s, 0));
+		inputItems.keySet().forEach(s -> map.put(s, 1));
+		inputFluids.keySet().forEach(s -> map.put(s, 1));
 		inputs.forEach(
 				(k, i) -> {
 					MachineSlot inputSlot = getInputSlot(k);

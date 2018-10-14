@@ -632,7 +632,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 					Map<MachineSlotItem, ItemStack> itemOutputs = recipe.getItemOutputs(itemInputMap, fluidInputMap);
 					Map<MachineSlotFluid, FluidStack> fluidOutputs = recipe.getFluidOutputs(itemInputMap, fluidInputMap);
 					for (MachineSlotItem slot : machine.itemOutputs) {
-						ItemStack stack = itemOutputs.get(slot);
+						ItemStack stack = itemOutputs.getOrDefault(slot, StackHelper.empty());
 						if (StackHelper.isNonNull(stack)) {
 							ItemStack curStack = savedItems.contents.get(slot.name);
 							if (StackHelper.isNonNull(curStack) && (!ItemHandlerHelper.canItemStacksStack(stack, curStack) || StackHelper.getStacksize(stack) + StackHelper.getStacksize(curStack) > Math.min(slot.stackCapacity, stack.getMaxStackSize()))) {
@@ -698,7 +698,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 			if (StackHelper.isNull(stack)) continue;
 			StackHelper.decrease(stack, i);
 			if (StackHelper.getStacksize(stack) <= 0) {
-				savedItems.contents.put(slot.name, containerItems.get(slot));
+				savedItems.contents.put(slot.name, containerItems.getOrDefault(slot, ItemStack.EMPTY));
 			}
 		}
 
@@ -716,7 +716,7 @@ public abstract class TileMachine extends TilePower implements ITickable, IDynam
 
 
 		for (MachineSlotItem slot : machine.itemOutputs) {
-			ItemStack stack = itemOutputs.get(slot);
+			ItemStack stack = itemOutputs.getOrDefault(slot, ItemStack.EMPTY);
 			if (StackHelper.isNull(stack)) continue;
 			if (probabilityModifier != null && probabilityModifier.containsKey(slot)) {
 				float v = probabilityModifier.get(slot);
