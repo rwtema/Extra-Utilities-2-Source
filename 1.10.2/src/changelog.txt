@@ -1,6 +1,4 @@
-Added Potion of Purging (sets hunger level to 0).
-Changed potion of relapse recipe to not conflict with potion of love.
-Add options to allow non-creative players to break/configure creative blocks.
-Fix potion-related crash with newer versions of 1.12 Forge.
-Fix crash with TE.
-Improve integration for CraftTweaker
+Fix shift-click transfer problem in Machine GUIs
+Fix crash with missing container items in recipes.
+Machines now include fluids when calculating JEI widths
+Prevent resonator from consuming all the input items when processing
