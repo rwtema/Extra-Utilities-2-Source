@@ -53,6 +53,7 @@ public abstract class ItemStackHandlerBase implements IItemHandlerCompat, IItemH
 				setStack(slot, reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack);
 			} else {
 				StackHelper.increase(existing, reachedLimit ? limit : StackHelper.getStacksize(stack));
+				setStack(slot, existing);
 			}
 			onContentsChanged(slot);
 		}
