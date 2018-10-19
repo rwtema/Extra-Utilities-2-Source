@@ -1,4 +1,1 @@
-Fix shift-click transfer problem in Machine GUIs
-Fix crash with missing container items in recipes.
-Machines now include fluids when calculating JEI widths
-Prevent resonator from consuming all the input items when processing
+Fix Inventories not voiding incoming items when a stack is already present.
