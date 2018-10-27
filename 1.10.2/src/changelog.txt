@@ -1,1 +1,1 @@
-Fix Inventories not voiding incoming items when a stack is already present.
+Fix items being voided when shift-click-transfering them in the GUI
