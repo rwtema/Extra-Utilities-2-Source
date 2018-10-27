@@ -396,14 +396,13 @@ public abstract class DynamicContainer extends Container {
 						if (j <= maxStackSize) {
 							StackHelper.setStackSize(stack, 0);
 							StackHelper.setStackSize(itemstack, j);
-							slot.onSlotChanged();
-							flag = true;
 						} else if (StackHelper.getStacksize(itemstack) < maxStackSize) {
 							StackHelper.decrease(stack, maxStackSize - StackHelper.getStacksize(itemstack));
 							StackHelper.setStackSize(itemstack, maxStackSize);
-							slot.onSlotChanged();
-							flag = true;
 						}
+						slot.putStack(itemstack);
+						slot.onSlotChanged();
+						flag = true;
 					}
 				}
 
