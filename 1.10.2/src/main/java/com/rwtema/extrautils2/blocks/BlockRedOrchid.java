@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockRedOrchid extends XUBlockStatic implements IPlantable, IGrowable {
-	public static final PropertyInteger GROWTH_STATE = PropertyInteger.create("growth", 0, 6);
+	public static final PropertyInteger GROWTH_STATE = PropertyInteger.create("age", 0, 6);
 	static float[] size_w = {1 / 16F, 1 / 16F, 2 / 16F, 3 / 16F, 3 / 16F, 4 / 16F, 5 / 16F};
 	static float[] size_h = {5 / 16F, 8 / 16F, 9 / 16F, 11 / 16F, 12 / 16F, 13 / 16F, 16 / 16F};
 	public final IBlockState FULLY_GROWN_STATE;
