@@ -89,7 +89,7 @@ public class XUEntityManager {
 	}
 
 	private static void registerEntity(Class<? extends Entity> clazz, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {
-		String name = clazz.getSimpleName().toLowerCase();
+		String name = clazz.getSimpleName().toLowerCase(Locale.ENGLISH);
 		if (name.startsWith("entity")) name = name.replace("entity", "");
 		CompatHelper.registerEntity(clazz, trackingRange, updateFrequency, sendsVelocityUpdates, name, id);
 		id++;

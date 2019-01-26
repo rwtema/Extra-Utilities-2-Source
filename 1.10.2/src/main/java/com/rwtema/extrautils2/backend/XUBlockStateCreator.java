@@ -135,7 +135,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 					builder.append(".");
 				} else
 					flag = true;
-				builder.append(validState.getValue(dropProperty).toString().toLowerCase());
+				builder.append(validState.getValue(dropProperty).toString().toLowerCase(Locale.ENGLISH));
 			}
 
 			for (IMetaProperty<? extends Comparable> metaProperty : hiddenProperties) {
@@ -145,7 +145,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 					builder.append(".");
 				} else
 					flag = true;
-				builder.append(validState.getValue(metaProperty).toString().toLowerCase());
+				builder.append(validState.getValue(metaProperty).toString().toLowerCase(Locale.ENGLISH));
 			}
 
 
@@ -182,7 +182,7 @@ public class XUBlockStateCreator extends BlockStateContainerCompat {
 				MapPopulator.createMap(
 						Lists.newArrayList(EnumFacing.values()),
 						Lists.newArrayList(EnumFacing.values()).stream().map(input -> {
-							String dirName = input.getName().toLowerCase();
+							String dirName = input.getName().toLowerCase(Locale.ENGLISH);
 							if (name != null) dirName = name + "_" + dirName;
 							return function.apply(dirName, input);
 						}).collect(Collectors.toList())));

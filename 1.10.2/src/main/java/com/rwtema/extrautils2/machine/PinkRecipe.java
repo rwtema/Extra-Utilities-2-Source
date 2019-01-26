@@ -70,7 +70,7 @@ public class PinkRecipe extends EnergyBaseRecipe {
 				}
 			}
 			for (String s : OreDictionary.getOreNames()) {
-				if (s.toLowerCase(Locale.ROOT).contains("pink")) {
+				if (s.toLowerCase(Locale.ENGLISH).contains("pink")) {
 					for (ItemStack itemStack : OreDictionary.getOres(s)) {
 						pinkThings.add(ItemRef.wrapCrafting(itemStack));
 					}

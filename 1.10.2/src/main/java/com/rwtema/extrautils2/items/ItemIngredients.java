@@ -140,7 +140,7 @@ public class ItemIngredients extends XUItemFlatMetadata implements IUpgradeProvi
 	@Nonnull
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName(stack) + "." + getType(stack).name().toLowerCase();
+		return super.getUnlocalizedName(stack) + "." + getType(stack).name().toLowerCase(Locale.ENGLISH);
 	}
 
 	@Override
@@ -730,7 +730,7 @@ public class ItemIngredients extends XUItemFlatMetadata implements IUpgradeProvi
 		Type(int meta, String oreName) {
 			this.meta = meta;
 			this.oreName = oreName;
-			texture = name().toLowerCase();
+			texture = name().toLowerCase(Locale.ENGLISH);
 			metaMap.put(meta, this);
 			if (meta < 0)
 				metaMap.put(meta + Short.MAX_VALUE, this);

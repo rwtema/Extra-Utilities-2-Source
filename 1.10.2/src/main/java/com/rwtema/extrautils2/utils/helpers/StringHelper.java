@@ -49,9 +49,9 @@ public class StringHelper {
 		if (s == null) return null;
 		int n = s.length();
 		if (n == 0) return s;
-		if (n == 1) return s.toUpperCase();
+		if (n == 1) return s.toUpperCase(Locale.ENGLISH));
 
-		return s.substring(0, 1).toUpperCase() + (lowerCaseRest ? s.substring(1).toLowerCase() : s.substring(1));
+		return s.substring(0, 1).toUpperCase(Locale.ENGLISH)) + (lowerCaseRest ? s.substring(1).toLowerCase(Locale.ENGLISH) : s.substring(1));
 	}
 
 
