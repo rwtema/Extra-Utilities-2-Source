@@ -29,6 +29,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
@@ -378,73 +379,72 @@ public abstract class DynamicContainer extends Container {
 	@Override
 	protected boolean mergeItemStack(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
 		boolean flag = false;
-		int i;
-
-		i = reverseDirection ? endIndex - 1 : startIndex;
 
 		if (stack.isStackable()) {
-			while (StackHelper.getStacksize(stack) > 0 && (!reverseDirection && i < endIndex || reverseDirection && i >= startIndex)) {
+			for (int i = reverseDirection ? endIndex - 1 : startIndex;
+				 reverseDirection && i >= startIndex || !reverseDirection && i < endIndex;
+				 i += reverseDirection ? -1 : 1) {
+
 				Slot slot = this.inventorySlots.get(i);
-				if (isValidForMerging(slot)) {
-					ItemStack itemstack = slot.getStack();
 
-					if (StackHelper.isNonNull(itemstack) && slot.isItemValid(itemstack) && //change
-							itemstack.getItem() == stack.getItem() && (!stack.getHasSubtypes() || stack.getMetadata() == itemstack.getMetadata()) && ItemStack.areItemStackTagsEqual(stack, itemstack)) {
-						int j = StackHelper.getStacksize(itemstack) + StackHelper.getStacksize(stack);
+				if (!isValidForMerging(slot))
+					continue;
 
-						int maxStackSize = Math.min(stack.getMaxStackSize(), slot.getItemStackLimit(itemstack));
-						if (j <= maxStackSize) {
-							StackHelper.setStackSize(stack, 0);
-							StackHelper.setStackSize(itemstack, j);
-						} else if (StackHelper.getStacksize(itemstack) < maxStackSize) {
-							StackHelper.decrease(stack, maxStackSize - StackHelper.getStacksize(itemstack));
-							StackHelper.setStackSize(itemstack, maxStackSize);
-						}
-						slot.putStack(itemstack);
-						slot.onSlotChanged();
-						flag = true;
-					}
+				ItemStack currentSlotStack = slot.getStack();
+
+				if (StackHelper.isEmpty(currentSlotStack) || !ItemHandlerHelper.canItemStacksStack(stack, currentSlotStack) || !slot.isItemValid(stack)) {
+					continue;
 				}
 
-				if (reverseDirection) {
-					--i;
-				} else {
-					++i;
+				int j = StackHelper.getStacksize(currentSlotStack) + StackHelper.getStacksize(stack);
+				int maxSize = Math.min(slot.getSlotStackLimit(), stack.getMaxStackSize());
+
+				if (j <= maxSize) {
+					StackHelper.setStackSize(stack, 0);
+					slot.putStack(ItemHandlerHelper.copyStackWithSize(currentSlotStack, j));
+					slot.onSlotChanged();
+					flag = true;
+					break;
+				} else if (maxSize - StackHelper.getStacksize(currentSlotStack) > 0) {
+					StackHelper.decrease(stack, maxSize - StackHelper.getStacksize(currentSlotStack));
+					slot.putStack(ItemHandlerHelper.copyStackWithSize(currentSlotStack, maxSize));
+					slot.onSlotChanged();
+					flag = true;
 				}
 			}
 		}
 
-		if (StackHelper.getStacksize(stack) > 0) {
-			i = reverseDirection ? endIndex - 1 : startIndex;
+		if (StackHelper.isEmpty(stack)) {
+			return flag;
+		}
 
-			while (!reverseDirection && i < endIndex || reverseDirection && i >= startIndex) {
-				Slot slot1 = this.inventorySlots.get(i);
-				if (isValidForMerging(slot1)) {
-					ItemStack otherStack = slot1.getStack();
+		for (int i = reverseDirection ? endIndex - 1 : startIndex;
+			 reverseDirection && i >= startIndex || !reverseDirection && i < endIndex;
+			 i += reverseDirection ? -1 : 1) {
 
-					if (StackHelper.isNull(otherStack) && slot1.isItemValid(stack)) // Forge: Make sure to respect isItemValid in the slot.
-					{
-						int maxInsert = slot1.getItemStackLimit(stack);
-						if (StackHelper.getStacksize(stack) > maxInsert) {
-							slot1.putStack(stack.splitStack(maxInsert));
-							slot1.onSlotChanged();
-							flag = true;
-						} else {
-							slot1.putStack(stack.copy());
-							slot1.onSlotChanged();
-							StackHelper.setStackSize(stack, 0);
-							flag = true;
-							break;
-						}
-					}
-				}
+			Slot slot = this.inventorySlots.get(i);
 
-				if (reverseDirection) {
-					--i;
-				} else {
-					++i;
-				}
+			if (!isValidForMerging(slot))
+				continue;
+
+			if (slot.getHasStack() || !StackHelper.isEmpty(slot.getStack()) || !slot.isItemValid(stack)) {
+				continue;
 			}
+
+			if (StackHelper.getStacksize(stack) > slot.getSlotStackLimit()) {
+				int toRemove = Math.min(slot.getSlotStackLimit(), StackHelper.getStacksize(stack));
+				ItemStack otherStack = stack.copy();
+				StackHelper.setStackSize(otherStack, toRemove);
+				StackHelper.decrease(stack, toRemove);
+				slot.putStack(otherStack);
+			} else {
+				slot.putStack(StackHelper.safeCopy(stack));
+				StackHelper.setStackSize(stack, 0);
+			}
+
+			slot.onSlotChanged();
+			flag = true;
+			break;
 		}
 
 		return flag;
