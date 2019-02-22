@@ -41,7 +41,7 @@ import java.util.Random;
 
 public class BlockEnderLilly extends XUBlockStatic implements IPlantable, IGrowable {
 	public static final EnumPlantType ender = EnumPlantType.getPlantType("ender");
-	public static final PropertyInteger GROWTH_STATE = PropertyInteger.create("growth", 0, 7);
+	public static final PropertyInteger GROWTH_STATE = PropertyInteger.create("age", 0, 7);
 	public static final HashSet<IBlockState> end_stone_states = Sets.newHashSet(Blocks.END_STONE.getBlockState().getValidStates());
 	public static final IMetaProperty<Boolean> READY_TO_GROW = new IMetaProperty.Wrap<Boolean>(PropertyBool.create("ready_to_grow"), false) {
 		@Override

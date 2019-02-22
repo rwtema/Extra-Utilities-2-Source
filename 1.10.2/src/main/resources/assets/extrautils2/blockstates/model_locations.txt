@@ -12,14 +12,14 @@ models/item/soundmuffler.json
 # Ender Lilly
 blockstates/enderlilly.json
 variants={
-	growth=2
-	growth=3
-	growth=4
-	growth=5
-	growth=0
-	growth=1
-	growth=6
-	growth=7
+	age=2
+	age=3
+	age=4
+	age=5
+	age=0
+	age=1
+	age=6
+	age=7
 }
 
 models/item/enderlilly.json
@@ -159,13 +159,13 @@ models/item/compressednetherrack.json
 # Red Orchid
 blockstates/redorchid.json
 variants={
-	growth=2
-	growth=3
-	growth=4
-	growth=5
-	growth=0
-	growth=1
-	growth=6
+	age=2
+	age=3
+	age=4
+	age=5
+	age=0
+	age=1
+	age=6
 }
 
 models/item/redorchid.json
