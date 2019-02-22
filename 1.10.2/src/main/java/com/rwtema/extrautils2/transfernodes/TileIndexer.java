@@ -641,7 +641,7 @@ public class TileIndexer extends TilePower implements ITickable, IDynamicHandler
 				if (j < 0) return ItemRef.NULL;
 				List<ItemRef> list = ContainerIndexer.this.list;
 
-				String filterText = widgetTextInput.getText().toLowerCase();
+				String filterText = widgetTextInput.getText().toLowerCase(Locale.ENGLISH);
 				if (!prevFilter.equals(filterText) || filteredList == null) {
 					prevFilter = filterText;
 					if (filterText.equals("")) {
@@ -657,7 +657,7 @@ public class TileIndexer extends TilePower implements ITickable, IDynamicHandler
 									mainLoop:
 									for (String s1 : split) {
 										for (String s2 : tooltip) {
-											if (s2.toLowerCase().contains(s1)) continue mainLoop;
+											if (s2.toLowerCase(Locale.ENGLISH).contains(s1)) continue mainLoop;
 										}
 
 										return false;

@@ -87,7 +87,7 @@ public class Test {
 //		for (int i = 0; i < 3000; i++) {
 //			String input = "Nineteen";
 //			while (input.length() < 31999){
-//				input = input.toLowerCase(Locale.ENGLISH) + "#" + new String(salt(StringUtils.getBytesUtf8(input.toUpperCase()), new byte[]{1,2,4,8,16,32,64, -128, -1}));
+//				input = input.toLowerCase(Locale.ENGLISH) + "#" + new String(salt(StringUtils.getBytesUtf8(input.toUpperCase(Locale.ENGLISH)), new byte[]{1,2,4,8,16,32,64, -128, -1}));
 //			}
 //
 //			byte[] s = StringUtils.getBytesUtf8(input + "#211");

@@ -41,7 +41,7 @@ public class BlockCompressed extends XUBlockFull {
 		this.max_n = max_n;
 		this.setHardness(2);
 		this.setResistance(10.0F);
-		property_compression = PropertyInteger.create("compression_level_" + texture.toLowerCase(), 1, max_n);
+		property_compression = PropertyInteger.create("compression_level_" + texture.toLowerCase(Locale.ENGLISH), 1, max_n);
 		setBlockState(new XUBlockStateCreator(this, false, property_compression));
 	}
 

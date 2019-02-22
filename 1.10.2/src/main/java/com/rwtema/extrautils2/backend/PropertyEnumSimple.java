@@ -22,7 +22,7 @@ public class PropertyEnumSimple<T extends Enum<T>> extends PropertyHelper<T> {
 		Collections.sort(allowedValues);
 		propertyNames = new EnumMap<>(valueClass);
 		for (T t : allowedValues) {
-			String key = t.toString().toLowerCase();
+			String key = t.toString().toLowerCase(Locale.ENGLISH);
 			nameToValue.put(key, t);
 			propertyNames.put(t, key);
 		}

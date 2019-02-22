@@ -127,7 +127,7 @@ public class XU2Entries {
 	public static ItemEntry<ItemDestructionWand> creativeDestructionWand = new ItemEntry<ItemDestructionWand>("ItemCreativeDestructionWand") {
 		@Override
 		public ItemDestructionWand initValue() {
-			return new ItemDestructionWand(name.toLowerCase().substring(4), name, new float[]{191 / 255F, 75 / 255F, 244 / 255F}, 49);
+			return new ItemDestructionWand(name.toLowerCase(Locale.ENGLISH).substring(4), name, new float[]{191 / 255F, 75 / 255F, 244 / 255F}, 49);
 		}
 	};
 	public static ItemEntry<ItemUnstableIngots> unstableIngots = new ItemClassEntry<ItemUnstableIngots>(ItemUnstableIngots.class) {
@@ -161,7 +161,7 @@ public class XU2Entries {
 	public static ItemEntry<ItemBuildersWand> buildersWand = new ItemEntry<ItemBuildersWand>("ItemBuildersWand") {
 		@Override
 		public ItemBuildersWand initValue() {
-			return new ItemBuildersWand(name, 9, name.toLowerCase().substring(4), new float[]{244 / 255F, 230 / 255F, 78 / 255F});
+			return new ItemBuildersWand(name, 9, name.toLowerCase(Locale.ENGLISH).substring(4), new float[]{244 / 255F, 230 / 255F, 78 / 255F});
 		}
 
 		@Override
@@ -177,7 +177,7 @@ public class XU2Entries {
 	public static ItemEntry<ItemDestructionWand> destructionWand = new ItemEntry<ItemDestructionWand>("ItemDestructionWand") {
 		@Override
 		public ItemDestructionWand initValue() {
-			return new ItemDestructionWand(name.toLowerCase().substring(4), name, new float[]{244 / 255F, 230 / 255F, 78 / 255F}, 9);
+			return new ItemDestructionWand(name.toLowerCase(Locale.ENGLISH).substring(4), name, new float[]{244 / 255F, 230 / 255F, 78 / 255F}, 9);
 		}
 
 		@Override
@@ -1590,7 +1590,7 @@ public class XU2Entries {
 		}
 
 		public void addClimographRecipe(BlockTerraformer.Type heater, Object lavaBucket) {
-			addShapeless("terraformer_" + heater.toString().toLowerCase(), getStack(heater), getBase(), lavaBucket, lavaBucket);
+			addShapeless("terraformer_" + heater.toString().toLowerCase(Locale.ENGLISH), getStack(heater), getBase(), lavaBucket, lavaBucket);
 		}
 
 		@Nonnull

@@ -65,7 +65,7 @@ public class IMCHandler {
 	public static void addMachine(NBTTagCompound tag, ModContainer modContainer) {
 		String machine = tag.getString("machine");
 
-		String energy_mode = tag.getString(tag.getString("energy_mode")).toUpperCase();
+		String energy_mode = tag.getString(tag.getString("energy_mode")).toUpperCase(Locale.ENGLISH);
 		Machine.EnergyMode energyMode = Machine.EnergyMode.valueOf(energy_mode);
 
 		int energyBufferSize = tag.getInteger("energy_buffer");

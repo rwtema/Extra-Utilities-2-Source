@@ -42,7 +42,7 @@ public class BookHandler {
 					IResource resource = null;
 					try {
 						try {
-							resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/" + currentLanguage.getLanguageCode().toLowerCase() + ".json"));
+							resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/" + currentLanguage.getLanguageCode().toLowerCase(Locale.ENGLISH) + ".json"));
 						} catch (IOException | NullPointerException err) {
 							resource = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ExtraUtils2.RESOURCE_FOLDER, "lang/book/en_us.json"));
 						}
@@ -189,13 +189,13 @@ public class BookHandler {
 
 		@Override
 		public Entry deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-			String asString = json.getAsString().toLowerCase();
+			String asString = json.getAsString().toLowerCase(Locale.ENGLISH);
 			Entry entry = EntryHandler.entryHashMap.get(asString);
 			if (entry != null)
 				return entry;
 
 			for (Map.Entry<String, Entry> e : EntryHandler.entryHashMap.entrySet()) {
-				String key = e.getKey().toLowerCase();
+				String key = e.getKey().toLowerCase(Locale.ENGLISH);
 				if (key.contains(asString) || asString.contains(key)) {
 					return e.getValue();
 				}

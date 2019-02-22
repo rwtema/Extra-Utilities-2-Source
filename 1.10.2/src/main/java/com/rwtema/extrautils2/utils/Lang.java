@@ -130,7 +130,7 @@ public class Lang {
 	@Nonnull
 	public static String stripText(String text) {
 		String t = text.replaceAll("([^A-Za-z\\s])", "").trim();
-		t = t.replaceAll("\\s+", ".").toLowerCase();
+		t = t.replaceAll("\\s+", ".").toLowerCase(Locale.ENGLISH);
 		if (t.length() > MAX_KEY_LEN) {
 			int n = t.indexOf('.', MAX_KEY_LEN);
 			if (n != -1)
@@ -141,7 +141,7 @@ public class Lang {
 
 	public static String translate(String key, String _default) {
 		if (ExtraUtils2.deobf_folder && FMLLaunchHandler.side() == Side.CLIENT) {
-			if (!key.equals(key.toLowerCase())) {
+			if (!key.equals(key.toLowerCase(Locale.ENGLISH))) {
 				LogHelper.oneTimeInfo("Lang: " + key + " is not lowercased");
 			}
 
@@ -237,7 +237,7 @@ public class Lang {
 					}
 					t = s;
 
-					out.println(key.toLowerCase() + "=" + value);
+					out.println(key.toLowerCase(Locale.ENGLISH) + "=" + value);
 				}
 			} finally {
 				if (out != null)

@@ -24,7 +24,7 @@ public class EntryHandler {
 	public static void loadConfig(Configuration config) {
 		HashMap<String, Boolean> configEntries = Maps.newHashMap();
 		for (Entry entry : entries) {
-			entryHashMap.put(entry.name.toLowerCase(), entry);
+			entryHashMap.put(entry.name.toLowerCase(Locale.ENGLISH), entry);
 			configEntries.put(entry.name, config.get("Enabled", entry.getConfigLabel(), entry.isEnabledByDefault()).getBoolean());
 			entry.loadAdditionalConfig(config);
 		}

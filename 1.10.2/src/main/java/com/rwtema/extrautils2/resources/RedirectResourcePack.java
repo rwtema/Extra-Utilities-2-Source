@@ -23,7 +23,7 @@ public class RedirectResourcePack implements IResourcePack {
 	IResourcePack xuPack;
 
 	public RedirectResourcePack(String name, HashSet<String> domains, String folderPrefix) {
-		this.name = name.toLowerCase();
+		this.name = name.toLowerCase(Locale.ENGLISH);
 		this.xuPack = FMLClientHandler.instance().getResourcePackFor(ExtraUtils2.MODID);
 		this.domains = domains;
 		this.prefix = folderPrefix;
