@@ -299,6 +299,7 @@ public class XU2Entries {
 		@Override
 		public void loadAdditionalConfig(Configuration config) {
 			Collections.addAll(BlockCursedEarth.entity_blacklist, config.getStringList("Cursed Earth Entity BlackList", ConfigHelper.GAMEPLAY_CATEGORY, new String[0], "Add an entity id (mod:name) to this list to prevent cursed earth from spawning it."));
+			BlockCursedEarth.spawnParticles = config.getBoolean("Spawn Particles", Configuration.CATEGORY_CLIENT, true, "Toggles spawning of particles from cursed earth. Disable it if you have performance problems.");
 		}
 	};
 	public static BlockClassEntry<BlockRedstoneClock> redstoneClock = new BlockClassEntry<BlockRedstoneClock>(BlockRedstoneClock.class) {
