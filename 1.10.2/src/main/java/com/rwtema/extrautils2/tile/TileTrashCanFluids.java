@@ -34,7 +34,7 @@ public class TileTrashCanFluids extends XUTile implements IDynamicHandler {
 
 		@Override
 		public int fill(FluidStack resource, boolean doFill) {
-			return resource != null ? resource.amount : 0;
+			return resource != null && (FILTER.isEmpty() || FILTER.matches(resource)) ? resource.amount : 0;
 		}
 
 		@Nullable
