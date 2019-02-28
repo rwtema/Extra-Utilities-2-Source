@@ -133,7 +133,7 @@ public class ItemFilterItems extends XUItemFlatMetadata implements IItemFilter, 
 
 			if (useOreDic) {
 				int[] ghostOreIDs = OreDictionary.getOreIDs(ghostStack);
-				int[] targetOreIDs = OreDictionary.getOreIDs(ghostStack);
+				int[] targetOreIDs = OreDictionary.getOreIDs(target);
 				for (int a : ghostOreIDs) {
 					for (int b : targetOreIDs) {
 						if (a == b) return !inverted;
