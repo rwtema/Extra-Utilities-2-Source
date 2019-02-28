@@ -210,7 +210,7 @@ public class ItemFilterFluids extends XUItemFlatMetadata implements IFluidFilter
 			Item item = ghostStack.getItem();
 			if (item instanceof IFluidFilter) {
 				IFluidFilter filter = (IFluidFilter) item;
-				if (filter.matches(ghostStack, target)) {
+				if (filter.matches(ghostStack, target) == !inverted) {
 					return !inverted;
 				}
 			}
