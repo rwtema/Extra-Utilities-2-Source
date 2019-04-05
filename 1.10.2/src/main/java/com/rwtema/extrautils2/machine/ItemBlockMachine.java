@@ -85,6 +85,8 @@ public class ItemBlockMachine extends XUItemBlock {
 	public boolean placeBlockAt(@Nonnull ItemStack stack, @Nonnull EntityPlayer player, World world, @Nonnull BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull IBlockState newState) {
 		Machine machine = getMachineType(stack);
 		if (machine == null) return false;
+		
+		if (side == null || side == EnumFacing.UP || side == EnumFacing.DOWN) side = EnumFacing.NORTH;			
 
 		Machine.EnergyMode mode = machine.energyMode;
 
