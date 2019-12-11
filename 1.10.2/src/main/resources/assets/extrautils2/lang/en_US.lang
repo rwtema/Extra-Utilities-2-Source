@@ -109,9 +109,9 @@ enchantment.xu.golden.resonance=Golden Resonance
 enchantment.xu.kaboomerang=Kaboomerang
 enchantment.xu.zoomerang=Zoomerang
 
-entity.villager.alchemist=Alchemist
-entity.villager.red_mechanic=Red Priest
-entity.villager.shady_merchant=Shady Merchant
+entity.Villager.alchemist=Alchemist
+entity.Villager.red_mechanic=Red Priest
+entity.Villager.shady_merchant=Shady Merchant
 
 extrautils2.text.a.strange.and.weak.sapling=A strange and weak sapling.
 extrautils2.text.above.s.gp.s=Above %s GP: %s
