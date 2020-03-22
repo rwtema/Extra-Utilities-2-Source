@@ -182,12 +182,16 @@ public class Radar {
 								if (handler == null) continue;
 
 								for (int i = 0; i < handler.getSlots(); i++) {
-									ItemStack stack1 = handler.getStackInSlot(i);
-									if (StackHelper.isNull(stack1) || stack1.getItem() != trueItem) continue;
+									try {
+										ItemStack stack1 = handler.getStackInSlot(i);
+										if (StackHelper.isNull(stack1) || stack1.getItem() != trueItem) continue;
 
-									if (trueItem.getHasSubtypes() && stack1.getItemDamage() != trueItemDamage)
+										if (trueItem.getHasSubtypes() && stack1.getItemDamage() != trueItemDamage)
+											continue;
+									} catch (AbstractMethodError e) {
 										continue;
-
+									}
+									
 									positions.add(entry.getKey());
 
 									if (positions.size() >= PacketPong.MAX_SIZE) {
