@@ -16,7 +16,13 @@ public abstract class VillagerEntry<T extends VillagerRegistry.VillagerProfessio
 
 	@Override
 	public String getDisplayName(int meta) {
-		return I18n.translateToLocal("entity.Villager." + careers.get(meta % careers.size()).getName());
+		String stringTranslate = null;
+		try {
+			stringTranslate = I18n.translateToLocal("entity.Villager." + careers.get(meta % careers.size()).getName());
+		} catch (NullPointerException err) {
+			stringTranslate = "Disabled";
+		}
+		return stringTranslate;
 	}
 
 	@Override
